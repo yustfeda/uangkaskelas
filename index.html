@@ -1,4982 +1,4012 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Kas Kelas VII B</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-<style>
-*{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:Arial,Helvetica,sans-serif;
-background:#f1f5f9;
-color:#1e293b
-}
-
-.hidden-page{display:none!important}
-
-button{font-family:inherit}
-
-#loginPage{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-background:linear-gradient(135deg,#0f172a,#1d4ed8)
-}
-
-.login-card{
-width:100%;
-max-width:420px;
-background:white;
-border-radius:24px;
-padding:30px 25px;
-box-shadow:0 25px 70px rgba(0,0,0,.3)
-}
-
-.login-logo{
-width:78px;
-height:78px;
-margin:0 auto 15px;
-border-radius:22px;
-background:#2563eb;
-color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:32px;
-box-shadow:0 10px 30px rgba(37,99,235,.3)
-}
-
-.login-title{
-text-align:center;
-font-size:24px;
-font-weight:800
-}
-
-.login-subtitle{
-text-align:center;
-font-size:13px;
-color:#64748b;
-margin:5px 0 25px
-}
-
-.login-choice{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-margin-bottom:20px
-}
-
-.role-choice{
-padding:15px 10px;
-border:2px solid #e2e8f0;
-border-radius:14px;
-background:white;
-cursor:pointer;
-text-align:center;
-transition:.2s
-}
-
-.role-choice:hover{
-border-color:#93c5fd;
-background:#eff6ff
-}
-
-.role-choice.active{
-border-color:#2563eb;
-background:#eff6ff;
-color:#1d4ed8
-}
-
-.role-choice i{
-font-size:22px;
-display:block;
-margin-bottom:7px
-}
-
-.role-choice span{
-font-size:12px;
-font-weight:800
-}
-
-.input-group{
-position:relative;
-margin-bottom:15px
-}
-
-.input-group i{
-position:absolute;
-left:14px;
-top:50%;
-transform:translateY(-50%);
-color:#64748b
-}
-
-.input-group input{
-width:100%;
-height:48px;
-border:1px solid #cbd5e1;
-border-radius:12px;
-padding:0 14px 0 42px;
-outline:none;
-background:#f8fafc
-}
-
-.input-group input:focus{
-border-color:#2563eb;
-background:white;
-box-shadow:0 0 0 3px rgba(37,99,235,.1)
-}
-
-.login-button{
-width:100%;
-height:48px;
-border:0;
-border-radius:12px;
-background:#2563eb;
-color:white;
-font-weight:800;
-cursor:pointer
-}
-
-.login-button:hover{background:#1d4ed8}
-
-.login-hint{
-margin-top:15px;
-padding:11px;
-border-radius:10px;
-background:#eff6ff;
-color:#1e40af;
-font-size:11px;
-text-align:center
-}
-
-/* APP */
-
-.sidebar{
-width:260px;
-position:fixed;
-left:0;
-top:0;
-bottom:0;
-background:#0f172a;
-color:white;
-z-index:100;
-overflow-y:auto
-}
-
-.sidebar-header{
-padding:24px 18px;
-border-bottom:1px solid rgba(255,255,255,.1)
-}
-
-.brand{
-display:flex;
-align-items:center;
-gap:11px
-}
-
-.brand-icon{
-width:44px;
-height:44px;
-border-radius:12px;
-background:#2563eb;
-display:flex;
-align-items:center;
-justify-content:center
-}
-
-.brand-title{
-font-weight:800;
-font-size:15px
-}
-
-.brand-subtitle{
-font-size:10px;
-color:#94a3b8;
-margin-top:3px
-}
-
-.role-badge{
-margin-top:15px;
-padding:8px;
-border-radius:9px;
-background:rgba(37,99,235,.2);
-color:#93c5fd;
-font-size:10px;
-text-align:center;
-font-weight:800
-}
-
-.menu-title{
-padding:20px 18px 7px;
-font-size:10px;
-color:#64748b;
-font-weight:800;
-text-transform:uppercase
-}
-
-.menu-item{
-margin:3px 10px;
-padding:12px;
-border-radius:10px;
-display:flex;
-gap:12px;
-align-items:center;
-cursor:pointer;
-color:#cbd5e1;
-font-size:13px;
-transition:.2s
-}
-
-.menu-item:hover,
-.menu-item.active{
-background:#2563eb;
-color:white
-}
-
-.menu-item i{
-width:20px;
-text-align:center
-}
-
-.logout-button{
-margin:20px 10px;
-padding:12px;
-border-radius:10px;
-background:#7f1d1d;
-color:#fecaca;
-display:flex;
-gap:12px;
-align-items:center;
-cursor:pointer;
-font-size:13px
-}
-
-.main{
-margin-left:260px;
-min-height:100vh
-}
-
-.topbar{
-height:70px;
-background:white;
-border-bottom:1px solid #e2e8f0;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 25px;
-position:sticky;
-top:0;
-z-index:50
-}
-
-.topbar-title{
-font-size:18px;
-font-weight:800
-}
-
-.user-info{
-display:flex;
-align-items:center;
-gap:10px
-}
-
-.avatar{
-width:38px;
-height:38px;
-border-radius:50%;
-background:#dbeafe;
-color:#2563eb;
-display:flex;
-align-items:center;
-justify-content:center
-}
-
-.content{
-padding:25px;
-max-width:1450px;
-margin:auto
-}
-
-.welcome-box{
-background:linear-gradient(135deg,#2563eb,#1e40af);
-color:white;
-border-radius:18px;
-padding:25px;
-margin-bottom:20px
-}
-
-.welcome-box h1{
-font-size:23px;
-font-weight:800;
-margin:0 0 5px
-}
-
-.welcome-box p{
-margin:0;
-font-size:13px;
-color:#dbeafe
-}
-
-.stats-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-margin-bottom:20px
-}
-
-.stat-card{
-background:white;
-border:1px solid #e2e8f0;
-border-radius:16px;
-padding:18px
-}
-
-.stat-icon{
-width:40px;
-height:40px;
-border-radius:11px;
-background:#eff6ff;
-color:#2563eb;
-display:flex;
-align-items:center;
-justify-content:center;
-margin-bottom:10px
-}
-
-.stat-title{
-font-size:11px;
-color:#64748b
-}
-
-.stat-value{
-font-size:19px;
-font-weight:800;
-margin-top:4px
-}
-
-.card{
-background:white;
-border:1px solid #e2e8f0;
-border-radius:16px;
-overflow:hidden;
-margin-bottom:20px
-}
-
-.card-header{
-padding:17px 19px;
-border-bottom:1px solid #e2e8f0;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px
-}
-
-.card-title{
-font-size:15px;
-font-weight:800
-}
-
-.card-body{
-padding:19px
-}
-
-.btn{
-border:0;
-border-radius:9px;
-padding:9px 13px;
-font-size:12px;
-font-weight:800;
-cursor:pointer;
-display:inline-flex;
-align-items:center;
-gap:6px
-}
-
-.btn-primary{background:#2563eb;color:white}
-.btn-success{background:#16a34a;color:white}
-.btn-danger{background:#dc2626;color:white}
-.btn-secondary{background:#e2e8f0;color:#334155}
-.btn-warning{background:#f59e0b;color:white}
-
-.btn:hover{opacity:.9}
-
-.table-wrapper{overflow-x:auto}
-
-table{
-width:100%;
-border-collapse:collapse;
-min-width:650px
-}
-
-th,td{
-padding:12px 13px;
-border-bottom:1px solid #e2e8f0;
-font-size:12px;
-text-align:left
-}
-
-th{
-background:#f8fafc;
-color:#475569;
-font-weight:800
-}
-
-.amount-in{
-color:#15803d;
-font-weight:800
-}
-
-.amount-out{
-color:#dc2626;
-font-weight:800
-}
-
-/* WARNING */
-
-.warning-card{
-border:1px solid #fde68a;
-background:#fffbeb;
-border-radius:15px;
-padding:16px;
-margin-bottom:20px
-}
-
-.warning-title{
-font-weight:800;
-color:#92400e;
-font-size:14px;
-margin-bottom:10px
-}
-
-.warning-item{
-padding:10px;
-background:white;
-border-radius:10px;
-margin-top:7px;
-display:flex;
-justify-content:space-between;
-gap:10px;
-align-items:center
-}
-
-.warning-name{
-font-weight:800;
-font-size:12px
-}
-
-.warning-detail{
-font-size:11px;
-color:#92400e
-}
-
-/* PAYMENT STATUS */
-
-.status-paid{
-display:inline-flex;
-padding:5px 8px;
-border-radius:999px;
-background:#dcfce7;
-color:#166534;
-font-size:10px;
-font-weight:800
-}
-
-.status-unpaid{
-display:inline-flex;
-padding:5px 8px;
-border-radius:999px;
-background:#fee2e2;
-color:#991b1b;
-font-size:10px;
-font-weight:800
-}
-
-/* FORM */
-
-.form-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:15px
-}
-
-.form-group{margin-bottom:13px}
-
-.form-group.full{
-grid-column:1/-1
-}
-
-.form-label{
-display:block;
-font-size:12px;
-font-weight:800;
-margin-bottom:6px
-}
-
-.form-control{
-width:100%;
-height:43px;
-border:1px solid #cbd5e1;
-border-radius:9px;
-padding:8px 11px;
-outline:none;
-background:white
-}
-
-.form-control:focus{
-border-color:#2563eb;
-box-shadow:0 0 0 3px rgba(37,99,235,.1)
-}
-
-/* MODAL */
-
-.app-modal{
-position:fixed;
-inset:0;
-background:rgba(15,23,42,.65);
-display:none;
-align-items:center;
-justify-content:center;
-padding:18px;
-z-index:500;
-backdrop-filter:blur(4px)
-}
-
-.app-modal.show{display:flex}
-
-.modal-box{
-width:100%;
-max-width:480px;
-background:white;
-border-radius:20px;
-box-shadow:0 25px 70px rgba(0,0,0,.3);
-overflow:hidden;
-animation:modalIn .2s ease
-}
-
-@keyframes modalIn{
-from{transform:scale(.94);opacity:0}
-to{transform:scale(1);opacity:1}
-}
-
-.modal-header{
-padding:18px 20px;
-border-bottom:1px solid #e2e8f0;
-display:flex;
-align-items:center;
-justify-content:space-between
-}
-
-.modal-title{
-font-size:16px;
-font-weight:800
-}
-
-.modal-close{
-width:34px;
-height:34px;
-border:0;
-border-radius:9px;
-background:#f1f5f9;
-cursor:pointer;
-color:#475569
-}
-
-.modal-body{padding:20px}
-
-.modal-footer{
-padding:15px 20px;
-border-top:1px solid #e2e8f0;
-display:flex;
-justify-content:flex-end;
-gap:8px
-}
-
-/* CONFIRM */
-
-.confirm-icon{
-width:62px;
-height:62px;
-border-radius:50%;
-background:#fee2e2;
-color:#dc2626;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:26px;
-margin:0 auto 14px
-}
-
-.confirm-content{
-text-align:center
-}
-
-.confirm-title{
-font-size:18px;
-font-weight:800;
-margin-bottom:6px
-}
-
-.confirm-text{
-font-size:12px;
-color:#64748b;
-line-height:1.6
-}
-
-.confirm-footer{
-justify-content:center
-}
-
-/* WELCOME */
-
-#welcomePopup{
-position:fixed;
-top:20px;
-right:20px;
-width:340px;
-max-width:calc(100% - 40px);
-background:white;
-border-radius:16px;
-padding:15px;
-box-shadow:0 20px 50px rgba(0,0,0,.22);
-z-index:800;
-border-left:5px solid #2563eb;
-transform:translateX(420px);
-transition:.35s
-}
-
-#welcomePopup.show{
-transform:translateX(0)
-}
-
-.welcome-content{
-display:flex;
-gap:12px;
-align-items:center
-}
-
-.welcome-icon{
-width:43px;
-height:43px;
-min-width:43px;
-border-radius:50%;
-background:#dbeafe;
-color:#2563eb;
-display:flex;
-align-items:center;
-justify-content:center
-}
-
-.welcome-title{
-font-size:13px;
-font-weight:800
-}
-
-.welcome-text{
-font-size:11px;
-color:#64748b;
-margin-top:3px
-}
-
-/* TOAST */
-
-#toast{
-position:fixed;
-right:20px;
-bottom:20px;
-padding:13px 16px;
-border-radius:11px;
-background:#0f172a;
-color:white;
-font-size:12px;
-z-index:1000;
-opacity:0;
-transform:translateY(20px);
-pointer-events:none;
-transition:.3s;
-max-width:350px
-}
-
-#toast.show{
-opacity:1;
-transform:translateY(0)
-}
-
-#toast.success{background:#15803d}
-#toast.error{background:#dc2626}
-
-/* MOBILE */
-
-.mobile-button{
-display:none;
-width:40px;
-height:40px;
-border:0;
-border-radius:10px;
-background:#eff6ff;
-color:#2563eb
-}
-
-#mobileOverlay{display:none}
-
-@media(max-width:950px){
-
-.sidebar{
-transform:translateX(-100%);
-transition:.3s
-}
-
-.sidebar.open{
-transform:translateX(0)
-}
-
-.main{
-margin-left:0
-}
-
-.mobile-button{
-display:block
-}
-
-#mobileOverlay.show{
-display:block;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.45);
-z-index:90
-}
-
-.stats-grid{
-grid-template-columns:repeat(2,1fr)
-}
-}
-
-@media(max-width:600px){
-
-.login-card{
-padding:25px 18px
-}
-
-.content{
-padding:14px
-}
-
-.topbar{
-padding:0 14px
-}
-
-.topbar-title{
-font-size:15px
-}
-
-.user-info-text{
-display:none
-}
-
-.stats-grid{
-gap:9px
-}
-
-.stat-card{
-padding:13px
-}
-
-.stat-value{
-font-size:16px
-}
-
-.form-grid{
-grid-template-columns:1fr
-}
-
-.form-group.full{
-grid-column:auto
-}
-
-.welcome-box{
-padding:20px
-}
-
-.welcome-box h1{
-font-size:20px
-}
-
-.warning-item{
-align-items:flex-start;
-flex-direction:column
-}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kas Kelas VII B</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fb;
+      color: #1e293b;
+    }
+
+    .sidebar {
+      transition: all .3s ease;
+    }
+
+    .menu-item {
+      transition: .2s;
+    }
+
+    .menu-item:hover {
+      background: rgba(255,255,255,.12);
+    }
+
+    .menu-item.active {
+      background: white;
+      color: #2563eb;
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    }
+
+    .overlay {
+      background: rgba(15,23,42,.58);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-box {
+      animation: modalIn .22s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(.94) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .welcome-popup {
+      animation: welcomeIn .3s ease;
+    }
+
+    @keyframes welcomeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .stat-card {
+      transition: .2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .scrollbar::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        z-index: 50;
+        left: -280px;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .mobile-overlay.show {
+        display: block;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-LOGIN
-===================================================== -->
+<!-- =========================================================
+     LOGIN
+========================================================= -->
+<div id="loginScreen" class="min-h-screen flex items-center justify-center p-5 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-900">
+
+  <div class="w-full max-w-md">
+
+    <div class="text-center text-white mb-7">
+      <div class="w-20 h-20 bg-white rounded-3xl mx-auto flex items-center justify-center shadow-2xl mb-4">
+        <i class="fa-solid fa-wallet text-4xl text-blue-600"></i>
+      </div>
+
+      <h1 class="text-3xl font-extrabold">Kas Kelas VII B</h1>
+      <p class="text-blue-100 mt-1">Sistem Pengelolaan Uang Kas Kelas</p>
+    </div>
+
+    <!-- PILIH LOGIN -->
+    <div id="loginChoice" class="bg-white rounded-3xl shadow-2xl p-6">
+
+      <h2 class="text-xl font-bold text-center mb-2">Selamat Datang</h2>
+      <p class="text-gray-500 text-center text-sm mb-6">
+        Silakan pilih jenis login
+      </p>
+
+      <div class="grid grid-cols-1 gap-4">
+
+        <button onclick="showLoginForm('bendahara')"
+          class="p-5 rounded-2xl border-2 border-blue-100 hover:border-blue-500 hover:bg-blue-50 transition text-left flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center">
+            <i class="fa-solid fa-user-tie text-2xl"></i>
+          </div>
+
+          <div>
+            <div class="font-bold text-lg">Login Bendahara</div>
+            <div class="text-sm text-gray-500">Kelola seluruh data kas kelas</div>
+          </div>
+
+          <i class="fa-solid fa-chevron-right ml-auto text-gray-400"></i>
+        </button>
+
+        <button onclick="showLoginForm('anggota')"
+          class="p-5 rounded-2xl border-2 border-green-100 hover:border-green-500 hover:bg-green-50 transition text-left flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center">
+            <i class="fa-solid fa-users text-2xl"></i>
+          </div>
+
+          <div>
+            <div class="font-bold text-lg">Login Anggota</div>
+            <div class="text-sm text-gray-500">Lihat pembayaran kas pribadi</div>
+          </div>
+
+          <i class="fa-solid fa-chevron-right ml-auto text-gray-400"></i>
+        </button>
+
+      </div>
+    </div>
+
+
+    <!-- LOGIN BENDAHARA -->
+    <div id="bendaharaLogin" class="hidden bg-white rounded-3xl shadow-2xl p-6">
+
+      <button onclick="backToLoginChoice()" class="text-gray-500 hover:text-blue-600 mb-5">
+        <i class="fa-solid fa-arrow-left mr-2"></i>Kembali
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-3">
+          <i class="fa-solid fa-user-tie text-2xl"></i>
+        </div>
+
+        <h2 class="text-xl font-bold">Login Bendahara</h2>
+        <p class="text-sm text-gray-500">Masukkan akun bendahara</p>
+      </div>
+
+      <form id="bendaharaForm" class="space-y-4">
+
+        <div>
+          <label class="text-sm font-semibold">Username</label>
+          <div class="relative mt-2">
+            <i class="fa-solid fa-user absolute left-4 top-3.5 text-gray-400"></i>
+            <input id="bendaharaUsername"
+              type="text"
+              class="w-full pl-11 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none"
+              placeholder="Username">
+          </div>
+        </div>
+
+        <div>
+          <label class="text-sm font-semibold">Password</label>
+          <div class="relative mt-2">
+            <i class="fa-solid fa-lock absolute left-4 top-3.5 text-gray-400"></i>
+            <input id="bendaharaPassword"
+              type="password"
+              class="w-full pl-11 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none"
+              placeholder="Password">
+          </div>
+        </div>
+
+        <button class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold">
+          <i class="fa-solid fa-right-to-bracket mr-2"></i>
+          Masuk sebagai Bendahara
+        </button>
+
+      </form>
+    </div>
+
+
+    <!-- LOGIN ANGGOTA -->
+    <div id="anggotaLogin" class="hidden bg-white rounded-3xl shadow-2xl p-6">
+
+      <button onclick="backToLoginChoice()" class="text-gray-500 hover:text-green-600 mb-5">
+        <i class="fa-solid fa-arrow-left mr-2"></i>Kembali
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-3">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
 
-<section id="loginPage">
+        <h2 class="text-xl font-bold">Login Anggota</h2>
+        <p class="text-sm text-gray-500">Pilih nama dan masukkan password</p>
+      </div>
+
+      <form id="anggotaForm" class="space-y-4">
 
-<div class="login-card">
+        <div>
+          <label class="text-sm font-semibold">Nama Siswa</label>
+          <select id="anggotaSelect"
+            class="w-full mt-2 px-4 py-3 rounded-xl border focus:ring-2 focus:ring-green-500 outline-none">
+            <option value="">Memuat data siswa...</option>
+          </select>
+        </div>
 
-<div class="login-logo">
-<i class="fa-solid fa-wallet"></i>
-</div>
-
-<div class="login-title">
-Kas Kelas VII B
-</div>
-
-<div class="login-subtitle">
-Sistem Informasi Kas Kelas
-</div>
-
-
-<div class="login-choice">
-
-<div id="choiceAnggota"
-class="role-choice active"
-onclick="selectLoginRole('anggota')">
-
-<i class="fa-solid fa-user"></i>
-<span>Login Anggota</span>
-
-</div>
-
-<div id="choiceBendahara"
-class="role-choice"
-onclick="selectLoginRole('bendahara')">
-
-<i class="fa-solid fa-user-tie"></i>
-<span>Login Bendahara</span>
-
-</div>
-
-</div>
-
-
-<form id="loginForm">
-
-<div class="input-group">
-
-<i class="fa-solid fa-user"></i>
-
-<input
-id="loginUsername"
-type="text"
-placeholder="Nama anggota"
-required>
-
-</div>
-
-
-<div class="input-group">
-
-<i class="fa-solid fa-lock"></i>
-
-<input
-id="loginPassword"
-type="password"
-placeholder="Password"
-required>
-
-</div>
-
-
-<button class="login-button"
-type="submit">
-
-<i class="fa-solid fa-right-to-bracket"></i>
-&nbsp; Masuk
-
-</button>
-
-</form>
-
-
-<div id="loginHint"
-class="login-hint">
-
-Anggota login menggunakan nama siswa dan password anggota.
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-APP
-===================================================== -->
-
-<section id="appPage" class="hidden-page">
-
-
-<aside id="sidebar" class="sidebar">
-
-<div class="sidebar-header">
-
-<div class="brand">
-
-<div class="brand-icon">
-<i class="fa-solid fa-wallet"></i>
-</div>
-
-<div>
-
-<div class="brand-title">
-Kas Kelas VII B
-</div>
-
-<div class="brand-subtitle">
-Sistem Kas Kelas
-</div>
-
-</div>
-
-</div>
-
-
-<div id="roleBadge"
-class="role-badge">
-ANGGOTA
-</div>
-
-</div>
-
-
-<!-- MENU ANGGOTA -->
-
-<div id="anggotaMenu">
-
-<div class="menu-title">
-Menu Anggota
-</div>
-
-<div
-class="menu-item active"
-data-page="beranda"
-onclick="navigate('beranda')">
-
-<i class="fa-solid fa-house"></i>
-<span>Beranda</span>
-
-</div>
-
-<div
-class="menu-item"
-data-page="riwayat"
-onclick="navigate('riwayat')">
-
-<i class="fa-solid fa-clock-rotate-left"></i>
-<span>Riwayat Kas</span>
-
-</div>
-
-</div>
-
-
-<!-- MENU BENDAHARA -->
-
-<div id="bendaharaMenu"
-class="hidden-page">
-
-<div class="menu-title">
-Menu Bendahara
-</div>
-
-<div
-class="menu-item active"
-data-page="beranda"
-onclick="navigate('beranda')">
-
-<i class="fa-solid fa-house"></i>
-<span>Beranda</span>
-
-</div>
-
-<div
-class="menu-item"
-data-page="kasMasuk"
-onclick="navigate('kasMasuk')">
-
-<i class="fa-solid fa-arrow-down"></i>
-<span>Kas Masuk</span>
-
-</div>
-
-<div
-class="menu-item"
-data-page="kasKeluar"
-onclick="navigate('kasKeluar')">
-
-<i class="fa-solid fa-arrow-up"></i>
-<span>Kas Keluar</span>
-
-</div>
-
-<div
-class="menu-item"
-data-page="siswa"
-onclick="navigate('siswa')">
-
-<i class="fa-solid fa-users"></i>
-<span>Daftar Siswa</span>
-
-</div>
-
-<div
-class="menu-item"
-data-page="riwayat"
-onclick="navigate('riwayat')">
-
-<i class="fa-solid fa-clock-rotate-left"></i>
-<span>Riwayat Kas</span>
-
-</div>
-
-<div
-class="menu-item"
-data-page="pengaturan"
-onclick="navigate('pengaturan')">
-
-<i class="fa-solid fa-gear"></i>
-<span>Pengaturan Kas</span>
-
-</div>
-
-</div>
-
-
-<div class="logout-button"
-onclick="askLogout()">
-
-<i class="fa-solid fa-right-from-bracket"></i>
-<span>Keluar</span>
-
-</div>
-
-</aside>
-
-
-<div id="mobileOverlay"
-onclick="closeSidebar()">
-</div>
-
-
-<main class="main">
-
-<header class="topbar">
-
-<div class="flex items-center gap-3">
-
-<button
-class="mobile-button"
-onclick="toggleSidebar()">
-
-<i class="fa-solid fa-bars"></i>
-
-</button>
-
-<div id="pageTitle"
-class="topbar-title">
-Beranda
-</div>
-
-</div>
-
-
-<div class="user-info">
-
-<div class="user-info-text text-right">
-
-<div id="topUsername"
-class="font-bold text-sm">
--
-</div>
-
-<div id="topRole"
-class="text-xs text-slate-500">
--
-</div>
-
-</div>
-
-<div class="avatar">
-<i class="fa-solid fa-user"></i>
-</div>
-
-</div>
-
-</header>
-
-
-<div class="content">
-
-
-<!-- =====================================================
-BERANDA
-===================================================== -->
-
-<div id="page-beranda">
-
-
-<div class="welcome-box">
-
-<h1 id="dashboardGreeting">
-Selamat Datang
-</h1>
-
-<p id="dashboardDescription">
-Pantau informasi kas kelas.
-</p>
-
-</div>
-
-
-<!-- NOTIFIKASI TUNGGAKAN BENDAHARA -->
-
-<div id="bendaharaWarning"
-class="warning-card hidden-page">
-
-<div class="warning-title">
-
-<i class="fa-solid fa-triangle-exclamation"></i>
-&nbsp; Siswa Belum Membayar Kas
-
-</div>
-
-<div id="warningList"></div>
-
-</div>
-
-
-<!-- STATUS ANGGOTA -->
-
-<div id="anggotaPaymentStatus"
-class="warning-card hidden-page">
-
-<div class="warning-title">
-
-<i class="fa-solid fa-circle-exclamation"></i>
-&nbsp; Status Pembayaran Kas
-
-</div>
-
-<div id="anggotaStatusContent"></div>
-
-</div>
-
-
-<div class="stats-grid">
-
-
-<div class="stat-card">
-
-<div class="stat-icon">
-<i class="fa-solid fa-wallet"></i>
-</div>
-
-<div class="stat-title">
-Saldo Kas
-</div>
-
-<div id="statSaldo"
-class="stat-value">
-Rp0
-</div>
-
-</div>
-
-
-<div class="stat-card">
-
-<div class="stat-icon">
-<i class="fa-solid fa-arrow-down"></i>
-</div>
-
-<div class="stat-title">
-Kas Masuk
-</div>
-
-<div id="statMasuk"
-class="stat-value">
-Rp0
-</div>
-
-</div>
-
-
-<div class="stat-card">
-
-<div class="stat-icon">
-<i class="fa-solid fa-arrow-up"></i>
-</div>
-
-<div class="stat-title">
-Kas Keluar
-</div>
-
-<div id="statKeluar"
-class="stat-value">
-Rp0
-</div>
-
-</div>
-
-
-<div class="stat-card">
-
-<div class="stat-icon">
-<i class="fa-solid fa-users"></i>
-</div>
-
-<div class="stat-title">
-Jumlah Siswa
-</div>
-
-<div id="statSiswa"
-class="stat-value">
-0
-</div>
-
-</div>
-
-
-</div>
-
-
-<div class="card">
-
-<div class="card-header">
-
-<div class="card-title">
-Transaksi Terbaru
-</div>
-
-<button
-class="btn btn-secondary"
-onclick="navigate('riwayat')">
-
-Lihat Semua
-<i class="fa-solid fa-arrow-right"></i>
-
-</button>
-
-</div>
-
-<div id="dashboardTransactions"
-class="card-body">
-</div>
-
-</div>
-
-
-</div>
-
-
-<!-- =====================================================
-KAS MASUK
-===================================================== -->
-
-<div id="page-kasMasuk"
-class="hidden-page">
-
-<div class="card">
-
-<div class="card-header">
-
-<div>
-
-<div class="card-title">
-Kas Masuk
-</div>
-
-<div class="text-xs text-slate-500 mt-1">
-Catatan pembayaran kas siswa
-</div>
-
-</div>
-
-<button
-class="btn btn-primary"
-onclick="openKasMasukModal()">
-
-<i class="fa-solid fa-plus"></i>
-Tambah Pembayaran
-
-</button>
-
-</div>
-
-
-<div class="table-wrapper">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Tanggal</th>
-<th>Nama Siswa</th>
-<th>Periode</th>
-<th>Keterangan</th>
-<th>Jumlah</th>
-<th>Aksi</th>
-
-</tr>
-
-</thead>
-
-<tbody id="tableKasMasuk">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-KAS KELUAR
-===================================================== -->
-
-<div id="page-kasKeluar"
-class="hidden-page">
-
-<div class="card">
-
-<div class="card-header">
-
-<div>
-
-<div class="card-title">
-Kas Keluar
-</div>
-
-<div class="text-xs text-slate-500 mt-1">
-Catatan pengeluaran kas kelas
-</div>
-
-</div>
-
-<button
-class="btn btn-danger"
-onclick="openKasKeluarModal()">
-
-<i class="fa-solid fa-plus"></i>
-Tambah Pengeluaran
-
-</button>
-
-</div>
-
-
-<div class="table-wrapper">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Tanggal</th>
-<th>Keterangan</th>
-<th>Jumlah</th>
-<th>Aksi</th>
-
-</tr>
-
-</thead>
-
-<tbody id="tableKasKeluar">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-SISWA
-===================================================== -->
-
-<div id="page-siswa"
-class="hidden-page">
-
-<div class="card">
-
-<div class="card-header">
-
-<div>
-
-<div class="card-title">
-Daftar Siswa
-</div>
-
-<div class="text-xs text-slate-500 mt-1">
-Data dan status pembayaran siswa
-</div>
-
-</div>
-
-<button
-class="btn btn-primary"
-onclick="openSiswaModal()">
-
-<i class="fa-solid fa-user-plus"></i>
-Tambah Siswa
-
-</button>
-
-</div>
-
-
-<div class="table-wrapper">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>No</th>
-<th>Nama</th>
-<th>NIS</th>
-<th>Jenis Kelamin</th>
-<th>Status Kas</th>
-<th>Tunggakan</th>
-<th>Aksi</th>
-
-</tr>
-
-</thead>
-
-<tbody id="tableSiswa">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-RIWAYAT
-===================================================== -->
-
-<div id="page-riwayat"
-class="hidden-page">
-
-
-<div class="card">
-
-<div class="card-header">
-
-<div class="card-title">
-Riwayat Kas
-</div>
-
-</div>
-
-
-<div class="flex gap-2 p-4 border-b border-slate-200">
-
-<button
-id="historyInButton"
-class="btn btn-primary"
-onclick="switchHistory('masuk')">
-
-<i class="fa-solid fa-arrow-down"></i>
-Kas Masuk
+        <div>
+          <label class="text-sm font-semibold">Password</label>
+          <div class="relative mt-2">
+            <i class="fa-solid fa-lock absolute left-4 top-3.5 text-gray-400"></i>
+            <input id="anggotaPassword"
+              type="password"
+              class="w-full pl-11 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-green-500 outline-none"
+              placeholder="Password">
+          </div>
 
-</button>
+          <p class="text-xs text-gray-400 mt-2">
+            Password awal siswa: <b>123456</b>
+          </p>
+        </div>
 
-<button
-id="historyOutButton"
-class="btn btn-secondary"
-onclick="switchHistory('keluar')">
+        <button class="w-full py-3.5 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold">
+          <i class="fa-solid fa-right-to-bracket mr-2"></i>
+          Masuk sebagai Anggota
+        </button>
 
-<i class="fa-solid fa-arrow-up"></i>
-Kas Keluar
+      </form>
+    </div>
 
-</button>
-
-</div>
-
-
-<div id="historyMasuk">
-
-<div class="table-wrapper">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Tanggal</th>
-<th>Siapa</th>
-<th>Periode</th>
-<th>Keterangan</th>
-<th>Jumlah</th>
-
-</tr>
-
-</thead>
-
-<tbody id="historyMasukTable">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-
-<div id="historyKeluar"
-class="hidden-page">
-
-<div class="table-wrapper">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Tanggal</th>
-<th>Keterangan</th>
-<th>Jumlah</th>
-
-</tr>
-
-</thead>
-
-<tbody id="historyKeluarTable">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-PENGATURAN
-===================================================== -->
-
-<div id="page-pengaturan"
-class="hidden-page">
-
-<div class="card">
-
-<div class="card-header">
-
-<div>
-
-<div class="card-title">
-Pengaturan Kas Mingguan
-</div>
-
-<div class="text-xs text-slate-500 mt-1">
-Atur nominal kas yang harus dibayar setiap minggu
-</div>
-
-</div>
-
-<i class="fa-solid fa-gear text-slate-400"></i>
-
-</div>
-
-
-<div class="card-body">
-
-<form id="settingsForm">
-
-<div class="form-grid">
-
-
-<div class="form-group">
-
-<label class="form-label">
-Nominal Kas Per Minggu
-</label>
-
-<input
-id="settingWeeklyAmount"
-type="number"
-class="form-control"
-min="0"
-required>
-
-</div>
-
-
-<div class="form-group">
-
-<label class="form-label">
-Mulai Pembayaran Kas
-</label>
-
-<input
-id="settingStartDate"
-type="date"
-class="form-control"
-required>
-
-</div>
-
-
-</div>
-
-
-<div class="mt-3 p-3 rounded-xl bg-blue-50 text-blue-800 text-xs">
-
-<i class="fa-solid fa-circle-info"></i>
-
-Nominal ini digunakan otomatis untuk menghitung
-total tunggakan setiap siswa.
-
-Contoh: kas Rp10.000/minggu dan siswa menunggak
-3 minggu, maka total tunggakannya Rp30.000.
-
-</div>
-
-
-<div class="mt-4">
-
-<button
-class="btn btn-primary"
-type="submit">
-
-<i class="fa-solid fa-save"></i>
-Simpan Pengaturan
-
-</button>
-
-</div>
-
-</form>
-
-</div>
-
-</div>
-
-</div>
-
-
-</div>
-
-</main>
-
-</section>
-
-
-<!-- =====================================================
-WELCOME POPUP
-===================================================== -->
-
-<div id="welcomePopup">
-
-<div class="welcome-content">
-
-<div class="welcome-icon">
-<i class="fa-solid fa-hand-sparkles"></i>
-</div>
-
-<div>
-
-<div id="welcomeTitle"
-class="welcome-title">
-Selamat Datang
-</div>
-
-<div id="welcomeText"
-class="welcome-text">
-Anda berhasil masuk.
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-TOAST
-===================================================== -->
-
-<div id="toast"></div>
-
-
-<!-- =====================================================
-MODAL KAS MASUK
-===================================================== -->
-
-<div id="kasMasukModal"
-class="app-modal">
-
-<div class="modal-box">
-
-<div class="modal-header">
-
-<div class="modal-title">
-Tambah Pembayaran Kas
-</div>
-
-<button
-class="modal-close"
-onclick="closeModal('kasMasukModal')">
-
-<i class="fa-solid fa-xmark"></i>
-
-</button>
-
+  </div>
 </div>
 
 
-<form id="kasMasukForm">
+<!-- =========================================================
+     APLIKASI
+========================================================= -->
+<div id="appScreen" class="hidden min-h-screen">
 
-<div class="modal-body">
+  <!-- MOBILE OVERLAY -->
+  <div id="mobileOverlay"
+    onclick="toggleSidebar()"
+    class="mobile-overlay hidden fixed inset-0 bg-black/40 z-40">
+  </div>
 
-<input id="kasMasukId"
-type="hidden">
+  <!-- SIDEBAR -->
+  <aside id="sidebar"
+    class="sidebar w-72 bg-gradient-to-b from-blue-700 to-indigo-900 text-white min-h-screen fixed top-0 left-0 flex flex-col">
 
+    <div class="p-6 border-b border-white/10">
 
-<div class="form-group">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 bg-white rounded-xl text-blue-600 flex items-center justify-center">
+          <i class="fa-solid fa-wallet text-xl"></i>
+        </div>
 
-<label class="form-label">
-Tanggal Pembayaran
-</label>
+        <div>
+          <div class="font-extrabold text-lg">Kas Kelas</div>
+          <div class="text-blue-200 text-xs">VII B</div>
+        </div>
+      </div>
 
-<input
-id="kasMasukTanggal"
-type="date"
-class="form-control"
-required>
+    </div>
 
-</div>
-
-
-<div class="form-group">
-
-<label class="form-label">
-Nama Siswa
-</label>
-
-<select
-id="kasMasukSiswa"
-class="form-control"
-required>
-
-<option value="">
-Pilih siswa
-</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label class="form-label">
-Bulan dan Minggu Pembayaran
-</label>
-
-<select
-id="kasMasukPeriode"
-class="form-control"
-required>
-
-<option value="">
-Pilih periode
-</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label class="form-label">
-Jumlah Pembayaran
-</label>
-
-<input
-id="kasMasukJumlah"
-type="number"
-class="form-control"
-readonly>
-
-</div>
-
-
-<div class="p-3 rounded-xl bg-green-50 text-green-700 text-xs">
-
-<i class="fa-solid fa-circle-check"></i>
-
-Jumlah pembayaran otomatis mengikuti
-nominal kas per minggu yang telah ditentukan.
-
-</div>
-
-</div>
-
-
-<div class="modal-footer">
-
-<button
-type="button"
-class="btn btn-secondary"
-onclick="closeModal('kasMasukModal')">
-
-Batal
-
-</button>
-
-<button
-type="submit"
-class="btn btn-success">
-
-<i class="fa-solid fa-save"></i>
-Simpan Pembayaran
-
-</button>
-
-</div>
-
-</form>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-MODAL KAS KELUAR
-===================================================== -->
-
-<div id="kasKeluarModal"
-class="app-modal">
-
-<div class="modal-box">
-
-<div class="modal-header">
-
-<div class="modal-title">
-Tambah Kas Keluar
-</div>
-
-<button
-class="modal-close"
-onclick="closeModal('kasKeluarModal')">
-
-<i class="fa-solid fa-xmark"></i>
-
-</button>
-
-</div>
-
-
-<form id="kasKeluarForm">
-
-<div class="modal-body">
-
-<input
-id="kasKeluarId"
-type="hidden">
-
-
-<div class="form-group">
+    <div class="px-5 py-5">
+      <div class="bg-white/10 rounded-2xl p-4">
+        <div class="text-xs text-blue-200">Login sebagai</div>
+        <div id="sidebarUserName" class="font-bold mt-1"></div>
+        <div id="sidebarRole" class="text-xs text-blue-200 mt-1"></div>
+      </div>
+    </div>
 
-<label class="form-label">
-Tanggal
-</label>
+    <nav id="sidebarMenu" class="px-4 space-y-2 flex-1 overflow-y-auto scrollbar"></nav>
 
-<input
-id="kasKeluarTanggal"
-type="date"
-class="form-control"
-required>
+    <div class="p-4 border-t border-white/10">
+      <button onclick="logout()"
+        class="w-full py-3 rounded-xl bg-red-500/20 hover:bg-red-500 text-white font-semibold">
+        <i class="fa-solid fa-right-from-bracket mr-2"></i>
+        Keluar
+      </button>
+    </div>
 
-</div>
-
-
-<div class="form-group">
-
-<label class="form-label">
-Keterangan
-</label>
-
-<input
-id="kasKeluarKeterangan"
-type="text"
-class="form-control"
-placeholder="Contoh: Membeli alat kebersihan"
-required>
-
-</div>
-
-
-<div class="form-group">
-
-<label class="form-label">
-Jumlah
-</label>
-
-<input
-id="kasKeluarJumlah"
-type="number"
-class="form-control"
-min="0"
-required>
-
-</div>
-
-</div>
-
-
-<div class="modal-footer">
-
-<button
-type="button"
-class="btn btn-secondary"
-onclick="closeModal('kasKeluarModal')">
-
-Batal
-
-</button>
-
-<button
-type="submit"
-class="btn btn-danger">
-
-<i class="fa-solid fa-save"></i>
-Simpan
-
-</button>
-
-</div>
-
-</form>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-MODAL SISWA
-===================================================== -->
+  </aside>
 
-<div id="siswaModal"
-class="app-modal">
 
-<div class="modal-box">
+  <!-- MAIN -->
+  <main class="md:ml-72 min-h-screen">
 
-<div class="modal-header">
+    <!-- TOPBAR -->
+    <header class="bg-white border-b sticky top-0 z-30">
+      <div class="px-5 md:px-8 py-4 flex items-center gap-4">
 
-<div id="siswaModalTitle"
-class="modal-title">
-Tambah Siswa
-</div>
-
-<button
-class="modal-close"
-onclick="closeModal('siswaModal')">
-
-<i class="fa-solid fa-xmark"></i>
-
-</button>
-
-</div>
-
-
-<form id="siswaForm">
-
-<div class="modal-body">
-
-<input
-id="siswaId"
-type="hidden">
-
-
-<div class="form-group">
-
-<label class="form-label">
-Nama Siswa
-</label>
-
-<input
-id="siswaNama"
-type="text"
-class="form-control"
-required>
-
-</div>
+        <button onclick="toggleSidebar()"
+          class="md:hidden w-10 h-10 rounded-xl bg-gray-100">
+          <i class="fa-solid fa-bars"></i>
+        </button>
 
+        <div>
+          <h1 id="pageTitle" class="text-xl font-bold">Beranda</h1>
+          <p class="text-xs text-gray-500">Pengelolaan Kas Kelas VII B</p>
+        </div>
 
-<div class="form-group">
+        <div class="ml-auto flex items-center gap-3">
 
-<label class="form-label">
-NIS
-</label>
+          <div id="connectionStatus"
+            class="hidden sm:flex items-center gap-2 text-xs px-3 py-2 rounded-full bg-gray-100">
+            <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+            Menghubungkan...
+          </div>
 
-<input
-id="siswaNis"
-type="text"
-class="form-control">
+        </div>
+      </div>
+    </header>
 
-</div>
-
-
-<div class="form-group">
-
-<label class="form-label">
-Jenis Kelamin
-</label>
-
-<select
-id="siswaGender"
-class="form-control">
-
-<option value="Laki-laki">
-Laki-laki
-</option>
-
-<option value="Perempuan">
-Perempuan
-</option>
-
-</select>
 
-</div>
+    <!-- CONTENT -->
+    <div id="pageContent" class="p-5 md:p-8"></div>
 
+  </main>
 </div>
-
-
-<div class="modal-footer">
-
-<button
-type="button"
-class="btn btn-secondary"
-onclick="closeModal('siswaModal')">
 
-Batal
 
-</button>
+<!-- =========================================================
+     FORM MODAL
+========================================================= -->
+<div id="formModal"
+  class="hidden fixed inset-0 z-[80] overlay items-center justify-center p-4">
 
-<button
-type="submit"
-class="btn btn-primary">
+  <div class="modal-box bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto scrollbar">
 
-<i class="fa-solid fa-save"></i>
-Simpan
+    <div class="p-5 border-b flex items-center justify-between sticky top-0 bg-white z-10">
+      <div>
+        <h3 id="formModalTitle" class="font-bold text-lg"></h3>
+        <p id="formModalSubtitle" class="text-xs text-gray-500"></p>
+      </div>
 
-</button>
+      <button onclick="closeFormModal()"
+        class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-red-100 hover:text-red-600">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
 
-</div>
-
-</form>
+    <div id="formModalBody" class="p-5"></div>
 
+  </div>
 </div>
-
-</div>
-
 
-<!-- =====================================================
-MODAL KONFIRMASI
-===================================================== -->
 
+<!-- =========================================================
+     CONFIRM MODAL
+========================================================= -->
 <div id="confirmModal"
-class="app-modal">
+  class="hidden fixed inset-0 z-[100] overlay items-center justify-center p-4">
 
-<div class="modal-box"
-style="max-width:390px">
+  <div class="modal-box bg-white rounded-3xl shadow-2xl w-full max-w-sm p-6 text-center">
 
-<div class="modal-body">
+    <div id="confirmIcon"
+      class="w-16 h-16 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-4">
+      <i class="fa-solid fa-trash text-2xl"></i>
+    </div>
 
-<div class="confirm-icon">
+    <h3 id="confirmTitle" class="font-bold text-xl"></h3>
 
-<i id="confirmIcon"
-class="fa-solid fa-triangle-exclamation"></i>
+    <p id="confirmMessage" class="text-sm text-gray-500 mt-2"></p>
 
+    <div class="grid grid-cols-2 gap-3 mt-6">
+
+      <button onclick="closeConfirmModal()"
+        class="py-3 rounded-xl bg-gray-100 hover:bg-gray-200 font-semibold">
+        Batal
+      </button>
+
+      <button id="confirmButton"
+        class="py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold">
+        Ya, Lanjutkan
+      </button>
+
+    </div>
+  </div>
 </div>
 
-<div class="confirm-content">
 
-<div id="confirmTitle"
-class="confirm-title">
-Konfirmasi
+<!-- =========================================================
+     WELCOME POPUP
+========================================================= -->
+<div id="welcomePopup"
+  class="hidden fixed top-5 right-5 z-[120] w-[calc(100%-40px)] max-w-sm">
+
+  <div class="welcome-popup bg-white rounded-2xl shadow-2xl border p-4 flex gap-4 items-center">
+
+    <div id="welcomeIcon"
+      class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+      <i class="fa-solid fa-hand-wave text-xl"></i>
+    </div>
+
+    <div class="min-w-0">
+      <div id="welcomeTitle" class="font-bold"></div>
+      <div id="welcomeMessage" class="text-sm text-gray-500"></div>
+    </div>
+
+  </div>
 </div>
 
-<div id="confirmText"
-class="confirm-text">
-Apakah Anda yakin?
-</div>
 
-</div>
-
-</div>
-
-
-<div class="modal-footer confirm-footer">
-
-<button
-class="btn btn-secondary"
-onclick="closeModal('confirmModal')">
-
-Batal
-
-</button>
-
-<button
-id="confirmYesButton"
-class="btn btn-danger">
-
-Ya, Lanjutkan
-
-</button>
-
-</div>
-
-</div>
-
+<!-- TOAST -->
+<div id="toastContainer"
+  class="fixed bottom-5 right-5 z-[150] space-y-3 w-[calc(100%-40px)] max-w-sm">
 </div>
 
 
 <script type="module">
 
-import {initializeApp}
-from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 
 import {
-getDatabase,
-ref,
-onValue,
-set,
-push,
-update,
-remove
-}
-from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+  getDatabase,
+  ref,
+  onValue,
+  set,
+  push,
+  update,
+  remove
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
 
-/* =====================================================
-FIREBASE
-===================================================== */
-
-const firebaseConfig={
-apiKey:"AIzaSyAmy4PcVbc3bUnIEti0rhkhyPvGiLwFRYc",
-authDomain:"absenguru-615da.firebaseapp.com",
-databaseURL:"https://absenguru-615da-default-rtdb.firebaseio.com",
-projectId:"absenguru-615da",
-storageBucket:"absenguru-615da.firebasestorage.app",
-messagingSenderId:"1014411980118",
-appId:"1:1014411980118:web:6f3f702d8aad89af57faf7"
+const firebaseConfig = {
+  apiKey: "AIzaSyAmy4PcVbc3bUnIEti0rhkhyPvGiLwFRYc",
+  authDomain: "absenguru-615da.firebaseapp.com",
+  databaseURL: "https://absenguru-615da-default-rtdb.firebaseio.com",
+  projectId: "absenguru-615da",
+  storageBucket: "absenguru-615da.firebasestorage.app",
+  messagingSenderId: "1014411980118",
+  appId: "1:1014411980118:web:6f3f702d8aad89af57faf7"
 };
 
-const app=initializeApp(firebaseConfig);
-const database=getDatabase(app);
+const firebaseApp = initializeApp(firebaseConfig);
+const database = getDatabase(firebaseApp);
+
+window.firebaseDB = database;
+window.firebaseRef = ref;
+window.firebasePush = push;
+window.firebaseSet = set;
+window.firebaseUpdate = update;
+window.firebaseRemove = remove;
 
 
-/* =====================================================
-STATE
-===================================================== */
+/* =========================================================
+   KONSTANTA
+========================================================= */
 
-window.appState={
-currentUser:null,
-currentRole:null,
-currentPage:"beranda",
-historyType:"masuk",
-siswa:{},
-kasMasuk:{},
-kasKeluar:{},
-settings:{
-weeklyAmount:10000,
-startDate:"2026-01-01"
-}
-};
+const DB_ROOT = "kelasVIIIB";
 
+const BENDAHARA_USERNAME = "iissumirat123";
+const BENDAHARA_PASSWORD = "112233";
 
-/* =====================================================
-HELPER
-===================================================== */
+const DEFAULT_MEMBER_PASSWORD = "123456";
 
-function rupiah(n){
-
-return new Intl.NumberFormat("id-ID",{
-style:"currency",
-currency:"IDR",
-maximumFractionDigits:0
-}).format(Number(n)||0);
-
-}
-
-
-function escapeHTML(value){
-
-return String(value??"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
-
-function today(){
-
-const d=new Date();
-
-return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-
-}
-
-
-function formatDate(value){
-
-if(!value)return"-";
-
-const d=new Date(value+"T00:00:00");
-
-return d.toLocaleDateString("id-ID",{
-day:"2-digit",
-month:"long",
-year:"numeric"
-});
-
-}
-
-
-function monthName(month){
-
-return new Date(
-2000,
-month,
-1
-).toLocaleString("id-ID",{
-month:"long"
-});
-
-}
-
-
-/* =====================================================
-TOAST
-===================================================== */
-
-window.showToast=function(message,type=""){
-
-const toast=document.getElementById("toast");
-
-toast.textContent=message;
-toast.className="";
-
-toast.id="toast";
-
-if(type)toast.classList.add(type);
-
-setTimeout(()=>{
-toast.classList.add("show");
-},20);
-
-setTimeout(()=>{
-toast.classList.remove("show");
-},3200);
-
+const DEFAULT_SETTINGS = {
+  weeklyFee: 10000,
+  startDate: `${new Date().getFullYear()}-01-01`
 };
 
 
-/* =====================================================
-CUSTOM CONFIRM MODAL
-===================================================== */
+/* =========================================================
+   STATE
+========================================================= */
 
-let confirmAction=null;
+window.appState = {
 
-window.askConfirm=function(
-title,
-text,
-callback,
-buttonText="Ya, Lanjutkan"
-){
+  currentUser: null,
+  currentRole: null,
 
-document.getElementById("confirmTitle")
-.textContent=title;
+  activeTab: "beranda",
 
-document.getElementById("confirmText")
-.textContent=text;
+  siswa: {},
+  kasMasuk: {},
+  kasKeluar: {},
 
-document.getElementById("confirmYesButton")
-.textContent=buttonText;
+  settings: {
+    ...DEFAULT_SETTINGS
+  },
 
-confirmAction=callback;
-
-openModal("confirmModal");
-
+  firebaseConnected: false
 };
 
 
-document.getElementById("confirmYesButton")
-.addEventListener("click",async()=>{
+/* =========================================================
+   HELPER
+========================================================= */
 
-const action=confirmAction;
+function rupiah(number) {
 
-confirmAction=null;
-
-closeModal("confirmModal");
-
-if(action){
-await action();
-}
-
-});
-
-
-/* =====================================================
-MODAL
-===================================================== */
-
-window.openModal=function(id){
-
-document.getElementById(id)
-.classList.add("show");
-
-};
-
-
-window.closeModal=function(id){
-
-document.getElementById(id)
-.classList.remove("show");
-
-};
-
-
-/* =====================================================
-LOGIN ROLE
-===================================================== */
-
-let loginRole="anggota";
-
-window.selectLoginRole=function(role){
-
-loginRole=role;
-
-document.getElementById("choiceAnggota")
-.classList.toggle(
-"active",
-role==="anggota"
-);
-
-document.getElementById("choiceBendahara")
-.classList.toggle(
-"active",
-role==="bendahara"
-);
-
-
-const username=document.getElementById(
-"loginUsername"
-);
-
-const hint=document.getElementById(
-"loginHint"
-);
-
-
-if(role==="anggota"){
-
-username.placeholder="Nama siswa";
-
-hint.textContent=
-"Anggota login menggunakan nama siswa dan password anggota.";
-
-}else{
-
-username.placeholder="Username bendahara";
-
-hint.textContent=
-"Gunakan akun bendahara yang telah ditentukan.";
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0
+  }).format(Number(number) || 0);
 
 }
 
-};
+window.rupiah = rupiah;
 
 
-/* =====================================================
-LOGIN
-===================================================== */
+function formatDate(dateString) {
 
-document.getElementById("loginForm")
-.addEventListener("submit",async e=>{
+  if (!dateString) return "-";
 
-e.preventDefault();
+  const date = new Date(dateString + "T00:00:00");
 
-const username=
-document.getElementById("loginUsername")
-.value.trim();
-
-const password=
-document.getElementById("loginPassword")
-.value;
-
-
-if(loginRole==="bendahara"){
-
-if(
-username==="iissumirat123" &&
-password==="112233"
-){
-
-loginSuccess(
-username,
-"bendahara"
-);
-
-}else{
-
-showToast(
-"Username atau password bendahara salah.",
-"error"
-);
-
-}
-
-return;
+  return date.toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  });
 
 }
 
 
-if(password!=="123456"){
+function todayString() {
 
-showToast(
-"Password anggota salah.",
-"error"
-);
+  const d = new Date();
 
-return;
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
 
-}
-
-
-const found=
-Object.entries(window.appState.siswa)
-.find(([id,siswa])=>
-String(siswa.nama||"")
-.trim()
-.toLowerCase()===
-username.toLowerCase()
-);
-
-
-if(!found){
-
-showToast(
-"Nama siswa tidak ditemukan.",
-"error"
-);
-
-return;
+  return `${year}-${month}-${day}`;
 
 }
 
 
-loginSuccess(
-found[1].nama,
-"anggota"
-);
+function monthName(month) {
 
-});
-
-
-/* =====================================================
-LOGIN SUCCESS
-===================================================== */
-
-function loginSuccess(username,role){
-
-window.appState.currentUser=username;
-window.appState.currentRole=role;
-
-sessionStorage.setItem(
-"kasKelasUser",
-username
-);
-
-sessionStorage.setItem(
-"kasKelasRole",
-role
-);
-
-
-document.getElementById("loginPage")
-.classList.add("hidden-page");
-
-document.getElementById("appPage")
-.classList.remove("hidden-page");
-
-
-setupRole();
-
-navigate("beranda");
-
-showWelcome();
-
-
-document.getElementById("loginForm").reset();
+  return new Date(2000, month - 1, 1).toLocaleString("id-ID", {
+    month: "long"
+  });
 
 }
 
 
-/* =====================================================
-SESSION
-===================================================== */
+function daysInMonth(year, month) {
 
-function checkSession(){
-
-const user=
-sessionStorage.getItem("kasKelasUser");
-
-const role=
-sessionStorage.getItem("kasKelasRole");
-
-
-if(user&&role){
-
-window.appState.currentUser=user;
-window.appState.currentRole=role;
-
-document.getElementById("loginPage")
-.classList.add("hidden-page");
-
-document.getElementById("appPage")
-.classList.remove("hidden-page");
-
-setupRole();
-
-navigate("beranda");
-
-}
-
-}
-
-
-/* =====================================================
-WELCOME
-===================================================== */
-
-function showWelcome(){
-
-const popup=
-document.getElementById("welcomePopup");
-
-if(window.appState.currentRole==="bendahara"){
-
-document.getElementById("welcomeTitle")
-.textContent=
-"Selamat Datang, Bendahara!";
-
-document.getElementById("welcomeText")
-.textContent=
-"Anda berhasil masuk ke panel pengelolaan kas.";
-
-}else{
-
-document.getElementById("welcomeTitle")
-.textContent=
-"Selamat Datang!";
-
-document.getElementById("welcomeText")
-.textContent=
-"Anda berhasil masuk sebagai anggota.";
-
-}
-
-popup.classList.add("show");
-
-setTimeout(()=>{
-popup.classList.remove("show");
-},3500);
-
-}
-
-
-/* =====================================================
-ROLE MENU
-===================================================== */
-
-function setupRole(){
-
-const bendahara=
-document.getElementById("bendaharaMenu");
-
-const anggota=
-document.getElementById("anggotaMenu");
-
-if(window.appState.currentRole==="bendahara"){
-
-bendahara.classList.remove("hidden-page");
-anggota.classList.add("hidden-page");
-
-document.getElementById("roleBadge")
-.textContent="AKSES BENDAHARA";
-
-}else{
-
-bendahara.classList.add("hidden-page");
-anggota.classList.remove("hidden-page");
-
-document.getElementById("roleBadge")
-.textContent="AKSES ANGGOTA";
-
-}
-
-
-document.getElementById("topUsername")
-.textContent=
-window.appState.currentUser;
-
-document.getElementById("topRole")
-.textContent=
-window.appState.currentRole==="bendahara"
-?"Bendahara"
-:"Anggota";
-
-}
-
-
-/* =====================================================
-NAVIGATION
-===================================================== */
-
-window.navigate=function(page){
-
-const role=
-window.appState.currentRole;
-
-
-if(
-role==="anggota" &&
-[
-"kasMasuk",
-"kasKeluar",
-"siswa",
-"pengaturan"
-].includes(page)
-){
-
-showToast(
-"Menu ini hanya dapat diakses bendahara.",
-"error"
-);
-
-return;
-
-}
-
-
-window.appState.currentPage=page;
-
-
-[
-"beranda",
-"kasMasuk",
-"kasKeluar",
-"siswa",
-"riwayat",
-"pengaturan"
-].forEach(p=>{
-
-const el=document.getElementById(
-"page-"+p
-);
-
-if(el)el.classList.add("hidden-page");
-
-});
-
-
-document.getElementById(
-"page-"+page
-).classList.remove("hidden-page");
-
-
-document.querySelectorAll(".menu-item")
-.forEach(item=>{
-
-item.classList.toggle(
-"active",
-item.dataset.page===page
-);
-
-});
-
-
-const titles={
-beranda:"Beranda",
-kasMasuk:"Kas Masuk",
-kasKeluar:"Kas Keluar",
-siswa:"Daftar Siswa",
-riwayat:"Riwayat Kas",
-pengaturan:"Pengaturan Kas"
-};
-
-document.getElementById("pageTitle")
-.textContent=titles[page];
-
-
-closeSidebar();
-
-refreshAll();
-
-};
-
-
-/* =====================================================
-FIREBASE LISTENERS
-===================================================== */
-
-onValue(
-ref(database,"kelasVIIIB/siswa"),
-snap=>{
-
-window.appState.siswa=
-snap.val()||{};
-
-refreshAll();
-
-}
-);
-
-
-onValue(
-ref(database,"kelasVIIIB/kasMasuk"),
-snap=>{
-
-window.appState.kasMasuk=
-snap.val()||{};
-
-refreshAll();
-
-}
-);
-
-
-onValue(
-ref(database,"kelasVIIIB/kasKeluar"),
-snap=>{
-
-window.appState.kasKeluar=
-snap.val()||{};
-
-refreshAll();
-
-}
-);
-
-
-/* =====================================================
-SETTINGS
-===================================================== */
-
-onValue(
-ref(database,"kelasVIIIB/settings"),
-snap=>{
-
-const data=snap.val();
-
-if(data){
-
-window.appState.settings={
-weeklyAmount:Number(
-data.weeklyAmount||10000
-),
-startDate:
-data.startDate||"2026-01-01"
-};
-
-}
-
-loadSettingsForm();
-
-refreshAll();
-
-}
-);
-
-
-/* =====================================================
-PERHITUNGAN MINGGU
-===================================================== */
-
-/*
-Setiap bulan dibagi menjadi minggu 1, 2, 3, dst.
-Jumlah minggu disesuaikan jumlah hari pada bulan tersebut.
-*/
-
-function getWeeksInMonth(year,month){
-
-const days=
-new Date(year,month+1,0).getDate();
-
-return Math.ceil(days/7);
-
-}
-
-
-function getPeriodKey(year,month,week){
-
-return `${year}-${String(month+1).padStart(2,"0")}-W${week}`;
-
-}
-
-
-function getPeriodLabel(year,month,week){
-
-return `${monthName(month)} ${year} - Minggu ${week}`;
-
-}
-
-
-/* =====================================================
-SEMUA PERIODE YANG SUDAH JATUH TEMPO
-===================================================== */
-
-function getExpectedPeriods(){
-
-const result=[];
-
-const start=
-new Date(
-window.appState.settings.startDate+
-"T00:00:00"
-);
-
-const now=new Date();
-
-let year=start.getFullYear();
-let month=start.getMonth();
-
-while(
-year<now.getFullYear() ||
-(
-year===now.getFullYear() &&
-month<=now.getMonth()
-)
-){
-
-const weeks=
-getWeeksInMonth(year,month);
-
-for(let w=1;w<=weeks;w++){
-
-const day=Math.min(
-w*7,
-new Date(year,month+1,0).getDate()
-);
-
-const due=
-new Date(
-year,
-month,
-day,
-23,59,59
-);
-
-
-if(due>=start&&due<=now){
-
-result.push({
-key:getPeriodKey(year,month,w),
-year,
-month,
-week:w,
-label:getPeriodLabel(year,month,w),
-due
-});
-
-}
-
-}
-
-
-month++;
-
-if(month>11){
-
-month=0;
-year++;
-
-}
-
-}
-
-return result;
-
-}
-
-
-/* =====================================================
-PERIODE DROPDOWN
-===================================================== */
-
-function populatePeriodSelect(){
-
-const select=
-document.getElementById(
-"kasMasukPeriode"
-);
-
-if(!select)return;
-
-const current=select.value;
-
-select.innerHTML=
-`<option value="">Pilih periode pembayaran</option>`;
-
-
-const now=new Date();
-
-const currentYear=
-now.getFullYear();
-
-
-/*
-Menampilkan tahun berjalan
-dan tahun sebelumnya jika diperlukan.
-*/
-
-for(
-let year=currentYear-1;
-year<=currentYear+1;
-year++
-){
-
-for(let month=0;month<12;month++){
-
-const weeks=
-getWeeksInMonth(year,month);
-
-for(let week=1;week<=weeks;week++){
-
-const key=
-getPeriodKey(year,month,week);
-
-const option=
-document.createElement("option");
-
-option.value=key;
-
-option.textContent=
-getPeriodLabel(
-year,
-month,
-week
-);
-
-option.dataset.year=year;
-option.dataset.month=month;
-option.dataset.week=week;
-
-select.appendChild(option);
-
-}
-
-}
-
-}
-
-
-if(current)select.value=current;
-
-}
-
-
-/* =====================================================
-CEK PEMBAYARAN SISWA
-===================================================== */
-
-function getPaidPeriodsForStudent(studentName){
-
-const paid=new Set();
-
-Object.values(window.appState.kasMasuk)
-.forEach(item=>{
-
-if(
-String(item.namaSiswa||"")
-.toLowerCase()===
-String(studentName||"")
-.toLowerCase() &&
-item.periodKey
-){
-
-paid.add(item.periodKey);
-
-}
-
-});
-
-return paid;
-
-}
-
-
-/* =====================================================
-TUNGGAKAN SISWA
-===================================================== */
-
-function getStudentArrears(studentName){
-
-const expected=
-getExpectedPeriods();
-
-const paid=
-getPaidPeriodsForStudent(studentName);
-
-const unpaid=
-expected.filter(
-period=>!paid.has(period.key)
-);
-
-return {
-
-unpaid,
-weeks:unpaid.length,
-total:
-unpaid.length*
-Number(
-window.appState.settings.weeklyAmount||0
-)
-
-};
-
-}
-
-
-/* =====================================================
-STATUS ANGGOTA
-===================================================== */
-
-function renderAnggotaStatus(){
-
-const box=
-document.getElementById(
-"anggotaPaymentStatus"
-);
-
-const content=
-document.getElementById(
-"anggotaStatusContent"
-);
-
-
-if(
-window.appState.currentRole!=="anggota"
-){
-
-box.classList.add("hidden-page");
-return;
-
-}
-
-
-box.classList.remove("hidden-page");
-
-
-const arrears=
-getStudentArrears(
-window.appState.currentUser
-);
-
-
-if(arrears.weeks===0){
-
-content.innerHTML=`
-
-<div class="p-4 rounded-xl bg-green-50 text-green-700">
-
-<div class="font-bold">
-<i class="fa-solid fa-circle-check"></i>
-&nbsp; Pembayaran Kas Anda Lengkap
-</div>
-
-<div class="text-xs mt-1">
-Tidak ada tunggakan kas sampai periode yang berjalan.
-</div>
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-content.innerHTML=`
-
-<div class="p-4 rounded-xl bg-red-50 text-red-700">
-
-<div class="font-bold">
-
-<i class="fa-solid fa-triangle-exclamation"></i>
-
-&nbsp;
-Anda menunggak ${arrears.weeks} minggu
-
-</div>
-
-
-<div class="text-sm font-bold mt-2">
-Total yang harus dibayar:
-${rupiah(arrears.total)}
-</div>
-
-
-<div class="text-xs mt-2">
-
-Nominal kas:
-${rupiah(
-window.appState.settings.weeklyAmount
-)}
-/minggu
-
-</div>
-
-
-<div class="mt-3 text-xs">
-
-<b>Periode yang belum dibayar:</b>
-
-<div class="mt-2 flex flex-wrap gap-2">
-
-${arrears.unpaid.map(p=>`
-
-<span class="px-2 py-1 rounded-full bg-white">
-${escapeHTML(p.label)}
-</span>
-
-`).join("")}
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-
-/* =====================================================
-NOTIFIKASI BENDAHARA
-===================================================== */
-
-function renderBendaharaWarning(){
-
-const box=
-document.getElementById(
-"bendaharaWarning"
-);
-
-const list=
-document.getElementById(
-"warningList"
-);
-
-
-if(
-window.appState.currentRole!=="bendahara"
-){
-
-box.classList.add("hidden-page");
-return;
-
-}
-
-
-const siswa=
-Object.values(
-window.appState.siswa
-);
-
-
-const tunggakan=
-siswa.map(s=>{
-
-const arrears=
-getStudentArrears(s.nama);
-
-return{
-nama:s.nama,
-...arrears
-};
-
-})
-.filter(s=>s.weeks>0);
-
-
-if(!tunggakan.length){
-
-box.classList.add("hidden-page");
-return;
-
-}
-
-
-box.classList.remove("hidden-page");
-
-
-list.innerHTML=
-tunggakan.map(s=>`
-
-<div class="warning-item">
-
-<div>
-
-<div class="warning-name">
-${escapeHTML(s.nama)}
-</div>
-
-<div class="warning-detail">
-
-Menunggak ${s.weeks} minggu
-·
-${rupiah(s.total)}
-
-</div>
-
-</div>
-
-<div class="status-unpaid">
-BELUM LUNAS
-</div>
-
-</div>
-
-`).join("");
-
-}
-
-
-/* =====================================================
-DASHBOARD
-===================================================== */
-
-function renderDashboard(){
-
-const masuk=
-Object.values(
-window.appState.kasMasuk
-);
-
-const keluar=
-Object.values(
-window.appState.kasKeluar
-);
-
-
-const totalMasuk=
-masuk.reduce(
-(a,b)=>a+Number(b.jumlah||0),
-0
-);
-
-const totalKeluar=
-keluar.reduce(
-(a,b)=>a+Number(b.jumlah||0),
-0
-);
-
-
-document.getElementById("statMasuk")
-.textContent=rupiah(totalMasuk);
-
-document.getElementById("statKeluar")
-.textContent=rupiah(totalKeluar);
-
-document.getElementById("statSaldo")
-.textContent=
-rupiah(totalMasuk-totalKeluar);
-
-document.getElementById("statSiswa")
-.textContent=
-Object.keys(
-window.appState.siswa
-).length;
-
-
-if(
-window.appState.currentRole==="bendahara"
-){
-
-document.getElementById("dashboardGreeting")
-.textContent=
-"Selamat Datang, Bendahara!";
-
-document.getElementById("dashboardDescription")
-.textContent=
-"Kelola pemasukan, pengeluaran, dan pembayaran kas siswa.";
-
-
-}else{
-
-document.getElementById("dashboardGreeting")
-.textContent=
-"Selamat Datang, "+
-window.appState.currentUser+"!";
-
-document.getElementById("dashboardDescription")
-.textContent=
-"Pantau status pembayaran dan riwayat kas kelas.";
-
-}
-
-
-renderBendaharaWarning();
-renderAnggotaStatus();
-renderDashboardTransactions();
-
-}
-
-
-/* =====================================================
-TRANSAKSI DASHBOARD
-===================================================== */
-
-function allTransactions(){
-
-const result=[];
-
-
-Object.values(window.appState.kasMasuk)
-.forEach(item=>{
-
-result.push({
-tanggal:item.tanggal,
-jenis:"masuk",
-nama:item.namaSiswa,
-periode:item.periodeLabel,
-keterangan:item.keterangan,
-jumlah:Number(item.jumlah||0)
-});
-
-});
-
-
-Object.values(window.appState.kasKeluar)
-.forEach(item=>{
-
-result.push({
-tanggal:item.tanggal,
-jenis:"keluar",
-nama:"",
-periode:"",
-keterangan:item.keterangan,
-jumlah:Number(item.jumlah||0)
-});
-
-});
-
-
-result.sort(
-(a,b)=>
-new Date(b.tanggal)-
-new Date(a.tanggal)
-);
-
-return result;
-
-}
-
-
-function renderDashboardTransactions(){
-
-const box=
-document.getElementById(
-"dashboardTransactions"
-);
-
-const data=
-allTransactions().slice(0,5);
-
-
-if(!data.length){
-
-box.innerHTML=`
-
-<div class="text-center text-slate-400 py-8">
-
-<i class="fa-solid fa-receipt text-3xl mb-3"></i>
-
-<div>Belum ada transaksi.</div>
-
-</div>
-
-`;
-
-return;
-
-}
-
-
-box.innerHTML=
-data.map(item=>`
-
-<div class="flex justify-between items-center
-py-3 border-b border-slate-100">
-
-<div class="flex gap-3 items-center">
-
-<div class="w-9 h-9 rounded-full
-flex items-center justify-center
-${
-item.jenis==="masuk"
-?"bg-green-100 text-green-600"
-:"bg-red-100 text-red-600"
-}">
-
-<i class="fa-solid ${
-item.jenis==="masuk"
-?"fa-arrow-down"
-:"fa-arrow-up"
-}"></i>
-
-</div>
-
-<div>
-
-<div class="font-bold text-xs">
-
-${escapeHTML(item.keterangan)}
-
-</div>
-
-<div class="text-xs text-slate-400">
-
-${formatDate(item.tanggal)}
-
-${
-item.nama
-?" · "+escapeHTML(item.nama)
-:""
-}
-
-</div>
-
-</div>
-
-</div>
-
-<div class="${
-item.jenis==="masuk"
-?"amount-in"
-:"amount-out"
-}">
-
-${item.jenis==="masuk"?"+":"-"}
-${rupiah(item.jumlah)}
-
-</div>
-
-</div>
-
-`).join("");
-
-}
-
-
-/* =====================================================
-KAS MASUK
-===================================================== */
-
-function populateStudentSelect(){
-
-const select=
-document.getElementById(
-"kasMasukSiswa"
-);
-
-if(!select)return;
-
-select.innerHTML=
-`<option value="">Pilih siswa</option>`;
-
-Object.values(
-window.appState.siswa
-)
-.forEach(s=>{
-
-const option=
-document.createElement("option");
-
-option.value=s.nama;
-
-option.textContent=s.nama;
-
-select.appendChild(option);
-
-});
-
-}
-
-
-function openKasMasukModal(){
-
-if(
-window.appState.currentRole!=="bendahara"
-)return;
-
-
-document.getElementById(
-"kasMasukForm"
-).reset();
-
-document.getElementById(
-"kasMasukId"
-).value="";
-
-document.getElementById(
-"kasMasukTanggal"
-).value=today();
-
-document.getElementById(
-"kasMasukJumlah"
-).value=
-window.appState.settings.weeklyAmount||0;
-
-
-populateStudentSelect();
-populatePeriodSelect();
-
-openModal("kasMasukModal");
-
-}
-
-
-window.openKasMasukModal=
-openKasMasukModal;
-
-
-document.getElementById(
-"kasMasukPeriode"
-).addEventListener(
-"change",
-function(){
-
-if(this.value){
-
-document.getElementById(
-"kasMasukJumlah"
-).value=
-window.appState.settings.weeklyAmount||0;
-
-}
-
-});
-
-
-document.getElementById(
-"kasMasukForm"
-).addEventListener(
-"submit",
-async e=>{
-
-e.preventDefault();
-
-
-const id=
-document.getElementById(
-"kasMasukId"
-).value;
-
-
-const siswa=
-document.getElementById(
-"kasMasukSiswa"
-).value;
-
-
-const periodKey=
-document.getElementById(
-"kasMasukPeriode"
-).value;
-
-
-if(!siswa||!periodKey){
-
-showToast(
-"Nama siswa dan periode wajib dipilih.",
-"error"
-);
-
-return;
+  return new Date(year, month, 0).getDate();
 
 }
 
 
 /*
-Cegah pembayaran periode yang sama
-dua kali untuk siswa yang sama.
+  Tahun periode kas hanya tahun berjalan.
+  Minggu:
+  1 = tanggal 1-7
+  2 = tanggal 8-14
+  3 = tanggal 15-21
+  4 = tanggal 22-28
+  5 = tanggal 29-selesai bulan
 */
 
-const duplicate=
-Object.values(
-window.appState.kasMasuk
-).some(item=>
-item.namaSiswa===siswa &&
-item.periodKey===periodKey &&
-item.id!==id
-);
+function weeksInMonth(year, month) {
 
-
-if(duplicate){
-
-showToast(
-"Siswa tersebut sudah membayar periode ini.",
-"error"
-);
-
-return;
+  return Math.ceil(daysInMonth(year, month) / 7);
 
 }
 
 
-const option=
-document.querySelector(
-`#kasMasukPeriode option[value="${periodKey}"]`
+function periodKey(year, month, week) {
+
+  return `${year}-${String(month).padStart(2, "0")}-W${week}`;
+
+}
+
+
+function periodLabel(year, month, week) {
+
+  const start = ((week - 1) * 7) + 1;
+  const end = Math.min(week * 7, daysInMonth(year, month));
+
+  return `${monthName(month)} ${year} - Minggu ${week} (${start}-${end})`;
+
+}
+
+
+function periodStartDate(year, month, week) {
+
+  const day = ((week - 1) * 7) + 1;
+
+  return new Date(year, month - 1, day);
+
+}
+
+
+/* =========================================================
+   EXPECTED PERIOD
+========================================================= */
+
+function getExpectedPeriods() {
+
+  const periods = [];
+
+  const startDate = new Date(
+    appState.settings.startDate + "T00:00:00"
+  );
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const currentYear = today.getFullYear();
+
+  /*
+    Periode hanya tahun berjalan.
+  */
+
+  const startYear = currentYear;
+
+  let startMonth = 1;
+
+  if (startDate.getFullYear() === currentYear) {
+    startMonth = startDate.getMonth() + 1;
+  }
+
+  for (let month = startMonth; month <= 12; month++) {
+
+    const weekCount = weeksInMonth(currentYear, month);
+
+    for (let week = 1; week <= weekCount; week++) {
+
+      const start = periodStartDate(
+        currentYear,
+        month,
+        week
+      );
+
+      if (start > today) continue;
+
+      /*
+        Jika periode sebelum tanggal mulai kas,
+        jangan dihitung.
+      */
+
+      const end = new Date(start);
+      end.setDate(end.getDate() + 6);
+
+      if (end < startDate) continue;
+
+      periods.push({
+        key: periodKey(currentYear, month, week),
+        label: periodLabel(currentYear, month, week),
+        year: currentYear,
+        month,
+        week
+      });
+
+    }
+  }
+
+  return periods;
+
+}
+
+
+/* =========================================================
+   CEK PEMBAYARAN
+========================================================= */
+
+function getPaymentForPeriod(studentId, key) {
+
+  return Object.values(appState.kasMasuk).find(item =>
+    item.siswaId === studentId &&
+    item.periodeKey === key
+  );
+
+}
+
+
+function getStudentArrears(studentId) {
+
+  const expected = getExpectedPeriods();
+
+  const unpaid = expected.filter(period =>
+    !getPaymentForPeriod(studentId, period.key)
+  );
+
+  return {
+    unpaid,
+    weeks: unpaid.length,
+    amount: unpaid.length * Number(appState.settings.weeklyFee || 0)
+  };
+
+}
+
+
+function getStudentPaidAmount(studentId) {
+
+  return Object.values(appState.kasMasuk)
+    .filter(item => item.siswaId === studentId)
+    .reduce((sum, item) => sum + Number(item.jumlah || 0), 0);
+
+}
+
+
+function getStudentStatus(studentId) {
+
+  const arrears = getStudentArrears(studentId);
+
+  return arrears.weeks > 0
+    ? "Menunggak"
+    : "Lunas";
+
+}
+
+
+/* =========================================================
+   FIREBASE LISTENER
+========================================================= */
+
+onValue(
+  ref(database, `${DB_ROOT}/siswa`),
+  snapshot => {
+
+    appState.siswa = snapshot.val() || {};
+
+    populateMemberSelect();
+    refreshAllViews();
+
+  }
 );
 
 
-const periodeLabel=
-option
-?option.textContent
-:"";
+onValue(
+  ref(database, `${DB_ROOT}/kasMasuk`),
+  snapshot => {
+
+    appState.kasMasuk = snapshot.val() || {};
+
+    refreshAllViews();
+
+  }
+);
 
 
-const data={
+onValue(
+  ref(database, `${DB_ROOT}/kasKeluar`),
+  snapshot => {
 
-tanggal:
-document.getElementById(
-"kasMasukTanggal"
-).value,
+    appState.kasKeluar = snapshot.val() || {};
 
-namaSiswa:siswa,
+    refreshAllViews();
 
-periodKey,
+  }
+);
 
-periodeLabel,
 
-keterangan:
-"Pembayaran kas "+periodeLabel,
+onValue(
+  ref(database, `${DB_ROOT}/settings`),
+  snapshot => {
 
-jumlah:
-Number(
-window.appState.settings.weeklyAmount||0
-),
+    appState.settings = {
+      ...DEFAULT_SETTINGS,
+      ...(snapshot.val() || {})
+    };
 
-updatedAt:Date.now()
+    refreshAllViews();
+
+  }
+);
+
+
+onValue(
+  ref(database, ".info/connected"),
+  snapshot => {
+
+    appState.firebaseConnected = snapshot.val() === true;
+
+    const status = document.getElementById("connectionStatus");
+
+    if (!status) return;
+
+    if (appState.firebaseConnected) {
+
+      status.innerHTML = `
+        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+        Terhubung
+      `;
+
+      status.className =
+        "hidden sm:flex items-center gap-2 text-xs px-3 py-2 rounded-full bg-green-50 text-green-700";
+
+    } else {
+
+      status.innerHTML = `
+        <span class="w-2 h-2 rounded-full bg-red-500"></span>
+        Offline
+      `;
+
+      status.className =
+        "hidden sm:flex items-center gap-2 text-xs px-3 py-2 rounded-full bg-red-50 text-red-700";
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   LOGIN UI
+========================================================= */
+
+window.showLoginForm = function(role) {
+
+  document.getElementById("loginChoice").classList.add("hidden");
+  document.getElementById("bendaharaLogin").classList.add("hidden");
+  document.getElementById("anggotaLogin").classList.add("hidden");
+
+  if (role === "bendahara") {
+    document.getElementById("bendaharaLogin").classList.remove("hidden");
+  }
+
+  if (role === "anggota") {
+    document.getElementById("anggotaLogin").classList.remove("hidden");
+  }
 
 };
 
 
-try{
+window.backToLoginChoice = function() {
 
-if(id){
+  document.getElementById("loginChoice").classList.remove("hidden");
+  document.getElementById("bendaharaLogin").classList.add("hidden");
+  document.getElementById("anggotaLogin").classList.add("hidden");
 
-await update(
-ref(
-database,
-"kelasVIIIB/kasMasuk/"+id
-),
-data
-);
+};
 
-showToast(
-"Pembayaran berhasil diperbarui.",
-"success"
-);
 
-}else{
+function populateMemberSelect() {
 
-const newRef=
-push(
-ref(
-database,
-"kelasVIIIB/kasMasuk"
-)
-);
+  const select = document.getElementById("anggotaSelect");
 
-await set(
-newRef,
-{
-...data,
-createdAt:Date.now()
-}
-);
+  if (!select) return;
 
-showToast(
-"Pembayaran kas berhasil disimpan.",
-"success"
-);
+  const students = Object.entries(appState.siswa)
+    .sort((a,b) =>
+      String(a[1].nama || "").localeCompare(
+        String(b[1].nama || ""),
+        "id"
+      )
+    );
 
-}
+  if (!students.length) {
 
-closeModal("kasMasukModal");
+    select.innerHTML = `
+      <option value="">Belum ada data siswa</option>
+    `;
 
-}catch(error){
+    return;
+  }
 
-console.error(error);
-
-showToast(
-"Gagal menyimpan: "+
-error.message,
-"error"
-);
+  select.innerHTML = `
+    <option value="">-- Pilih Nama Siswa --</option>
+    ${students.map(([id, student]) => `
+      <option value="${id}">
+        ${escapeHtml(student.nama || "-")}
+      </option>
+    `).join("")}
+  `;
 
 }
+
+
+/* =========================================================
+   LOGIN BENDAHARA
+========================================================= */
+
+document.getElementById("bendaharaForm").addEventListener(
+  "submit",
+  function(e) {
+
+    e.preventDefault();
+
+    const username =
+      document.getElementById("bendaharaUsername").value.trim();
+
+    const password =
+      document.getElementById("bendaharaPassword").value;
+
+    if (
+      username !== BENDAHARA_USERNAME ||
+      password !== BENDAHARA_PASSWORD
+    ) {
+
+      showToast(
+        "Username atau password bendahara salah.",
+        "error"
+      );
+
+      return;
+    }
+
+    openApplication(
+      "bendahara",
+      "Bendahara"
+    );
+
+  }
+);
+
+
+/* =========================================================
+   LOGIN ANGGOTA
+========================================================= */
+
+document.getElementById("anggotaForm").addEventListener(
+  "submit",
+  function(e) {
+
+    e.preventDefault();
+
+    const studentId =
+      document.getElementById("anggotaSelect").value;
+
+    const password =
+      document.getElementById("anggotaPassword").value;
+
+    if (!studentId) {
+
+      showToast(
+        "Silakan pilih nama siswa terlebih dahulu.",
+        "error"
+      );
+
+      return;
+    }
+
+    const student = appState.siswa[studentId];
+
+    if (!student) {
+
+      showToast(
+        "Data siswa tidak ditemukan.",
+        "error"
+      );
+
+      return;
+    }
+
+    const correctPassword =
+      student.password || DEFAULT_MEMBER_PASSWORD;
+
+    if (password !== correctPassword) {
+
+      showToast(
+        "Password anggota salah.",
+        "error"
+      );
+
+      return;
+    }
+
+    openApplication(
+      "anggota",
+      {
+        id: studentId,
+        nama: student.nama
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   OPEN APPLICATION
+========================================================= */
+
+function openApplication(role, user) {
+
+  appState.currentRole = role;
+  appState.currentUser = user;
+  appState.activeTab = "beranda";
+
+  sessionStorage.setItem(
+    "kasKelasSession",
+    JSON.stringify({
+      role,
+      user
+    })
+  );
+
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("appScreen").classList.remove("hidden");
+
+  renderSidebar();
+  renderCurrentPage();
+
+  const name =
+    role === "bendahara"
+      ? "Bendahara"
+      : user.nama;
+
+  showWelcomePopup(
+    "Selamat Datang 👋",
+    `Halo, ${name}!`,
+    role === "bendahara" ? "blue" : "green"
+  );
+
+}
+
+
+function restoreSession() {
+
+  const saved = sessionStorage.getItem(
+    "kasKelasSession"
+  );
+
+  if (!saved) return;
+
+  try {
+
+    const session = JSON.parse(saved);
+
+    if (
+      session.role === "bendahara" ||
+      session.role === "anggota"
+    ) {
+
+      appState.currentRole = session.role;
+      appState.currentUser = session.user;
+
+      document.getElementById("loginScreen")
+        .classList.add("hidden");
+
+      document.getElementById("appScreen")
+        .classList.remove("hidden");
+
+      renderSidebar();
+      renderCurrentPage();
+
+    }
+
+  } catch {
+
+    sessionStorage.removeItem("kasKelasSession");
+
+  }
+
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+function renderSidebar() {
+
+  const role = appState.currentRole;
+
+  const userName =
+    role === "bendahara"
+      ? "Bendahara"
+      : appState.currentUser?.nama || "-";
+
+  document.getElementById("sidebarUserName")
+    .textContent = userName;
+
+  document.getElementById("sidebarRole")
+    .textContent =
+      role === "bendahara"
+        ? "Administrator"
+        : "Anggota";
+
+  let menu = [];
+
+  if (role === "bendahara") {
+
+    menu = [
+      ["beranda", "fa-house", "Beranda"],
+      ["kasMasuk", "fa-arrow-down", "Kas Masuk"],
+      ["kasKeluar", "fa-arrow-up", "Kas Keluar"],
+      ["siswa", "fa-users", "Data Siswa"],
+      ["nunggak", "fa-user-clock", "Siswa Nunggak"],
+      ["pengaturan", "fa-gear", "Pengaturan Kas"]
+    ];
+
+  } else {
+
+    menu = [
+      ["beranda", "fa-house", "Beranda"],
+      ["kasMasuk", "fa-arrow-down", "Kas Masuk"],
+      ["kasKeluar", "fa-arrow-up", "Kas Keluar"]
+    ];
+
+  }
+
+  document.getElementById("sidebarMenu").innerHTML =
+    menu.map(item => {
+
+      const active =
+        appState.activeTab === item[0]
+          ? "active"
+          : "";
+
+      return `
+        <button
+          onclick="navigate('${item[0]}')"
+          class="menu-item ${active} w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left">
+
+          <i class="fa-solid ${item[1]} w-5"></i>
+
+          <span class="font-semibold text-sm">
+            ${item[2]}
+          </span>
+
+        </button>
+      `;
+
+    }).join("");
+
+}
+
+
+window.navigate = function(tab) {
+
+  if (
+    appState.currentRole === "anggota" &&
+    ["siswa", "nunggak", "pengaturan"].includes(tab)
+  ) {
+    return;
+  }
+
+  appState.activeTab = tab;
+
+  renderSidebar();
+  renderCurrentPage();
+
+  closeMobileSidebar();
+
+};
+
+
+function renderCurrentPage() {
+
+  const titleMap = {
+    beranda: "Beranda",
+    kasMasuk: "Kas Masuk",
+    kasKeluar: "Kas Keluar",
+    siswa: "Data Siswa",
+    nunggak: "Siswa Nunggak",
+    pengaturan: "Pengaturan Kas"
+  };
+
+  document.getElementById("pageTitle").textContent =
+    titleMap[appState.activeTab] || "Beranda";
+
+  const content =
+    document.getElementById("pageContent");
+
+  switch (appState.activeTab) {
+
+    case "kasMasuk":
+      content.innerHTML = renderKasMasuk();
+      break;
+
+    case "kasKeluar":
+      content.innerHTML = renderKasKeluar();
+      break;
+
+    case "siswa":
+      content.innerHTML = renderSiswa();
+      break;
+
+    case "nunggak":
+      content.innerHTML = renderNunggak();
+      break;
+
+    case "pengaturan":
+      content.innerHTML = renderPengaturan();
+      break;
+
+    default:
+      content.innerHTML = renderBeranda();
+
+  }
+
+}
+
+
+/* =========================================================
+   BERANDA
+========================================================= */
+
+function renderBeranda() {
+
+  if (appState.currentRole === "anggota") {
+
+    return renderBerandaAnggota();
+
+  }
+
+  return renderBerandaBendahara();
+
+}
+
+
+/* =========================================================
+   BERANDA BENDAHARA
+========================================================= */
+
+function renderBerandaBendahara() {
+
+  const kasMasuk = Object.values(appState.kasMasuk)
+    .reduce((sum, item) =>
+      sum + Number(item.jumlah || 0), 0);
+
+  const kasKeluar = Object.values(appState.kasKeluar)
+    .reduce((sum, item) =>
+      sum + Number(item.jumlah || 0), 0);
+
+  const saldo = kasMasuk - kasKeluar;
+
+  const arrears = Object.entries(appState.siswa)
+    .map(([id, student]) => {
+
+      const data = getStudentArrears(id);
+
+      return {
+        id,
+        nama: student.nama,
+        ...data
+      };
+
+    })
+    .filter(student => student.weeks > 0);
+
+  return `
+
+    <div class="space-y-6">
+
+      <!-- HEADER -->
+      <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-6 md:p-8 text-white">
+
+        <div class="flex flex-col md:flex-row md:items-center gap-5">
+
+          <div class="w-16 h-16 rounded-2xl bg-white/15 flex items-center justify-center">
+            <i class="fa-solid fa-chart-line text-3xl"></i>
+          </div>
+
+          <div>
+            <div class="text-blue-100 text-sm">Dashboard Bendahara</div>
+            <h2 class="text-2xl md:text-3xl font-extrabold mt-1">
+              Kas Kelas VII B
+            </h2>
+            <p class="text-blue-100 mt-1">
+              Kelola pembayaran dan keuangan kelas dengan mudah.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- STAT -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+        ${statCard(
+          "Total Kas Masuk",
+          rupiah(kasMasuk),
+          "fa-arrow-down",
+          "blue"
+        )}
+
+        ${statCard(
+          "Total Kas Keluar",
+          rupiah(kasKeluar),
+          "fa-arrow-up",
+          "red"
+        )}
+
+        ${statCard(
+          "Saldo",
+          rupiah(saldo),
+          "fa-wallet",
+          "green"
+        )}
+
+        ${statCard(
+          "Kas / Minggu",
+          rupiah(appState.settings.weeklyFee),
+          "fa-calendar-week",
+          "purple"
+        )}
+
+      </div>
+
+
+      <!-- NOTIFIKASI -->
+      ${
+        arrears.length > 0
+        ? `
+          <div class="bg-white rounded-3xl border shadow-sm p-5 md:p-6">
+
+            <div class="flex items-center gap-4">
+
+              <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center">
+                <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+              </div>
+
+              <div class="flex-1">
+                <div class="font-bold">
+                  Ada siswa yang belum melunasi kas
+                </div>
+
+                <div class="text-sm text-gray-500 mt-1">
+                  ${arrears.length} siswa masih memiliki tunggakan pembayaran.
+                </div>
+              </div>
+
+              <button
+                onclick="navigate('nunggak')"
+                class="px-4 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-semibold text-sm whitespace-nowrap">
+
+                Lihat Semua
+
+                <i class="fa-solid fa-arrow-right ml-1"></i>
+
+              </button>
+
+            </div>
+
+          </div>
+        `
+        : `
+          <div class="bg-white rounded-3xl border shadow-sm p-6">
+
+            <div class="flex items-center gap-4">
+
+              <div class="w-12 h-12 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center">
+                <i class="fa-solid fa-circle-check text-xl"></i>
+              </div>
+
+              <div>
+                <div class="font-bold">Semua pembayaran aman</div>
+                <div class="text-sm text-gray-500">
+                  Tidak ada siswa yang memiliki tunggakan.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        `
+      }
+
+
+      <!-- AKSI CEPAT -->
+      <div>
+
+        <h3 class="font-bold text-lg mb-4">
+          Aksi Cepat
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+          <button
+            onclick="openKasMasukModal()"
+            class="bg-white border rounded-2xl p-5 text-left hover:shadow-md transition">
+
+            <div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-4">
+              <i class="fa-solid fa-plus"></i>
+            </div>
+
+            <div class="font-bold">Catat Kas Masuk</div>
+            <div class="text-sm text-gray-500 mt-1">
+              Catat pembayaran kas siswa
+            </div>
+
+          </button>
+
+
+          <button
+            onclick="openKasKeluarModal()"
+            class="bg-white border rounded-2xl p-5 text-left hover:shadow-md transition">
+
+            <div class="w-11 h-11 rounded-xl bg-red-100 text-red-600 flex items-center justify-center mb-4">
+              <i class="fa-solid fa-arrow-up"></i>
+            </div>
+
+            <div class="font-bold">Catat Kas Keluar</div>
+            <div class="text-sm text-gray-500 mt-1">
+              Catat pengeluaran kelas
+            </div>
+
+          </button>
+
+
+          <button
+            onclick="navigate('nunggak')"
+            class="bg-white border rounded-2xl p-5 text-left hover:shadow-md transition">
+
+            <div class="w-11 h-11 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-4">
+              <i class="fa-solid fa-user-clock"></i>
+            </div>
+
+            <div class="font-bold">Siswa Nunggak</div>
+            <div class="text-sm text-gray-500 mt-1">
+              Lihat dan lunaskan tunggakan
+            </div>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   BERANDA ANGGOTA
+========================================================= */
+
+function renderBerandaAnggota() {
+
+  const studentId = appState.currentUser?.id;
+
+  const student = appState.siswa[studentId];
+
+  if (!student) {
+
+    return `
+      <div class="bg-white rounded-3xl p-8 text-center">
+        <i class="fa-solid fa-user-slash text-4xl text-gray-300"></i>
+        <p class="mt-3 text-gray-500">
+          Data siswa tidak ditemukan.
+        </p>
+      </div>
+    `;
+
+  }
+
+  const arrears = getStudentArrears(studentId);
+
+  const paid = getStudentPaidAmount(studentId);
+
+  return `
+
+    <div class="space-y-6">
+
+      <div class="bg-gradient-to-r from-green-600 to-emerald-700 rounded-3xl p-6 md:p-8 text-white">
+
+        <div class="text-green-100 text-sm">
+          Selamat datang
+        </div>
+
+        <h2 class="text-2xl md:text-3xl font-extrabold mt-1">
+          ${escapeHtml(student.nama)}
+        </h2>
+
+        <p class="text-green-100 mt-1">
+          Pantau pembayaran kas kamu di sini.
+        </p>
+
+      </div>
+
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+        ${statCard(
+          "Total Dibayar",
+          rupiah(paid),
+          "fa-money-bill-wave",
+          "blue"
+        )}
+
+        ${statCard(
+          "Tunggakan",
+          `${arrears.weeks} minggu`,
+          "fa-clock",
+          arrears.weeks > 0 ? "orange" : "green"
+        )}
+
+        ${statCard(
+          "Kas / Minggu",
+          rupiah(appState.settings.weeklyFee),
+          "fa-calendar-week",
+          "purple"
+        )}
+
+      </div>
+
+
+      ${
+        arrears.weeks > 0
+        ? `
+          <div class="bg-orange-50 border border-orange-200 rounded-3xl p-6">
+
+            <div class="flex gap-4">
+
+              <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+              </div>
+
+              <div>
+
+                <div class="font-bold text-orange-800 text-lg">
+                  Kamu masih memiliki tunggakan
+                </div>
+
+                <div class="text-orange-700 mt-1">
+                  Belum membayar
+                  <b>${arrears.weeks} minggu</b>.
+                </div>
+
+                <div class="text-2xl font-extrabold text-orange-700 mt-2">
+                  ${rupiah(arrears.amount)}
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        `
+        : `
+          <div class="bg-green-50 border border-green-200 rounded-3xl p-6">
+
+            <div class="flex items-center gap-4">
+
+              <div class="w-12 h-12 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center">
+                <i class="fa-solid fa-circle-check text-xl"></i>
+              </div>
+
+              <div>
+                <div class="font-bold text-green-800 text-lg">
+                  Pembayaran kas kamu sudah lunas
+                </div>
+
+                <div class="text-sm text-green-700 mt-1">
+                  Tidak ada tunggakan pembayaran.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        `
+      }
+
+
+      <div class="bg-white border rounded-3xl p-6">
+
+        <div class="flex items-center justify-between mb-5">
+          <h3 class="font-bold text-lg">
+            Pembayaran Terbaru
+          </h3>
+
+          <button
+            onclick="navigate('kasMasuk')"
+            class="text-blue-600 text-sm font-semibold">
+            Lihat Semua
+          </button>
+        </div>
+
+        ${renderLatestMemberPayments(studentId)}
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+function renderLatestMemberPayments(studentId) {
+
+  const data = Object.values(appState.kasMasuk)
+    .filter(item => item.siswaId === studentId)
+    .sort((a,b) =>
+      String(b.tanggal || "").localeCompare(
+        String(a.tanggal || "")
+      )
+    )
+    .slice(0, 5);
+
+  if (!data.length) {
+
+    return `
+      <div class="text-center py-8 text-gray-400">
+        <i class="fa-solid fa-receipt text-3xl mb-2"></i>
+        <div>Belum ada pembayaran.</div>
+      </div>
+    `;
+
+  }
+
+  return `
+    <div class="space-y-3">
+
+      ${data.map(item => `
+        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+
+          <div class="w-10 h-10 rounded-xl bg-green-100 text-green-600 flex items-center justify-center">
+            <i class="fa-solid fa-check"></i>
+          </div>
+
+          <div class="flex-1 min-w-0">
+
+            <div class="font-semibold text-sm">
+              ${escapeHtml(item.periodeLabel || "-")}
+            </div>
+
+            <div class="text-xs text-gray-500">
+              ${formatDate(item.tanggal)}
+            </div>
+
+          </div>
+
+          <div class="font-bold text-green-600">
+            ${rupiah(item.jumlah)}
+          </div>
+
+        </div>
+      `).join("")}
+
+    </div>
+  `;
+
+}
+
+
+/* =========================================================
+   KAS MASUK
+========================================================= */
+
+function renderKasMasuk() {
+
+  const isBendahara =
+    appState.currentRole === "bendahara";
+
+  let data = Object.entries(appState.kasMasuk);
+
+  if (!isBendahara) {
+
+    data = data.filter(([id, item]) =>
+      item.siswaId === appState.currentUser?.id
+    );
+
+  }
+
+  data.sort((a,b) =>
+    String(b[1].tanggal || "").localeCompare(
+      String(a[1].tanggal || "")
+    )
+  );
+
+  return `
+
+    <div class="space-y-5">
+
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+
+        <div class="flex-1">
+
+          <h2 class="text-xl font-bold">
+            Riwayat Kas Masuk
+          </h2>
+
+          <p class="text-sm text-gray-500">
+            ${isBendahara
+              ? "Seluruh pembayaran kas siswa."
+              : "Riwayat pembayaran kas kamu."
+            }
+          </p>
+
+        </div>
+
+        ${
+          isBendahara
+          ? `
+            <button
+              onclick="openKasMasukModal()"
+              class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold">
+
+              <i class="fa-solid fa-plus mr-2"></i>
+              Tambah Pembayaran
+
+            </button>
+          `
+          : ""
+        }
+
+      </div>
+
+
+      <div class="bg-white rounded-3xl border shadow-sm overflow-hidden">
+
+        ${
+          data.length
+          ? `
+            <div class="overflow-x-auto">
+
+              <table class="w-full text-sm">
+
+                <thead class="bg-gray-50 border-b">
+
+                  <tr>
+
+                    <th class="text-left px-5 py-4">No</th>
+
+                    <th class="text-left px-5 py-4">
+                      Siapa
+                    </th>
+
+                    <th class="text-left px-5 py-4">
+                      Periode
+                    </th>
+
+                    <th class="text-left px-5 py-4">
+                      Tanggal
+                    </th>
+
+                    <th class="text-left px-5 py-4">
+                      Jumlah
+                    </th>
+
+                    <th class="text-left px-5 py-4">
+                      Keterangan
+                    </th>
+
+                    ${
+                      isBendahara
+                      ? `<th class="text-center px-5 py-4">Aksi</th>`
+                      : ""
+                    }
+
+                  </tr>
+
+                </thead>
+
+                <tbody class="divide-y">
+
+                  ${data.map(([id,item], index) => `
+
+                    <tr class="hover:bg-gray-50">
+
+                      <td class="px-5 py-4">
+                        ${index + 1}
+                      </td>
+
+                      <td class="px-5 py-4 font-semibold">
+                        ${escapeHtml(item.nama || "-")}
+                      </td>
+
+                      <td class="px-5 py-4">
+                        ${escapeHtml(item.periodeLabel || "-")}
+                      </td>
+
+                      <td class="px-5 py-4">
+                        ${formatDate(item.tanggal)}
+                      </td>
+
+                      <td class="px-5 py-4 font-bold text-green-600">
+                        ${rupiah(item.jumlah)}
+                      </td>
+
+                      <td class="px-5 py-4 text-gray-500">
+                        ${escapeHtml(item.keterangan || "-")}
+                      </td>
+
+                      ${
+                        isBendahara
+                        ? `
+                          <td class="px-5 py-4">
+
+                            <div class="flex justify-center gap-2">
+
+                              <button
+                                onclick="editKasMasuk('${id}')"
+                                class="w-9 h-9 rounded-lg bg-blue-50 text-blue-600">
+                                <i class="fa-solid fa-pen"></i>
+                              </button>
+
+                              <button
+                                onclick="deleteKasMasuk('${id}')"
+                                class="w-9 h-9 rounded-lg bg-red-50 text-red-600">
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+
+                            </div>
+
+                          </td>
+                        `
+                        : ""
+                      }
+
+                    </tr>
+
+                  `).join("")}
+
+                </tbody>
+
+              </table>
+
+            </div>
+          `
+          : `
+            <div class="py-16 text-center text-gray-400">
+
+              <i class="fa-solid fa-receipt text-4xl mb-3"></i>
+
+              <div>
+                Belum ada data kas masuk.
+              </div>
+
+            </div>
+          `
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   MODAL KAS MASUK
+========================================================= */
+
+window.openKasMasukModal = function(editId = null) {
+
+  if (appState.currentRole !== "bendahara") return;
+
+  const existing =
+    editId
+      ? appState.kasMasuk[editId]
+      : null;
+
+  const currentYear = new Date().getFullYear();
+
+  const defaultDate =
+    existing?.tanggal || todayString();
+
+  const selectedMonth =
+    existing?.periodeKey
+      ? Number(existing.periodeKey.split("-")[1])
+      : new Date().getMonth() + 1;
+
+  const selectedWeek =
+    existing?.periodeKey
+      ? Number(existing.periodeKey.split("W")[1])
+      : 1;
+
+  openFormModal(
+    editId
+      ? "Edit Pembayaran Kas"
+      : "Tambah Pembayaran Kas",
+
+    "Periode pembayaran otomatis mengikuti tahun berjalan.",
+
+    `
+
+      <form id="kasMasukForm" class="space-y-4">
+
+        <input type="hidden" id="kasMasukEditId" value="${editId || ""}">
+
+
+        <div>
+
+          <label class="text-sm font-semibold">
+            Nama Siswa
+          </label>
+
+          <select
+            id="kasMasukSiswa"
+            required
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+
+            <option value="">
+              -- Pilih Siswa --
+            </option>
+
+            ${Object.entries(appState.siswa)
+              .sort((a,b) =>
+                String(a[1].nama || "").localeCompare(
+                  String(b[1].nama || ""),
+                  "id"
+                )
+              )
+              .map(([id,student]) => `
+                <option
+                  value="${id}"
+                  ${existing?.siswaId === id ? "selected" : ""}>
+                  ${escapeHtml(student.nama)}
+                </option>
+              `).join("")}
+
+          </select>
+
+        </div>
+
+
+        <div>
+
+          <label class="text-sm font-semibold">
+            Tahun
+          </label>
+
+          <input
+            type="text"
+            value="${currentYear}"
+            readonly
+            class="w-full mt-2 px-4 py-3 rounded-xl border bg-gray-100 text-gray-600">
+
+        </div>
+
+
+        <div class="grid grid-cols-2 gap-3">
+
+          <div>
+
+            <label class="text-sm font-semibold">
+              Bulan
+            </label>
+
+            <select
+              id="kasMasukBulan"
+              onchange="updateKasMasukWeeks()"
+              class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+
+              ${Array.from({length:12}, (_,i) => i+1)
+                .map(month => `
+                  <option
+                    value="${month}"
+                    ${month === selectedMonth ? "selected" : ""}>
+                    ${monthName(month)}
+                  </option>
+                `).join("")}
+
+            </select>
+
+          </div>
+
+
+          <div>
+
+            <label class="text-sm font-semibold">
+              Minggu
+            </label>
+
+            <select
+              id="kasMasukMinggu"
+              class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <label class="text-sm font-semibold">
+            Nominal Pembayaran
+          </label>
+
+          <div class="relative mt-2">
+
+            <span class="absolute left-4 top-3.5 text-gray-500">
+              Rp
+            </span>
+
+            <input
+              id="kasMasukJumlah"
+              type="text"
+              readonly
+              value="${rupiah(appState.settings.weeklyFee)}"
+              class="w-full pl-11 pr-4 py-3 rounded-xl border bg-gray-100 font-bold text-green-600">
+
+          </div>
+
+          <p class="text-xs text-gray-400 mt-1">
+            Nominal mengikuti pengaturan kas per minggu.
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <label class="text-sm font-semibold">
+            Tanggal Pembayaran
+          </label>
+
+          <input
+            id="kasMasukTanggal"
+            type="date"
+            value="${defaultDate}"
+            required
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+
+        </div>
+
+
+        <div>
+
+          <label class="text-sm font-semibold">
+            Keterangan
+          </label>
+
+          <textarea
+            id="kasMasukKeterangan"
+            rows="3"
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Contoh: Pembayaran kas minggu ke-2">${escapeHtml(existing?.keterangan || "")}</textarea>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold">
+
+          <i class="fa-solid fa-floppy-disk mr-2"></i>
+          ${editId ? "Simpan Perubahan" : "Simpan Pembayaran"}
+
+        </button>
+
+      </form>
+
+    `
+  );
+
+  updateKasMasukWeeks(selectedWeek);
+
+  document.getElementById("kasMasukForm")
+    .addEventListener("submit", saveKasMasuk);
+
+};
+
+
+window.updateKasMasukWeeks = function(selectedWeek = null) {
+
+  const selectMonth =
+    document.getElementById("kasMasukBulan");
+
+  const selectWeek =
+    document.getElementById("kasMasukMinggu");
+
+  if (!selectMonth || !selectWeek) return;
+
+  const month =
+    Number(selectMonth.value);
+
+  const year =
+    new Date().getFullYear();
+
+  const count =
+    weeksInMonth(year, month);
+
+  let html = "";
+
+  for (let week = 1; week <= count; week++) {
+
+    html += `
+      <option
+        value="${week}"
+        ${Number(selectedWeek) === week ? "selected" : ""}>
+
+        Minggu ${week}
+        (${((week - 1) * 7) + 1}-${Math.min(
+          week * 7,
+          daysInMonth(year, month)
+        )})
+
+      </option>
+    `;
+
+  }
+
+  selectWeek.innerHTML = html;
+
+};
+
+
+async function saveKasMasuk(e) {
+
+  e.preventDefault();
+
+  const editId =
+    document.getElementById("kasMasukEditId").value;
+
+  const siswaId =
+    document.getElementById("kasMasukSiswa").value;
+
+  const month =
+    Number(document.getElementById("kasMasukBulan").value);
+
+  const week =
+    Number(document.getElementById("kasMasukMinggu").value);
+
+  const tanggal =
+    document.getElementById("kasMasukTanggal").value;
+
+  const keterangan =
+    document.getElementById("kasMasukKeterangan").value.trim();
+
+  if (!siswaId || !tanggal) {
+
+    showToast(
+      "Lengkapi data pembayaran.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const year =
+    new Date().getFullYear();
+
+  const key =
+    periodKey(year, month, week);
+
+  /*
+    Cegah satu siswa membayar periode yang sama dua kali.
+  */
+
+  const duplicate =
+    Object.entries(appState.kasMasuk)
+      .find(([id,item]) =>
+        id !== editId &&
+        item.siswaId === siswaId &&
+        item.periodeKey === key
+      );
+
+  if (duplicate) {
+
+    showToast(
+      "Siswa tersebut sudah tercatat membayar periode ini.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const student =
+    appState.siswa[siswaId];
+
+  const data = {
+
+    siswaId,
+
+    nama: student.nama,
+
+    jumlah:
+      Number(appState.settings.weeklyFee || 0),
+
+    tanggal,
+
+    periodeKey: key,
+
+    periodeLabel:
+      periodLabel(year, month, week),
+
+    keterangan:
+      keterangan || "Pembayaran kas",
+
+    createdAt:
+      Date.now()
+
+  };
+
+
+  try {
+
+    if (editId) {
+
+      await update(
+        ref(database, `${DB_ROOT}/kasMasuk/${editId}`),
+        data
+      );
+
+    } else {
+
+      const newRef =
+        push(ref(database, `${DB_ROOT}/kasMasuk`));
+
+      await set(newRef, data);
+
+    }
+
+    closeFormModal();
+
+    showToast(
+      "Pembayaran kas berhasil disimpan.",
+      "success"
+    );
+
+  } catch(error) {
+
+    console.error(error);
+
+    showToast(
+      "Gagal menyimpan pembayaran.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   LUNASKAN TUNGGAKAN
+========================================================= */
+
+window.lunaskanTunggakan = function(studentId) {
+
+  const student =
+    appState.siswa[studentId];
+
+  if (!student) return;
+
+  const arrears =
+    getStudentArrears(studentId);
+
+  if (arrears.weeks <= 0) {
+
+    showToast(
+      "Siswa ini sudah lunas.",
+      "success"
+    );
+
+    return;
+
+  }
+
+  showConfirmModal({
+
+    title: "Lunaskan Tunggakan?",
+
+    message:
+      `${student.nama} memiliki tunggakan ${arrears.weeks} minggu sebesar ${rupiah(arrears.amount)}. Sistem akan mencatat seluruh minggu yang belum dibayar.`,
+
+    icon: "fa-money-bill-wave",
+
+    iconClass:
+      "bg-green-100 text-green-600",
+
+    buttonText:
+      "Lunaskan",
+
+    buttonClass:
+      "bg-green-600 hover:bg-green-700",
+
+    onConfirm:
+      () => processPelunasan(studentId)
+
+  });
+
+};
+
+
+async function processPelunasan(studentId) {
+
+  const student =
+    appState.siswa[studentId];
+
+  const arrears =
+    getStudentArrears(studentId);
+
+  if (
+    !student ||
+    arrears.weeks <= 0
+  ) return;
+
+  const year =
+    new Date().getFullYear();
+
+  try {
+
+    /*
+      Setiap minggu yang belum dibayar dibuat
+      sebagai transaksi kas masuk.
+
+      Total otomatis:
+      jumlah minggu × kas per minggu.
+    */
+
+    for (const period of arrears.unpaid) {
+
+      const newRef =
+        push(ref(database, `${DB_ROOT}/kasMasuk`));
+
+      await set(newRef, {
+
+        siswaId,
+
+        nama: student.nama,
+
+        jumlah:
+          Number(appState.settings.weeklyFee || 0),
+
+        tanggal:
+          todayString(),
+
+        periodeKey:
+          period.key,
+
+        periodeLabel:
+          period.label,
+
+        keterangan:
+          "Pelunasan tunggakan",
+
+        createdAt:
+          Date.now()
+
+      });
+
+    }
+
+    showToast(
+      `Tunggakan ${student.nama} sebesar ${rupiah(arrears.amount)} berhasil dilunaskan.`,
+      "success"
+    );
+
+  } catch(error) {
+
+    console.error(error);
+
+    showToast(
+      "Pelunasan gagal. Silakan coba lagi.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   EDIT / DELETE KAS MASUK
+========================================================= */
+
+window.editKasMasuk = function(id) {
+
+  openKasMasukModal(id);
+
+};
+
+
+window.deleteKasMasuk = function(id) {
+
+  const data =
+    appState.kasMasuk[id];
+
+  if (!data) return;
+
+  showConfirmModal({
+
+    title: "Hapus Pembayaran?",
+
+    message:
+      `Pembayaran ${data.nama || ""} sebesar ${rupiah(data.jumlah)} akan dihapus.`,
+
+    icon: "fa-trash",
+
+    iconClass:
+      "bg-red-100 text-red-600",
+
+    buttonText:
+      "Hapus",
+
+    buttonClass:
+      "bg-red-600 hover:bg-red-700",
+
+    onConfirm:
+      async () => {
+
+        try {
+
+          await remove(
+            ref(database, `${DB_ROOT}/kasMasuk/${id}`)
+          );
+
+          showToast(
+            "Pembayaran berhasil dihapus.",
+            "success"
+          );
+
+        } catch(error) {
+
+          showToast(
+            "Gagal menghapus pembayaran.",
+            "error"
+          );
+
+        }
+
+      }
+
+  });
+
+};
+
+
+/* =========================================================
+   KAS KELUAR
+========================================================= */
+
+function renderKasKeluar() {
+
+  const data =
+    Object.entries(appState.kasKeluar)
+      .sort((a,b) =>
+        String(b[1].tanggal || "").localeCompare(
+          String(a[1].tanggal || "")
+        )
+      );
+
+  const isBendahara =
+    appState.currentRole === "bendahara";
+
+  return `
+
+    <div class="space-y-5">
+
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+
+        <div class="flex-1">
+
+          <h2 class="text-xl font-bold">
+            Riwayat Kas Keluar
+          </h2>
+
+          <p class="text-sm text-gray-500">
+            Catatan pengeluaran uang kas kelas.
+          </p>
+
+        </div>
+
+        ${
+          isBendahara
+          ? `
+            <button
+              onclick="openKasKeluarModal()"
+              class="px-5 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold">
+
+              <i class="fa-solid fa-plus mr-2"></i>
+              Tambah Pengeluaran
+
+            </button>
+          `
+          : ""
+        }
+
+      </div>
+
+
+      <div class="bg-white rounded-3xl border shadow-sm overflow-hidden">
+
+        ${
+          data.length
+          ? `
+            <div class="overflow-x-auto">
+
+              <table class="w-full text-sm">
+
+                <thead class="bg-gray-50 border-b">
+
+                  <tr>
+
+                    <th class="text-left px-5 py-4">No</th>
+
+                    <th class="text-left px-5 py-4">
+                      Siapa
+                    </th>
+
+                    <th class="text-left px-5 py-4">
+                      Tanggal
+                    </th>
+
+                    <th class="text-left px-5 py-4">
+                      Jumlah
+                    </th>
+
+                    <th class="text-left px-5 py-4">
+                      Keterangan
+                    </th>
+
+                    ${
+                      isBendahara
+                      ? `<th class="text-center px-5 py-4">Aksi</th>`
+                      : ""
+                    }
+
+                  </tr>
+
+                </thead>
+
+                <tbody class="divide-y">
+
+                  ${data.map(([id,item],index) => `
+
+                    <tr class="hover:bg-gray-50">
+
+                      <td class="px-5 py-4">
+                        ${index + 1}
+                      </td>
+
+                      <td class="px-5 py-4 font-semibold">
+                        ${escapeHtml(item.dibuatOleh || "Bendahara")}
+                      </td>
+
+                      <td class="px-5 py-4">
+                        ${formatDate(item.tanggal)}
+                      </td>
+
+                      <td class="px-5 py-4 font-bold text-red-600">
+                        ${rupiah(item.jumlah)}
+                      </td>
+
+                      <td class="px-5 py-4 text-gray-500">
+                        ${escapeHtml(item.keterangan || "-")}
+                      </td>
+
+                      ${
+                        isBendahara
+                        ? `
+                          <td class="px-5 py-4">
+
+                            <div class="flex justify-center gap-2">
+
+                              <button
+                                onclick="editKasKeluar('${id}')"
+                                class="w-9 h-9 rounded-lg bg-blue-50 text-blue-600">
+                                <i class="fa-solid fa-pen"></i>
+                              </button>
+
+                              <button
+                                onclick="deleteKasKeluar('${id}')"
+                                class="w-9 h-9 rounded-lg bg-red-50 text-red-600">
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+
+                            </div>
+
+                          </td>
+                        `
+                        : ""
+                      }
+
+                    </tr>
+
+                  `).join("")}
+
+                </tbody>
+
+              </table>
+
+            </div>
+          `
+          : `
+            <div class="py-16 text-center text-gray-400">
+              <i class="fa-solid fa-arrow-up text-4xl mb-3"></i>
+              <div>Belum ada kas keluar.</div>
+            </div>
+          `
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   MODAL KAS KELUAR
+========================================================= */
+
+window.openKasKeluarModal = function(editId = null) {
+
+  if (appState.currentRole !== "bendahara") return;
+
+  const existing =
+    editId
+      ? appState.kasKeluar[editId]
+      : null;
+
+  openFormModal(
+
+    editId
+      ? "Edit Kas Keluar"
+      : "Tambah Kas Keluar",
+
+    "Catat pengeluaran uang kas kelas.",
+
+    `
+
+      <form id="kasKeluarForm" class="space-y-4">
+
+        <input
+          type="hidden"
+          id="kasKeluarEditId"
+          value="${editId || ""}">
+
+        <div>
+
+          <label class="text-sm font-semibold">
+            Tanggal
+          </label>
+
+          <input
+            id="kasKeluarTanggal"
+            type="date"
+            value="${existing?.tanggal || todayString()}"
+            required
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-red-500">
+
+        </div>
+
+
+        <div>
+
+          <label class="text-sm font-semibold">
+            Jumlah
+          </label>
+
+          <div class="relative mt-2">
+
+            <span class="absolute left-4 top-3.5 text-gray-500">
+              Rp
+            </span>
+
+            <input
+              id="kasKeluarJumlah"
+              type="number"
+              min="1"
+              value="${existing?.jumlah || ""}"
+              required
+              class="w-full pl-11 pr-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-red-500">
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <label class="text-sm font-semibold">
+            Keterangan
+          </label>
+
+          <textarea
+            id="kasKeluarKeterangan"
+            rows="4"
+            required
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-red-500"
+            placeholder="Contoh: Membeli alat kebersihan">${escapeHtml(existing?.keterangan || "")}</textarea>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="w-full py-3.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold">
+
+          <i class="fa-solid fa-floppy-disk mr-2"></i>
+          ${editId ? "Simpan Perubahan" : "Simpan Pengeluaran"}
+
+        </button>
+
+      </form>
+
+    `
+  );
+
+
+  document.getElementById("kasKeluarForm")
+    .addEventListener(
+      "submit",
+      saveKasKeluar
+    );
+
+};
+
+
+async function saveKasKeluar(e) {
+
+  e.preventDefault();
+
+  const editId =
+    document.getElementById("kasKeluarEditId").value;
+
+  const tanggal =
+    document.getElementById("kasKeluarTanggal").value;
+
+  const jumlah =
+    Number(document.getElementById("kasKeluarJumlah").value);
+
+  const keterangan =
+    document.getElementById("kasKeluarKeterangan").value.trim();
+
+  if (!tanggal || !jumlah || !keterangan) {
+
+    showToast(
+      "Lengkapi data kas keluar.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const data = {
+
+    tanggal,
+
+    jumlah,
+
+    keterangan,
+
+    dibuatOleh:
+      "Bendahara",
+
+    createdAt:
+      Date.now()
+
+  };
+
+
+  try {
+
+    if (editId) {
+
+      await update(
+        ref(database, `${DB_ROOT}/kasKeluar/${editId}`),
+        data
+      );
+
+    } else {
+
+      const newRef =
+        push(ref(database, `${DB_ROOT}/kasKeluar`));
+
+      await set(newRef, data);
+
+    }
+
+    closeFormModal();
+
+    showToast(
+      "Kas keluar berhasil disimpan.",
+      "success"
+    );
+
+  } catch(error) {
+
+    console.error(error);
+
+    showToast(
+      "Gagal menyimpan kas keluar.",
+      "error"
+    );
+
+  }
+
+}
+
+
+window.editKasKeluar = function(id) {
+
+  openKasKeluarModal(id);
+
+};
+
+
+window.deleteKasKeluar = function(id) {
+
+  const data =
+    appState.kasKeluar[id];
+
+  if (!data) return;
+
+  showConfirmModal({
+
+    title: "Hapus Kas Keluar?",
+
+    message:
+      `Pengeluaran sebesar ${rupiah(data.jumlah)} akan dihapus.`,
+
+    icon: "fa-trash",
+
+    iconClass:
+      "bg-red-100 text-red-600",
+
+    buttonText:
+      "Hapus",
+
+    buttonClass:
+      "bg-red-600 hover:bg-red-700",
+
+    onConfirm:
+      async () => {
+
+        try {
+
+          await remove(
+            ref(database, `${DB_ROOT}/kasKeluar/${id}`)
+          );
+
+          showToast(
+            "Kas keluar berhasil dihapus.",
+            "success"
+          );
+
+        } catch {
+
+          showToast(
+            "Gagal menghapus kas keluar.",
+            "error"
+          );
+
+        }
+
+      }
+
+  });
+
+};
+
+
+/* =========================================================
+   DATA SISWA
+========================================================= */
+
+function renderSiswa() {
+
+  const students =
+    Object.entries(appState.siswa)
+      .sort((a,b) =>
+        String(a[1].nama || "").localeCompare(
+          String(b[1].nama || ""),
+          "id"
+        )
+      );
+
+  return `
+
+    <div class="space-y-5">
+
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+
+        <div class="flex-1">
+
+          <h2 class="text-xl font-bold">
+            Data Siswa
+          </h2>
+
+          <p class="text-sm text-gray-500">
+            Kelola data anggota kelas.
+          </p>
+
+        </div>
+
+        <button
+          onclick="openSiswaModal()"
+          class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold">
+
+          <i class="fa-solid fa-user-plus mr-2"></i>
+          Tambah Siswa
+
+        </button>
+
+      </div>
+
+
+      <div class="bg-white rounded-3xl border shadow-sm overflow-hidden">
+
+        ${
+          students.length
+          ? `
+            <div class="overflow-x-auto">
+
+              <table class="w-full text-sm">
+
+                <thead class="bg-gray-50 border-b">
+
+                  <tr>
+
+                    <th class="text-left px-5 py-4">No</th>
+                    <th class="text-left px-5 py-4">Nama</th>
+                    <th class="text-left px-5 py-4">NIS</th>
+                    <th class="text-left px-5 py-4">Status Kas</th>
+                    <th class="text-center px-5 py-4">Aksi</th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody class="divide-y">
+
+                  ${students.map(([id,student],index) => {
+
+                    const arrears =
+                      getStudentArrears(id);
+
+                    return `
+
+                      <tr class="hover:bg-gray-50">
+
+                        <td class="px-5 py-4">
+                          ${index + 1}
+                        </td>
+
+                        <td class="px-5 py-4 font-semibold">
+                          ${escapeHtml(student.nama || "-")}
+                        </td>
+
+                        <td class="px-5 py-4 text-gray-500">
+                          ${escapeHtml(student.nis || "-")}
+                        </td>
+
+                        <td class="px-5 py-4">
+
+                          ${
+                            arrears.weeks > 0
+                            ? `
+                              <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-bold">
+
+                                <i class="fa-solid fa-clock"></i>
+
+                                ${arrears.weeks} minggu
+
+                              </span>
+                            `
+                            : `
+                              <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold">
+
+                                <i class="fa-solid fa-check"></i>
+
+                                Lunas
+
+                              </span>
+                            `
+                          }
+
+                        </td>
+
+                        <td class="px-5 py-4">
+
+                          <div class="flex justify-center gap-2">
+
+                            <button
+                              onclick="openSiswaModal('${id}')"
+                              class="w-9 h-9 rounded-lg bg-blue-50 text-blue-600">
+
+                              <i class="fa-solid fa-pen"></i>
+
+                            </button>
+
+                            <button
+                              onclick="deleteSiswa('${id}')"
+                              class="w-9 h-9 rounded-lg bg-red-50 text-red-600">
+
+                              <i class="fa-solid fa-trash"></i>
+
+                            </button>
+
+                          </div>
+
+                        </td>
+
+                      </tr>
+
+                    `;
+
+                  }).join("")}
+
+                </tbody>
+
+              </table>
+
+            </div>
+          `
+          : `
+            <div class="py-16 text-center text-gray-400">
+
+              <i class="fa-solid fa-users text-4xl mb-3"></i>
+
+              <div>
+                Belum ada data siswa.
+              </div>
+
+            </div>
+          `
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   SISWA NUNGGAK
+========================================================= */
+
+function renderNunggak() {
+
+  const students =
+    Object.entries(appState.siswa)
+      .map(([id,student]) => {
+
+        const arrears =
+          getStudentArrears(id);
+
+        return {
+          id,
+          ...student,
+          ...arrears
+        };
+
+      })
+      .filter(student => student.weeks > 0)
+      .sort((a,b) => b.weeks - a.weeks);
+
+
+  return `
+
+    <div class="space-y-5">
+
+      <div class="bg-orange-50 border border-orange-200 rounded-3xl p-6">
+
+        <div class="flex items-center gap-4">
+
+          <div class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center">
+            <i class="fa-solid fa-user-clock text-2xl"></i>
+          </div>
+
+          <div>
+
+            <h2 class="text-xl font-bold text-orange-900">
+              Siswa Nunggak
+            </h2>
+
+            <p class="text-sm text-orange-700 mt-1">
+              Daftar siswa yang belum menyelesaikan pembayaran kas.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+
+        ${
+          students.length
+          ? students.map(student => `
+
+              <div class="bg-white border rounded-3xl p-5 shadow-sm">
+
+                <div class="flex items-start gap-4">
+
+                  <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+
+                  <div class="flex-1 min-w-0">
+
+                    <div class="font-bold truncate">
+                      ${escapeHtml(student.nama)}
+                    </div>
+
+                    <div class="text-sm text-orange-600 font-semibold mt-1">
+                      ${student.weeks} minggu menunggak
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <div class="mt-5 p-4 bg-gray-50 rounded-2xl">
+
+                  <div class="text-xs text-gray-500">
+                    Total yang harus dibayar
+                  </div>
+
+                  <div class="text-2xl font-extrabold text-orange-600 mt-1">
+                    ${rupiah(student.amount)}
+                  </div>
+
+                </div>
+
+
+                <div class="mt-4">
+
+                  <button
+                    onclick="lunaskanTunggakan('${student.id}')"
+                    class="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold">
+
+                    <i class="fa-solid fa-check-double mr-2"></i>
+                    Lunaskan ${student.weeks} Minggu
+
+                  </button>
+
+                </div>
+
+              </div>
+
+            `).join("")
+          : `
+            <div class="md:col-span-2 xl:col-span-3 bg-white rounded-3xl border p-12 text-center">
+
+              <div class="w-16 h-16 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center mx-auto">
+
+                <i class="fa-solid fa-circle-check text-3xl"></i>
+
+              </div>
+
+              <h3 class="font-bold text-lg mt-4">
+                Tidak Ada Tunggakan
+              </h3>
+
+              <p class="text-gray-500 text-sm mt-1">
+                Semua siswa sudah melunasi pembayaran kas.
+              </p>
+
+            </div>
+          `
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   PENGATURAN
+========================================================= */
+
+function renderPengaturan() {
+
+  return `
+
+    <div class="max-w-2xl space-y-5">
+
+      <div>
+
+        <h2 class="text-xl font-bold">
+          Pengaturan Kas
+        </h2>
+
+        <p class="text-sm text-gray-500">
+          Tentukan nominal kas mingguan dan awal periode kas.
+        </p>
+
+      </div>
+
+
+      <div class="bg-white border rounded-3xl p-6">
+
+        <form id="settingsForm" class="space-y-5">
+
+          <div>
+
+            <label class="text-sm font-semibold">
+              Nominal Kas Per Minggu
+            </label>
+
+            <div class="relative mt-2">
+
+              <span class="absolute left-4 top-3.5 text-gray-500">
+                Rp
+              </span>
+
+              <input
+                id="weeklyFee"
+                type="number"
+                min="0"
+                value="${Number(appState.settings.weeklyFee || 0)}"
+                class="w-full pl-11 pr-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+
+            </div>
+
+            <p class="text-xs text-gray-400 mt-2">
+              Nominal ini digunakan otomatis ketika mencatat pembayaran dan menghitung tunggakan.
+            </p>
+
+          </div>
+
+
+          <div>
+
+            <label class="text-sm font-semibold">
+              Mulai Perhitungan Kas
+            </label>
+
+            <input
+              id="startDate"
+              type="date"
+              value="${appState.settings.startDate || `${new Date().getFullYear()}-01-01`}"
+              class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+
+            <p class="text-xs text-gray-400 mt-2">
+              Perhitungan tunggakan hanya dilakukan pada periode tahun berjalan.
+            </p>
+
+          </div>
+
+
+          <div class="p-4 bg-blue-50 rounded-2xl text-sm text-blue-700">
+
+            <i class="fa-solid fa-circle-info mr-2"></i>
+
+            Tahun pembayaran otomatis mengikuti
+            <b>${new Date().getFullYear()}</b>.
+            Tahun sebelumnya tidak dimasukkan ke perhitungan tunggakan.
+
+          </div>
+
+
+          <button
+            class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold">
+
+            <i class="fa-solid fa-save mr-2"></i>
+            Simpan Pengaturan
+
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+document.addEventListener("submit", async function(e) {
+
+  if (e.target.id !== "settingsForm") return;
+
+  e.preventDefault();
+
+  const weeklyFee =
+    Number(document.getElementById("weeklyFee").value);
+
+  const startDate =
+    document.getElementById("startDate").value;
+
+  if (weeklyFee < 0 || !startDate) {
+
+    showToast(
+      "Pengaturan belum lengkap.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  try {
+
+    await update(
+      ref(database, `${DB_ROOT}/settings`),
+      {
+        weeklyFee,
+        startDate
+      }
+    );
+
+    showToast(
+      "Pengaturan kas berhasil disimpan.",
+      "success"
+    );
+
+  } catch(error) {
+
+    console.error(error);
+
+    showToast(
+      "Gagal menyimpan pengaturan.",
+      "error"
+    );
+
+  }
 
 });
 
 
-/* =====================================================
-EDIT KAS MASUK
-===================================================== */
+/* =========================================================
+   MODAL SISWA
+========================================================= */
 
-window.editKasMasuk=function(id){
+window.openSiswaModal = function(editId = null) {
 
-const item=
-window.appState.kasMasuk[id];
+  const existing =
+    editId
+      ? appState.siswa[editId]
+      : null;
 
-if(!item)return;
+  openFormModal(
 
+    editId
+      ? "Edit Data Siswa"
+      : "Tambah Siswa",
 
-document.getElementById(
-"kasMasukId"
-).value=id;
+    "Data siswa digunakan untuk login anggota.",
 
-document.getElementById(
-"kasMasukTanggal"
-).value=
-item.tanggal||today();
+    `
 
-populateStudentSelect();
-populatePeriodSelect();
+      <form id="siswaForm" class="space-y-4">
 
+        <input
+          type="hidden"
+          id="siswaEditId"
+          value="${editId || ""}">
 
-document.getElementById(
-"kasMasukSiswa"
-).value=
-item.namaSiswa||"";
+        <div>
 
-document.getElementById(
-"kasMasukPeriode"
-).value=
-item.periodKey||"";
+          <label class="text-sm font-semibold">
+            Nama Siswa
+          </label>
 
-document.getElementById(
-"kasMasukJumlah"
-).value=
-window.appState.settings.weeklyAmount||0;
+          <input
+            id="siswaNama"
+            type="text"
+            required
+            value="${escapeHtml(existing?.nama || "")}"
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Nama lengkap">
 
-
-openModal("kasMasukModal");
-
-};
-
-
-/* =====================================================
-DELETE KAS MASUK
-===================================================== */
-
-window.deleteKasMasuk=function(id){
-
-askConfirm(
-"Hapus Pembayaran?",
-"Data pembayaran ini akan dihapus dari riwayat kas.",
-async()=>{
-
-try{
-
-await remove(
-ref(
-database,
-"kelasVIIIB/kasMasuk/"+id
-)
-);
-
-showToast(
-"Pembayaran berhasil dihapus.",
-"success"
-);
-
-}catch(error){
-
-showToast(
-"Gagal menghapus: "+
-error.message,
-"error"
-);
-
-}
-
-},
-"Ya, Hapus"
-);
-
-};
+        </div>
 
 
-/* =====================================================
-KAS KELUAR
-===================================================== */
+        <div>
 
-window.openKasKeluarModal=function(){
+          <label class="text-sm font-semibold">
+            NIS
+          </label>
 
-document.getElementById(
-"kasKeluarForm"
-).reset();
+          <input
+            id="siswaNis"
+            type="text"
+            value="${escapeHtml(existing?.nis || "")}"
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Nomor induk siswa">
 
-document.getElementById(
-"kasKeluarId"
-).value="";
+        </div>
 
-document.getElementById(
-"kasKeluarTanggal"
-).value=today();
 
-openModal("kasKeluarModal");
+        <div>
+
+          <label class="text-sm font-semibold">
+            Password Anggota
+          </label>
+
+          <input
+            id="siswaPassword"
+            type="text"
+            value="${escapeHtml(existing?.password || DEFAULT_MEMBER_PASSWORD)}"
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+
+          <p class="text-xs text-gray-400 mt-2">
+            Password awal: 123456
+          </p>
+
+        </div>
+
+
+        <button
+          class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold">
+
+          <i class="fa-solid fa-save mr-2"></i>
+          ${editId ? "Simpan Perubahan" : "Tambah Siswa"}
+
+        </button>
+
+      </form>
+
+    `
+  );
+
+
+  document.getElementById("siswaForm")
+    .addEventListener(
+      "submit",
+      saveSiswa
+    );
 
 };
 
 
-document.getElementById(
-"kasKeluarForm"
-).addEventListener(
-"submit",
-async e=>{
+async function saveSiswa(e) {
 
-e.preventDefault();
+  e.preventDefault();
+
+  const editId =
+    document.getElementById("siswaEditId").value;
+
+  const nama =
+    document.getElementById("siswaNama").value.trim();
+
+  const nis =
+    document.getElementById("siswaNis").value.trim();
+
+  const password =
+    document.getElementById("siswaPassword").value.trim()
+    || DEFAULT_MEMBER_PASSWORD;
+
+  if (!nama) {
+
+    showToast(
+      "Nama siswa wajib diisi.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  const data = {
+    nama,
+    nis,
+    kelas: "VII B",
+    password,
+    aktif: true,
+    updatedAt: Date.now()
+  };
 
 
-const id=
-document.getElementById(
-"kasKeluarId"
-).value;
+  try {
+
+    if (editId) {
+
+      await update(
+        ref(database, `${DB_ROOT}/siswa/${editId}`),
+        data
+      );
+
+    } else {
+
+      const newRef =
+        push(ref(database, `${DB_ROOT}/siswa`));
+
+      await set(newRef, {
+        ...data,
+        createdAt: Date.now()
+      });
+
+    }
+
+    closeFormModal();
+
+    showToast(
+      editId
+        ? "Data siswa berhasil diperbarui."
+        : "Siswa berhasil ditambahkan.",
+      "success"
+    );
+
+  } catch(error) {
+
+    console.error(error);
+
+    showToast(
+      "Gagal menyimpan data siswa.",
+      "error"
+    );
+
+  }
+
+}
 
 
-const data={
+window.deleteSiswa = function(id) {
 
-tanggal:
-document.getElementById(
-"kasKeluarTanggal"
-).value,
+  const student =
+    appState.siswa[id];
 
-keterangan:
-document.getElementById(
-"kasKeluarKeterangan"
-).value.trim(),
+  if (!student) return;
 
-jumlah:
-Number(
-document.getElementById(
-"kasKeluarJumlah"
-).value
-),
+  showConfirmModal({
 
-updatedAt:Date.now()
+    title: "Hapus Siswa?",
+
+    message:
+      `Data ${student.nama} akan dihapus dari daftar siswa.`,
+
+    icon: "fa-user-minus",
+
+    iconClass:
+      "bg-red-100 text-red-600",
+
+    buttonText:
+      "Hapus",
+
+    buttonClass:
+      "bg-red-600 hover:bg-red-700",
+
+    onConfirm:
+      async () => {
+
+        try {
+
+          await remove(
+            ref(database, `${DB_ROOT}/siswa/${id}`)
+          );
+
+          showToast(
+            "Data siswa berhasil dihapus.",
+            "success"
+          );
+
+        } catch(error) {
+
+          console.error(error);
+
+          showToast(
+            "Gagal menghapus siswa.",
+            "error"
+          );
+
+        }
+
+      }
+
+  });
 
 };
 
 
-try{
+/* =========================================================
+   FORM MODAL
+========================================================= */
 
-if(id){
+function openFormModal(title, subtitle, body) {
 
-await update(
-ref(
-database,
-"kelasVIIIB/kasKeluar/"+id
-),
-data
-);
+  const modal =
+    document.getElementById("formModal");
 
-showToast(
-"Kas keluar berhasil diperbarui.",
-"success"
-);
+  document.getElementById("formModalTitle")
+    .textContent = title;
 
-}else{
+  document.getElementById("formModalSubtitle")
+    .textContent = subtitle;
 
-const newRef=
-push(
-ref(
-database,
-"kelasVIIIB/kasKeluar"
-)
-);
+  document.getElementById("formModalBody")
+    .innerHTML = body;
 
-await set(
-newRef,
-{
-...data,
-createdAt:Date.now()
-}
-);
-
-showToast(
-"Kas keluar berhasil disimpan.",
-"success"
-);
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
 
 }
 
-closeModal("kasKeluarModal");
 
-}catch(error){
+window.closeFormModal = function() {
 
-showToast(
-"Gagal menyimpan: "+
-error.message,
-"error"
-);
+  const modal =
+    document.getElementById("formModal");
 
-}
-
-});
-
-
-window.editKasKeluar=function(id){
-
-const item=
-window.appState.kasKeluar[id];
-
-if(!item)return;
-
-
-document.getElementById(
-"kasKeluarId"
-).value=id;
-
-document.getElementById(
-"kasKeluarTanggal"
-).value=
-item.tanggal||today();
-
-document.getElementById(
-"kasKeluarKeterangan"
-).value=
-item.keterangan||"";
-
-document.getElementById(
-"kasKeluarJumlah"
-).value=
-item.jumlah||0;
-
-openModal("kasKeluarModal");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
 
 };
 
 
-window.deleteKasKeluar=function(id){
+/* =========================================================
+   CONFIRM MODAL
+========================================================= */
 
-askConfirm(
-"Hapus Kas Keluar?",
-"Data pengeluaran ini akan dihapus dari database.",
-async()=>{
+function showConfirmModal(options) {
 
-try{
+  const modal =
+    document.getElementById("confirmModal");
 
-await remove(
-ref(
-database,
-"kelasVIIIB/kasKeluar/"+id
-)
-);
+  const icon =
+    document.getElementById("confirmIcon");
 
-showToast(
-"Kas keluar berhasil dihapus.",
-"success"
-);
+  icon.className =
+    `w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 ${options.iconClass || "bg-red-100 text-red-600"}`;
 
-}catch(error){
+  icon.innerHTML =
+    `<i class="fa-solid ${options.icon || "fa-circle-question"} text-2xl"></i>`;
 
-showToast(
-"Gagal menghapus: "+
-error.message,
-"error"
-);
+  document.getElementById("confirmTitle")
+    .textContent =
+      options.title || "Konfirmasi";
+
+  document.getElementById("confirmMessage")
+    .textContent =
+      options.message || "";
+
+  const button =
+    document.getElementById("confirmButton");
+
+  button.textContent =
+    options.buttonText || "Ya";
+
+  button.className =
+    `py-3 rounded-xl text-white font-semibold ${options.buttonClass || "bg-red-600 hover:bg-red-700"}`;
+
+  button.onclick = async function() {
+
+    closeConfirmModal();
+
+    await options.onConfirm();
+
+  };
+
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
 
 }
 
-},
-"Ya, Hapus"
-);
+
+window.closeConfirmModal = function() {
+
+  const modal =
+    document.getElementById("confirmModal");
+
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
 
 };
 
 
-/* =====================================================
-SISWA
-===================================================== */
+/* =========================================================
+   LOGOUT
+========================================================= */
 
-window.openSiswaModal=function(){
+window.logout = function() {
 
-document.getElementById(
-"siswaForm"
-).reset();
+  showConfirmModal({
 
-document.getElementById(
-"siswaId"
-).value="";
+    title: "Keluar dari Aplikasi?",
 
-document.getElementById(
-"siswaModalTitle"
-).textContent=
-"Tambah Siswa";
+    message:
+      "Sesi login akan diakhiri dan kamu akan kembali ke halaman login.",
 
-openModal("siswaModal");
+    icon:
+      "fa-right-from-bracket",
 
-};
+    iconClass:
+      "bg-blue-100 text-blue-600",
 
+    buttonText:
+      "Keluar",
 
-window.editSiswa=function(id){
+    buttonClass:
+      "bg-blue-600 hover:bg-blue-700",
 
-const item=
-window.appState.siswa[id];
+    onConfirm:
+      () => {
 
-if(!item)return;
+        sessionStorage.removeItem(
+          "kasKelasSession"
+        );
 
+        appState.currentUser = null;
+        appState.currentRole = null;
+        appState.activeTab = "beranda";
 
-document.getElementById(
-"siswaId"
-).value=id;
+        document.getElementById("appScreen")
+          .classList.add("hidden");
 
-document.getElementById(
-"siswaNama"
-).value=
-item.nama||"";
+        document.getElementById("loginScreen")
+          .classList.remove("hidden");
 
-document.getElementById(
-"siswaNis"
-).value=
-item.nis||"";
+        document.getElementById("bendaharaForm")
+          .reset();
 
-document.getElementById(
-"siswaGender"
-).value=
-item.gender||"Laki-laki";
+        document.getElementById("anggotaForm")
+          .reset();
 
-document.getElementById(
-"siswaModalTitle"
-).textContent=
-"Edit Siswa";
+        backToLoginChoice();
 
-openModal("siswaModal");
+      }
+
+  });
 
 };
 
 
-document.getElementById(
-"siswaForm"
-).addEventListener(
-"submit",
-async e=>{
+/* =========================================================
+   WELCOME POPUP
+========================================================= */
 
-e.preventDefault();
+function showWelcomePopup(
+  title,
+  message,
+  color = "blue"
+) {
+
+  const popup =
+    document.getElementById("welcomePopup");
+
+  const icon =
+    document.getElementById("welcomeIcon");
+
+  icon.className =
+    color === "green"
+      ? "w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center shrink-0"
+      : "w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0";
+
+  document.getElementById("welcomeTitle")
+    .textContent = title;
+
+  document.getElementById("welcomeMessage")
+    .textContent = message;
+
+  popup.classList.remove("hidden");
+
+  setTimeout(() => {
+
+    popup.classList.add("hidden");
+
+  }, 2500);
+
+}
 
 
-const id=
-document.getElementById(
-"siswaId"
-).value;
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message, type = "success") {
+
+  const container =
+    document.getElementById("toastContainer");
+
+  const id =
+    "toast_" + Date.now();
+
+  const config = {
+
+    success: {
+      icon: "fa-circle-check",
+      cls: "bg-green-600"
+    },
+
+    error: {
+      icon: "fa-circle-xmark",
+      cls: "bg-red-600"
+    },
+
+    info: {
+      icon: "fa-circle-info",
+      cls: "bg-blue-600"
+    },
+
+    warning: {
+      icon: "fa-triangle-exclamation",
+      cls: "bg-orange-500"
+    }
+
+  };
+
+  const c =
+    config[type] || config.info;
+
+  const div =
+    document.createElement("div");
+
+  div.id = id;
+
+  div.className =
+    `${c.cls} text-white rounded-2xl shadow-xl p-4 flex items-center gap-3`;
+
+  div.innerHTML = `
+
+    <i class="fa-solid ${c.icon} text-xl"></i>
+
+    <div class="text-sm font-semibold flex-1">
+      ${escapeHtml(message)}
+    </div>
+
+    <button onclick="document.getElementById('${id}').remove()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+  `;
+
+  container.appendChild(div);
+
+  setTimeout(() => {
+
+    const element =
+      document.getElementById(id);
+
+    if (element) element.remove();
+
+  }, 3500);
+
+}
 
 
-const data={
+window.showToast = showToast;
 
-nama:
-document.getElementById(
-"siswaNama"
-).value.trim(),
 
-nis:
-document.getElementById(
-"siswaNis"
-).value.trim(),
+/* =========================================================
+   STAT CARD
+========================================================= */
 
-gender:
-document.getElementById(
-"siswaGender"
-).value,
+function statCard(title, value, icon, color) {
 
-updatedAt:Date.now()
+  const colors = {
+
+    blue: "bg-blue-100 text-blue-600",
+
+    red: "bg-red-100 text-red-600",
+
+    green: "bg-green-100 text-green-600",
+
+    purple: "bg-purple-100 text-purple-600",
+
+    orange: "bg-orange-100 text-orange-600"
+
+  };
+
+  return `
+
+    <div class="stat-card bg-white border rounded-3xl p-5 shadow-sm">
+
+      <div class="flex items-center justify-between">
+
+        <div>
+
+          <div class="text-sm text-gray-500">
+            ${title}
+          </div>
+
+          <div class="text-xl font-extrabold mt-2">
+            ${value}
+          </div>
+
+        </div>
+
+        <div class="w-12 h-12 rounded-2xl ${colors[color] || colors.blue} flex items-center justify-center">
+
+          <i class="fa-solid ${icon} text-lg"></i>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   SIDEBAR MOBILE
+========================================================= */
+
+window.toggleSidebar = function() {
+
+  const sidebar =
+    document.getElementById("sidebar");
+
+  const overlay =
+    document.getElementById("mobileOverlay");
+
+  sidebar.classList.toggle("open");
+
+  if (sidebar.classList.contains("open")) {
+
+    overlay.classList.remove("hidden");
+    overlay.classList.add("show");
+
+  } else {
+
+    overlay.classList.add("hidden");
+    overlay.classList.remove("show");
+
+  }
 
 };
 
 
-if(!data.nama){
+function closeMobileSidebar() {
 
-showToast(
-"Nama siswa wajib diisi.",
-"error"
-);
+  const sidebar =
+    document.getElementById("sidebar");
 
-return;
+  const overlay =
+    document.getElementById("mobileOverlay");
 
-}
-
-
-try{
-
-if(id){
-
-await update(
-ref(
-database,
-"kelasVIIIB/siswa/"+id
-),
-data
-);
-
-showToast(
-"Data siswa diperbarui.",
-"success"
-);
-
-}else{
-
-const newRef=
-push(
-ref(
-database,
-"kelasVIIIB/siswa"
-)
-);
-
-await set(
-newRef,
-{
-...data,
-createdAt:Date.now()
-}
-);
-
-showToast(
-"Data siswa ditambahkan.",
-"success"
-);
-
-}
-
-closeModal("siswaModal");
-
-}catch(error){
-
-showToast(
-"Gagal menyimpan: "+
-error.message,
-"error"
-);
-
-}
-
-});
-
-
-window.deleteSiswa=function(id){
-
-const item=
-window.appState.siswa[id];
-
-askConfirm(
-"Hapus Siswa?",
-`Data ${item?.nama||"siswa"} akan dihapus dari daftar siswa.`,
-async()=>{
-
-try{
-
-await remove(
-ref(
-database,
-"kelasVIIIB/siswa/"+id
-)
-);
-
-showToast(
-"Data siswa berhasil dihapus.",
-"success"
-);
-
-}catch(error){
-
-showToast(
-"Gagal menghapus: "+
-error.message,
-"error"
-);
-
-}
-
-},
-"Ya, Hapus"
-);
-
-};
-
-
-/* =====================================================
-RENDER KAS MASUK
-===================================================== */
-
-function renderKasMasuk(){
-
-const tbody=
-document.getElementById(
-"tableKasMasuk"
-);
-
-const data=
-Object.entries(
-window.appState.kasMasuk
-);
-
-data.sort(
-([,a],[,b])=>
-new Date(b.tanggal)-
-new Date(a.tanggal)
-);
-
-
-if(!data.length){
-
-tbody.innerHTML=`
-
-<tr>
-<td colspan="6"
-class="text-center text-slate-400 py-8">
-
-Belum ada pembayaran kas.
-
-</td>
-</tr>
-
-`;
-
-return;
+  sidebar.classList.remove("open");
+  overlay.classList.add("hidden");
+  overlay.classList.remove("show");
 
 }
 
 
-tbody.innerHTML=
-data.map(([id,item])=>`
+/* =========================================================
+   REFRESH
+========================================================= */
 
-<tr>
+function refreshAllViews() {
 
-<td>
-${formatDate(item.tanggal)}
-</td>
+  if (
+    appState.currentRole &&
+    !document.getElementById("appScreen").classList.contains("hidden")
+  ) {
 
-<td class="font-bold">
-${escapeHTML(item.namaSiswa)}
-</td>
+    renderSidebar();
+    renderCurrentPage();
 
-<td>
-${escapeHTML(item.periodeLabel||"-")}
-</td>
-
-<td>
-${escapeHTML(item.keterangan||"-")}
-</td>
-
-<td class="amount-in">
-+ ${rupiah(item.jumlah)}
-</td>
-
-<td>
-
-<div class="flex gap-2">
-
-<button
-class="btn btn-secondary"
-onclick="editKasMasuk('${id}')">
-
-<i class="fa-solid fa-pen"></i>
-
-</button>
-
-<button
-class="btn btn-danger"
-onclick="deleteKasMasuk('${id}')">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-</div>
-
-</td>
-
-</tr>
-
-`).join("");
+  }
 
 }
 
 
-/* =====================================================
-RENDER KAS KELUAR
-===================================================== */
+/* =========================================================
+   INITIAL
+========================================================= */
 
-function renderKasKeluar(){
+populateMemberSelect();
 
-const tbody=
-document.getElementById(
-"tableKasKeluar"
-);
-
-const data=
-Object.entries(
-window.appState.kasKeluar
-);
-
-data.sort(
-([,a],[,b])=>
-new Date(b.tanggal)-
-new Date(a.tanggal)
-);
-
-
-if(!data.length){
-
-tbody.innerHTML=`
-
-<tr>
-<td colspan="4"
-class="text-center text-slate-400 py-8">
-
-Belum ada pengeluaran.
-
-</td>
-</tr>
-
-`;
-
-return;
-
-}
-
-
-tbody.innerHTML=
-data.map(([id,item])=>`
-
-<tr>
-
-<td>
-${formatDate(item.tanggal)}
-</td>
-
-<td>
-${escapeHTML(item.keterangan)}
-</td>
-
-<td class="amount-out">
-- ${rupiah(item.jumlah)}
-</td>
-
-<td>
-
-<div class="flex gap-2">
-
-<button
-class="btn btn-secondary"
-onclick="editKasKeluar('${id}')">
-
-<i class="fa-solid fa-pen"></i>
-
-</button>
-
-<button
-class="btn btn-danger"
-onclick="deleteKasKeluar('${id}')">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-</div>
-
-</td>
-
-</tr>
-
-`).join("");
-
-}
-
-
-/* =====================================================
-RENDER SISWA
-===================================================== */
-
-function renderSiswa(){
-
-const tbody=
-document.getElementById(
-"tableSiswa"
-);
-
-const data=
-Object.entries(
-window.appState.siswa
-);
-
-
-if(!data.length){
-
-tbody.innerHTML=`
-
-<tr>
-<td colspan="7"
-class="text-center text-slate-400 py-8">
-
-Belum ada data siswa.
-
-</td>
-</tr>
-
-`;
-
-return;
-
-}
-
-
-tbody.innerHTML=
-data.map(([id,siswa],index)=>{
-
-const arrears=
-getStudentArrears(siswa.nama);
-
-
-return`
-
-<tr>
-
-<td>${index+1}</td>
-
-<td class="font-bold">
-${escapeHTML(siswa.nama)}
-</td>
-
-<td>
-${escapeHTML(siswa.nis||"-")}
-</td>
-
-<td>
-${escapeHTML(siswa.gender||"-")}
-</td>
-
-<td>
-
-${
-arrears.weeks===0
-
-?`
-
-<span class="status-paid">
-<i class="fa-solid fa-check"></i>
-LUNAS
-</span>
-
-`
-
-:`
-
-<span class="status-unpaid">
-<i class="fa-solid fa-triangle-exclamation"></i>
-MENUNGGAK
-</span>
-
-`
-
-}
-
-</td>
-
-<td>
-
-${
-arrears.weeks===0
-
-?"-"
-
-:`
-
-<div class="font-bold text-red-600">
-${arrears.weeks} minggu
-</div>
-
-<div class="text-xs text-red-500">
-${rupiah(arrears.total)}
-</div>
-
-`
-}
-
-</td>
-
-<td>
-
-<div class="flex gap-2">
-
-<button
-class="btn btn-secondary"
-onclick="editSiswa('${id}')">
-
-<i class="fa-solid fa-pen"></i>
-
-</button>
-
-<button
-class="btn btn-danger"
-onclick="deleteSiswa('${id}')">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-</div>
-
-</td>
-
-</tr>
-
-`;
-
-}).join("");
-
-}
-
-
-/* =====================================================
-HISTORY SWITCH
-===================================================== */
-
-window.switchHistory=function(type){
-
-window.appState.historyType=type;
-
-
-const masuk=
-document.getElementById(
-"historyMasuk"
-);
-
-const keluar=
-document.getElementById(
-"historyKeluar"
-);
-
-const b1=
-document.getElementById(
-"historyInButton"
-);
-
-const b2=
-document.getElementById(
-"historyOutButton"
-);
-
-
-if(type==="masuk"){
-
-masuk.classList.remove("hidden-page");
-keluar.classList.add("hidden-page");
-
-b1.className="btn btn-primary";
-b2.className="btn btn-secondary";
-
-}else{
-
-masuk.classList.add("hidden-page");
-keluar.classList.remove("hidden-page");
-
-b1.className="btn btn-secondary";
-b2.className="btn btn-primary";
-
-}
-
-
-renderHistory();
-
-};
-
-
-function renderHistory(){
-
-const masuk=
-Object.values(
-window.appState.kasMasuk
-).sort(
-(a,b)=>
-new Date(b.tanggal)-
-new Date(a.tanggal)
-);
-
-
-const keluar=
-Object.values(
-window.appState.kasKeluar
-).sort(
-(a,b)=>
-new Date(b.tanggal)-
-new Date(a.tanggal)
-);
-
-
-document.getElementById(
-"historyMasukTable"
-).innerHTML=
-masuk.length
-
-?masuk.map(item=>`
-
-<tr>
-
-<td>
-${formatDate(item.tanggal)}
-</td>
-
-<td class="font-bold">
-${escapeHTML(item.namaSiswa)}
-</td>
-
-<td>
-${escapeHTML(item.periodeLabel||"-")}
-</td>
-
-<td>
-${escapeHTML(item.keterangan||"-")}
-</td>
-
-<td class="amount-in">
-+ ${rupiah(item.jumlah)}
-</td>
-
-</tr>
-
-`).join("")
-
-:`
-
-<tr>
-<td colspan="5"
-class="text-center text-slate-400 py-8">
-Belum ada kas masuk.
-</td>
-</tr>
-
-`;
-
-
-document.getElementById(
-"historyKeluarTable"
-).innerHTML=
-keluar.length
-
-?keluar.map(item=>`
-
-<tr>
-
-<td>
-${formatDate(item.tanggal)}
-</td>
-
-<td>
-${escapeHTML(item.keterangan||"-")}
-</td>
-
-<td class="amount-out">
-- ${rupiah(item.jumlah)}
-</td>
-
-</tr>
-
-`).join("")
-
-:`
-
-<tr>
-<td colspan="3"
-class="text-center text-slate-400 py-8">
-Belum ada kas keluar.
-</td>
-</tr>
-
-`;
-
-}
-
-
-/* =====================================================
-SETTINGS
-===================================================== */
-
-function loadSettingsForm(){
-
-const amount=
-document.getElementById(
-"settingWeeklyAmount"
-);
-
-const start=
-document.getElementById(
-"settingStartDate"
-);
-
-if(amount){
-
-amount.value=
-window.appState.settings.weeklyAmount;
-
-}
-
-if(start){
-
-start.value=
-window.appState.settings.startDate;
-
-}
-
-}
-
-
-document.getElementById(
-"settingsForm"
-).addEventListener(
-"submit",
-async e=>{
-
-e.preventDefault();
-
-
-const weeklyAmount=
-Number(
-document.getElementById(
-"settingWeeklyAmount"
-).value
-);
-
-
-const startDate=
-document.getElementById(
-"settingStartDate"
-).value;
-
-
-if(weeklyAmount<0||!startDate){
-
-showToast(
-"Pengaturan belum lengkap.",
-"error"
-);
-
-return;
-
-}
-
-
-try{
-
-await set(
-ref(
-database,
-"kelasVIIIB/settings"
-),
-{
-weeklyAmount,
-startDate,
-updatedAt:Date.now()
-}
-);
-
-
-showToast(
-"Pengaturan kas berhasil disimpan.",
-"success"
-);
-
-}catch(error){
-
-showToast(
-"Gagal menyimpan pengaturan: "+
-error.message,
-"error"
-);
-
-}
-
-});
-
-
-/* =====================================================
-LOGOUT MODAL
-===================================================== */
-
-window.askLogout=function(){
-
-askConfirm(
-"Keluar dari Aplikasi?",
-"Anda akan keluar dari akun dan kembali ke halaman login.",
-()=>{
-logout()
-},
-"Ya, Keluar"
-);
-
-};
-
-
-function logout(){
-
-sessionStorage.removeItem(
-"kasKelasUser"
-);
-
-sessionStorage.removeItem(
-"kasKelasRole"
-);
-
-window.appState.currentUser=null;
-window.appState.currentRole=null;
-
-
-document.getElementById("appPage")
-.classList.add("hidden-page");
-
-document.getElementById("loginPage")
-.classList.remove("hidden-page");
-
-
-selectLoginRole("anggota");
-
-showToast(
-"Anda telah keluar dari aplikasi.",
-"success"
-);
-
-}
-
-
-/* =====================================================
-MOBILE SIDEBAR
-===================================================== */
-
-window.toggleSidebar=function(){
-
-document.getElementById("sidebar")
-.classList.toggle("open");
-
-document.getElementById("mobileOverlay")
-.classList.toggle("show");
-
-};
-
-
-window.closeSidebar=function(){
-
-document.getElementById("sidebar")
-.classList.remove("open");
-
-document.getElementById("mobileOverlay")
-.classList.remove("show");
-
-};
-
-
-/* =====================================================
-REFRESH
-===================================================== */
-
-function refreshAll(){
-
-if(!window.appState.currentRole)
-return;
-
-renderDashboard();
-renderKasMasuk();
-renderKasKeluar();
-renderSiswa();
-renderHistory();
-populateStudentSelect();
-populatePeriodSelect();
-loadSettingsForm();
-
-}
-
-
-/* =====================================================
-CLOSE MODAL CLICK OUTSIDE
-===================================================== */
-
-document.querySelectorAll(".app-modal")
-.forEach(modal=>{
-
-modal.addEventListener("click",e=>{
-
-if(e.target===modal){
-
-modal.classList.remove("show");
-
-}
-
-});
-
-});
-
-
-/* =====================================================
-START
-===================================================== */
-
-checkSession();
+restoreSession();
 
 </script>
 
