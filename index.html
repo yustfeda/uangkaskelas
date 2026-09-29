@@ -373,6 +373,12 @@ button{
     color:white;
     z-index:1100;
     box-shadow:var(--shadow);
+    transition:opacity .2s,transform .2s;
+}
+
+/* HAMBURGER HILANG KETIKA NAVBAR/SIDEBAR TERBUKA */
+.hamburger-btn.menu-open{
+    display:none!important;
 }
 
 /* CONTENT */
@@ -547,6 +553,33 @@ button{
 .table-wrap{
     overflow-x:auto;
     width:100%;
+    padding-bottom:4px;
+    scrollbar-width:auto;
+    scrollbar-color:#94a3b8 #e2e8f0;
+}
+
+/* SCROLLBAR DIPERLEBAR */
+.table-wrap::-webkit-scrollbar,
+.recent-scroll::-webkit-scrollbar{
+    height:12px;
+}
+
+.table-wrap::-webkit-scrollbar-track,
+.recent-scroll::-webkit-scrollbar-track{
+    background:#e2e8f0;
+    border-radius:10px;
+}
+
+.table-wrap::-webkit-scrollbar-thumb,
+.recent-scroll::-webkit-scrollbar-thumb{
+    background:#94a3b8;
+    border-radius:10px;
+    border:2px solid #e2e8f0;
+}
+
+.table-wrap::-webkit-scrollbar-thumb:hover,
+.recent-scroll::-webkit-scrollbar-thumb:hover{
+    background:#64748b;
 }
 
 table{
@@ -629,6 +662,8 @@ td{
     max-width:100%;
     overflow-x:auto;
     -webkit-overflow-scrolling:touch;
+    scrollbar-width:auto;
+    scrollbar-color:#94a3b8 #e2e8f0;
 }
 
 .recent-scroll table{
@@ -808,6 +843,7 @@ td{
 }
 
 @media(max-width:768px){
+
     .sidebar{
         transform:translateX(-105%);
     }
@@ -824,6 +860,11 @@ td{
         display:flex;
         align-items:center;
         justify-content:center;
+    }
+
+    /* HAMBURGER HILANG SAAT NAVBAR TERBUKA */
+    .hamburger-btn.menu-open{
+        display:none!important;
     }
 
     .main-content{
@@ -913,6 +954,11 @@ td{
         min-width:0;
         width:100%;
     }
+
+    /* DAFTAR SISWA SEDIKIT LEBIH LONGGAR */
+    .table-wrap table{
+        min-width:760px;
+    }
 }
 </style>
 </head>
@@ -922,176 +968,354 @@ td{
 <!-- LOGIN -->
 <div id="loginScreen">
     <div class="login-card">
+
         <div class="login-header">
+
             <div class="login-logo">
                 <i class="fa-solid fa-wallet"></i>
             </div>
+
             <h1>KAS KELAS VII B</h1>
+
             <p>Sistem Pengelolaan Kas Kelas</p>
+
         </div>
 
         <div class="login-body">
+
             <div class="role-tabs">
-                <button class="role-tab active" id="roleBendahara" onclick="setLoginRole('bendahara')">
-                    <i class="fa-solid fa-user-tie"></i> Bendahara
+
+                <button
+                    class="role-tab active"
+                    id="roleBendahara"
+                    onclick="setLoginRole('bendahara')">
+
+                    <i class="fa-solid fa-user-tie"></i>
+                    Bendahara
+
                 </button>
-                <button class="role-tab" id="roleAnggota" onclick="setLoginRole('anggota')">
-                    <i class="fa-solid fa-users"></i> Anggota
+
+                <button
+                    class="role-tab"
+                    id="roleAnggota"
+                    onclick="setLoginRole('anggota')">
+
+                    <i class="fa-solid fa-users"></i>
+                    Anggota
+
                 </button>
+
             </div>
 
             <div id="bendaharaLogin">
+
                 <div class="form-group">
+
                     <label>Username</label>
-                    <input id="loginUsername" class="form-control" type="text" placeholder="Masukkan username">
+
+                    <input
+                        id="loginUsername"
+                        class="form-control"
+                        type="text"
+                        placeholder="Masukkan username">
+
                 </div>
 
                 <div class="form-group">
+
                     <label>Password</label>
+
                     <div class="password-wrap">
-                        <input id="loginPassword" class="form-control" type="password" placeholder="Masukkan password">
-                        <button class="password-toggle" onclick="togglePassword('loginPassword',this)">
+
+                        <input
+                            id="loginPassword"
+                            class="form-control"
+                            type="password"
+                            placeholder="Masukkan password">
+
+                        <button
+                            class="password-toggle"
+                            onclick="togglePassword('loginPassword',this)">
+
                             <i class="fa-solid fa-eye"></i>
+
                         </button>
+
                     </div>
+
                 </div>
+
             </div>
 
             <div id="anggotaLogin" class="hidden">
+
                 <div class="form-group">
+
                     <label>Nama Siswa</label>
-                    <select id="loginStudent" class="form-control">
-                        <option value="">Pilih nama siswa</option>
+
+                    <select
+                        id="loginStudent"
+                        class="form-control">
+
+                        <option value="">
+                            Pilih nama siswa
+                        </option>
+
                     </select>
+
                 </div>
 
                 <div class="form-group">
+
                     <label>Password</label>
+
                     <div class="password-wrap">
-                        <input id="loginStudentPassword" class="form-control" type="password" placeholder="Masukkan password">
-                        <button class="password-toggle" onclick="togglePassword('loginStudentPassword',this)">
+
+                        <input
+                            id="loginStudentPassword"
+                            class="form-control"
+                            type="password"
+                            placeholder="Masukkan password">
+
+                        <button
+                            class="password-toggle"
+                            onclick="togglePassword('loginStudentPassword',this)">
+
                             <i class="fa-solid fa-eye"></i>
+
                         </button>
+
                     </div>
+
                 </div>
+
             </div>
 
-            <button class="btn btn-primary btn-block" onclick="login()">
+            <button
+                class="btn btn-primary btn-block"
+                onclick="login()">
+
                 <i class="fa-solid fa-right-to-bracket"></i>
                 Masuk
+
             </button>
 
             <div class="login-note">
                 KAS KELAS VII B
             </div>
+
         </div>
+
     </div>
 </div>
+
 
 <!-- APP -->
 <div id="app" class="hidden">
 
-    <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()">
+    <button
+        class="hamburger-btn"
+        id="hamburgerBtn"
+        onclick="toggleSidebar()">
+
         <i class="fa-solid fa-bars"></i>
+
     </button>
 
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+        onclick="closeSidebar()">
+    </div>
 
-    <aside class="sidebar" id="sidebar">
+    <aside
+        class="sidebar"
+        id="sidebar">
 
         <div class="sidebar-brand">
-            <h2><i class="fa-solid fa-wallet"></i> KAS KELAS VII B</h2>
-            <p>Pengelolaan kas kelas</p>
+
+            <h2>
+                <i class="fa-solid fa-wallet"></i>
+                KAS KELAS VII B
+            </h2>
+
+            <p>
+                Pengelolaan kas kelas
+            </p>
+
         </div>
 
         <div class="nav-menu">
 
-            <div class="nav-section">Menu Utama</div>
+            <div class="nav-section">
+                Menu Utama
+            </div>
 
-            <button class="nav-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
+            <button
+                class="nav-item active"
+                data-page="dashboard"
+                onclick="navigateTo('dashboard')">
+
                 <i class="fa-solid fa-house"></i>
                 <span>Beranda</span>
+
             </button>
 
-            <button class="nav-item" data-page="kasMasuk" onclick="navigateTo('kasMasuk')">
+            <button
+                class="nav-item"
+                data-page="kasMasuk"
+                onclick="navigateTo('kasMasuk')">
+
                 <i class="fa-solid fa-arrow-down"></i>
                 <span>Kas Masuk</span>
+
             </button>
 
-            <button class="nav-item" data-page="kasKeluar" onclick="navigateTo('kasKeluar')">
+            <button
+                class="nav-item"
+                data-page="kasKeluar"
+                onclick="navigateTo('kasKeluar')">
+
                 <i class="fa-solid fa-arrow-up"></i>
                 <span>Kas Keluar</span>
+
             </button>
 
-            <button class="nav-item" id="navSiswa" data-page="siswa" onclick="navigateTo('siswa')">
+            <button
+                class="nav-item"
+                id="navSiswa"
+                data-page="siswa"
+                onclick="navigateTo('siswa')">
+
                 <i class="fa-solid fa-user-group"></i>
                 <span>Daftar Siswa</span>
+
             </button>
 
-            <button class="nav-item" id="navNunggak" data-page="siswaNunggak" onclick="navigateTo('siswaNunggak')">
+            <button
+                class="nav-item"
+                id="navNunggak"
+                data-page="siswaNunggak"
+                onclick="navigateTo('siswaNunggak')">
+
                 <i class="fa-solid fa-triangle-exclamation"></i>
                 <span>Siswa Nunggak</span>
+
             </button>
 
-            <button class="nav-item" data-page="riwayat" onclick="navigateTo('riwayat')">
+            <button
+                class="nav-item"
+                data-page="riwayat"
+                onclick="navigateTo('riwayat')">
+
                 <i class="fa-solid fa-clock-rotate-left"></i>
                 <span>Riwayat</span>
+
             </button>
 
-            <div class="nav-section bendahara-only">Pengaturan</div>
+            <div class="nav-section bendahara-only">
+                Pengaturan
+            </div>
 
-            <button class="nav-item bendahara-only" data-page="pengaturan" onclick="navigateTo('pengaturan')">
+            <button
+                class="nav-item bendahara-only"
+                data-page="pengaturan"
+                onclick="navigateTo('pengaturan')">
+
                 <i class="fa-solid fa-gear"></i>
                 <span>Pengaturan</span>
+
             </button>
+
         </div>
 
         <div class="sidebar-footer">
+
             <div class="sidebar-user">
+
                 <div class="avatar">
                     <i class="fa-solid fa-user"></i>
                 </div>
+
                 <div>
-                    <strong id="sidebarUserName">User</strong>
-                    <small id="sidebarUserRole">Anggota</small>
+
+                    <strong id="sidebarUserName">
+                        User
+                    </strong>
+
+                    <small id="sidebarUserRole">
+                        Anggota
+                    </small>
+
                 </div>
+
             </div>
 
-            <button class="logout-side" onclick="confirmLogout()">
+            <button
+                class="logout-side"
+                onclick="confirmLogout()">
+
                 <i class="fa-solid fa-right-from-bracket"></i>
                 Logout
+
             </button>
+
         </div>
+
     </aside>
 
     <main class="main-content">
 
         <header class="topbar">
+
             <div>
-                <div class="page-title" id="pageTitle">Beranda</div>
-                <div class="page-subtitle">KAS KELAS VII B</div>
+
+                <div
+                    class="page-title"
+                    id="pageTitle">
+
+                    Beranda
+
+                </div>
+
+                <div class="page-subtitle">
+                    KAS KELAS VII B
+                </div>
+
             </div>
 
             <div class="top-user">
+
                 <div>
-                    <strong id="topUserName">User</strong>
+                    <strong id="topUserName">
+                        User
+                    </strong>
                 </div>
+
                 <div class="top-avatar">
                     <i class="fa-solid fa-user"></i>
                 </div>
+
             </div>
+
         </header>
 
-        <div class="content" id="pageContent"></div>
+        <div
+            class="content"
+            id="pageContent">
+        </div>
 
     </main>
+
 </div>
+
 
 <!-- MODAL -->
 <div id="modalContainer"></div>
 
 <!-- TOAST -->
 <div id="toastContainer"></div>
+
 
 <script type="module">
 
@@ -1106,8 +1330,7 @@ import {
     set,
     push,
     update,
-    remove,
-    get
+    remove
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
 
@@ -1125,8 +1348,11 @@ const firebaseConfig = {
     appId: "1:1014411980118:web:6f3f702d8aad89af57faf7"
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
-const database = getDatabase(firebaseApp);
+const firebaseApp =
+    initializeApp(firebaseConfig);
+
+const database =
+    getDatabase(firebaseApp);
 
 const DB = "kelasVIIIB";
 
@@ -1136,36 +1362,46 @@ const DB = "kelasVIIIB";
 ========================================================= */
 
 const defaultSettings = {
-    weeklyFee: 5000,
-    startDate: "",
-    resetState: {
-        cashInOffset: 0,
-        cashOutOffset: 0,
-        updatedAt: 0
+    weeklyFee:5000,
+    startDate:"",
+    resetState:{
+        cashInOffset:0,
+        cashOutOffset:0,
+        updatedAt:0
     },
-    deletedStudents: {}
+    deletedStudents:{}
 };
 
 const appState = {
-    siswa: {},
-    kasMasuk: {},
-    kasKeluar: {},
-    pembayaranStatus: {},
-    settings: {...defaultSettings},
-    currentPage: "dashboard",
-    role: null,
-    userId: null,
-    userName: null
+
+    siswa:{},
+
+    kasMasuk:{},
+
+    kasKeluar:{},
+
+    pembayaranStatus:{},
+
+    settings:{...defaultSettings},
+
+    currentPage:"dashboard",
+
+    role:null,
+
+    userId:null,
+
+    userName:null
 };
 
-let reconciling = false;
+let reconciling=false;
 
 
 /* =========================================================
    BASIC UTILITIES
 ========================================================= */
 
-window.escapeHtml = function(value){
+window.escapeHtml=function(value){
+
     return String(value ?? "")
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
@@ -1174,70 +1410,81 @@ window.escapeHtml = function(value){
         .replace(/'/g,"&#039;");
 };
 
-window.formatRupiah = function(value){
-    return new Intl.NumberFormat("id-ID",{
-        style:"currency",
-        currency:"IDR",
-        minimumFractionDigits:0
-    }).format(Number(value)||0);
+window.formatRupiah=function(value){
+
+    return new Intl.NumberFormat(
+        "id-ID",
+        {
+            style:"currency",
+            currency:"IDR",
+            minimumFractionDigits:0
+        }
+    ).format(Number(value)||0);
 };
 
 function formatDate(timestamp){
+
     if(!timestamp) return "-";
 
-    const d = new Date(timestamp);
+    const d=new Date(timestamp);
 
-    return d.toLocaleDateString("id-ID",{
-        day:"2-digit",
-        month:"short",
-        year:"numeric"
-    }) + " " +
-    d.toLocaleTimeString("id-ID",{
-        hour:"2-digit",
-        minute:"2-digit"
-    });
+    return d.toLocaleDateString(
+        "id-ID",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    )+" "+
+    d.toLocaleTimeString(
+        "id-ID",
+        {
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
 }
 
 function formatDateOnly(date){
-    return new Date(date).toLocaleDateString("id-ID",{
-        day:"2-digit",
-        month:"long",
-        year:"numeric"
-    });
+
+    return new Date(date).toLocaleDateString(
+        "id-ID",
+        {
+            day:"2-digit",
+            month:"long",
+            year:"numeric"
+        }
+    );
 }
 
-function monthName(month){
-    return [
-        "Januari",
-        "Februari",
-        "Maret",
-        "April",
-        "Mei",
-        "Juni",
-        "Juli",
-        "Agustus",
-        "September",
-        "Oktober",
-        "November",
-        "Desember"
-    ][month];
-}
+function showToast(
+    message,
+    type="success"
+){
 
-function showToast(message,type="success"){
-    const container = document.getElementById("toastContainer");
+    const container =
+        document.getElementById(
+            "toastContainer"
+        );
 
-    const toast = document.createElement("div");
-    toast.className = `toast toast-${type}`;
+    const toast =
+        document.createElement("div");
 
-    toast.innerHTML = `
+    toast.className=
+        `toast toast-${type}`;
+
+    toast.innerHTML=`
         <i class="fa-solid ${
             type==="success"
-            ? "fa-circle-check"
-            : type==="error"
-            ? "fa-circle-xmark"
-            : "fa-circle-info"
+            ?"fa-circle-check"
+            :type==="error"
+            ?"fa-circle-xmark"
+            :"fa-circle-info"
         }"></i>
-        <span>${escapeHtml(message)}</span>
+
+        <span>
+            ${escapeHtml(message)}
+        </span>
     `;
 
     container.appendChild(toast);
@@ -1252,73 +1499,131 @@ function showToast(message,type="success"){
    LOGIN
 ========================================================= */
 
-window.setLoginRole = function(role){
+window.setLoginRole=function(role){
 
-    document.getElementById("roleBendahara")
-        .classList.toggle("active",role==="bendahara");
+    document
+        .getElementById("roleBendahara")
+        .classList.toggle(
+            "active",
+            role==="bendahara"
+        );
 
-    document.getElementById("roleAnggota")
-        .classList.toggle("active",role==="anggota");
+    document
+        .getElementById("roleAnggota")
+        .classList.toggle(
+            "active",
+            role==="anggota"
+        );
 
-    document.getElementById("bendaharaLogin")
-        .classList.toggle("hidden",role!=="bendahara");
+    document
+        .getElementById("bendaharaLogin")
+        .classList.toggle(
+            "hidden",
+            role!=="bendahara"
+        );
 
-    document.getElementById("anggotaLogin")
-        .classList.toggle("hidden",role!=="anggota");
+    document
+        .getElementById("anggotaLogin")
+        .classList.toggle(
+            "hidden",
+            role!=="anggota"
+        );
 };
 
-window.togglePassword = function(id,button){
+window.togglePassword=function(
+    id,
+    button
+){
 
-    const input = document.getElementById(id);
+    const input =
+        document.getElementById(id);
 
     if(input.type==="password"){
+
         input.type="text";
-        button.innerHTML='<i class="fa-solid fa-eye-slash"></i>';
+
+        button.innerHTML=
+            '<i class="fa-solid fa-eye-slash"></i>';
+
     }else{
+
         input.type="password";
-        button.innerHTML='<i class="fa-solid fa-eye"></i>';
+
+        button.innerHTML=
+            '<i class="fa-solid fa-eye"></i>';
     }
 };
 
-window.login = async function(){
+window.login=async function(){
 
     const isBendahara =
-        document.getElementById("roleBendahara").classList.contains("active");
+        document
+        .getElementById("roleBendahara")
+        .classList
+        .contains("active");
 
     if(isBendahara){
 
         const username =
-            document.getElementById("loginUsername").value.trim();
+            document
+            .getElementById("loginUsername")
+            .value
+            .trim();
 
         const password =
-            document.getElementById("loginPassword").value;
+            document
+            .getElementById("loginPassword")
+            .value;
 
-        if(username!=="iissumirat123" || password!=="112233"){
-            showToast("Username atau password bendahara salah.","error");
+        if(
+            username!=="iissumirat123" ||
+            password!=="112233"
+        ){
+
+            showToast(
+                "Username atau password bendahara salah.",
+                "error"
+            );
+
             return;
         }
 
-        appState.role = "bendahara";
-        appState.userId = "bendahara";
-        appState.userName = "Bendahara";
+        appState.role="bendahara";
+        appState.userId="bendahara";
+        appState.userName="Bendahara";
 
     }else{
 
         const studentId =
-            document.getElementById("loginStudent").value;
+            document
+            .getElementById("loginStudent")
+            .value;
 
         const password =
-            document.getElementById("loginStudentPassword").value;
+            document
+            .getElementById("loginStudentPassword")
+            .value;
 
         if(!studentId){
-            showToast("Silakan pilih nama siswa.","error");
+
+            showToast(
+                "Silakan pilih nama siswa.",
+                "error"
+            );
+
             return;
         }
 
-        const student = appState.siswa[studentId];
+        const student =
+            appState.siswa[studentId];
 
         if(!student){
-            showToast("Data siswa tidak ditemukan.","error");
+
+            showToast(
+                "Data siswa tidak ditemukan.",
+                "error"
+            );
+
             return;
         }
 
@@ -1326,18 +1631,28 @@ window.login = async function(){
             student.password || "123456";
 
         if(password!==savedPassword){
-            showToast("Password salah.","error");
+
+            showToast(
+                "Password salah.",
+                "error"
+            );
+
             return;
         }
 
         if(student.aktif===false){
-            showToast("Siswa ini tidak aktif.","error");
+
+            showToast(
+                "Siswa ini tidak aktif.",
+                "error"
+            );
+
             return;
         }
 
-        appState.role = "anggota";
-        appState.userId = studentId;
-        appState.userName = student.nama;
+        appState.role="anggota";
+        appState.userId=studentId;
+        appState.userName=student.nama;
     }
 
     sessionStorage.setItem(
@@ -1351,7 +1666,10 @@ window.login = async function(){
 
     openApp();
 
-    showToast(`Selamat datang, ${appState.userName}.`,"success");
+    showToast(
+        `Selamat datang, ${appState.userName}.`,
+        "success"
+    );
 
     navigateTo("dashboard");
 };
@@ -1363,64 +1681,83 @@ window.login = async function(){
 
 function loadSession(){
 
-    const raw =
-        sessionStorage.getItem("kasKelasSession");
+    const raw=
+        sessionStorage.getItem(
+            "kasKelasSession"
+        );
 
     if(!raw) return;
 
     try{
 
-        const session = JSON.parse(raw);
+        const session=
+            JSON.parse(raw);
 
         if(!session.role) return;
 
-        appState.role = session.role;
-        appState.userId = session.userId;
-        appState.userName = session.userName;
+        appState.role=session.role;
+        appState.userId=session.userId;
+        appState.userName=session.userName;
 
         openApp();
 
     }catch(e){
 
-        sessionStorage.removeItem("kasKelasSession");
+        sessionStorage.removeItem(
+            "kasKelasSession"
+        );
     }
 }
 
 function openApp(){
 
-    document.getElementById("loginScreen")
-        .classList.add("hidden");
+    document
+        .getElementById("loginScreen")
+        .classList
+        .add("hidden");
 
-    document.getElementById("app")
-        .classList.remove("hidden");
+    document
+        .getElementById("app")
+        .classList
+        .remove("hidden");
 
-    document.getElementById("sidebarUserName")
-        .textContent = appState.userName || "User";
+    document
+        .getElementById("sidebarUserName")
+        .textContent=
+        appState.userName || "User";
 
-    document.getElementById("topUserName")
-        .textContent = appState.userName || "User";
+    document
+        .getElementById("topUserName")
+        .textContent=
+        appState.userName || "User";
 
-    document.getElementById("sidebarUserRole")
-        .textContent =
+    document
+        .getElementById("sidebarUserRole")
+        .textContent=
         appState.role==="bendahara"
-        ? "Bendahara"
-        : "Anggota";
+        ?"Bendahara"
+        :"Anggota";
 
-    document.querySelectorAll(".bendahara-only")
+    document
+        .querySelectorAll(".bendahara-only")
         .forEach(el=>{
+
             el.classList.toggle(
                 "hidden",
                 appState.role!=="bendahara"
             );
+
         });
 
-    document.getElementById("navSiswa")
+    document
+        .getElementById("navSiswa")
         .classList.toggle(
             "hidden",
             appState.role!=="bendahara"
         );
 
-    document.getElementById("navNunggak")
+    document
+        .getElementById("navNunggak")
         .classList.toggle(
             "hidden",
             appState.role!=="bendahara"
@@ -1432,76 +1769,141 @@ function openApp(){
    SIDEBAR
 ========================================================= */
 
-window.toggleSidebar = function(){
+window.toggleSidebar=function(){
 
     const sidebar =
-        document.getElementById("sidebar");
+        document.getElementById(
+            "sidebar"
+        );
 
     const overlay =
-        document.getElementById("sidebarOverlay");
+        document.getElementById(
+            "sidebarOverlay"
+        );
+
+    const hamburger =
+        document.getElementById(
+            "hamburgerBtn"
+        );
 
     const open =
         sidebar.classList.toggle("open");
 
-    overlay.classList.toggle("show",open);
+    overlay.classList.toggle(
+        "show",
+        open
+    );
 
-    document.body.classList.toggle("no-scroll",open);
+    /*
+       PERBAIKAN:
+       Hamburger menghilang ketika
+       navbar/sidebar terbuka.
+    */
+    hamburger.classList.toggle(
+        "menu-open",
+        open
+    );
+
+    document.body.classList.toggle(
+        "no-scroll",
+        open
+    );
 };
 
-window.closeSidebar = function(){
+window.closeSidebar=function(){
 
-    document.getElementById("sidebar")
-        .classList.remove("open");
+    document
+        .getElementById("sidebar")
+        .classList
+        .remove("open");
 
-    document.getElementById("sidebarOverlay")
-        .classList.remove("show");
+    document
+        .getElementById("sidebarOverlay")
+        .classList
+        .remove("show");
 
-    document.body.classList.remove("no-scroll");
+    /*
+       Hamburger muncul kembali
+       setelah navbar ditutup.
+    */
+    document
+        .getElementById("hamburgerBtn")
+        .classList
+        .remove("menu-open");
+
+    document.body.classList.remove(
+        "no-scroll"
+    );
 };
 
-document.addEventListener("keydown",e=>{
-    if(e.key==="Escape"){
-        closeSidebar();
-        closeModal();
+document.addEventListener(
+    "keydown",
+    e=>{
+
+        if(e.key==="Escape"){
+
+            closeSidebar();
+            closeModal();
+
+        }
+
     }
-});
+);
 
 
 /* =========================================================
    NAVIGATION
 ========================================================= */
 
-window.navigateTo = function(page){
+window.navigateTo=function(page){
 
-    if(appState.role!=="bendahara" &&
-       (page==="siswa" ||
-        page==="siswaNunggak" ||
-        page==="pengaturan")){
+    if(
+        appState.role!=="bendahara" &&
+        (
+            page==="siswa" ||
+            page==="siswaNunggak" ||
+            page==="pengaturan"
+        )
+    ){
+
         page="dashboard";
     }
 
-    appState.currentPage = page;
+    appState.currentPage=page;
 
-    document.querySelectorAll(".nav-item")
+    document
+        .querySelectorAll(".nav-item")
         .forEach(item=>{
+
             item.classList.toggle(
                 "active",
                 item.dataset.page===page
             );
+
         });
 
-    const titles = {
+    const titles={
+
         dashboard:"Beranda",
+
         kasMasuk:"Kas Masuk",
+
         kasKeluar:"Kas Keluar",
+
         siswa:"Daftar Siswa",
+
         siswaNunggak:"Siswa Nunggak",
+
         riwayat:"Riwayat",
+
         pengaturan:"Pengaturan"
+
     };
 
-    document.getElementById("pageTitle")
-        .textContent = titles[page] || "Beranda";
+    document
+        .getElementById("pageTitle")
+        .textContent=
+        titles[page] || "Beranda";
 
     closeSidebar();
 
@@ -1513,31 +1915,23 @@ window.navigateTo = function(page){
    PERIOD PAYMENT SYSTEM
 ========================================================= */
 
-/*
-   Periode pembayaran sekarang mengikuti:
-   settings.startDate
-
-   Setiap periode = 7 hari.
-   Contoh:
-   01-09-2026 = Minggu 1
-   08-09-2026 = Minggu 2
-   dst.
-*/
-
 function getStartDate(){
 
     if(appState.settings.startDate){
-        const d = new Date(
-            appState.settings.startDate + "T00:00:00"
-        );
+
+        const d =
+            new Date(
+                appState.settings.startDate+
+                "T00:00:00"
+            );
 
         if(!isNaN(d.getTime())){
             return d;
         }
     }
 
-    // fallback agar aplikasi tetap berjalan
-    const d = new Date();
+    const d=new Date();
+
     d.setMonth(0);
     d.setDate(1);
     d.setHours(0,0,0,0);
@@ -1546,41 +1940,61 @@ function getStartDate(){
 }
 
 function getWeeklyFee(){
-    return Number(appState.settings.weeklyFee) || 0;
+
+    return Number(
+        appState.settings.weeklyFee
+    ) || 0;
 }
 
 function getPaymentPeriods(){
 
-    const start = getStartDate();
+    const start=getStartDate();
 
-    const today = new Date();
-    today.setHours(23,59,59,999);
+    const today=new Date();
 
-    const result = [];
+    today.setHours(
+        23,59,59,999
+    );
 
-    let cursor = new Date(start);
-    let index = 1;
+    const result=[];
 
-    while(cursor <= today){
+    let cursor=new Date(start);
 
-        const periodStart = new Date(cursor);
+    let index=1;
 
-        const periodEnd = new Date(cursor);
-        periodEnd.setDate(periodEnd.getDate()+6);
-        periodEnd.setHours(23,59,59,999);
+    while(cursor<=today){
 
-        if(periodStart > today){
+        const periodStart=
+            new Date(cursor);
+
+        const periodEnd=
+            new Date(cursor);
+
+        periodEnd.setDate(
+            periodEnd.getDate()+6
+        );
+
+        periodEnd.setHours(
+            23,59,59,999
+        );
+
+        if(periodStart>today){
             break;
         }
 
         result.push({
+
             key:
-                "PERIOD-" +
-                periodStart.getFullYear() +
-                "-" +
-                String(periodStart.getMonth()+1).padStart(2,"0") +
-                "-" +
-                String(periodStart.getDate()).padStart(2,"0"),
+                "PERIOD-"+
+                periodStart.getFullYear()+
+                "-"+
+                String(
+                    periodStart.getMonth()+1
+                ).padStart(2,"0")+
+                "-"+
+                String(
+                    periodStart.getDate()
+                ).padStart(2,"0"),
 
             index:index,
 
@@ -1590,9 +2004,13 @@ function getPaymentPeriods(){
 
             label:
                 `Minggu ${index} (${formatDateOnly(periodStart)} - ${formatDateOnly(periodEnd)})`
+
         });
 
-        cursor.setDate(cursor.getDate()+7);
+        cursor.setDate(
+            cursor.getDate()+7
+        );
+
         index++;
     }
 
@@ -1600,43 +2018,69 @@ function getPaymentPeriods(){
 }
 
 function getPeriodByKey(key){
+
     return getPaymentPeriods()
         .find(p=>p.key===key);
 }
 
-function getStudentPaymentStatus(studentId,periodKey){
+function getStudentPaymentStatus(
+    studentId,
+    periodKey
+){
 
     return !!(
-        appState.pembayaranStatus?.[studentId]?.[periodKey]?.paid
+        appState
+        .pembayaranStatus?.[
+            studentId
+        ]?.[
+            periodKey
+        ]?.paid
     );
 }
 
-function getStudentPaidAmount(studentId){
+function getStudentPaidAmount(
+    studentId
+){
 
-    let total = 0;
+    let total=0;
 
-    const periods =
-        appState.pembayaranStatus?.[studentId] || {};
+    const periods=
+        appState
+        .pembayaranStatus?.[
+            studentId
+        ] || {};
 
-    Object.values(periods).forEach(p=>{
-        if(p?.paid){
-            total += Number(p.jumlah)||0;
-        }
-    });
+    Object.values(periods)
+        .forEach(p=>{
+
+            if(p?.paid){
+
+                total+=
+                    Number(p.jumlah)||0;
+            }
+
+        });
 
     return total;
 }
 
-function getStudentUnpaidPeriods(studentId){
+function getStudentUnpaidPeriods(
+    studentId
+){
 
-    const periods = getPaymentPeriods();
+    const periods=
+        getPaymentPeriods();
 
-    return periods.filter(period=>{
-        return !getStudentPaymentStatus(
-            studentId,
-            period.key
-        );
-    });
+    return periods.filter(
+        period=>{
+
+            return !getStudentPaymentStatus(
+                studentId,
+                period.key
+            );
+
+        }
+    );
 }
 
 
@@ -1646,27 +2090,41 @@ function getStudentUnpaidPeriods(studentId){
 
 function getPersistentCashInTotal(){
 
-    let total = 0;
+    let total=0;
 
-    const deleted =
-        appState.settings.deletedStudents || {};
+    const deleted=
+        appState.settings
+        .deletedStudents || {};
 
-    const status =
+    const status=
         appState.pembayaranStatus || {};
 
-    const covered = new Set();
+    const covered=new Set();
 
-    for(const [studentId,periods]
-        of Object.entries(status)){
+    for(
+        const [
+            studentId,
+            periods
+        ]
+        of Object.entries(status)
+    ){
 
         if(deleted[studentId]) continue;
 
-        for(const [periodKey,p]
-            of Object.entries(periods || {})){
+        for(
+            const [
+                periodKey,
+                p
+            ]
+            of Object.entries(
+                periods || {}
+            )
+        ){
 
             if(p?.paid){
 
-                total += Number(p.jumlah)||0;
+                total+=
+                    Number(p.jumlah)||0;
 
                 covered.add(
                     `${studentId}|${periodKey}`
@@ -1675,22 +2133,35 @@ function getPersistentCashInTotal(){
         }
     }
 
-    for(const tx of Object.values(appState.kasMasuk || {})){
+    for(
+        const tx
+        of Object.values(
+            appState.kasMasuk || {}
+        )
+    ){
 
-        if(tx?.siswaId && tx?.periodeKey){
+        if(
+            tx?.siswaId &&
+            tx?.periodeKey
+        ){
 
-            if(deleted[tx.siswaId]) continue;
+            if(
+                deleted[tx.siswaId]
+            ) continue;
 
-            const key =
+            const key=
                 `${tx.siswaId}|${tx.periodeKey}`;
 
             if(!covered.has(key)){
-                total += Number(tx.jumlah)||0;
+
+                total+=
+                    Number(tx.jumlah)||0;
             }
 
         }else{
 
-            total += Number(tx?.jumlah)||0;
+            total+=
+                Number(tx?.jumlah)||0;
         }
     }
 
@@ -1699,21 +2170,26 @@ function getPersistentCashInTotal(){
 
 function getRawCashOutTotal(){
 
-    let total = 0;
+    let total=0;
 
-    Object.values(appState.kasKeluar || {})
-        .forEach(tx=>{
-            total += Number(tx?.jumlah)||0;
-        });
+    Object.values(
+        appState.kasKeluar || {}
+    ).forEach(tx=>{
+
+        total+=
+            Number(tx?.jumlah)||0;
+
+    });
 
     return total;
 }
 
 function getDisplayedCashIn(){
 
-    const offset =
+    const offset=
         Number(
-            appState.settings.resetState?.cashInOffset
+            appState.settings
+            .resetState?.cashInOffset
         ) || 0;
 
     return Math.max(
@@ -1724,9 +2200,10 @@ function getDisplayedCashIn(){
 
 function getDisplayedCashOut(){
 
-    const offset =
+    const offset=
         Number(
-            appState.settings.resetState?.cashOutOffset
+            appState.settings
+            .resetState?.cashOutOffset
         ) || 0;
 
     return Math.max(
@@ -1738,7 +2215,7 @@ function getDisplayedCashOut(){
 function getDisplayedBalance(){
 
     return getDisplayedCashIn()
-        - getDisplayedCashOut();
+        -getDisplayedCashOut();
 }
 
 
@@ -1751,44 +2228,55 @@ function startListeners(){
     onValue(
         ref(database,`${DB}/siswa`),
         snap=>{
-            appState.siswa =
+
+            appState.siswa=
                 snap.val() || {};
 
             updateStudentSelect();
 
             refreshAllViews();
+
         }
     );
 
     onValue(
         ref(database,`${DB}/kasMasuk`),
         snap=>{
-            appState.kasMasuk =
+
+            appState.kasMasuk=
                 snap.val() || {};
 
             refreshAllViews();
 
             reconcilePaymentStatus();
+
         }
     );
 
     onValue(
         ref(database,`${DB}/kasKeluar`),
         snap=>{
-            appState.kasKeluar =
+
+            appState.kasKeluar=
                 snap.val() || {};
 
             refreshAllViews();
+
         }
     );
 
     onValue(
-        ref(database,`${DB}/pembayaranStatus`),
+        ref(
+            database,
+            `${DB}/pembayaranStatus`
+        ),
         snap=>{
-            appState.pembayaranStatus =
+
+            appState.pembayaranStatus=
                 snap.val() || {};
 
             refreshAllViews();
+
         }
     );
 
@@ -1796,16 +2284,24 @@ function startListeners(){
         ref(database,`${DB}/settings`),
         snap=>{
 
-            appState.settings = {
+            const data=
+                snap.val() || {};
+
+            appState.settings={
+
                 ...defaultSettings,
-                ...(snap.val() || {}),
+
+                ...data,
+
                 resetState:{
                     ...defaultSettings.resetState,
-                    ...(snap.val()?.resetState || {})
+                    ...(data.resetState || {})
                 }
+
             };
 
             refreshAllViews();
+
         }
     );
 }
@@ -1823,37 +2319,64 @@ async function reconcilePaymentStatus(){
 
     try{
 
-        const status =
+        const status=
             appState.pembayaranStatus || {};
 
-        const changes = {};
+        const changes={};
 
-        for(const tx of Object.values(appState.kasMasuk || {})){
+        for(
+            const tx
+            of Object.values(
+                appState.kasMasuk || {}
+            )
+        ){
 
             if(
                 tx?.siswaId &&
                 tx?.periodeKey
             ){
 
-                const existing =
-                    status?.[tx.siswaId]?.[tx.periodeKey];
+                const existing=
+                    status
+                    ?.[
+                        tx.siswaId
+                    ]
+                    ?.[
+                        tx.periodeKey
+                    ];
 
                 if(!existing?.paid){
 
                     changes[
                         `${DB}/pembayaranStatus/${tx.siswaId}/${tx.periodeKey}`
-                    ] = {
+                    ]={
+
                         paid:true,
-                        jumlah:Number(tx.jumlah)||0,
-                        timestamp:tx.timestamp || Date.now(),
+
+                        jumlah:
+                            Number(tx.jumlah)||0,
+
+                        timestamp:
+                            tx.timestamp ||
+                            Date.now(),
+
+                        namaSiswa:
+                            tx.namaSiswa || "",
+
                         migrated:true
                     };
                 }
             }
         }
 
-        if(Object.keys(changes).length){
-            await update(ref(database),changes);
+        if(
+            Object.keys(changes).length
+        ){
+
+            await update(
+                ref(database),
+                changes
+            );
         }
 
     }catch(error){
@@ -1873,30 +2396,49 @@ async function reconcilePaymentStatus(){
 
 function updateStudentSelect(){
 
-    const select =
-        document.getElementById("loginStudent");
+    const select=
+        document.getElementById(
+            "loginStudent"
+        );
 
     if(!select) return;
 
-    const students =
-        Object.entries(appState.siswa)
-        .filter(([id,s])=>{
-            return s &&
-                s.aktif!==false &&
-                !(appState.settings.deletedStudents || {})[id];
-        })
-        .sort((a,b)=>
-            String(a[1].nama||"")
-            .localeCompare(String(b[1].nama||""))
+    const students=
+        Object.entries(
+            appState.siswa
+        )
+        .filter(
+            ([id,s])=>{
+
+                return s &&
+                    s.aktif!==false &&
+                    !(
+                        appState
+                        .settings
+                        .deletedStudents || {}
+                    )[id];
+
+            }
+        )
+        .sort(
+            (a,b)=>
+                String(a[1].nama||"")
+                .localeCompare(
+                    String(b[1].nama||"")
+                )
         );
 
-    select.innerHTML =
-        `<option value="">Pilih nama siswa</option>` +
-        students.map(([id,s])=>`
-            <option value="${escapeHtml(id)}">
-                ${escapeHtml(s.nama)}
-            </option>
-        `).join("");
+    select.innerHTML=
+        `<option value="">Pilih nama siswa</option>`+
+        students.map(
+            ([id,s])=>`
+
+                <option value="${escapeHtml(id)}">
+                    ${escapeHtml(s.nama)}
+                </option>
+
+            `
+        ).join("");
 }
 
 
@@ -1906,41 +2448,53 @@ function updateStudentSelect(){
 
 function renderPage(){
 
-    const container =
-        document.getElementById("pageContent");
+    const container=
+        document.getElementById(
+            "pageContent"
+        );
 
-    switch(appState.currentPage){
+    switch(
+        appState.currentPage
+    ){
 
         case "dashboard":
-            container.innerHTML = renderDashboard();
+            container.innerHTML=
+                renderDashboard();
             break;
 
         case "kasMasuk":
-            container.innerHTML = renderKasMasukPage();
+            container.innerHTML=
+                renderKasMasukPage();
             break;
 
         case "kasKeluar":
-            container.innerHTML = renderKasKeluarPage();
+            container.innerHTML=
+                renderKasKeluarPage();
             break;
 
         case "siswa":
-            container.innerHTML = renderSiswaPage();
+            container.innerHTML=
+                renderSiswaPage();
             break;
 
         case "siswaNunggak":
-            container.innerHTML = renderNunggakPage();
+            container.innerHTML=
+                renderNunggakPage();
             break;
 
         case "riwayat":
-            container.innerHTML = renderRiwayatPage();
+            container.innerHTML=
+                renderRiwayatPage();
             break;
 
         case "pengaturan":
-            container.innerHTML = renderPengaturanPage();
+            container.innerHTML=
+                renderPengaturanPage();
             break;
 
         default:
-            container.innerHTML = renderDashboard();
+            container.innerHTML=
+                renderDashboard();
     }
 }
 
@@ -1948,7 +2502,10 @@ function refreshAllViews(){
 
     if(
         !document.getElementById("app") ||
-        document.getElementById("app").classList.contains("hidden")
+        document
+            .getElementById("app")
+            .classList
+            .contains("hidden")
     ){
         return;
     }
@@ -1963,122 +2520,187 @@ function refreshAllViews(){
 
 function renderDashboard(){
 
-    const cashIn =
+    const cashIn=
         getDisplayedCashIn();
 
-    const cashOut =
+    const cashOut=
         getDisplayedCashOut();
 
-    const balance =
+    const balance=
         getDisplayedBalance();
 
-    const activeStudents =
-        Object.entries(appState.siswa)
-        .filter(([id,s])=>
-            s &&
-            s.aktif!==false &&
-            !(appState.settings.deletedStudents || {})[id]
+    const activeStudents=
+        Object.entries(
+            appState.siswa
+        )
+        .filter(
+            ([id,s])=>
+                s &&
+                s.aktif!==false &&
+                !(
+                    appState
+                    .settings
+                    .deletedStudents || {}
+                )[id]
         );
 
-    const arrears =
-        activeStudents.filter(([id])=>
-            getStudentUnpaidPeriods(id).length>0
+    const arrears=
+        activeStudents.filter(
+            ([id])=>
+                getStudentUnpaidPeriods(id)
+                .length>0
         );
 
-    const history =
+    const history=
         getHistoryForCurrentUser();
 
-    const recent =
+    const recent=
         history.slice(0,6);
 
     return `
 
         <div class="welcome">
-            <h2>Selamat datang, ${escapeHtml(appState.userName || "User")} 👋</h2>
+
+            <h2>
+                Selamat datang,
+                ${escapeHtml(
+                    appState.userName ||
+                    "User"
+                )} 👋
+            </h2>
+
             <p>
                 Kelola dan pantau kas kelas VII B dengan mudah.
             </p>
+
         </div>
 
         <div class="stats-grid">
 
             <div class="stat-card">
+
                 <div class="stat-icon icon-green">
                     <i class="fa-solid fa-arrow-down"></i>
                 </div>
-                <div class="stat-title">Total Kas Masuk</div>
+
+                <div class="stat-title">
+                    Total Kas Masuk
+                </div>
+
                 <div class="stat-value">
                     ${formatRupiah(cashIn)}
                 </div>
+
             </div>
 
             <div class="stat-card">
+
                 <div class="stat-icon icon-red">
                     <i class="fa-solid fa-arrow-up"></i>
                 </div>
-                <div class="stat-title">Total Kas Keluar</div>
+
+                <div class="stat-title">
+                    Total Kas Keluar
+                </div>
+
                 <div class="stat-value">
                     ${formatRupiah(cashOut)}
                 </div>
+
             </div>
 
             <div class="stat-card">
+
                 <div class="stat-icon icon-blue">
                     <i class="fa-solid fa-wallet"></i>
                 </div>
-                <div class="stat-title">Saldo</div>
+
+                <div class="stat-title">
+                    Saldo
+                </div>
+
                 <div class="stat-value">
                     ${formatRupiah(balance)}
                 </div>
+
             </div>
 
             <div class="stat-card">
+
                 <div class="stat-icon icon-yellow">
                     <i class="fa-solid fa-users"></i>
                 </div>
+
                 <div class="stat-title">
-                    ${appState.role==="bendahara"
-                    ?"Siswa Nunggak"
-                    :"Status Kas"}
-                </div>
-                <div class="stat-value">
                     ${
                         appState.role==="bendahara"
-                        ? arrears.length
-                        : (
-                            getStudentUnpaidPeriods(appState.userId).length
-                            ? "Nunggak"
-                            : "Lunas"
-                        )
+                        ?"Siswa Nunggak"
+                        :"Status Kas"
                     }
                 </div>
+
+                <div class="stat-value">
+
+                    ${
+                        appState.role==="bendahara"
+                        ?arrears.length
+                        :(
+                            getStudentUnpaidPeriods(
+                                appState.userId
+                            ).length
+                            ?"Nunggak"
+                            :"Lunas"
+                        )
+                    }
+
+                </div>
+
             </div>
 
         </div>
 
         ${
-            appState.role==="bendahara" && arrears.length
-            ? `
-            <div class="card alert-card">
-                <div class="card-body">
-                    <div class="alert-content">
-                        <div>
-                            <strong>
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-                                Ada ${arrears.length} siswa yang memiliki tunggakan
-                            </strong>
-                            <p>
-                                Periksa daftar siswa yang belum membayar kas.
-                            </p>
+            appState.role==="bendahara" &&
+            arrears.length
+            ?`
+
+                <div class="card alert-card">
+
+                    <div class="card-body">
+
+                        <div class="alert-content">
+
+                            <div>
+
+                                <strong>
+
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                                    Ada ${arrears.length}
+                                    siswa yang memiliki tunggakan
+
+                                </strong>
+
+                                <p>
+                                    Periksa daftar siswa yang belum membayar kas.
+                                </p>
+
+                            </div>
+
+                            <button
+                                class="btn btn-danger"
+                                onclick="navigateTo('siswaNunggak')">
+
+                                Lihat Semua
+
+                            </button>
+
                         </div>
 
-                        <button class="btn btn-danger"
-                            onclick="navigateTo('siswaNunggak')">
-                            Lihat Semua
-                        </button>
                     </div>
+
                 </div>
-            </div>
+
             `
             :""
         }
@@ -2086,92 +2708,146 @@ function renderDashboard(){
         <div class="grid-2">
 
             <div class="card">
+
                 <div class="card-header">
+
                     <div class="card-title">
                         Pembayaran Terbaru
                     </div>
+
                 </div>
 
                 <div class="card-body">
+
                     ${
                         recent.length
-                        ? `
-                        <div class="recent-scroll">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Tanggal</th>
-                                        <th>Nama</th>
-                                        <th>Keterangan</th>
-                                        <th>Jumlah</th>
-                                    </tr>
-                                </thead>
+                        ?`
 
-                                <tbody>
-                                    ${recent.map(renderHistoryRow).join("")}
-                                </tbody>
-                            </table>
-                        </div>
+                            <div class="recent-scroll">
+
+                                <table>
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th>Tanggal</th>
+                                            <th>Nama</th>
+                                            <th>Keterangan</th>
+                                            <th>Jumlah</th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                        ${recent
+                                            .map(renderHistoryRow)
+                                            .join("")}
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
                         `
-                        : `
-                        <div class="empty">
-                            <i class="fa-solid fa-receipt"></i>
-                            <div>Belum ada riwayat pembayaran.</div>
-                        </div>
+                        :`
+
+                            <div class="empty">
+
+                                <i class="fa-solid fa-receipt"></i>
+
+                                <div>
+                                    Belum ada riwayat pembayaran.
+                                </div>
+
+                            </div>
+
                         `
                     }
 
                     ${
                         history.length>6
-                        ? `
-                        <div style="margin-top:12px;text-align:center">
-                            <button class="btn btn-outline"
-                                onclick="navigateTo('riwayat')">
-                                Lihat Semua
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                        </div>
+                        ?`
+
+                            <div
+                                style="margin-top:12px;text-align:center">
+
+                                <button
+                                    class="btn btn-outline"
+                                    onclick="navigateTo('riwayat')">
+
+                                    Lihat Semua
+
+                                    <i class="fa-solid fa-arrow-right"></i>
+
+                                </button>
+
+                            </div>
+
                         `
                         :""
                     }
+
                 </div>
+
             </div>
 
             <div class="card">
+
                 <div class="card-header">
+
                     <div class="card-title">
                         Informasi Kas
                     </div>
+
                 </div>
 
                 <div class="card-body">
 
                     <div class="info-box">
+
                         Kas per minggu
+
                         <strong>
-                            ${formatRupiah(getWeeklyFee())}
+                            ${formatRupiah(
+                                getWeeklyFee()
+                            )}
                         </strong>
+
                     </div>
 
                     <br>
 
                     <div class="info-box">
+
                         Mulai periode kas
+
                         <strong>
-                            ${formatDateOnly(getStartDate())}
+                            ${formatDateOnly(
+                                getStartDate()
+                            )}
                         </strong>
+
                     </div>
 
                     <br>
 
                     <div class="info-box">
+
                         Periode berjalan
+
                         <strong>
-                            ${getPaymentPeriods().length} minggu
+                            ${getPaymentPeriods().length}
+                            minggu
                         </strong>
+
                     </div>
 
                 </div>
+
             </div>
 
         </div>
@@ -2185,10 +2861,12 @@ function renderDashboard(){
 
 function getHistoryForCurrentUser(){
 
-    const list = [];
+    const list=[];
 
-    Object.entries(appState.kasMasuk || {})
-        .forEach(([id,tx])=>{
+    Object.entries(
+        appState.kasMasuk || {}
+    ).forEach(
+        ([id,tx])=>{
 
             if(!tx) return;
 
@@ -2200,201 +2878,306 @@ function getHistoryForCurrentUser(){
             }
 
             list.push({
+
                 id,
+
                 type:"masuk",
-                timestamp:Number(tx.timestamp)||0,
+
+                timestamp:
+                    Number(tx.timestamp)||0,
+
                 nama:
                     tx.namaSiswa ||
                     (
                         tx.siswaId &&
-                        appState.siswa[tx.siswaId]?.nama
+                        appState.siswa[
+                            tx.siswaId
+                        ]?.nama
                     ) ||
                     "-",
+
                 keterangan:
                     tx.keterangan ||
                     (
                         tx.periodeKey
-                        ? "Pembayaran kas"
-                        : "Kas masuk"
+                        ?"Pembayaran kas"
+                        :"Kas masuk"
                     ),
-                jumlah:Number(tx.jumlah)||0
-            });
-        });
 
-    /*
-       Kas keluar hanya ditampilkan di riwayat bendahara.
-    */
+                jumlah:
+                    Number(tx.jumlah)||0
+
+            });
+
+        }
+    );
+
     if(appState.role==="bendahara"){
 
-        Object.entries(appState.kasKeluar || {})
-            .forEach(([id,tx])=>{
+        Object.entries(
+            appState.kasKeluar || {}
+        ).forEach(
+            ([id,tx])=>{
 
                 if(!tx) return;
 
                 list.push({
+
                     id,
+
                     type:"keluar",
-                    timestamp:Number(tx.timestamp)||0,
+
+                    timestamp:
+                        Number(tx.timestamp)||0,
+
                     nama:"Bendahara",
+
                     keterangan:
                         tx.keterangan ||
                         tx.nama ||
                         "Kas keluar",
-                    jumlah:Number(tx.jumlah)||0
+
+                    jumlah:
+                        Number(tx.jumlah)||0
+
                 });
-            });
+
+            }
+        );
     }
 
     return list.sort(
-        (a,b)=>b.timestamp-a.timestamp
+        (a,b)=>
+            b.timestamp-a.timestamp
     );
 }
 
 function renderHistoryRow(item){
 
     return `
+
         <tr>
-            <td>${formatDate(item.timestamp)}</td>
+
+            <td>
+                ${formatDate(
+                    item.timestamp
+                )}
+            </td>
 
             <td>
                 <strong>
-                    ${escapeHtml(item.nama)}
+                    ${escapeHtml(
+                        item.nama
+                    )}
                 </strong>
             </td>
 
             <td>
+
                 <span class="badge ${
                     item.type==="masuk"
                     ?"badge-green"
                     :"badge-red"
                 }">
+
                     ${
                         item.type==="masuk"
                         ?"Kas Masuk"
                         :"Kas Keluar"
                     }
+
                 </span>
+
                 <br>
+
                 <small>
-                    ${escapeHtml(item.keterangan)}
+                    ${escapeHtml(
+                        item.keterangan
+                    )}
                 </small>
+
             </td>
 
             <td>
-                <strong class="${
-                    item.type==="masuk"
-                    ?"text-green"
-                    :""
-                }">
+
+                <strong>
+
                     ${
                         item.type==="masuk"
                         ?"+ "
                         :"- "
                     }
-                    ${formatRupiah(item.jumlah)}
+
+                    ${formatRupiah(
+                        item.jumlah
+                    )}
+
                 </strong>
+
             </td>
+
         </tr>
     `;
 }
 
 function renderRiwayatPage(){
 
-    const history =
+    const history=
         getHistoryForCurrentUser();
 
     return `
 
         <div class="toolbar">
+
             <div>
-                <div class="section-title" style="margin:0">
+
+                <div
+                    class="section-title"
+                    style="margin:0">
+
                     Riwayat Transaksi
+
                 </div>
-                <div style="color:var(--muted);font-size:11px">
+
+                <div
+                    style="
+                        color:var(--muted);
+                        font-size:11px">
+
                     Seluruh riwayat transaksi kas.
+
                 </div>
+
             </div>
 
             ${
                 appState.role==="bendahara"
-                ? `
-                <button class="btn btn-danger"
-                    onclick="confirmDeleteHistory()">
-                    <i class="fa-solid fa-trash"></i>
-                    Hapus Riwayat
-                </button>
+                ?`
+
+                    <button
+                        class="btn btn-danger"
+                        onclick="confirmDeleteHistory()">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        Hapus Riwayat
+
+                    </button>
+
                 `
                 :""
             }
+
         </div>
 
         <div class="card">
+
             <div class="card-body">
 
                 ${
                     history.length
-                    ? `
-                    <div class="table-wrap">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Tanggal</th>
-                                    <th>Nama</th>
-                                    <th>Jenis</th>
-                                    <th>Keterangan</th>
-                                    <th>Jumlah</th>
-                                </tr>
-                            </thead>
+                    ?`
 
-                            <tbody>
-                                ${history.map(item=>`
+                        <div class="table-wrap">
+
+                            <table>
+
+                                <thead>
+
                                     <tr>
-                                        <td>
-                                            ${formatDate(item.timestamp)}
-                                        </td>
 
-                                        <td>
-                                            ${escapeHtml(item.nama)}
-                                        </td>
+                                        <th>Tanggal</th>
+                                        <th>Nama</th>
+                                        <th>Jenis</th>
+                                        <th>Keterangan</th>
+                                        <th>Jumlah</th>
 
-                                        <td>
-                                            <span class="badge ${
-                                                item.type==="masuk"
-                                                ?"badge-green"
-                                                :"badge-red"
-                                            }">
-                                                ${
-                                                    item.type==="masuk"
-                                                    ?"Kas Masuk"
-                                                    :"Kas Keluar"
-                                                }
-                                            </span>
-                                        </td>
-
-                                        <td>
-                                            ${escapeHtml(item.keterangan)}
-                                        </td>
-
-                                        <td>
-                                            <strong>
-                                                ${formatRupiah(item.jumlah)}
-                                            </strong>
-                                        </td>
                                     </tr>
-                                `).join("")}
-                            </tbody>
-                        </table>
-                    </div>
+
+                                </thead>
+
+                                <tbody>
+
+                                    ${history
+                                        .map(item=>`
+
+                                            <tr>
+
+                                                <td>
+                                                    ${formatDate(
+                                                        item.timestamp
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    ${escapeHtml(
+                                                        item.nama
+                                                    )}
+                                                </td>
+
+                                                <td>
+
+                                                    <span class="badge ${
+                                                        item.type==="masuk"
+                                                        ?"badge-green"
+                                                        :"badge-red"
+                                                    }">
+
+                                                        ${
+                                                            item.type==="masuk"
+                                                            ?"Kas Masuk"
+                                                            :"Kas Keluar"
+                                                        }
+
+                                                    </span>
+
+                                                </td>
+
+                                                <td>
+                                                    ${escapeHtml(
+                                                        item.keterangan
+                                                    )}
+                                                </td>
+
+                                                <td>
+
+                                                    <strong>
+                                                        ${formatRupiah(
+                                                            item.jumlah
+                                                        )}
+                                                    </strong>
+
+                                                </td>
+
+                                            </tr>
+
+                                        `)
+                                        .join("")}
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
                     `
-                    : `
-                    <div class="empty">
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                        <div>Belum ada riwayat.</div>
-                    </div>
+                    :`
+
+                        <div class="empty">
+
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+
+                            <div>
+                                Belum ada riwayat.
+                            </div>
+
+                        </div>
+
                     `
                 }
 
             </div>
+
         </div>
     `;
 }
@@ -2406,16 +3189,24 @@ function renderRiwayatPage(){
 
 function renderKasMasukPage(){
 
-    const transactions =
-        Object.entries(appState.kasMasuk || {})
-        .map(([id,tx])=>({
-            id,
-            ...tx
-        }))
+    const transactions=
+        Object.entries(
+            appState.kasMasuk || {}
+        )
+        .map(
+            ([id,tx])=>({
+                id,
+                ...tx
+            })
+        )
         .sort(
             (a,b)=>
-            (Number(b.timestamp)||0)-
-            (Number(a.timestamp)||0)
+                (
+                    Number(b.timestamp)||0
+                )-
+                (
+                    Number(a.timestamp)||0
+                )
         );
 
     return `
@@ -2423,32 +3214,54 @@ function renderKasMasukPage(){
         <div class="toolbar">
 
             <div>
-                <div class="section-title" style="margin:0">
+
+                <div
+                    class="section-title"
+                    style="margin:0">
+
                     Kas Masuk
+
                 </div>
-                <div style="color:var(--muted);font-size:11px">
+
+                <div
+                    style="
+                        color:var(--muted);
+                        font-size:11px">
+
                     Semua pemasukan kas kelas.
+
                 </div>
+
             </div>
 
             ${
                 appState.role==="bendahara"
-                ? `
-                <div class="toolbar-actions">
+                ?`
 
-                    <button class="btn btn-success"
-                        onclick="openPaymentModal()">
-                        <i class="fa-solid fa-plus"></i>
-                        Catat Pembayaran
-                    </button>
+                    <div class="toolbar-actions">
 
-                    <button class="btn btn-danger"
-                        onclick="confirmDeleteAllKasMasuk()">
-                        <i class="fa-solid fa-trash"></i>
-                        Hapus Semua
-                    </button>
+                        <button
+                            class="btn btn-success"
+                            onclick="openPaymentModal()">
 
-                </div>
+                            <i class="fa-solid fa-plus"></i>
+
+                            Catat Pembayaran
+
+                        </button>
+
+                        <button
+                            class="btn btn-danger"
+                            onclick="confirmDeleteAllKasMasuk()">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            Hapus Semua
+
+                        </button>
+
+                    </div>
+
                 `
                 :""
             }
@@ -2456,118 +3269,199 @@ function renderKasMasukPage(){
         </div>
 
         <div class="card">
+
             <div class="card-body">
 
                 ${
                     transactions.length
-                    ? `
-                    <div class="table-wrap">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Tanggal</th>
-                                    <th>Nama Siswa</th>
-                                    <th>Keterangan</th>
-                                    <th>Jumlah</th>
-                                    ${
-                                        appState.role==="bendahara"
-                                        ?"<th>Aksi</th>"
-                                        :""
-                                    }
-                                </tr>
-                            </thead>
+                    ?`
 
-                            <tbody>
+                        <div class="table-wrap">
 
-                            ${transactions.map(tx=>`
+                            <table>
 
-                                <tr>
+                                <thead>
 
-                                    <td>
-                                        ${formatDate(tx.timestamp)}
-                                    </td>
+                                    <tr>
 
-                                    <td>
-                                        <strong>
-                                            ${escapeHtml(
-                                                tx.namaSiswa ||
-                                                (
-                                                    tx.siswaId &&
-                                                    appState.siswa[tx.siswaId]?.nama
-                                                ) ||
-                                                "-"
-                                            )}
-                                        </strong>
-                                    </td>
-
-                                    <td>
-                                        ${escapeHtml(
-                                            tx.keterangan ||
-                                            "Kas masuk"
-                                        )}
+                                        <th>Tanggal</th>
+                                        <th>Nama Siswa</th>
+                                        <th>Keterangan</th>
+                                        <th>Jumlah</th>
 
                                         ${
-                                            tx.periodeKey
-                                            ? `
-                                            <br>
-                                            <small style="color:var(--muted)">
-                                                ${
-                                                    getPeriodByKey(tx.periodeKey)
-                                                    ?.label || ""
-                                                }
-                                            </small>
-                                            `
+                                            appState.role==="bendahara"
+                                            ?"<th>Aksi</th>"
                                             :""
                                         }
-                                    </td>
 
-                                    <td>
-                                        <strong>
-                                            ${formatRupiah(tx.jumlah)}
-                                        </strong>
-                                    </td>
+                                    </tr>
 
-                                    ${
-                                        appState.role==="bendahara"
-                                        ? `
-                                        <td>
-                                            <div class="action-group">
+                                </thead>
 
-                                                <button class="action-btn action-edit"
-                                                    title="Edit"
-                                                    onclick="openEditKasMasuk('${tx.id}')">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </button>
+                                <tbody>
 
-                                                <button class="action-btn action-delete"
-                                                    title="Hapus"
-                                                    onclick="confirmDeleteKasMasuk('${tx.id}')">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </button>
+                                    ${transactions
+                                        .map(tx=>`
 
-                                            </div>
-                                        </td>
-                                        `
-                                        :""
-                                    }
+                                            <tr>
 
-                                </tr>
+                                                <td>
+                                                    ${formatDate(
+                                                        tx.timestamp
+                                                    )}
+                                                </td>
 
-                            `).join("")}
+                                                <td>
 
-                            </tbody>
-                        </table>
-                    </div>
+                                                    <strong>
+
+                                                        ${escapeHtml(
+                                                            tx.namaSiswa ||
+                                                            (
+                                                                tx.siswaId &&
+                                                                appState
+                                                                    .siswa[
+                                                                        tx.siswaId
+                                                                    ]?.nama
+                                                            ) ||
+                                                            "-"
+                                                        )}
+
+                                                    </strong>
+
+                                                </td>
+
+                                                <td>
+
+                                                    ${escapeHtml(
+                                                        tx.keterangan ||
+                                                        "Kas masuk"
+                                                    )}
+
+                                                    ${
+                                                        tx.periodeKey
+                                                        ?`
+
+                                                            <br>
+
+                                                            <small
+                                                                style="
+                                                                    color:var(--muted)">
+
+                                                                ${
+                                                                    getPeriodByKey(
+                                                                        tx.periodeKey
+                                                                    )?.label ||
+                                                                    ""
+                                                                }
+
+                                                            </small>
+
+                                                        `
+                                                        :""
+                                                    }
+
+                                                </td>
+
+                                                <td>
+
+                                                    <strong>
+                                                        ${formatRupiah(
+                                                            tx.jumlah
+                                                        )}
+                                                    </strong>
+
+                                                </td>
+
+                                                ${
+                                                    appState.role==="bendahara"
+                                                    ?`
+
+                                                        <td>
+
+                                                            <div
+                                                                class="action-group">
+
+                                                                <button
+                                                                    class="
+                                                                        action-btn
+                                                                        action-edit
+                                                                    "
+                                                                    title="Edit"
+                                                                    onclick="
+                                                                        openEditKasMasuk(
+                                                                            '${tx.id}'
+                                                                        )
+                                                                    ">
+
+                                                                    <i
+                                                                        class="
+                                                                            fa-solid
+                                                                            fa-pen
+                                                                        ">
+                                                                    </i>
+
+                                                                </button>
+
+                                                                <button
+                                                                    class="
+                                                                        action-btn
+                                                                        action-delete
+                                                                    "
+                                                                    title="Hapus"
+                                                                    onclick="
+                                                                        confirmDeleteKasMasuk(
+                                                                            '${tx.id}'
+                                                                        )
+                                                                    ">
+
+                                                                    <i
+                                                                        class="
+                                                                            fa-solid
+                                                                            fa-trash
+                                                                        ">
+                                                                    </i>
+
+                                                                </button>
+
+                                                            </div>
+
+                                                        </td>
+
+                                                    `
+                                                    :""
+                                                }
+
+                                            </tr>
+
+                                        `)
+                                        .join("")}
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
                     `
-                    : `
-                    <div class="empty">
-                        <i class="fa-solid fa-arrow-down"></i>
-                        <div>Belum ada kas masuk.</div>
-                    </div>
+                    :`
+
+                        <div class="empty">
+
+                            <i class="fa-solid fa-arrow-down"></i>
+
+                            <div>
+                                Belum ada kas masuk.
+                            </div>
+
+                        </div>
+
                     `
                 }
 
             </div>
+
         </div>
     `;
 }
@@ -2579,16 +3473,24 @@ function renderKasMasukPage(){
 
 function renderKasKeluarPage(){
 
-    const transactions =
-        Object.entries(appState.kasKeluar || {})
-        .map(([id,tx])=>({
-            id,
-            ...tx
-        }))
+    const transactions=
+        Object.entries(
+            appState.kasKeluar || {}
+        )
+        .map(
+            ([id,tx])=>({
+                id,
+                ...tx
+            })
+        )
         .sort(
             (a,b)=>
-            (Number(b.timestamp)||0)-
-            (Number(a.timestamp)||0)
+                (
+                    Number(b.timestamp)||0
+                )-
+                (
+                    Number(a.timestamp)||0
+                )
         );
 
     return `
@@ -2596,32 +3498,54 @@ function renderKasKeluarPage(){
         <div class="toolbar">
 
             <div>
-                <div class="section-title" style="margin:0">
+
+                <div
+                    class="section-title"
+                    style="margin:0">
+
                     Kas Keluar
+
                 </div>
-                <div style="color:var(--muted);font-size:11px">
+
+                <div
+                    style="
+                        color:var(--muted);
+                        font-size:11px">
+
                     Semua pengeluaran kas kelas.
+
                 </div>
+
             </div>
 
             ${
                 appState.role==="bendahara"
-                ? `
-                <div class="toolbar-actions">
+                ?`
 
-                    <button class="btn btn-danger"
-                        onclick="openKasKeluarModal()">
-                        <i class="fa-solid fa-plus"></i>
-                        Catat Kas Keluar
-                    </button>
+                    <div class="toolbar-actions">
 
-                    <button class="btn btn-danger"
-                        onclick="confirmDeleteAllKasKeluar()">
-                        <i class="fa-solid fa-trash"></i>
-                        Hapus Semua
-                    </button>
+                        <button
+                            class="btn btn-danger"
+                            onclick="openKasKeluarModal()">
 
-                </div>
+                            <i class="fa-solid fa-plus"></i>
+
+                            Catat Kas Keluar
+
+                        </button>
+
+                        <button
+                            class="btn btn-danger"
+                            onclick="confirmDeleteAllKasKeluar()">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            Hapus Semua
+
+                        </button>
+
+                    </div>
+
                 `
                 :""
             }
@@ -2629,92 +3553,154 @@ function renderKasKeluarPage(){
         </div>
 
         <div class="card">
+
             <div class="card-body">
 
                 ${
                     transactions.length
-                    ? `
-                    <div class="table-wrap">
-                        <table>
+                    ?`
 
-                            <thead>
-                                <tr>
-                                    <th>Tanggal</th>
-                                    <th>Keterangan</th>
-                                    <th>Jumlah</th>
+                        <div class="table-wrap">
 
-                                    ${
-                                        appState.role==="bendahara"
-                                        ?"<th>Aksi</th>"
-                                        :""
-                                    }
-                                </tr>
-                            </thead>
+                            <table>
 
-                            <tbody>
+                                <thead>
 
-                            ${transactions.map(tx=>`
+                                    <tr>
 
-                                <tr>
+                                        <th>Tanggal</th>
+                                        <th>Keterangan</th>
+                                        <th>Jumlah</th>
 
-                                    <td>
-                                        ${formatDate(tx.timestamp)}
-                                    </td>
+                                        ${
+                                            appState.role==="bendahara"
+                                            ?"<th>Aksi</th>"
+                                            :""
+                                        }
 
-                                    <td>
-                                        ${escapeHtml(
-                                            tx.keterangan ||
-                                            tx.nama ||
-                                            "Kas keluar"
-                                        )}
-                                    </td>
+                                    </tr>
 
-                                    <td>
-                                        <strong>
-                                            ${formatRupiah(tx.jumlah)}
-                                        </strong>
-                                    </td>
+                                </thead>
 
-                                    ${
-                                        appState.role==="bendahara"
-                                        ? `
-                                        <td>
-                                            <div class="action-group">
+                                <tbody>
 
-                                                <button class="action-btn action-edit"
-                                                    onclick="openEditKasKeluar('${tx.id}')">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </button>
+                                    ${transactions
+                                        .map(tx=>`
 
-                                                <button class="action-btn action-delete"
-                                                    onclick="confirmDeleteKasKeluar('${tx.id}')">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </button>
+                                            <tr>
 
-                                            </div>
-                                        </td>
-                                        `
-                                        :""
-                                    }
+                                                <td>
+                                                    ${formatDate(
+                                                        tx.timestamp
+                                                    )}
+                                                </td>
 
-                                </tr>
+                                                <td>
+                                                    ${escapeHtml(
+                                                        tx.keterangan ||
+                                                        tx.nama ||
+                                                        "Kas keluar"
+                                                    )}
+                                                </td>
 
-                            `).join("")}
+                                                <td>
 
-                            </tbody>
+                                                    <strong>
+                                                        ${formatRupiah(
+                                                            tx.jumlah
+                                                        )}
+                                                    </strong>
 
-                        </table>
-                    </div>
+                                                </td>
+
+                                                ${
+                                                    appState.role==="bendahara"
+                                                    ?`
+
+                                                        <td>
+
+                                                            <div
+                                                                class="
+                                                                    action-group
+                                                                ">
+
+                                                                <button
+                                                                    class="
+                                                                        action-btn
+                                                                        action-edit
+                                                                    "
+                                                                    onclick="
+                                                                        openEditKasKeluar(
+                                                                            '${tx.id}'
+                                                                        )
+                                                                    ">
+
+                                                                    <i
+                                                                        class="
+                                                                            fa-solid
+                                                                            fa-pen
+                                                                        ">
+                                                                    </i>
+
+                                                                </button>
+
+                                                                <button
+                                                                    class="
+                                                                        action-btn
+                                                                        action-delete
+                                                                    "
+                                                                    onclick="
+                                                                        confirmDeleteKasKeluar(
+                                                                            '${tx.id}'
+                                                                        )
+                                                                    ">
+
+                                                                    <i
+                                                                        class="
+                                                                            fa-solid
+                                                                            fa-trash
+                                                                        ">
+                                                                    </i>
+
+                                                                </button>
+
+                                                            </div>
+
+                                                        </td>
+
+                                                    `
+                                                    :""
+                                                }
+
+                                            </tr>
+
+                                        `)
+                                        .join("")}
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
                     `
-                    : `
-                    <div class="empty">
-                        <i class="fa-solid fa-arrow-up"></i>
-                        <div>Belum ada kas keluar.</div>
-                    </div>
+                    :`
+
+                        <div class="empty">
+
+                            <i class="fa-solid fa-arrow-up"></i>
+
+                            <div>
+                                Belum ada kas keluar.
+                            </div>
+
+                        </div>
+
                     `
                 }
 
             </div>
+
         </div>
     `;
 }
@@ -2724,47 +3710,72 @@ function renderKasKeluarPage(){
    PAYMENT MODAL
 ========================================================= */
 
-window.openPaymentModal = function(studentId=""){
+window.openPaymentModal=
+function(studentId=""){
 
-    if(appState.role!=="bendahara") return;
+    if(
+        appState.role!=="bendahara"
+    ) return;
 
-    const students =
-        Object.entries(appState.siswa)
-        .filter(([id,s])=>
-            s &&
-            s.aktif!==false &&
-            !(appState.settings.deletedStudents || {})[id]
+    const students=
+        Object.entries(
+            appState.siswa
         )
-        .sort((a,b)=>
-            String(a[1].nama||"")
-            .localeCompare(String(b[1].nama||""))
+        .filter(
+            ([id,s])=>
+                s &&
+                s.aktif!==false &&
+                !(
+                    appState
+                    .settings
+                    .deletedStudents || {}
+                )[id]
+        )
+        .sort(
+            (a,b)=>
+                String(a[1].nama||"")
+                .localeCompare(
+                    String(b[1].nama||"")
+                )
         );
 
-    const periods =
+    const periods=
         getPaymentPeriods();
 
-    const html = `
+    const html=`
 
-        <div class="modal-backdrop" id="activeModal">
+        <div
+            class="modal-backdrop"
+            id="activeModal">
+
             <div class="modal">
 
                 <div class="modal-header">
+
                     <h3>
                         Catat Pembayaran Kas
                     </h3>
 
-                    <button class="modal-close"
+                    <button
+                        class="modal-close"
                         onclick="closeModal()">
+
                         <i class="fa-solid fa-xmark"></i>
+
                     </button>
+
                 </div>
 
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label>Nama Siswa</label>
 
-                        <select id="paymentStudent"
+                        <label>
+                            Nama Siswa
+                        </label>
+
+                        <select
+                            id="paymentStudent"
                             class="form-control"
                             onchange="updatePaymentPeriods()">
 
@@ -2772,42 +3783,79 @@ window.openPaymentModal = function(studentId=""){
                                 Pilih siswa
                             </option>
 
-                            ${students.map(([id,s])=>`
-                                <option
-                                    value="${escapeHtml(id)}"
-                                    ${id===studentId?"selected":""}>
-                                    ${escapeHtml(s.nama)}
-                                </option>
-                            `).join("")}
+                            ${students
+                                .map(
+                                    ([id,s])=>`
+
+                                        <option
+                                            value="${escapeHtml(id)}"
+                                            ${
+                                                id===studentId
+                                                ?"selected"
+                                                :""
+                                            }>
+
+                                            ${escapeHtml(
+                                                s.nama
+                                            )}
+
+                                        </option>
+
+                                    `
+                                )
+                                .join("")}
 
                         </select>
+
                     </div>
 
                     <div class="form-group">
-                        <label>Periode Pembayaran</label>
 
-                        <select id="paymentPeriod"
+                        <label>
+                            Periode Pembayaran
+                        </label>
+
+                        <select
+                            id="paymentPeriod"
                             class="form-control">
 
                             <option value="">
                                 Pilih periode
                             </option>
 
-                            ${periods.map(period=>`
-                                <option value="${period.key}">
-                                    ${escapeHtml(period.label)}
-                                    -
-                                    ${formatRupiah(getWeeklyFee())}
-                                </option>
-                            `).join("")}
+                            ${periods
+                                .map(
+                                    period=>`
+
+                                        <option
+                                            value="${period.key}">
+
+                                            ${escapeHtml(
+                                                period.label
+                                            )}
+
+                                            -
+                                            ${formatRupiah(
+                                                getWeeklyFee()
+                                            )}
+
+                                        </option>
+
+                                    `
+                                )
+                                .join("")}
 
                         </select>
+
                     </div>
 
                     <div id="paymentInfo"></div>
 
                     <div class="form-group">
-                        <label>Jumlah Pembayaran</label>
+
+                        <label>
+                            Jumlah Pembayaran
+                        </label>
 
                         <input
                             id="paymentAmount"
@@ -2815,220 +3863,361 @@ window.openPaymentModal = function(studentId=""){
                             type="number"
                             value="${getWeeklyFee()}"
                             min="0">
+
                     </div>
 
                     <div class="form-group">
-                        <label>Keterangan</label>
+
+                        <label>
+                            Keterangan
+                        </label>
 
                         <input
                             id="paymentDescription"
                             class="form-control"
                             value="Pembayaran kas mingguan"
                             placeholder="Keterangan">
+
                     </div>
 
                 </div>
 
                 <div class="modal-footer">
 
-                    <button class="btn btn-secondary"
+                    <button
+                        class="btn btn-secondary"
                         onclick="closeModal()">
+
                         Batal
+
                     </button>
 
-                    <button class="btn btn-success"
+                    <button
+                        class="btn btn-success"
                         onclick="savePayment()">
+
                         <i class="fa-solid fa-check"></i>
+
                         Simpan
+
                     </button>
 
                 </div>
 
             </div>
+
         </div>
     `;
 
-    document.getElementById("modalContainer")
-        .innerHTML = html;
+    document
+        .getElementById("modalContainer")
+        .innerHTML=html;
 
     if(studentId){
         updatePaymentPeriods();
     }
 };
 
-window.updatePaymentPeriods = function(){
+window.updatePaymentPeriods=
+function(){
 
-    const studentId =
-        document.getElementById("paymentStudent")?.value;
+    const studentId=
+        document
+        .getElementById(
+            "paymentStudent"
+        )?.value;
 
-    const select =
-        document.getElementById("paymentPeriod");
+    const select=
+        document.getElementById(
+            "paymentPeriod"
+        );
 
-    const info =
-        document.getElementById("paymentInfo");
+    const info=
+        document.getElementById(
+            "paymentInfo"
+        );
 
     if(!select) return;
 
-    const periods =
+    const periods=
         getPaymentPeriods();
 
-    select.innerHTML =
-        `<option value="">Pilih periode</option>` +
-        periods.map(period=>{
+    select.innerHTML=
+        `<option value="">Pilih periode</option>`+
+        periods.map(
+            period=>{
 
-            const paid =
-                studentId &&
-                getStudentPaymentStatus(
-                    studentId,
-                    period.key
-                );
+                const paid=
+                    studentId &&
+                    getStudentPaymentStatus(
+                        studentId,
+                        period.key
+                    );
 
-            return `
-                <option
-                    value="${period.key}"
-                    ${paid?"disabled":""}>
-                    ${escapeHtml(period.label)}
-                    ${
-                        paid
-                        ?" - SUDAH DIBAYAR"
-                        :" - "+formatRupiah(getWeeklyFee())
-                    }
-                </option>
-            `;
+                return `
 
-        }).join("");
+                    <option
+                        value="${period.key}"
+                        ${paid?"disabled":""}>
+
+                        ${escapeHtml(
+                            period.label
+                        )}
+
+                        ${
+                            paid
+                            ?" - SUDAH DIBAYAR"
+                            :" - "+
+                              formatRupiah(
+                                  getWeeklyFee()
+                              )
+                        }
+
+                    </option>
+
+                `;
+
+            }
+        ).join("");
 
     if(studentId){
 
-        const unpaid =
-            getStudentUnpaidPeriods(studentId);
+        const unpaid=
+            getStudentUnpaidPeriods(
+                studentId
+            );
 
         if(!unpaid.length){
 
-            info.innerHTML = `
-                <div class="info-box"
-                    style="border-color:#bbf7d0;background:#f0fdf4;color:#166534">
-                    <strong style="color:#166534">
-                        Siswa sudah melunasi seluruh periode kas.
+            info.innerHTML=`
+
+                <div
+                    class="info-box"
+                    style="
+                        border-color:#bbf7d0;
+                        background:#f0fdf4;
+                        color:#166534">
+
+                    <strong
+                        style="color:#166534">
+
+                        Siswa sudah melunasi
+                        seluruh periode kas.
+
                     </strong>
+
                 </div>
+
                 <br>
+
             `;
 
         }else{
 
-            info.innerHTML = `
+            info.innerHTML=`
+
                 <div class="info-box">
+
                     Belum dibayar:
+
                     <strong>
-                        ${unpaid.length} minggu
+
+                        ${unpaid.length}
+                        minggu
                         -
                         ${formatRupiah(
-                            unpaid.length * getWeeklyFee()
+                            unpaid.length*
+                            getWeeklyFee()
                         )}
+
                     </strong>
+
                 </div>
+
                 <br>
+
             `;
         }
     }
 };
 
-window.savePayment = async function(){
 
-    const studentId =
-        document.getElementById("paymentStudent").value;
+/* =========================================================
+   SIMPAN PEMBAYARAN
+========================================================= */
 
-    const periodKey =
-        document.getElementById("paymentPeriod").value;
+window.savePayment=
+async function(){
 
-    const amount =
+    const studentId=
+        document
+        .getElementById(
+            "paymentStudent"
+        ).value;
+
+    const periodKey=
+        document
+        .getElementById(
+            "paymentPeriod"
+        ).value;
+
+    const amount=
         Number(
-            document.getElementById("paymentAmount").value
+            document
+            .getElementById(
+                "paymentAmount"
+            ).value
         );
 
-    const description =
-        document.getElementById("paymentDescription").value.trim();
+    const description=
+        document
+        .getElementById(
+            "paymentDescription"
+        ).value
+        .trim();
 
     if(!studentId){
-        showToast("Pilih siswa terlebih dahulu.","error");
+
+        showToast(
+            "Pilih siswa terlebih dahulu.",
+            "error"
+        );
+
         return;
     }
 
     if(!periodKey){
-        showToast("Pilih periode pembayaran.","error");
+
+        showToast(
+            "Pilih periode pembayaran.",
+            "error"
+        );
+
         return;
     }
 
-    if(getStudentPaymentStatus(studentId,periodKey)){
-        showToast("Periode ini sudah dibayar.","error");
+    if(
+        getStudentPaymentStatus(
+            studentId,
+            periodKey
+        )
+    ){
+
+        showToast(
+            "Periode ini sudah dibayar.",
+            "error"
+        );
+
         return;
     }
 
     if(amount<=0){
-        showToast("Jumlah pembayaran tidak valid.","error");
+
+        showToast(
+            "Jumlah pembayaran tidak valid.",
+            "error"
+        );
+
         return;
     }
 
-    const student =
-        appState.siswa[studentId];
+    const student=
+        appState.siswa[
+            studentId
+        ];
 
-    const transactionRef =
-        push(ref(database,`${DB}/kasMasuk`));
+    if(!student){
 
-    const txId =
+        showToast(
+            "Data siswa tidak ditemukan.",
+            "error"
+        );
+
+        return;
+    }
+
+    const transactionRef=
+        push(
+            ref(
+                database,
+                `${DB}/kasMasuk`
+            )
+        );
+
+    const txId=
         transactionRef.key;
 
-    const timestamp =
+    const timestamp=
         Date.now();
 
-    const paymentData = {
+    /*
+       DATA TRANSAKSI KAS MASUK
+    */
+    const paymentData={
 
         siswaId:studentId,
 
         namaSiswa:student.nama,
 
-        periodeKey,
+        periodeKey:periodKey,
 
         jumlah:amount,
 
         keterangan:
-            description || "Pembayaran kas mingguan",
+            description ||
+            "Pembayaran kas mingguan",
 
-        timestamp,
+        timestamp:timestamp,
 
         dibuatOleh:"Bendahara"
     };
 
-    const statusData = {
+    /*
+       DATA STATUS SISWA
+       Inilah yang dibaca oleh akun anggota.
+    */
+    const statusData={
 
         paid:true,
 
         jumlah:amount,
 
-        timestamp,
+        timestamp:timestamp,
 
-        namaSiswa:student.nama
+        namaSiswa:student.nama,
+
+        periodeKey:periodKey,
+
+        transaksiId:txId,
+
+        updatedBy:"Bendahara"
     };
 
-    const updates = {};
+    const updates={};
 
     updates[
         `${DB}/kasMasuk/${txId}`
-    ] = paymentData;
+    ]=paymentData;
 
     updates[
         `${DB}/pembayaranStatus/${studentId}/${periodKey}`
-    ] = statusData;
+    ]=statusData;
 
     try{
 
+        /*
+           SATU UPDATE:
+           Kas Masuk + status anggota
+           tersimpan bersamaan.
+        */
         await update(
             ref(database),
             updates
         );
 
-        showToast("Pembayaran berhasil disimpan.");
+        showToast(
+            "Pembayaran berhasil disimpan dan disinkronkan ke anggota."
+        );
 
         closeModal();
 
@@ -3048,15 +4237,20 @@ window.savePayment = async function(){
    LUNASKAN SISWA
 ========================================================= */
 
-window.lunaskanSiswa = function(studentId){
+window.lunaskanSiswa=
+function(studentId){
 
-    const student =
-        appState.siswa[studentId];
+    const student=
+        appState.siswa[
+            studentId
+        ];
 
     if(!student) return;
 
-    const unpaid =
-        getStudentUnpaidPeriods(studentId);
+    const unpaid=
+        getStudentUnpaidPeriods(
+            studentId
+        );
 
     if(!unpaid.length){
 
@@ -3070,60 +4264,88 @@ window.lunaskanSiswa = function(studentId){
 
     openConfirmModal(
         "Lunasi Kas",
-        `Lunasi ${unpaid.length} minggu kas untuk ${student.nama} sebesar ${formatRupiah(unpaid.length * getWeeklyFee())}?`,
-        async ()=>{
 
-            const updates = {};
+        `Lunasi ${unpaid.length} minggu kas untuk ${student.nama} sebesar ${formatRupiah(unpaid.length*getWeeklyFee())}?`,
 
-            const timestamp =
+        async()=>{
+
+            const updates={};
+
+            const timestamp=
                 Date.now();
 
-            unpaid.forEach((period,i)=>{
+            unpaid.forEach(
+                (period,i)=>{
 
-                const txRef =
-                    push(ref(database,`${DB}/kasMasuk`));
+                    const txRef=
+                        push(
+                            ref(
+                                database,
+                                `${DB}/kasMasuk`
+                            )
+                        );
 
-                const txId =
-                    txRef.key;
+                    const txId=
+                        txRef.key;
 
-                const amount =
-                    getWeeklyFee();
+                    const amount=
+                        getWeeklyFee();
 
-                updates[
-                    `${DB}/kasMasuk/${txId}`
-                ] = {
+                    updates[
+                        `${DB}/kasMasuk/${txId}`
+                    ]={
 
-                    siswaId:studentId,
+                        siswaId:
+                            studentId,
 
-                    namaSiswa:student.nama,
+                        namaSiswa:
+                            student.nama,
 
-                    periodeKey:period.key,
+                        periodeKey:
+                            period.key,
 
-                    jumlah:amount,
+                        jumlah:
+                            amount,
 
-                    keterangan:
-                        "Pelunasan kas",
+                        keterangan:
+                            "Pelunasan kas",
 
-                    timestamp:
-                        timestamp+i,
+                        timestamp:
+                            timestamp+i,
 
-                    dibuatOleh:"Bendahara"
-                };
+                        dibuatOleh:
+                            "Bendahara"
 
-                updates[
-                    `${DB}/pembayaranStatus/${studentId}/${period.key}`
-                ] = {
+                    };
 
-                    paid:true,
+                    updates[
+                        `${DB}/pembayaranStatus/${studentId}/${period.key}`
+                    ]={
 
-                    jumlah:amount,
+                        paid:true,
 
-                    timestamp:
-                        timestamp+i,
+                        jumlah:
+                            amount,
 
-                    namaSiswa:student.nama
-                };
-            });
+                        timestamp:
+                            timestamp+i,
+
+                        namaSiswa:
+                            student.nama,
+
+                        periodeKey:
+                            period.key,
+
+                        transaksiId:
+                            txId,
+
+                        updatedBy:
+                            "Bendahara"
+
+                    };
+
+                }
+            );
 
             try{
 
@@ -3132,7 +4354,9 @@ window.lunaskanSiswa = function(studentId){
                     updates
                 );
 
-                showToast("Kas siswa berhasil dilunasi.");
+                showToast(
+                    "Kas siswa berhasil dilunasi dan disinkronkan ke anggota."
+                );
 
             }catch(error){
 
@@ -3154,15 +4378,25 @@ window.lunaskanSiswa = function(studentId){
 
 function renderSiswaPage(){
 
-    const students =
-        Object.entries(appState.siswa)
-        .filter(([id,s])=>
-            s &&
-            !(appState.settings.deletedStudents || {})[id]
+    const students=
+        Object.entries(
+            appState.siswa
         )
-        .sort((a,b)=>
-            String(a[1].nama||"")
-            .localeCompare(String(b[1].nama||""))
+        .filter(
+            ([id,s])=>
+                s &&
+                !(
+                    appState
+                    .settings
+                    .deletedStudents || {}
+                )[id]
+        )
+        .sort(
+            (a,b)=>
+                String(a[1].nama||"")
+                .localeCompare(
+                    String(b[1].nama||"")
+                )
         );
 
     return `
@@ -3170,19 +4404,34 @@ function renderSiswaPage(){
         <div class="toolbar">
 
             <div>
-                <div class="section-title" style="margin:0">
+
+                <div
+                    class="section-title"
+                    style="margin:0">
+
                     Daftar Siswa
+
                 </div>
 
-                <div style="color:var(--muted);font-size:11px">
+                <div
+                    style="
+                        color:var(--muted);
+                        font-size:11px">
+
                     Data siswa kelas VII B.
+
                 </div>
+
             </div>
 
-            <button class="btn btn-success"
+            <button
+                class="btn btn-success"
                 onclick="openStudentModal()">
+
                 <i class="fa-solid fa-user-plus"></i>
+
                 Tambah Siswa
+
             </button>
 
         </div>
@@ -3193,115 +4442,210 @@ function renderSiswaPage(){
 
                 ${
                     students.length
-                    ? `
-                    <div class="table-wrap">
+                    ?`
 
-                        <table>
+                        <div class="table-wrap">
 
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>NIS</th>
-                                    <th>Kelas</th>
-                                    <th>Status Kas</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
+                            <table>
 
-                            <tbody>
+                                <thead>
 
-                            ${students.map(([id,s],index)=>{
-
-                                const unpaid =
-                                    getStudentUnpaidPeriods(id).length;
-
-                                return `
                                     <tr>
 
-                                        <td>${index+1}</td>
-
-                                        <td>
-                                            <strong>
-                                                ${escapeHtml(s.nama)}
-                                            </strong>
-                                        </td>
-
-                                        <td>
-                                            ${escapeHtml(s.nis || "-")}
-                                        </td>
-
-                                        <td>
-                                            ${escapeHtml(s.kelas || "VII B")}
-                                        </td>
-
-                                        <td>
-
-                                            ${
-                                                unpaid
-                                                ? `
-                                                <span class="badge badge-red">
-                                                    Nunggak ${unpaid} minggu
-                                                </span>
-                                                `
-                                                : `
-                                                <span class="badge badge-green">
-                                                    Lunas
-                                                </span>
-                                                `
-                                            }
-
-                                        </td>
-
-                                        <td>
-
-                                            <div class="action-group">
-
-                                                ${
-                                                    unpaid
-                                                    ? `
-                                                    <button
-                                                        class="btn btn-success"
-                                                        style="padding:7px 9px;font-size:10px"
-                                                        onclick="lunaskanSiswa('${id}')">
-                                                        Lunaskan
-                                                    </button>
-                                                    `
-                                                    :""
-                                                }
-
-                                                <button
-                                                    class="action-btn action-edit"
-                                                    onclick="openStudentModal('${id}')">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                </button>
-
-                                                <button
-                                                    class="action-btn action-delete"
-                                                    onclick="confirmDeleteStudent('${id}')">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </button>
-
-                                            </div>
-
-                                        </td>
+                                        <th>No</th>
+                                        <th>Nama</th>
+                                        <th>NIS</th>
+                                        <th>Kelas</th>
+                                        <th>Status Kas</th>
+                                        <th>Aksi</th>
 
                                     </tr>
-                                `;
 
-                            }).join("")}
+                                </thead>
 
-                            </tbody>
+                                <tbody>
 
-                        </table>
+                                    ${students
+                                        .map(
+                                            ([id,s],index)=>{
 
-                    </div>
+                                                const unpaid=
+                                                    getStudentUnpaidPeriods(
+                                                        id
+                                                    ).length;
+
+                                                return `
+
+                                                    <tr>
+
+                                                        <td>
+                                                            ${index+1}
+                                                        </td>
+
+                                                        <td>
+
+                                                            <strong>
+                                                                ${escapeHtml(
+                                                                    s.nama
+                                                                )}
+                                                            </strong>
+
+                                                        </td>
+
+                                                        <td>
+                                                            ${escapeHtml(
+                                                                s.nis ||
+                                                                "-"
+                                                            )}
+                                                        </td>
+
+                                                        <td>
+                                                            ${escapeHtml(
+                                                                s.kelas ||
+                                                                "VII B"
+                                                            )}
+                                                        </td>
+
+                                                        <td>
+
+                                                            ${
+                                                                unpaid
+                                                                ?`
+
+                                                                    <span
+                                                                        class="
+                                                                            badge
+                                                                            badge-red
+                                                                        ">
+
+                                                                        Nunggak
+                                                                        ${unpaid}
+                                                                        minggu
+
+                                                                    </span>
+
+                                                                `
+                                                                :`
+
+                                                                    <span
+                                                                        class="
+                                                                            badge
+                                                                            badge-green
+                                                                        ">
+
+                                                                        Lunas
+
+                                                                    </span>
+
+                                                                `
+                                                            }
+
+                                                        </td>
+
+                                                        <td>
+
+                                                            <div
+                                                                class="
+                                                                    action-group
+                                                                ">
+
+                                                                ${
+                                                                    unpaid
+                                                                    ?`
+
+                                                                        <button
+                                                                            class="
+                                                                                btn
+                                                                                btn-success
+                                                                            "
+                                                                            style="
+                                                                                padding:7px 9px;
+                                                                                font-size:10px"
+                                                                            onclick="
+                                                                                lunaskanSiswa(
+                                                                                    '${id}'
+                                                                                )
+                                                                            ">
+
+                                                                            Lunaskan
+
+                                                                        </button>
+
+                                                                    `
+                                                                    :""
+                                                                }
+
+                                                                <button
+                                                                    class="
+                                                                        action-btn
+                                                                        action-edit
+                                                                    "
+                                                                    onclick="
+                                                                        openStudentModal(
+                                                                            '${id}'
+                                                                        )
+                                                                    ">
+
+                                                                    <i
+                                                                        class="
+                                                                            fa-solid
+                                                                            fa-pen
+                                                                        ">
+                                                                    </i>
+
+                                                                </button>
+
+                                                                <button
+                                                                    class="
+                                                                        action-btn
+                                                                        action-delete
+                                                                    "
+                                                                    onclick="
+                                                                        confirmDeleteStudent(
+                                                                            '${id}'
+                                                                        )
+                                                                    ">
+
+                                                                    <i
+                                                                        class="
+                                                                            fa-solid
+                                                                            fa-trash
+                                                                        ">
+                                                                    </i>
+
+                                                                </button>
+
+                                                            </div>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                `;
+
+                                            }
+                                        )
+                                        .join("")}
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
                     `
-                    : `
-                    <div class="empty">
-                        <i class="fa-solid fa-users"></i>
-                        <div>Belum ada siswa.</div>
-                    </div>
+                    :`
+
+                        <div class="empty">
+
+                            <i class="fa-solid fa-users"></i>
+
+                            <div>
+                                Belum ada siswa.
+                            </div>
+
+                        </div>
+
                     `
                 }
 
@@ -3316,28 +4660,40 @@ function renderSiswaPage(){
    STUDENT MODAL
 ========================================================= */
 
-window.openStudentModal = function(studentId=""){
+window.openStudentModal=
+function(studentId=""){
 
-    const student =
+    const student=
         studentId
-        ? appState.siswa[studentId]
-        : null;
+        ?appState.siswa[studentId]
+        :null;
 
-    const html = `
+    const html=`
 
-        <div class="modal-backdrop" id="activeModal">
+        <div
+            class="modal-backdrop"
+            id="activeModal">
 
             <div class="modal">
 
                 <div class="modal-header">
 
                     <h3>
-                        ${student ? "Edit Siswa" : "Tambah Siswa"}
+
+                        ${
+                            student
+                            ?"Edit Siswa"
+                            :"Tambah Siswa"
+                        }
+
                     </h3>
 
-                    <button class="modal-close"
+                    <button
+                        class="modal-close"
                         onclick="closeModal()">
+
                         <i class="fa-solid fa-xmark"></i>
+
                     </button>
 
                 </div>
@@ -3345,60 +4701,103 @@ window.openStudentModal = function(studentId=""){
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label>Nama Siswa</label>
+
+                        <label>
+                            Nama Siswa
+                        </label>
 
                         <input
                             id="studentName"
                             class="form-control"
-                            value="${escapeHtml(student?.nama || "")}"
+                            value="${escapeHtml(
+                                student?.nama || ""
+                            )}"
                             placeholder="Nama lengkap">
+
                     </div>
 
                     <div class="form-group">
-                        <label>NIS</label>
+
+                        <label>
+                            NIS
+                        </label>
 
                         <input
                             id="studentNis"
                             class="form-control"
-                            value="${escapeHtml(student?.nis || "")}"
+                            value="${escapeHtml(
+                                student?.nis || ""
+                            )}"
                             placeholder="NIS">
+
                     </div>
 
                     <div class="form-group">
-                        <label>Kelas</label>
+
+                        <label>
+                            Kelas
+                        </label>
 
                         <input
                             id="studentClass"
                             class="form-control"
-                            value="${escapeHtml(student?.kelas || "VII B")}"
+                            value="${escapeHtml(
+                                student?.kelas ||
+                                "VII B"
+                            )}"
                             placeholder="Kelas">
+
                     </div>
 
                     <div class="form-group">
-                        <label>Password</label>
+
+                        <label>
+                            Password
+                        </label>
 
                         <input
                             id="studentPassword"
                             class="form-control"
-                            value="${escapeHtml(student?.password || "123456")}"
+                            value="${escapeHtml(
+                                student?.password ||
+                                "123456"
+                            )}"
                             placeholder="Password anggota">
+
                     </div>
 
                     <div class="form-group">
 
-                        <label>Status</label>
+                        <label>
+                            Status
+                        </label>
 
-                        <select id="studentActive"
+                        <select
+                            id="studentActive"
                             class="form-control">
 
-                            <option value="true"
-                                ${student?.aktif!==false?"selected":""}>
+                            <option
+                                value="true"
+                                ${
+                                    student?.aktif!==false
+                                    ?"selected"
+                                    :""
+                                }>
+
                                 Aktif
+
                             </option>
 
-                            <option value="false"
-                                ${student?.aktif===false?"selected":""}>
+                            <option
+                                value="false"
+                                ${
+                                    student?.aktif===false
+                                    ?"selected"
+                                    :""
+                                }>
+
                                 Tidak Aktif
+
                             </option>
 
                         </select>
@@ -3409,14 +4808,22 @@ window.openStudentModal = function(studentId=""){
 
                 <div class="modal-footer">
 
-                    <button class="btn btn-secondary"
+                    <button
+                        class="btn btn-secondary"
                         onclick="closeModal()">
+
                         Batal
+
                     </button>
 
-                    <button class="btn btn-success"
-                        onclick="saveStudent('${studentId}')">
+                    <button
+                        class="btn btn-success"
+                        onclick="
+                            saveStudent('${studentId}')
+                        ">
+
                         Simpan
+
                     </button>
 
                 </div>
@@ -3426,49 +4833,86 @@ window.openStudentModal = function(studentId=""){
         </div>
     `;
 
-    document.getElementById("modalContainer")
+    document
+        .getElementById("modalContainer")
         .innerHTML=html;
 };
 
-window.saveStudent = async function(studentId){
+window.saveStudent=
+async function(studentId){
 
-    const nama =
-        document.getElementById("studentName").value.trim();
+    const nama=
+        document
+        .getElementById(
+            "studentName"
+        ).value.trim();
 
-    const nis =
-        document.getElementById("studentNis").value.trim();
+    const nis=
+        document
+        .getElementById(
+            "studentNis"
+        ).value.trim();
 
-    const kelas =
-        document.getElementById("studentClass").value.trim();
+    const kelas=
+        document
+        .getElementById(
+            "studentClass"
+        ).value.trim();
 
-    const password =
-        document.getElementById("studentPassword").value.trim();
+    const password=
+        document
+        .getElementById(
+            "studentPassword"
+        ).value.trim();
 
-    const aktif =
-        document.getElementById("studentActive").value==="true";
+    const aktif=
+        document
+        .getElementById(
+            "studentActive"
+        ).value==="true";
 
     if(!nama){
-        showToast("Nama siswa wajib diisi.","error");
+
+        showToast(
+            "Nama siswa wajib diisi.",
+            "error"
+        );
+
         return;
     }
 
     if(!password){
-        showToast("Password wajib diisi.","error");
+
+        showToast(
+            "Password wajib diisi.",
+            "error"
+        );
+
         return;
     }
 
-    const id =
+    const id=
         studentId ||
-        push(ref(database,`${DB}/siswa`)).key;
+        push(
+            ref(
+                database,
+                `${DB}/siswa`
+            )
+        ).key;
 
     try{
 
         await set(
-            ref(database,`${DB}/siswa/${id}`),
+            ref(
+                database,
+                `${DB}/siswa/${id}`
+            ),
             {
                 nama,
                 nis,
-                kelas:kelas || "VII B",
+                kelas:
+                    kelas ||
+                    "VII B",
                 password,
                 aktif
             }
@@ -3476,8 +4920,8 @@ window.saveStudent = async function(studentId){
 
         showToast(
             studentId
-            ? "Data siswa berhasil diperbarui."
-            : "Siswa berhasil ditambahkan."
+            ?"Data siswa berhasil diperbarui."
+            :"Siswa berhasil ditambahkan."
         );
 
         closeModal();
@@ -3500,22 +4944,40 @@ window.saveStudent = async function(studentId){
 
 function renderNunggakPage(){
 
-    const students =
-        Object.entries(appState.siswa)
-        .filter(([id,s])=>{
-            if(!s || s.aktif===false) return false;
+    const students=
+        Object.entries(
+            appState.siswa
+        )
+        .filter(
+            ([id,s])=>{
 
-            if(
-                (appState.settings.deletedStudents || {})[id]
-            ){
-                return false;
+                if(
+                    !s ||
+                    s.aktif===false
+                ) return false;
+
+                if(
+                    (
+                        appState
+                        .settings
+                        .deletedStudents || {}
+                    )[id]
+                ){
+                    return false;
+                }
+
+                return getStudentUnpaidPeriods(
+                    id
+                ).length>0;
+
             }
-
-            return getStudentUnpaidPeriods(id).length>0;
-        })
-        .sort((a,b)=>
-            String(a[1].nama||"")
-            .localeCompare(String(b[1].nama||""))
+        )
+        .sort(
+            (a,b)=>
+                String(a[1].nama||"")
+                .localeCompare(
+                    String(b[1].nama||"")
+                )
         );
 
     return `
@@ -3523,13 +4985,24 @@ function renderNunggakPage(){
         <div class="toolbar">
 
             <div>
-                <div class="section-title" style="margin:0">
+
+                <div
+                    class="section-title"
+                    style="margin:0">
+
                     Siswa Nunggak
+
                 </div>
 
-                <div style="color:var(--muted);font-size:11px">
+                <div
+                    style="
+                        color:var(--muted);
+                        font-size:11px">
+
                     Daftar siswa yang belum melunasi kas.
+
                 </div>
+
             </div>
 
         </div>
@@ -3540,87 +5013,145 @@ function renderNunggakPage(){
 
                 ${
                     students.length
-                    ? `
-                    <div class="table-wrap">
+                    ?`
 
-                        <table>
+                        <div class="table-wrap">
 
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Belum Bayar</th>
-                                    <th>Total Tunggakan</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
+                            <table>
 
-                            <tbody>
+                                <thead>
 
-                            ${students.map(([id,s],index)=>{
-
-                                const unpaid =
-                                    getStudentUnpaidPeriods(id).length;
-
-                                const total =
-                                    unpaid * getWeeklyFee();
-
-                                return `
                                     <tr>
 
-                                        <td>${index+1}</td>
-
-                                        <td>
-                                            <strong>
-                                                ${escapeHtml(s.nama)}
-                                            </strong>
-                                        </td>
-
-                                        <td>
-                                            <span class="badge badge-red">
-                                                ${unpaid} minggu
-                                            </span>
-                                        </td>
-
-                                        <td>
-                                            <strong>
-                                                ${formatRupiah(total)}
-                                            </strong>
-                                        </td>
-
-                                        <td>
-
-                                            <button
-                                                class="btn btn-success"
-                                                style="padding:8px 10px;font-size:11px"
-                                                onclick="lunaskanSiswa('${id}')">
-                                                <i class="fa-solid fa-check-double"></i>
-                                                Lunaskan
-                                            </button>
-
-                                        </td>
+                                        <th>No</th>
+                                        <th>Nama</th>
+                                        <th>Belum Bayar</th>
+                                        <th>Total Tunggakan</th>
+                                        <th>Aksi</th>
 
                                     </tr>
-                                `;
 
-                            }).join("")}
+                                </thead>
 
-                            </tbody>
+                                <tbody>
 
-                        </table>
+                                    ${students
+                                        .map(
+                                            ([id,s],index)=>{
 
-                    </div>
-                    `
-                    : `
-                    <div class="empty">
+                                                const unpaid=
+                                                    getStudentUnpaidPeriods(
+                                                        id
+                                                    ).length;
 
-                        <i class="fa-solid fa-circle-check"></i>
+                                                const total=
+                                                    unpaid*
+                                                    getWeeklyFee();
 
-                        <div>
-                            Tidak ada siswa yang menunggak.
+                                                return `
+
+                                                    <tr>
+
+                                                        <td>
+                                                            ${index+1}
+                                                        </td>
+
+                                                        <td>
+
+                                                            <strong>
+                                                                ${escapeHtml(
+                                                                    s.nama
+                                                                )}
+                                                            </strong>
+
+                                                        </td>
+
+                                                        <td>
+
+                                                            <span
+                                                                class="
+                                                                    badge
+                                                                    badge-red
+                                                                ">
+
+                                                                ${unpaid}
+                                                                minggu
+
+                                                            </span>
+
+                                                        </td>
+
+                                                        <td>
+
+                                                            <strong>
+                                                                ${formatRupiah(
+                                                                    total
+                                                                )}
+                                                            </strong>
+
+                                                        </td>
+
+                                                        <td>
+
+                                                            <button
+                                                                class="
+                                                                    btn
+                                                                    btn-success
+                                                                "
+                                                                style="
+                                                                    padding:8px 10px;
+                                                                    font-size:11px"
+                                                                onclick="
+                                                                    lunaskanSiswa(
+                                                                        '${id}'
+                                                                    )
+                                                                ">
+
+                                                                <i
+                                                                    class="
+                                                                        fa-solid
+                                                                        fa-check-double
+                                                                    ">
+                                                                </i>
+
+                                                                Lunaskan
+
+                                                            </button>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                `;
+
+                                            }
+                                        )
+                                        .join("")}
+
+                                </tbody>
+
+                            </table>
+
                         </div>
 
-                    </div>
+                    `
+                    :`
+
+                        <div class="empty">
+
+                            <i
+                                class="
+                                    fa-solid
+                                    fa-circle-check
+                                ">
+                            </i>
+
+                            <div>
+                                Tidak ada siswa yang menunggak.
+                            </div>
+
+                        </div>
+
                     `
                 }
 
@@ -3635,28 +5166,38 @@ function renderNunggakPage(){
    KAS KELUAR MODAL
 ========================================================= */
 
-window.openKasKeluarModal = function(id=""){
+window.openKasKeluarModal=
+function(id=""){
 
-    const tx =
+    const tx=
         id
-        ? appState.kasKeluar[id]
-        : null;
+        ?appState.kasKeluar[id]
+        :null;
 
-    const html = `
+    const html=`
 
-        <div class="modal-backdrop" id="activeModal">
+        <div
+            class="modal-backdrop"
+            id="activeModal">
 
             <div class="modal">
 
                 <div class="modal-header">
 
                     <h3>
-                        ${tx ? "Edit Kas Keluar" : "Catat Kas Keluar"}
+                        ${
+                            tx
+                            ?"Edit Kas Keluar"
+                            :"Catat Kas Keluar"
+                        }
                     </h3>
 
-                    <button class="modal-close"
+                    <button
+                        class="modal-close"
                         onclick="closeModal()">
+
                         <i class="fa-solid fa-xmark"></i>
+
                     </button>
 
                 </div>
@@ -3665,7 +5206,9 @@ window.openKasKeluarModal = function(id=""){
 
                     <div class="form-group">
 
-                        <label>Keterangan</label>
+                        <label>
+                            Keterangan
+                        </label>
 
                         <input
                             id="expenseDescription"
@@ -3681,14 +5224,20 @@ window.openKasKeluarModal = function(id=""){
 
                     <div class="form-group">
 
-                        <label>Jumlah</label>
+                        <label>
+                            Jumlah
+                        </label>
 
                         <input
                             id="expenseAmount"
                             class="form-control"
                             type="number"
                             min="0"
-                            value="${Number(tx?.jumlah)||""}"
+                            value="${
+                                Number(
+                                    tx?.jumlah
+                                ) || ""
+                            }"
                             placeholder="Jumlah pengeluaran">
 
                     </div>
@@ -3697,14 +5246,22 @@ window.openKasKeluarModal = function(id=""){
 
                 <div class="modal-footer">
 
-                    <button class="btn btn-secondary"
+                    <button
+                        class="btn btn-secondary"
                         onclick="closeModal()">
+
                         Batal
+
                     </button>
 
-                    <button class="btn btn-danger"
-                        onclick="saveKasKeluar('${id}')">
+                    <button
+                        class="btn btn-danger"
+                        onclick="
+                            saveKasKeluar('${id}')
+                        ">
+
                         Simpan
+
                     </button>
 
                 </div>
@@ -3714,64 +5271,100 @@ window.openKasKeluarModal = function(id=""){
         </div>
     `;
 
-    document.getElementById("modalContainer")
+    document
+        .getElementById(
+            "modalContainer"
+        )
         .innerHTML=html;
 };
 
-window.openEditKasKeluar =
-    function(id){
-        openKasKeluarModal(id);
-    };
+window.openEditKasKeluar=
+function(id){
 
-window.saveKasKeluar = async function(id){
+    openKasKeluarModal(id);
+};
 
-    const description =
-        document.getElementById("expenseDescription")
-        .value.trim();
+window.saveKasKeluar=
+async function(id){
 
-    const amount =
+    const description=
+        document
+        .getElementById(
+            "expenseDescription"
+        )
+        .value
+        .trim();
+
+    const amount=
         Number(
-            document.getElementById("expenseAmount").value
+            document
+            .getElementById(
+                "expenseAmount"
+            )
+            .value
         );
 
     if(!description){
+
         showToast(
             "Keterangan wajib diisi.",
             "error"
         );
+
         return;
     }
 
     if(amount<=0){
+
         showToast(
             "Jumlah tidak valid.",
             "error"
         );
+
         return;
     }
 
-    const txId =
+    const txId=
         id ||
-        push(ref(database,`${DB}/kasKeluar`)).key;
+        push(
+            ref(
+                database,
+                `${DB}/kasKeluar`
+            )
+        ).key;
 
     try{
 
         await set(
-            ref(database,`${DB}/kasKeluar/${txId}`),
+            ref(
+                database,
+                `${DB}/kasKeluar/${txId}`
+            ),
             {
-                keterangan:description,
-                jumlah:amount,
+
+                keterangan:
+                    description,
+
+                jumlah:
+                    amount,
+
                 timestamp:
                     id
-                    ? Number(appState.kasKeluar[id]?.timestamp)||Date.now()
-                    : Date.now()
+                    ?Number(
+                        appState
+                        .kasKeluar[id]
+                        ?.timestamp
+                    ) ||
+                    Date.now()
+                    :Date.now()
+
             }
         );
 
         showToast(
             id
-            ? "Kas keluar berhasil diperbarui."
-            : "Kas keluar berhasil disimpan."
+            ?"Kas keluar berhasil diperbarui."
+            :"Kas keluar berhasil disimpan."
         );
 
         closeModal();
@@ -3792,26 +5385,34 @@ window.saveKasKeluar = async function(id){
    EDIT KAS MASUK
 ========================================================= */
 
-window.openEditKasMasuk = function(id){
+window.openEditKasMasuk=
+function(id){
 
-    const tx =
+    const tx=
         appState.kasMasuk[id];
 
     if(!tx) return;
 
-    const html = `
+    const html=`
 
-        <div class="modal-backdrop" id="activeModal">
+        <div
+            class="modal-backdrop"
+            id="activeModal">
 
             <div class="modal">
 
                 <div class="modal-header">
 
-                    <h3>Edit Kas Masuk</h3>
+                    <h3>
+                        Edit Kas Masuk
+                    </h3>
 
-                    <button class="modal-close"
+                    <button
+                        class="modal-close"
                         onclick="closeModal()">
+
                         <i class="fa-solid fa-xmark"></i>
+
                     </button>
 
                 </div>
@@ -3820,12 +5421,15 @@ window.openEditKasMasuk = function(id){
 
                     <div class="form-group">
 
-                        <label>Nama Siswa</label>
+                        <label>
+                            Nama Siswa
+                        </label>
 
                         <input
                             class="form-control"
                             value="${escapeHtml(
-                                tx.namaSiswa || ""
+                                tx.namaSiswa ||
+                                ""
                             )}"
                             disabled>
 
@@ -3833,26 +5437,35 @@ window.openEditKasMasuk = function(id){
 
                     <div class="form-group">
 
-                        <label>Jumlah</label>
+                        <label>
+                            Jumlah
+                        </label>
 
                         <input
                             id="editIncomeAmount"
                             class="form-control"
                             type="number"
-                            value="${Number(tx.jumlah)||0}"
+                            value="${
+                                Number(
+                                    tx.jumlah
+                                ) || 0
+                            }"
                             min="0">
 
                     </div>
 
                     <div class="form-group">
 
-                        <label>Keterangan</label>
+                        <label>
+                            Keterangan
+                        </label>
 
                         <input
                             id="editIncomeDescription"
                             class="form-control"
                             value="${escapeHtml(
-                                tx.keterangan || ""
+                                tx.keterangan ||
+                                ""
                             )}">
 
                     </div>
@@ -3861,14 +5474,22 @@ window.openEditKasMasuk = function(id){
 
                 <div class="modal-footer">
 
-                    <button class="btn btn-secondary"
+                    <button
+                        class="btn btn-secondary"
                         onclick="closeModal()">
+
                         Batal
+
                     </button>
 
-                    <button class="btn btn-success"
-                        onclick="saveEditKasMasuk('${id}')">
+                    <button
+                        class="btn btn-success"
+                        onclick="
+                            saveEditKasMasuk('${id}')
+                        ">
+
                         Simpan
+
                     </button>
 
                 </div>
@@ -3878,54 +5499,85 @@ window.openEditKasMasuk = function(id){
         </div>
     `;
 
-    document.getElementById("modalContainer")
+    document
+        .getElementById(
+            "modalContainer"
+        )
         .innerHTML=html;
 };
 
-window.saveEditKasMasuk = async function(id){
+window.saveEditKasMasuk=
+async function(id){
 
-    const tx =
+    const tx=
         appState.kasMasuk[id];
 
     if(!tx) return;
 
-    const amount =
+    const amount=
         Number(
-            document.getElementById("editIncomeAmount")
+            document
+            .getElementById(
+                "editIncomeAmount"
+            )
             .value
         );
 
-    const description =
-        document.getElementById("editIncomeDescription")
-        .value.trim();
+    const description=
+        document
+        .getElementById(
+            "editIncomeDescription"
+        )
+        .value
+        .trim();
 
     if(amount<=0){
+
         showToast(
             "Jumlah tidak valid.",
             "error"
         );
+
         return;
     }
 
-    const updates = {};
+    const updates={};
 
     updates[
         `${DB}/kasMasuk/${id}/jumlah`
-    ] = amount;
+    ]=amount;
 
     updates[
         `${DB}/kasMasuk/${id}/keterangan`
-    ] = description || "Kas masuk";
+    ]=
+        description ||
+        "Kas masuk";
 
     /*
-       Jika transaksi adalah pembayaran periode,
-       jumlah pada status pembayaran ikut diperbarui.
+       SINKRONISASI:
+       Jika transaksi pembayaran siswa,
+       status pembayaran siswa ikut berubah.
     */
-    if(tx.siswaId && tx.periodeKey){
+    if(
+        tx.siswaId &&
+        tx.periodeKey
+    ){
 
         updates[
             `${DB}/pembayaranStatus/${tx.siswaId}/${tx.periodeKey}/jumlah`
-        ] = amount;
+        ]=amount;
+
+        updates[
+            `${DB}/pembayaranStatus/${tx.siswaId}/${tx.periodeKey}/timestamp`
+        ]=
+            Number(
+                tx.timestamp
+            ) ||
+            Date.now();
+
+        updates[
+            `${DB}/pembayaranStatus/${tx.siswaId}/${tx.periodeKey}/updatedBy`
+        ]="Bendahara";
     }
 
     try{
@@ -3936,7 +5588,7 @@ window.saveEditKasMasuk = async function(id){
         );
 
         showToast(
-            "Kas masuk berhasil diperbarui."
+            "Kas masuk berhasil diperbarui dan disinkronkan ke anggota."
         );
 
         closeModal();
@@ -3959,12 +5611,14 @@ window.saveEditKasMasuk = async function(id){
 
 function renderPengaturanPage(){
 
-    const startDate =
+    const startDate=
         appState.settings.startDate ||
         "";
 
-    const weeklyFee =
-        Number(appState.settings.weeklyFee)||0;
+    const weeklyFee=
+        Number(
+            appState.settings.weeklyFee
+        ) || 0;
 
     return `
 
@@ -3975,9 +5629,11 @@ function renderPengaturanPage(){
         <div class="card">
 
             <div class="card-header">
+
                 <div class="card-title">
                     Periode Pembayaran
                 </div>
+
             </div>
 
             <div class="card-body">
@@ -3994,10 +5650,18 @@ function renderPengaturanPage(){
                             id="settingStartDate"
                             class="form-control"
                             type="date"
-                            value="${escapeHtml(startDate)}">
+                            value="${escapeHtml(
+                                startDate
+                            )}">
 
-                        <small style="color:var(--muted);font-size:10px">
-                            Tanggal ini menjadi awal Minggu 1 pembayaran kas.
+                        <small
+                            style="
+                                color:var(--muted);
+                                font-size:10px">
+
+                            Tanggal ini menjadi awal
+                            Minggu 1 pembayaran kas.
+
                         </small>
 
                     </div>
@@ -4015,24 +5679,33 @@ function renderPengaturanPage(){
                             min="0"
                             value="${weeklyFee}">
 
-                        <small style="color:var(--muted);font-size:10px">
-                            Nominal yang digunakan untuk periode pembayaran baru.
+                        <small
+                            style="
+                                color:var(--muted);
+                                font-size:10px">
+
+                            Nominal yang digunakan
+                            untuk periode pembayaran baru.
+
                         </small>
 
                     </div>
 
                 </div>
 
-                <button class="btn btn-success"
+                <button
+                    class="btn btn-success"
                     onclick="saveSettings()">
+
                     <i class="fa-solid fa-floppy-disk"></i>
+
                     Simpan Pengaturan
+
                 </button>
 
             </div>
 
         </div>
-
 
         <div class="card">
 
@@ -4049,17 +5722,27 @@ function renderPengaturanPage(){
                 <div class="settings-grid">
 
                     <div class="info-box">
+
                         Mulai kas
+
                         <strong>
-                            ${formatDateOnly(getStartDate())}
+                            ${formatDateOnly(
+                                getStartDate()
+                            )}
                         </strong>
+
                     </div>
 
                     <div class="info-box">
+
                         Kas per minggu
+
                         <strong>
-                            ${formatRupiah(weeklyFee)}
+                            ${formatRupiah(
+                                weeklyFee
+                            )}
                         </strong>
+
                     </div>
 
                 </div>
@@ -4067,7 +5750,6 @@ function renderPengaturanPage(){
             </div>
 
         </div>
-
 
         <div class="card">
 
@@ -4081,18 +5763,22 @@ function renderPengaturanPage(){
 
             <div class="card-body">
 
-                <div class="info-box"
+                <div
+                    class="info-box"
                     style="margin-bottom:15px">
 
-                    Fitur reset hanya mengatur saldo yang ditampilkan
-                    menjadi nol. Riwayat transaksi tetap tersimpan.
+                    Fitur reset hanya mengatur
+                    saldo yang ditampilkan menjadi nol.
+                    Riwayat transaksi tetap tersimpan.
 
                 </div>
 
-                <button class="btn btn-warning"
+                <button
+                    class="btn btn-warning"
                     onclick="openResetModal()">
 
                     <i class="fa-solid fa-rotate-left"></i>
+
                     Reset Saldo Tampilan
 
                 </button>
@@ -4103,38 +5789,52 @@ function renderPengaturanPage(){
     `;
 }
 
-window.saveSettings = async function(){
+window.saveSettings=
+async function(){
 
-    const startDate =
-        document.getElementById("settingStartDate")
+    const startDate=
+        document
+        .getElementById(
+            "settingStartDate"
+        )
         .value;
 
-    const weeklyFee =
+    const weeklyFee=
         Number(
-            document.getElementById("settingWeeklyFee")
+            document
+            .getElementById(
+                "settingWeeklyFee"
+            )
             .value
         );
 
     if(!startDate){
+
         showToast(
             "Tanggal mulai periode wajib diisi.",
             "error"
         );
+
         return;
     }
 
     if(weeklyFee<=0){
+
         showToast(
             "Jumlah kas per minggu harus lebih dari 0.",
             "error"
         );
+
         return;
     }
 
     try{
 
         await update(
-            ref(database,`${DB}/settings`),
+            ref(
+                database,
+                `${DB}/settings`
+            ),
             {
                 startDate,
                 weeklyFee
@@ -4161,32 +5861,44 @@ window.saveSettings = async function(){
    RESET
 ========================================================= */
 
-window.openResetModal = function(){
+window.openResetModal=
+function(){
 
-    const html = `
+    const html=`
 
-        <div class="modal-backdrop" id="activeModal">
+        <div
+            class="modal-backdrop"
+            id="activeModal">
 
             <div class="modal">
 
                 <div class="modal-header">
 
-                    <h3>Reset Saldo Tampilan</h3>
+                    <h3>
+                        Reset Saldo Tampilan
+                    </h3>
 
-                    <button class="modal-close"
+                    <button
+                        class="modal-close"
                         onclick="closeModal()">
+
                         <i class="fa-solid fa-xmark"></i>
+
                     </button>
 
                 </div>
 
                 <div class="modal-body">
 
-                    <p style="color:var(--muted);font-size:13px;line-height:1.6">
+                    <p
+                        style="
+                            color:var(--muted);
+                            font-size:13px;
+                            line-height:1.6">
 
-                        Masukkan kode reset untuk membuat
-                        tampilan saldo menjadi nol tanpa menghapus
-                        riwayat transaksi.
+                        Masukkan kode reset untuk
+                        membuat tampilan saldo menjadi nol
+                        tanpa menghapus riwayat transaksi.
 
                     </p>
 
@@ -4194,7 +5906,9 @@ window.openResetModal = function(){
 
                     <div class="form-group">
 
-                        <label>Kode Reset</label>
+                        <label>
+                            Kode Reset
+                        </label>
 
                         <input
                             id="resetCode"
@@ -4208,14 +5922,20 @@ window.openResetModal = function(){
 
                 <div class="modal-footer">
 
-                    <button class="btn btn-secondary"
+                    <button
+                        class="btn btn-secondary"
                         onclick="closeModal()">
+
                         Batal
+
                     </button>
 
-                    <button class="btn btn-warning"
+                    <button
+                        class="btn btn-warning"
                         onclick="processReset()">
+
                         Reset
+
                     </button>
 
                 </div>
@@ -4225,14 +5945,21 @@ window.openResetModal = function(){
         </div>
     `;
 
-    document.getElementById("modalContainer")
+    document
+        .getElementById(
+            "modalContainer"
+        )
         .innerHTML=html;
 };
 
-window.processReset = async function(){
+window.processReset=
+async function(){
 
-    const code =
-        document.getElementById("resetCode")
+    const code=
+        document
+        .getElementById(
+            "resetCode"
+        )
         .value;
 
     if(code!=="060999"){
@@ -4250,6 +5977,7 @@ window.processReset = async function(){
         await update(
             ref(database),
             {
+
                 [`${DB}/settings/resetState/cashInOffset`]:
                     getPersistentCashInTotal(),
 
@@ -4258,6 +5986,7 @@ window.processReset = async function(){
 
                 [`${DB}/settings/resetState/updatedAt`]:
                     Date.now()
+
             }
         );
 
@@ -4280,14 +6009,20 @@ window.processReset = async function(){
 
 
 /* =========================================================
-   DELETE CONFIRMATION
+   CONFIRM MODAL
 ========================================================= */
 
-function openConfirmModal(title,message,onYes){
+function openConfirmModal(
+    title,
+    message,
+    onYes
+){
 
-    const html = `
+    const html=`
 
-        <div class="modal-backdrop" id="activeModal">
+        <div
+            class="modal-backdrop"
+            id="activeModal">
 
             <div class="modal">
 
@@ -4297,41 +6032,53 @@ function openConfirmModal(title,message,onYes){
                         ${escapeHtml(title)}
                     </h3>
 
-                    <button class="modal-close"
+                    <button
+                        class="modal-close"
                         onclick="closeModal()">
+
                         <i class="fa-solid fa-xmark"></i>
+
                     </button>
 
                 </div>
 
                 <div class="modal-body">
 
-                    <div style="
-                        display:flex;
-                        gap:12px;
-                        align-items:flex-start;
-                    ">
-
-                        <div style="
-                            width:42px;
-                            height:42px;
-                            border-radius:50%;
-                            background:#fee2e2;
-                            color:#dc2626;
+                    <div
+                        style="
                             display:flex;
-                            align-items:center;
-                            justify-content:center;
-                            flex:none;
-                        ">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            gap:12px;
+                            align-items:flex-start;">
+
+                        <div
+                            style="
+                                width:42px;
+                                height:42px;
+                                border-radius:50%;
+                                background:#fee2e2;
+                                color:#dc2626;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                flex:none;">
+
+                            <i
+                                class="
+                                    fa-solid
+                                    fa-triangle-exclamation
+                                ">
+                            </i>
+
                         </div>
 
-                        <div style="
-                            line-height:1.6;
-                            font-size:13px;
-                            color:#475569;
-                        ">
+                        <div
+                            style="
+                                line-height:1.6;
+                                font-size:13px;
+                                color:#475569;">
+
                             ${escapeHtml(message)}
+
                         </div>
 
                     </div>
@@ -4340,14 +6087,20 @@ function openConfirmModal(title,message,onYes){
 
                 <div class="modal-footer">
 
-                    <button class="btn btn-secondary"
+                    <button
+                        class="btn btn-secondary"
                         onclick="closeModal()">
+
                         Tidak
+
                     </button>
 
-                    <button class="btn btn-danger"
+                    <button
+                        class="btn btn-danger"
                         id="confirmYesButton">
+
                         Ya
+
                     </button>
 
                 </div>
@@ -4357,55 +6110,89 @@ function openConfirmModal(title,message,onYes){
         </div>
     `;
 
-    document.getElementById("modalContainer")
+    document
+        .getElementById(
+            "modalContainer"
+        )
         .innerHTML=html;
 
-    document.getElementById("confirmYesButton")
-        .onclick=async()=>{
+    document
+        .getElementById(
+            "confirmYesButton"
+        )
+        .onclick=
+        async()=>{
 
             closeModal();
 
             try{
+
                 await onYes();
+
             }catch(error){
+
                 console.error(error);
+
                 showToast(
                     "Terjadi kesalahan.",
                     "error"
                 );
             }
+
         };
 }
 
 
 /* =========================================================
-   DELETE SINGLE
+   DELETE SINGLE KAS MASUK
 ========================================================= */
 
-window.confirmDeleteKasMasuk = function(id){
+window.confirmDeleteKasMasuk=
+function(id){
 
     openConfirmModal(
+
         "Hapus Kas Masuk",
-        "Apakah Anda yakin ingin menghapus transaksi kas masuk ini?",
+
+        "Apakah Anda yakin ingin menghapus transaksi kas masuk ini? Status pembayaran siswa terkait juga akan disinkronkan.",
+
         async()=>{
 
-            const tx =
+            const tx=
                 appState.kasMasuk[id];
+
+            if(!tx) return;
+
+            const updates={};
+
+            /*
+               PERBAIKAN UTAMA:
+               Ketika transaksi pembayaran dihapus,
+               status pembayaran anggota ikut dihapus.
+            */
+            if(
+                tx.siswaId &&
+                tx.periodeKey
+            ){
+
+                updates[
+                    `${DB}/pembayaranStatus/${tx.siswaId}/${tx.periodeKey}`
+                ]=null;
+            }
+
+            updates[
+                `${DB}/kasMasuk/${id}`
+            ]=null;
 
             try{
 
-                await remove(
-                    ref(database,`${DB}/kasMasuk/${id}`)
+                await update(
+                    ref(database),
+                    updates
                 );
 
-                /*
-                   payment status sengaja tidak dihapus.
-                   Riwayat dapat dihapus tanpa membuat
-                   periode pembayaran kembali menjadi tunggakan.
-                */
-
                 showToast(
-                    "Riwayat kas masuk berhasil dihapus."
+                    "Kas masuk berhasil dihapus dan status anggota telah disinkronkan."
                 );
 
             }catch(error){
@@ -4421,17 +6208,29 @@ window.confirmDeleteKasMasuk = function(id){
     );
 };
 
-window.confirmDeleteKasKeluar = function(id){
+
+/* =========================================================
+   DELETE KAS KELUAR
+========================================================= */
+
+window.confirmDeleteKasKeluar=
+function(id){
 
     openConfirmModal(
+
         "Hapus Kas Keluar",
+
         "Apakah Anda yakin ingin menghapus transaksi kas keluar ini?",
+
         async()=>{
 
             try{
 
                 await remove(
-                    ref(database,`${DB}/kasKeluar/${id}`)
+                    ref(
+                        database,
+                        `${DB}/kasKeluar/${id}`
+                    )
                 );
 
                 showToast(
@@ -4456,10 +6255,13 @@ window.confirmDeleteKasKeluar = function(id){
    DELETE ALL KAS MASUK
 ========================================================= */
 
-window.confirmDeleteAllKasMasuk = function(){
+window.confirmDeleteAllKasMasuk=
+function(){
 
-    const count =
-        Object.keys(appState.kasMasuk || {}).length;
+    const count=
+        Object.keys(
+            appState.kasMasuk || {}
+        ).length;
 
     if(!count){
 
@@ -4472,18 +6274,50 @@ window.confirmDeleteAllKasMasuk = function(){
     }
 
     openConfirmModal(
+
         "Hapus Semua Kas Masuk",
-        `Apakah Anda yakin ingin menghapus semua ${count} transaksi kas masuk? Status pembayaran siswa tetap tersimpan.`,
+
+        `Apakah Anda yakin ingin menghapus semua ${count} transaksi kas masuk? Status pembayaran anggota untuk transaksi tersebut juga akan disinkronkan.`,
+
         async()=>{
 
             try{
 
-                await remove(
-                    ref(database,`${DB}/kasMasuk`)
+                const updates={};
+
+                /*
+                   Hapus transaksi kas masuk
+                   sekaligus status pembayaran terkait.
+                */
+                Object.entries(
+                    appState.kasMasuk || {}
+                ).forEach(
+                    ([id,tx])=>{
+
+                        updates[
+                            `${DB}/kasMasuk/${id}`
+                        ]=null;
+
+                        if(
+                            tx?.siswaId &&
+                            tx?.periodeKey
+                        ){
+
+                            updates[
+                                `${DB}/pembayaranStatus/${tx.siswaId}/${tx.periodeKey}`
+                            ]=null;
+                        }
+
+                    }
+                );
+
+                await update(
+                    ref(database),
+                    updates
                 );
 
                 showToast(
-                    "Semua kas masuk berhasil dihapus."
+                    "Semua kas masuk berhasil dihapus dan data anggota telah disinkronkan."
                 );
 
             }catch(error){
@@ -4504,10 +6338,13 @@ window.confirmDeleteAllKasMasuk = function(){
    DELETE ALL KAS KELUAR
 ========================================================= */
 
-window.confirmDeleteAllKasKeluar = function(){
+window.confirmDeleteAllKasKeluar=
+function(){
 
-    const count =
-        Object.keys(appState.kasKeluar || {}).length;
+    const count=
+        Object.keys(
+            appState.kasKeluar || {}
+        ).length;
 
     if(!count){
 
@@ -4520,14 +6357,20 @@ window.confirmDeleteAllKasKeluar = function(){
     }
 
     openConfirmModal(
+
         "Hapus Semua Kas Keluar",
+
         `Apakah Anda yakin ingin menghapus semua ${count} transaksi kas keluar?`,
+
         async()=>{
 
             try{
 
                 await remove(
-                    ref(database,`${DB}/kasKeluar`)
+                    ref(
+                        database,
+                        `${DB}/kasKeluar`
+                    )
                 );
 
                 showToast(
@@ -4552,15 +6395,23 @@ window.confirmDeleteAllKasKeluar = function(){
    DELETE ALL HISTORY
 ========================================================= */
 
-window.confirmDeleteHistory = function(){
+window.confirmDeleteHistory=
+function(){
 
-    const incomeCount =
-        Object.keys(appState.kasMasuk || {}).length;
+    const incomeCount=
+        Object.keys(
+            appState.kasMasuk || {}
+        ).length;
 
-    const expenseCount =
-        Object.keys(appState.kasKeluar || {}).length;
+    const expenseCount=
+        Object.keys(
+            appState.kasKeluar || {}
+        ).length;
 
-    if(!incomeCount && !expenseCount){
+    if(
+        !incomeCount &&
+        !expenseCount
+    ){
 
         showToast(
             "Belum ada riwayat yang dapat dihapus.",
@@ -4571,22 +6422,62 @@ window.confirmDeleteHistory = function(){
     }
 
     openConfirmModal(
+
         "Hapus Semua Riwayat",
-        `Apakah Anda yakin ingin menghapus seluruh riwayat? ${incomeCount} kas masuk dan ${expenseCount} kas keluar akan dihapus. Status pembayaran siswa tetap tersimpan.`,
+
+        `Apakah Anda yakin ingin menghapus seluruh riwayat? ${incomeCount} kas masuk dan ${expenseCount} kas keluar akan dihapus. Status pembayaran anggota untuk transaksi kas masuk juga akan disinkronkan.`,
+
         async()=>{
 
             try{
 
-                await update(
-                    ref(database),
-                    {
-                        [`${DB}/kasMasuk`]:null,
-                        [`${DB}/kasKeluar`]:null
+                const updates={};
+
+                /*
+                   Hapus seluruh kas masuk
+                   + status pembayaran siswa.
+                */
+                Object.entries(
+                    appState.kasMasuk || {}
+                ).forEach(
+                    ([id,tx])=>{
+
+                        updates[
+                            `${DB}/kasMasuk/${id}`
+                        ]=null;
+
+                        if(
+                            tx?.siswaId &&
+                            tx?.periodeKey
+                        ){
+
+                            updates[
+                                `${DB}/pembayaranStatus/${tx.siswaId}/${tx.periodeKey}`
+                            ]=null;
+                        }
+
                     }
                 );
 
+                Object.keys(
+                    appState.kasKeluar || {}
+                ).forEach(
+                    id=>{
+
+                        updates[
+                            `${DB}/kasKeluar/${id}`
+                        ]=null;
+
+                    }
+                );
+
+                await update(
+                    ref(database),
+                    updates
+                );
+
                 showToast(
-                    "Semua riwayat berhasil dihapus."
+                    "Semua riwayat berhasil dihapus dan data anggota telah disinkronkan."
                 );
 
             }catch(error){
@@ -4607,19 +6498,23 @@ window.confirmDeleteHistory = function(){
    DELETE STUDENT
 ========================================================= */
 
-window.confirmDeleteStudent = function(id){
+window.confirmDeleteStudent=
+function(id){
 
-    const student =
+    const student=
         appState.siswa[id];
 
     if(!student) return;
 
-    const totalPaid =
+    const totalPaid=
         getStudentPaidAmount(id);
 
     openConfirmModal(
+
         "Hapus Siswa",
+
         `Apakah Anda yakin ingin menghapus ${student.nama}? Data pembayaran historis tetap dipertahankan.`,
+
         async()=>{
 
             try{
@@ -4627,13 +6522,23 @@ window.confirmDeleteStudent = function(id){
                 await update(
                     ref(database),
                     {
+
                         [`${DB}/settings/deletedStudents/${id}`]:{
-                            nama:student.nama,
-                            totalPaid,
-                            deletedAt:Date.now()
+
+                            nama:
+                                student.nama,
+
+                            totalPaid:
+                                totalPaid,
+
+                            deletedAt:
+                                Date.now()
+
                         },
 
-                        [`${DB}/siswa/${id}`]:null
+                        [`${DB}/siswa/${id}`]:
+                            null
+
                     }
                 );
 
@@ -4659,11 +6564,15 @@ window.confirmDeleteStudent = function(id){
    LOGOUT
 ========================================================= */
 
-window.confirmLogout = function(){
+window.confirmLogout=
+function(){
 
     openConfirmModal(
+
         "Logout",
+
         "Apakah Anda yakin ingin keluar dari akun ini?",
+
         async()=>{
 
             sessionStorage.removeItem(
@@ -4677,22 +6586,37 @@ window.confirmLogout = function(){
 
             closeSidebar();
 
-            document.getElementById("app")
-                .classList.add("hidden");
+            document
+                .getElementById("app")
+                .classList
+                .add("hidden");
 
-            document.getElementById("loginScreen")
-                .classList.remove("hidden");
+            document
+                .getElementById("loginScreen")
+                .classList
+                .remove("hidden");
 
-            document.getElementById("loginUsername")
+            document
+                .getElementById(
+                    "loginUsername"
+                )
                 .value="";
 
-            document.getElementById("loginPassword")
+            document
+                .getElementById(
+                    "loginPassword"
+                )
                 .value="";
 
-            document.getElementById("loginStudentPassword")
+            document
+                .getElementById(
+                    "loginStudentPassword"
+                )
                 .value="";
 
-            setLoginRole("bendahara");
+            setLoginRole(
+                "bendahara"
+            );
 
             closeModal();
 
@@ -4708,9 +6632,13 @@ window.confirmLogout = function(){
    CLOSE MODAL
 ========================================================= */
 
-window.closeModal = function(){
+window.closeModal=
+function(){
 
-    document.getElementById("modalContainer")
+    document
+        .getElementById(
+            "modalContainer"
+        )
         .innerHTML="";
 };
 
