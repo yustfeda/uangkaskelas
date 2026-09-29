@@ -3,34 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Kas Kelas VII B</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  >
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <style>
-
     * {
       box-sizing: border-box;
     }
 
-    html,
     body {
       margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
     }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f5f7fb;
-      color: #1f2937;
+    .hidden-page {
+      display: none !important;
     }
 
     /* =========================
@@ -39,126 +32,476 @@
 
     #loginPage {
       min-height: 100vh;
-      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
+      background:
+        linear-gradient(135deg, #0f172a, #1e3a8a);
     }
 
     .login-card {
       width: 100%;
-      max-width: 390px;
+      max-width: 400px;
       background: white;
-      border-radius: 20px;
-      padding: 30px 24px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.18);
+      border-radius: 22px;
+      padding: 30px 25px;
+      box-shadow: 0 25px 60px rgba(0,0,0,.25);
     }
 
     .login-logo {
-      width: 70px;
-      height: 70px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      background: #1d4ed8;
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 18px auto;
-      position: relative;
-      z-index: 1;
-      flex-shrink: 0;
-    }
-
-    .login-logo i {
-      font-size: 28px;
+      font-size: 34px;
+      box-shadow: 0 10px 25px rgba(29,78,216,.3);
     }
 
     .login-title {
       text-align: center;
-      margin-bottom: 24px;
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
     }
 
-    .login-title h1 {
-      margin: 0;
-      font-size: 23px;
-      font-weight: 700;
-      color: #111827;
-    }
-
-    .login-title p {
-      margin: 6px 0 0;
-      color: #6b7280;
+    .login-subtitle {
+      text-align: center;
       font-size: 13px;
+      color: #64748b;
+      margin-top: 5px;
+      margin-bottom: 25px;
     }
 
-    .login-field {
+    .input-group {
+      position: relative;
       margin-bottom: 16px;
     }
 
-    .login-field label {
-      display: block;
-      margin-bottom: 7px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #374151;
-    }
-
-    .login-input-wrapper {
-      position: relative;
-      width: 100%;
-    }
-
-    .login-input-wrapper i {
+    .input-group i {
       position: absolute;
-      left: 13px;
+      left: 14px;
       top: 50%;
       transform: translateY(-50%);
-      color: #9ca3af;
-      z-index: 2;
+      color: #64748b;
       pointer-events: none;
     }
 
-    .login-input {
+    .input-group input,
+    .input-group select {
       width: 100%;
-      height: 45px;
-      border: 1px solid #d1d5db;
-      border-radius: 10px;
-      padding: 0 13px 0 40px;
+      height: 48px;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 0 14px 0 42px;
       outline: none;
+      background: #f8fafc;
       font-size: 14px;
-      background: white;
-      position: relative;
-      z-index: 1;
     }
 
-    .login-input:focus {
+    .input-group input:focus,
+    .input-group select:focus {
       border-color: #2563eb;
+      background: white;
       box-shadow: 0 0 0 3px rgba(37,99,235,.1);
     }
 
     .login-button {
       width: 100%;
-      height: 45px;
-      border: none;
-      border-radius: 10px;
+      height: 48px;
+      border: 0;
+      border-radius: 12px;
       background: #2563eb;
       color: white;
       font-weight: 700;
       cursor: pointer;
-      margin-top: 5px;
+      transition: .2s;
     }
 
     .login-button:hover {
       background: #1d4ed8;
     }
 
+    .login-info {
+      margin-top: 18px;
+      padding: 12px;
+      background: #eff6ff;
+      border-radius: 12px;
+      font-size: 12px;
+      color: #1e40af;
+      text-align: center;
+    }
+
     /* =========================
-       SIDEBAR
+       APP
     ========================= */
 
+    #appPage {
+      min-height: 100vh;
+    }
+
     .sidebar {
-      transition: transform .25s ease;
+      width: 260px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      background: #0f172a;
+      color: white;
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      padding: 25px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 45px;
+      height: 45px;
+      background: #2563eb;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 3px;
+    }
+
+    .role-badge {
+      margin-top: 15px;
+      padding: 8px 10px;
+      border-radius: 9px;
+      background: rgba(37,99,235,.2);
+      color: #93c5fd;
+      font-size: 11px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .menu-title {
+      padding: 20px 20px 8px;
+      color: #64748b;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .menu-item {
+      margin: 4px 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #cbd5e1;
+      cursor: pointer;
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    .menu-item:hover,
+    .menu-item.active {
+      background: #2563eb;
+      color: white;
+    }
+
+    .menu-item i {
+      width: 20px;
+      text-align: center;
+    }
+
+    .logout-button {
+      margin: 20px 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #7f1d1d;
+      color: #fecaca;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .logout-button:hover {
+      background: #991b1b;
+    }
+
+    .main {
+      margin-left: 260px;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      height: 70px;
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 25px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar-title {
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #dbeafe;
+      color: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .content {
+      padding: 25px;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .welcome-box {
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      color: white;
+      border-radius: 18px;
+      padding: 25px;
+      margin-bottom: 22px;
+    }
+
+    .welcome-box h1 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .welcome-box p {
+      color: #dbeafe;
+      font-size: 14px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .stat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .stat-title {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .stat-value {
+      font-size: 21px;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    /* =========================
+       BUTTON
+    ========================= */
+
+    .btn {
+      border: 0;
+      border-radius: 9px;
+      padding: 9px 14px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn-success {
+      background: #16a34a;
+      color: white;
+    }
+
+    .btn-danger {
+      background: #dc2626;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .btn:hover {
+      opacity: .9;
+    }
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    th {
+      background: #f8fafc;
+      font-weight: 800;
+      color: #475569;
+    }
+
+    tr:hover td {
+      background: #f8fafc;
+    }
+
+    .amount-in {
+      color: #15803d;
+      font-weight: 800;
+    }
+
+    .amount-out {
+      color: #dc2626;
+      font-weight: 800;
+    }
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .form-control {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      padding: 9px 12px;
+      outline: none;
+      background: white;
+    }
+
+    .form-control:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,.1);
     }
 
     /* =========================
@@ -166,140 +509,267 @@
     ========================= */
 
     .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,.65);
       display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 300;
     }
 
-    .modal.active {
+    .modal.show {
       display: flex;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 500px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 25px 60px rgba(0,0,0,.3);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-weight: 800;
+    }
+
+    .modal-close {
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      font-size: 20px;
+      color: #64748b;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .modal-footer {
+      padding: 15px 20px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    /* =========================
+       WELCOME POPUP
+    ========================= */
+
+    #welcomePopup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 330px;
+      max-width: calc(100% - 40px);
+      background: white;
+      border-radius: 14px;
+      padding: 15px;
+      box-shadow: 0 15px 40px rgba(0,0,0,.2);
+      z-index: 999;
+      transform: translateX(450px);
+      transition: .4s ease;
+      border-left: 5px solid #2563eb;
+    }
+
+    #welcomePopup.show {
+      transform: translateX(0);
+    }
+
+    .welcome-popup-content {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .welcome-popup-icon {
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      border-radius: 50%;
+      background: #dbeafe;
+      color: #2563eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .welcome-popup-title {
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .welcome-popup-text {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 3px;
     }
 
     /* =========================
        TOAST
     ========================= */
 
-    .toast {
+    #toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      max-width: 350px;
+      padding: 13px 16px;
+      background: #0f172a;
+      color: white;
+      border-radius: 10px;
+      box-shadow: 0 15px 35px rgba(0,0,0,.25);
+      z-index: 1000;
+      transform: translateY(100px);
       opacity: 0;
-      transform: translateY(-15px);
-      pointer-events: none;
-      transition: .25s;
+      transition: .3s;
+      font-size: 13px;
     }
 
-    .toast.show {
-      opacity: 1;
+    #toast.show {
       transform: translateY(0);
+      opacity: 1;
+    }
+
+    #toast.success {
+      background: #15803d;
+    }
+
+    #toast.error {
+      background: #dc2626;
     }
 
     /* =========================
        MOBILE
     ========================= */
 
-    @media(max-width:640px) {
+    #mobileOverlay {
+      display: none;
+    }
 
-      html {
-        font-size: 13px;
-      }
+    .mobile-menu-button {
+      display: none;
+      border: 0;
+      background: #eff6ff;
+      color: #2563eb;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
 
-      body {
-        font-size: 13px;
-      }
-
-      #loginPage {
-        padding: 15px;
-      }
-
-      .login-card {
-        max-width: 360px;
-        padding: 25px 19px;
-        border-radius: 17px;
-      }
-
-      .login-logo {
-        width: 62px;
-        height: 62px;
-        border-radius: 16px;
-        margin-bottom: 15px;
-      }
-
-      .login-logo i {
-        font-size: 24px;
-      }
-
-      .login-title {
-        margin-bottom: 20px;
-      }
-
-      .login-title h1 {
-        font-size: 20px;
-      }
-
-      .login-title p {
-        font-size: 11px;
-      }
-
-      .login-field {
-        margin-bottom: 13px;
-      }
-
-      .login-field label {
-        font-size: 12px;
-        margin-bottom: 5px;
-      }
-
-      .login-input {
-        height: 42px;
-        font-size: 12px;
-      }
-
-      .login-button {
-        height: 42px;
-        font-size: 12px;
-      }
-
-      table {
-        font-size: 11px !important;
-      }
-
-      th,
-      td {
-        padding: 7px 6px !important;
-      }
-
-      .page-container {
-        padding: 10px !important;
+    @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .sidebar {
-        width: 245px !important;
+        transform: translateX(-100%);
+        transition: .3s;
       }
 
-      .modal-box {
-        width: calc(100% - 20px) !important;
-        max-width: 390px !important;
-        margin: 10px;
+      .sidebar.open {
+        transform: translateX(0);
       }
 
-      input,
-      select,
-      textarea {
-        font-size: 12px !important;
+      .main {
+        margin-left: 0;
       }
 
-      button {
-        font-size: 12px;
+      .mobile-menu-button {
+        display: block;
+      }
+
+      #mobileOverlay.show {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.45);
+        z-index: 90;
       }
     }
 
+    @media (max-width: 600px) {
+      #loginPage {
+        padding: 12px;
+      }
+
+      .login-card {
+        padding: 25px 18px;
+        border-radius: 18px;
+      }
+
+      .login-title {
+        font-size: 21px;
+      }
+
+      .content {
+        padding: 15px;
+      }
+
+      .topbar {
+        padding: 0 15px;
+      }
+
+      .topbar-title {
+        font-size: 15px;
+      }
+
+      .user-info-text {
+        display: none;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .stat-card {
+        padding: 15px;
+      }
+
+      .stat-value {
+        font-size: 17px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .welcome-box {
+        padding: 20px;
+      }
+
+      .welcome-box h1 {
+        font-size: 20px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-
 <!-- =========================================================
-     LOGIN
+     LOGIN PAGE
 ========================================================= -->
 
-<div id="loginPage">
+<section id="loginPage">
 
   <div class="login-card">
 
@@ -308,294 +778,235 @@
     </div>
 
     <div class="login-title">
-
-      <h1>Kas Kelas VII B</h1>
-
-      <p>
-        Sistem Pengelolaan Uang Kas Kelas
-      </p>
-
+      Kas Kelas VII B
     </div>
 
+    <div class="login-subtitle">
+      Sistem Informasi Kas Kelas
+    </div>
 
     <form id="loginForm">
 
-      <div class="login-field">
-
-        <label>
-          Username
-        </label>
-
-        <div class="login-input-wrapper">
-
-          <i class="fa-solid fa-user"></i>
-
-          <input
-            id="username"
-            class="login-input"
-            type="text"
-            autocomplete="username"
-            placeholder="Masukkan username"
-            required
-          >
-
-        </div>
-
+      <div class="input-group">
+        <i class="fa-solid fa-user"></i>
+        <input
+          type="text"
+          id="loginUsername"
+          placeholder="Username"
+          autocomplete="username"
+          required>
       </div>
 
-
-      <div class="login-field">
-
-        <label>
-          Password
-        </label>
-
-        <div class="login-input-wrapper">
-
-          <i class="fa-solid fa-lock"></i>
-
-          <input
-            id="password"
-            class="login-input"
-            type="password"
-            autocomplete="current-password"
-            placeholder="Masukkan password"
-            required
-          >
-
-        </div>
-
+      <div class="input-group">
+        <i class="fa-solid fa-lock"></i>
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Password"
+          autocomplete="current-password"
+          required>
       </div>
 
-
-      <button
-        type="submit"
-        class="login-button"
-      >
-        <i class="fa-solid fa-right-to-bracket mr-2"></i>
-        Masuk
+      <button type="submit" class="login-button">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        &nbsp; Masuk
       </button>
 
     </form>
 
-
-    <div class="text-center text-xs text-gray-400 mt-5">
-      Kas Kelas VII B
+    <div class="login-info">
+      <i class="fa-solid fa-circle-info"></i>
+      Silakan masuk menggunakan akun yang telah ditentukan.
     </div>
 
   </div>
 
-</div>
+</section>
 
 
 <!-- =========================================================
-     APPLICATION
+     APP PAGE
 ========================================================= -->
 
-<div
-  id="app"
-  class="hidden min-h-screen"
->
-
+<section id="appPage" class="hidden-page">
 
   <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar">
 
-  <aside
-    id="sidebar"
-    class="sidebar fixed z-50 top-0 left-0 h-full w-64 bg-white border-r shadow-sm -translate-x-full lg:translate-x-0"
-  >
+    <div class="sidebar-header">
 
-    <div class="h-16 border-b flex items-center px-5">
+      <div class="brand">
+
+        <div class="brand-icon">
+          <i class="fa-solid fa-wallet"></i>
+        </div>
+
+        <div>
+          <div class="brand-title">Kas Kelas VII B</div>
+          <div class="brand-subtitle">Sistem Kas Kelas</div>
+        </div>
+
+      </div>
+
+      <div id="roleBadge" class="role-badge">
+        BENDahara
+      </div>
+
+    </div>
+
+
+    <!-- MENU BENDahara -->
+    <div id="bendaharaMenu">
+
+      <div class="menu-title">
+        Menu Bendahara
+      </div>
 
       <div
-        class="w-9 h-9 bg-blue-600 rounded-lg text-white flex items-center justify-center mr-3"
-      >
-        <i class="fa-solid fa-wallet"></i>
-      </div>
+        class="menu-item active"
+        data-page="beranda"
+        onclick="navigate('beranda')">
 
-      <div>
-
-        <div class="font-bold">
-          Kas Kelas
-        </div>
-
-        <div class="text-xs text-gray-400">
-          VII B
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="p-3">
-
-      <div class="text-[10px] uppercase text-gray-400 font-bold px-3 py-2">
-        Menu
-      </div>
-
-
-      <button
-        onclick="navigate('beranda')"
-        data-nav="beranda"
-        class="nav-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-left mb-1"
-      >
-        <i class="fa-solid fa-house w-5"></i>
+        <i class="fa-solid fa-house"></i>
         <span>Beranda</span>
-      </button>
 
+      </div>
 
-      <button
-        onclick="navigate('kasMasuk')"
-        data-nav="kasMasuk"
-        class="nav-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-left mb-1"
-      >
-        <i class="fa-solid fa-arrow-down w-5"></i>
+      <div
+        class="menu-item"
+        data-page="kasMasuk"
+        onclick="navigate('kasMasuk')">
+
+        <i class="fa-solid fa-arrow-down"></i>
         <span>Kas Masuk</span>
-      </button>
 
+      </div>
 
-      <button
-        onclick="navigate('kasKeluar')"
-        data-nav="kasKeluar"
-        class="nav-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-left mb-1"
-      >
-        <i class="fa-solid fa-arrow-up w-5"></i>
+      <div
+        class="menu-item"
+        data-page="kasKeluar"
+        onclick="navigate('kasKeluar')">
+
+        <i class="fa-solid fa-arrow-up"></i>
         <span>Kas Keluar</span>
-      </button>
 
+      </div>
 
-      <button
-        onclick="navigate('siswa')"
-        data-nav="siswa"
-        class="nav-btn w-full flex items-center gap-3 px-3 py-3 rounded-lg text-left mb-1"
-      >
-        <i class="fa-solid fa-users w-5"></i>
+      <div
+        class="menu-item"
+        data-page="siswa"
+        onclick="navigate('siswa')">
+
+        <i class="fa-solid fa-users"></i>
         <span>Daftar Siswa</span>
-      </button>
+
+      </div>
+
+      <div
+        class="menu-item"
+        data-page="riwayat"
+        onclick="navigate('riwayat')">
+
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Riwayat Kas</span>
+
+      </div>
 
     </div>
 
 
-    <div class="absolute bottom-0 left-0 right-0 p-4 border-t">
+    <!-- MENU ANGGOTA -->
+    <div id="anggotaMenu" class="hidden-page">
 
-      <div class="flex items-center gap-3 mb-3">
+      <div class="menu-title">
+        Menu Anggota
+      </div>
 
-        <div
-          class="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center"
-        >
-          <i class="fa-solid fa-user"></i>
-        </div>
+      <div
+        class="menu-item active"
+        data-page="beranda"
+        onclick="navigate('beranda')">
 
-        <div class="min-w-0">
-
-          <div
-            id="sidebarUser"
-            class="font-semibold text-sm truncate"
-          >
-            Bendahara
-          </div>
-
-          <div class="text-xs text-gray-400">
-            Bendahara Kelas
-          </div>
-
-        </div>
+        <i class="fa-solid fa-house"></i>
+        <span>Beranda</span>
 
       </div>
 
+      <div
+        class="menu-item"
+        data-page="riwayat"
+        onclick="navigate('riwayat')">
 
-      <button
-        onclick="logout()"
-        class="w-full border border-red-200 text-red-500 hover:bg-red-50 py-2 rounded-lg text-sm"
-      >
-        <i class="fa-solid fa-right-from-bracket mr-2"></i>
-        Keluar
-      </button>
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Riwayat Kas</span>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="logout-button"
+      onclick="logout()">
+
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span>Keluar</span>
 
     </div>
 
   </aside>
 
 
-  <!-- OVERLAY -->
-
   <div
-    id="sidebarOverlay"
-    onclick="closeSidebar()"
-    class="hidden fixed inset-0 bg-black/40 z-40 lg:hidden"
-  ></div>
+    id="mobileOverlay"
+    onclick="closeSidebar()">
+  </div>
 
 
-  <!-- CONTENT -->
+  <!-- MAIN -->
+  <main class="main">
 
-  <div class="lg:ml-64 min-h-screen">
-
-
-    <!-- NAVBAR -->
-
-    <header
-      class="h-16 bg-white border-b sticky top-0 z-30 flex items-center justify-between px-4 lg:px-6"
-    >
+    <header class="topbar">
 
       <div class="flex items-center gap-3">
 
-        <!-- GARIS TIGA -->
-
         <button
-          onclick="toggleSidebar()"
-          class="lg:hidden w-9 h-9 rounded-lg hover:bg-gray-100 flex items-center justify-center"
-        >
-          <i class="fa-solid fa-bars text-lg"></i>
+          class="mobile-menu-button"
+          onclick="toggleSidebar()">
+
+          <i class="fa-solid fa-bars"></i>
+
         </button>
 
-
-        <div>
-
-          <h1
-            id="pageTitle"
-            class="font-bold text-lg"
-          >
-            Beranda
-          </h1>
-
-          <div class="text-[10px] text-gray-400">
-            Pengelolaan Kas Kelas VII B
-          </div>
-
+        <div
+          id="pageTitle"
+          class="topbar-title">
+          Beranda
         </div>
 
       </div>
 
 
-      <div class="flex items-center gap-3">
+      <div class="user-info">
 
-        <div
-          id="firebaseStatus"
-          class="flex items-center gap-1 text-xs"
-        >
-          <span
-            class="w-2 h-2 bg-gray-400 rounded-full"
-          ></span>
+        <div class="user-info-text text-right">
 
-          <span class="hidden sm:block">
-            Menghubungkan...
-          </span>
+          <div
+            id="topUsername"
+            class="font-bold text-sm">
+            -
+          </div>
+
+          <div
+            id="topRole"
+            class="text-xs text-slate-500">
+            -
+          </div>
 
         </div>
 
-
-        <div class="hidden sm:flex items-center gap-2">
-
-          <i class="fa-solid fa-user text-gray-400"></i>
-
-          <span
-            id="navbarUser"
-            class="text-xs font-semibold"
-          >
-            Bendahara
-          </span>
-
+        <div class="user-avatar">
+          <i class="fa-solid fa-user"></i>
         </div>
 
       </div>
@@ -603,10 +1014,409 @@
     </header>
 
 
-    <main
-      id="pageContent"
-      class="page-container p-5 lg:p-6"
-    ></main>
+    <div class="content">
+
+      <!-- ==============================================
+           PAGE BERANDA
+      =============================================== -->
+
+      <div id="page-beranda">
+
+        <div class="welcome-box">
+
+          <h1 id="dashboardGreeting">
+            Selamat Datang
+          </h1>
+
+          <p id="dashboardDescription">
+            Kelola dan pantau keuangan kelas dengan mudah.
+          </p>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-wallet"></i>
+            </div>
+
+            <div class="stat-title">
+              Saldo Kas
+            </div>
+
+            <div
+              id="statSaldo"
+              class="stat-value">
+              Rp0
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-arrow-down"></i>
+            </div>
+
+            <div class="stat-title">
+              Total Kas Masuk
+            </div>
+
+            <div
+              id="statMasuk"
+              class="stat-value">
+              Rp0
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-arrow-up"></i>
+            </div>
+
+            <div class="stat-title">
+              Total Kas Keluar
+            </div>
+
+            <div
+              id="statKeluar"
+              class="stat-value">
+              Rp0
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div class="stat-title">
+              Jumlah Siswa
+            </div>
+
+            <div
+              id="statSiswa"
+              class="stat-value">
+              0
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <div class="card-title">
+              Transaksi Terbaru
+            </div>
+
+            <button
+              class="btn btn-secondary"
+              onclick="navigate('riwayat')">
+
+              Lihat Semua
+
+              <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+          </div>
+
+          <div
+            id="dashboardTransactions"
+            class="card-body">
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==============================================
+           PAGE KAS MASUK
+      =============================================== -->
+
+      <div id="page-kasMasuk" class="hidden-page">
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <div>
+              <div class="card-title">
+                Kas Masuk
+              </div>
+
+              <div class="text-xs text-slate-500 mt-1">
+                Catatan pemasukan kas kelas
+              </div>
+            </div>
+
+            <button
+              id="btnTambahKasMasuk"
+              class="btn btn-primary"
+              onclick="openKasMasukModal()">
+
+              <i class="fa-solid fa-plus"></i>
+              Tambah
+
+            </button>
+
+          </div>
+
+          <div class="table-wrapper">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Tanggal</th>
+                  <th>Nama Siswa</th>
+                  <th>Keterangan</th>
+                  <th>Jumlah</th>
+                  <th id="thAksiMasuk">Aksi</th>
+                </tr>
+
+              </thead>
+
+              <tbody id="tableKasMasuk">
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==============================================
+           PAGE KAS KELUAR
+      =============================================== -->
+
+      <div id="page-kasKeluar" class="hidden-page">
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <div>
+
+              <div class="card-title">
+                Kas Keluar
+              </div>
+
+              <div class="text-xs text-slate-500 mt-1">
+                Catatan pengeluaran kas kelas
+              </div>
+
+            </div>
+
+            <button
+              id="btnTambahKasKeluar"
+              class="btn btn-danger"
+              onclick="openKasKeluarModal()">
+
+              <i class="fa-solid fa-plus"></i>
+              Tambah
+
+            </button>
+
+          </div>
+
+          <div class="table-wrapper">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Tanggal</th>
+                  <th>Keterangan</th>
+                  <th>Jumlah</th>
+                  <th id="thAksiKeluar">Aksi</th>
+                </tr>
+
+              </thead>
+
+              <tbody id="tableKasKeluar">
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==============================================
+           PAGE SISWA
+      =============================================== -->
+
+      <div id="page-siswa" class="hidden-page">
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <div>
+
+              <div class="card-title">
+                Daftar Siswa
+              </div>
+
+              <div class="text-xs text-slate-500 mt-1">
+                Data anggota kelas VII B
+              </div>
+
+            </div>
+
+            <button
+              id="btnTambahSiswa"
+              class="btn btn-primary"
+              onclick="openSiswaModal()">
+
+              <i class="fa-solid fa-user-plus"></i>
+              Tambah Siswa
+
+            </button>
+
+          </div>
+
+          <div class="table-wrapper">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>NIS</th>
+                  <th>Jenis Kelamin</th>
+                  <th id="thAksiSiswa">Aksi</th>
+                </tr>
+
+              </thead>
+
+              <tbody id="tableSiswa">
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ==============================================
+           PAGE RIWAYAT
+      =============================================== -->
+
+      <div id="page-riwayat" class="hidden-page">
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <div>
+
+              <div class="card-title">
+                Riwayat Kas
+              </div>
+
+              <div class="text-xs text-slate-500 mt-1">
+                Semua transaksi kas kelas
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="table-wrapper">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Tanggal</th>
+                  <th>Jenis</th>
+                  <th>Keterangan</th>
+                  <th>Jumlah</th>
+                </tr>
+
+              </thead>
+
+              <tbody id="tableRiwayat">
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</section>
+
+
+<!-- =========================================================
+     POPUP WELCOME
+========================================================= -->
+
+<div id="welcomePopup">
+
+  <div class="welcome-popup-content">
+
+    <div class="welcome-popup-icon">
+      <i class="fa-solid fa-hand"></i>
+    </div>
+
+    <div>
+
+      <div
+        id="welcomePopupTitle"
+        class="welcome-popup-title">
+        Selamat Datang
+      </div>
+
+      <div
+        id="welcomePopupText"
+        class="welcome-popup-text">
+        Anda berhasil masuk.
+      </div>
+
+    </div>
 
   </div>
 
@@ -614,126 +1424,136 @@
 
 
 <!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div id="toast"></div>
+
+
+<!-- =========================================================
      MODAL KAS MASUK
 ========================================================= -->
 
-<div
-  id="modalKasMasuk"
-  class="modal fixed inset-0 z-[80] bg-black/40 items-center justify-center p-4"
->
+<div id="kasMasukModal" class="modal">
 
-  <div class="modal-box bg-white rounded-xl shadow-xl w-full max-w-lg">
+  <div class="modal-box">
 
-    <div class="flex justify-between items-center border-b px-5 py-4">
+    <div class="modal-header">
 
-      <h2
-        id="modalKasMasukTitle"
-        class="font-bold"
-      >
-        Tambah Kas Masuk
-      </h2>
+      <div class="modal-title">
+        <span id="kasMasukModalTitle">
+          Tambah Kas Masuk
+        </span>
+      </div>
 
       <button
-        onclick="closeModal('modalKasMasuk')"
-      >
-        <i class="fa-solid fa-xmark text-xl text-gray-400"></i>
+        class="modal-close"
+        onclick="closeModal('kasMasukModal')">
+
+        <i class="fa-solid fa-xmark"></i>
+
       </button>
 
     </div>
 
 
-    <form
-      id="formKasMasuk"
-      class="p-5"
-    >
+    <form id="kasMasukForm">
 
-      <div class="mb-4">
-
-        <label class="block text-sm font-semibold mb-1">
-          Tanggal
-        </label>
+      <div class="modal-body">
 
         <input
-          id="kasMasukTanggal"
-          type="date"
-          required
-          class="w-full border rounded-lg px-3 py-2.5"
-        >
+          type="hidden"
+          id="kasMasukId">
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Tanggal
+          </label>
+
+          <input
+            type="date"
+            id="kasMasukTanggal"
+            class="form-control"
+            required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Nama Siswa
+          </label>
+
+          <select
+            id="kasMasukSiswa"
+            class="form-control"
+            required>
+
+            <option value="">
+              Pilih siswa
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Keterangan
+          </label>
+
+          <input
+            type="text"
+            id="kasMasukKeterangan"
+            class="form-control"
+            placeholder="Contoh: Bayaran kas minggu 1"
+            required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Jumlah
+          </label>
+
+          <input
+            type="number"
+            id="kasMasukJumlah"
+            class="form-control"
+            placeholder="10000"
+            min="0"
+            required>
+
+        </div>
 
       </div>
 
 
-      <div class="mb-4">
-
-        <label class="block text-sm font-semibold mb-1">
-          Siswa
-        </label>
-
-        <select
-          id="kasMasukSiswa"
-          required
-          class="w-full border rounded-lg px-3 py-2.5"
-        >
-
-          <option value="">
-            Pilih siswa
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="mb-4">
-
-        <label class="block text-sm font-semibold mb-1">
-          Keterangan
-        </label>
-
-        <input
-          id="kasMasukKeterangan"
-          type="text"
-          value="Pembayaran kas"
-          class="w-full border rounded-lg px-3 py-2.5"
-        >
-
-      </div>
-
-
-      <div class="mb-5">
-
-        <label class="block text-sm font-semibold mb-1">
-          Nominal
-        </label>
-
-        <input
-          id="kasMasukNominal"
-          type="number"
-          min="1"
-          required
-          placeholder="Contoh: 10000"
-          class="w-full border rounded-lg px-3 py-2.5"
-        >
-
-      </div>
-
-
-      <div class="flex justify-end gap-2">
+      <div class="modal-footer">
 
         <button
           type="button"
-          onclick="closeModal('modalKasMasuk')"
-          class="px-4 py-2 border rounded-lg"
-        >
+          class="btn btn-secondary"
+          onclick="closeModal('kasMasukModal')">
+
           Batal
+
         </button>
 
         <button
           type="submit"
-          class="px-5 py-2 bg-blue-600 text-white rounded-lg font-semibold"
-        >
-          <i class="fa-solid fa-floppy-disk mr-1"></i>
+          class="btn btn-primary">
+
+          <i class="fa-solid fa-save"></i>
           Simpan
+
         </button>
 
       </div>
@@ -749,102 +1569,106 @@
      MODAL KAS KELUAR
 ========================================================= -->
 
-<div
-  id="modalKasKeluar"
-  class="modal fixed inset-0 z-[80] bg-black/40 items-center justify-center p-4"
->
+<div id="kasKeluarModal" class="modal">
 
-  <div class="modal-box bg-white rounded-xl shadow-xl w-full max-w-lg">
+  <div class="modal-box">
 
-    <div class="flex justify-between items-center border-b px-5 py-4">
+    <div class="modal-header">
 
-      <h2
-        id="modalKasKeluarTitle"
-        class="font-bold"
-      >
-        Tambah Kas Keluar
-      </h2>
+      <div class="modal-title">
+        <span id="kasKeluarModalTitle">
+          Tambah Kas Keluar
+        </span>
+      </div>
 
       <button
-        onclick="closeModal('modalKasKeluar')"
-      >
-        <i class="fa-solid fa-xmark text-xl text-gray-400"></i>
+        class="modal-close"
+        onclick="closeModal('kasKeluarModal')">
+
+        <i class="fa-solid fa-xmark"></i>
+
       </button>
 
     </div>
 
 
-    <form
-      id="formKasKeluar"
-      class="p-5"
-    >
+    <form id="kasKeluarForm">
 
-      <div class="mb-4">
-
-        <label class="block text-sm font-semibold mb-1">
-          Tanggal
-        </label>
+      <div class="modal-body">
 
         <input
-          id="kasKeluarTanggal"
-          type="date"
-          required
-          class="w-full border rounded-lg px-3 py-2.5"
-        >
+          type="hidden"
+          id="kasKeluarId">
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Tanggal
+          </label>
+
+          <input
+            type="date"
+            id="kasKeluarTanggal"
+            class="form-control"
+            required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Keterangan
+          </label>
+
+          <input
+            type="text"
+            id="kasKeluarKeterangan"
+            class="form-control"
+            placeholder="Contoh: Membeli alat kebersihan"
+            required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Jumlah
+          </label>
+
+          <input
+            type="number"
+            id="kasKeluarJumlah"
+            class="form-control"
+            placeholder="50000"
+            min="0"
+            required>
+
+        </div>
 
       </div>
 
 
-      <div class="mb-4">
-
-        <label class="block text-sm font-semibold mb-1">
-          Keterangan
-        </label>
-
-        <textarea
-          id="kasKeluarKeterangan"
-          required
-          rows="3"
-          class="w-full border rounded-lg px-3 py-2.5"
-        ></textarea>
-
-      </div>
-
-
-      <div class="mb-5">
-
-        <label class="block text-sm font-semibold mb-1">
-          Nominal
-        </label>
-
-        <input
-          id="kasKeluarNominal"
-          type="number"
-          min="1"
-          required
-          class="w-full border rounded-lg px-3 py-2.5"
-          placeholder="Contoh: 25000"
-        >
-
-      </div>
-
-
-      <div class="flex justify-end gap-2">
+      <div class="modal-footer">
 
         <button
           type="button"
-          onclick="closeModal('modalKasKeluar')"
-          class="px-4 py-2 border rounded-lg"
-        >
+          class="btn btn-secondary"
+          onclick="closeModal('kasKeluarModal')">
+
           Batal
+
         </button>
 
         <button
           type="submit"
-          class="px-5 py-2 bg-red-600 text-white rounded-lg font-semibold"
-        >
-          <i class="fa-solid fa-floppy-disk mr-1"></i>
+          class="btn btn-danger">
+
+          <i class="fa-solid fa-save"></i>
           Simpan
+
         </button>
 
       </div>
@@ -860,100 +1684,112 @@
      MODAL SISWA
 ========================================================= -->
 
-<div
-  id="modalSiswa"
-  class="modal fixed inset-0 z-[80] bg-black/40 items-center justify-center p-4"
->
+<div id="siswaModal" class="modal">
 
-  <div class="modal-box bg-white rounded-xl shadow-xl w-full max-w-lg">
+  <div class="modal-box">
 
-    <div class="flex justify-between items-center border-b px-5 py-4">
+    <div class="modal-header">
 
-      <h2
-        id="modalSiswaTitle"
-        class="font-bold"
-      >
-        Tambah Siswa
-      </h2>
+      <div class="modal-title">
+        <span id="siswaModalTitle">
+          Tambah Siswa
+        </span>
+      </div>
 
       <button
-        onclick="closeModal('modalSiswa')"
-      >
-        <i class="fa-solid fa-xmark text-xl text-gray-400"></i>
+        class="modal-close"
+        onclick="closeModal('siswaModal')">
+
+        <i class="fa-solid fa-xmark"></i>
+
       </button>
 
     </div>
 
 
-    <form
-      id="formSiswa"
-      class="p-5"
-    >
+    <form id="siswaForm">
 
-      <div class="mb-4">
-
-        <label class="block text-sm font-semibold mb-1">
-          Nama Siswa
-        </label>
+      <div class="modal-body">
 
         <input
-          id="siswaNama"
-          type="text"
-          required
-          class="w-full border rounded-lg px-3 py-2.5"
-          placeholder="Nama lengkap"
-        >
+          type="hidden"
+          id="siswaId">
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Nama Siswa
+          </label>
+
+          <input
+            type="text"
+            id="siswaNama"
+            class="form-control"
+            placeholder="Nama lengkap siswa"
+            required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            NIS
+          </label>
+
+          <input
+            type="text"
+            id="siswaNis"
+            class="form-control"
+            placeholder="Nomor induk siswa">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label class="form-label">
+            Jenis Kelamin
+          </label>
+
+          <select
+            id="siswaGender"
+            class="form-control">
+
+            <option value="Laki-laki">
+              Laki-laki
+            </option>
+
+            <option value="Perempuan">
+              Perempuan
+            </option>
+
+          </select>
+
+        </div>
 
       </div>
 
 
-      <div class="mb-4">
-
-        <label class="block text-sm font-semibold mb-1">
-          NIS
-        </label>
-
-        <input
-          id="siswaNis"
-          type="text"
-          class="w-full border rounded-lg px-3 py-2.5"
-        >
-
-      </div>
-
-
-      <div class="mb-5">
-
-        <label class="block text-sm font-semibold mb-1">
-          Kelas
-        </label>
-
-        <input
-          id="siswaKelas"
-          type="text"
-          value="VII B"
-          class="w-full border rounded-lg px-3 py-2.5"
-        >
-
-      </div>
-
-
-      <div class="flex justify-end gap-2">
+      <div class="modal-footer">
 
         <button
           type="button"
-          onclick="closeModal('modalSiswa')"
-          class="px-4 py-2 border rounded-lg"
-        >
+          class="btn btn-secondary"
+          onclick="closeModal('siswaModal')">
+
           Batal
+
         </button>
 
         <button
           type="submit"
-          class="px-5 py-2 bg-blue-600 text-white rounded-lg font-semibold"
-        >
-          <i class="fa-solid fa-floppy-disk mr-1"></i>
+          class="btn btn-primary">
+
+          <i class="fa-solid fa-save"></i>
           Simpan
+
         </button>
 
       </div>
@@ -966,27 +1802,56 @@
 
 
 <!-- =========================================================
-     TOAST
+     FIREBASE + APPLICATION
 ========================================================= -->
 
-<div
-  id="toast"
-  class="toast fixed top-5 right-5 z-[200]"
->
+<script type="module">
 
-  <div
-    id="toastContent"
-    class="bg-gray-900 text-white rounded-lg shadow-xl px-4 py-3 text-sm max-w-xs"
-  ></div>
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 
-</div>
+  import {
+    getDatabase,
+    ref,
+    onValue,
+    set,
+    push,
+    update,
+    remove
+  }
+  from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
 
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
+  /* =========================================================
+     FIREBASE CONFIG
+  ========================================================= */
 
-<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAmy4PcVbc3bUnIEti0rhkhyPvGiLwFRYc",
+    authDomain: "absenguru-615da.firebaseapp.com",
+    databaseURL: "https://absenguru-615da-default-rtdb.firebaseio.com",
+    projectId: "absenguru-615da",
+    storageBucket: "absenguru-615da.firebasestorage.app",
+    messagingSenderId: "1014411980118",
+    appId: "1:1014411980118:web:6f3f702d8aad89af57faf7"
+  };
+
+
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+
+
+  /* =========================================================
+     GLOBAL FIREBASE
+  ========================================================= */
+
+  window.firebaseDB = database;
+  window.firebaseRef = ref;
+  window.firebaseSet = set;
+  window.firebasePush = push;
+  window.firebaseUpdate = update;
+  window.firebaseRemove = remove;
+
 
   /* =========================================================
      STATE
@@ -996,9 +1861,9 @@
 
     currentUser: null,
 
-    currentRole: "bendahara",
+    currentRole: null,
 
-    activeTab: "beranda",
+    currentPage: "beranda",
 
     siswa: {},
 
@@ -1013,39 +1878,28 @@
      HELPER
   ========================================================= */
 
-  function rupiah(value) {
+  function rupiah(number) {
 
-    return new Intl.NumberFormat(
-      "id-ID",
-      {
-        style: "currency",
-        currency: "IDR",
-        maximumFractionDigits: 0
-      }
-    ).format(Number(value) || 0);
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      maximumFractionDigits: 0
+    }).format(Number(number) || 0);
 
   }
 
 
-  function formatTanggal(value) {
+  function formatDate(dateString) {
 
-    if (!value) return "-";
+    if (!dateString) return "-";
 
-    const d =
-      new Date(value + "T00:00:00");
+    const date = new Date(dateString + "T00:00:00");
 
-    if (isNaN(d.getTime())) {
-      return value;
-    }
-
-    return d.toLocaleDateString(
-      "id-ID",
-      {
-        day: "2-digit",
-        month: "short",
-        year: "numeric"
-      }
-    );
+    return date.toLocaleDateString("id-ID", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric"
+    });
 
   }
 
@@ -1054,18 +1908,15 @@
 
     const d = new Date();
 
-    const month =
-      String(d.getMonth() + 1).padStart(2, "0");
-
-    const day =
-      String(d.getDate()).padStart(2, "0");
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
 
     return `${d.getFullYear()}-${month}-${day}`;
 
   }
 
 
-  function escapeHtml(value) {
+  function escapeHTML(value) {
 
     return String(value ?? "")
       .replace(/&/g, "&amp;")
@@ -1077,40 +1928,112 @@
   }
 
 
-  function showToast(
-    message,
-    type = "success"
-  ) {
+  /* =========================================================
+     TOAST
+  ========================================================= */
 
-    const toast =
-      document.getElementById("toast");
+  window.showToast = function(message, type = "") {
 
-    const content =
-      document.getElementById("toastContent");
+    const toast = document.getElementById("toast");
 
+    toast.textContent = message;
 
-    let icon =
-      type === "error"
-        ? "fa-circle-exclamation"
-        : "fa-circle-check";
+    toast.className = "";
 
+    toast.id = "toast";
 
-    content.innerHTML = `
-      <i class="fa-solid ${icon} mr-2"></i>
-      ${escapeHtml(message)}
-    `;
-
-
-    toast.classList.add("show");
-
+    if (type) {
+      toast.classList.add(type);
+    }
 
     setTimeout(() => {
+      toast.classList.add("show");
+    }, 10);
 
+    setTimeout(() => {
       toast.classList.remove("show");
-
     }, 3000);
 
+  };
+
+
+  /* =========================================================
+     WELCOME POPUP
+  ========================================================= */
+
+  function showWelcomePopup() {
+
+    const popup = document.getElementById("welcomePopup");
+
+    const title = document.getElementById("welcomePopupTitle");
+    const text = document.getElementById("welcomePopupText");
+
+    if (window.appState.currentRole === "bendahara") {
+
+      title.textContent = "Selamat Datang, Bendahara!";
+
+      text.textContent =
+        "Anda berhasil masuk ke menu pengelolaan kas kelas.";
+
+    } else {
+
+      title.textContent = "Selamat Datang!";
+
+      text.textContent =
+        "Anda berhasil masuk sebagai anggota kelas.";
+
+    }
+
+    popup.classList.add("show");
+
+    setTimeout(() => {
+      popup.classList.remove("show");
+    }, 3500);
+
   }
+
+
+  /* =========================================================
+     FIREBASE REALTIME LISTENER
+  ========================================================= */
+
+  onValue(
+    ref(database, "kelasVIIIB/siswa"),
+    snapshot => {
+
+      window.appState.siswa =
+        snapshot.val() || {};
+
+      refreshAll();
+
+    }
+  );
+
+
+  onValue(
+    ref(database, "kelasVIIIB/kasMasuk"),
+    snapshot => {
+
+      window.appState.kasMasuk =
+        snapshot.val() || {};
+
+      refreshAll();
+
+    }
+  );
+
+
+  onValue(
+    ref(database, "kelasVIIIB/kasKeluar"),
+    snapshot => {
+
+      window.appState.kasKeluar =
+        snapshot.val() || {};
+
+      refreshAll();
+
+    }
+  );
 
 
   /* =========================================================
@@ -1119,113 +2042,215 @@
 
   document
     .getElementById("loginForm")
-    .addEventListener(
-      "submit",
-      function(event) {
+    .addEventListener("submit", async function(event) {
 
-        event.preventDefault();
+      event.preventDefault();
+
+      const username =
+        document
+          .getElementById("loginUsername")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("loginPassword")
+          .value;
+
+      /* -----------------------------------------
+         LOGIN BENDahara
+      ----------------------------------------- */
+
+      if (
+        username === "iissumirat123" &&
+        password === "112233"
+      ) {
+
+        loginSuccess(
+          username,
+          "bendahara"
+        );
+
+        return;
+
+      }
 
 
-        const username =
-          document
-            .getElementById("username")
-            .value
-            .trim();
+      /* -----------------------------------------
+         LOGIN ANGGOTA
+      ----------------------------------------- */
+
+      if (password === "123456") {
+
+        const siswaList =
+          Object.entries(window.appState.siswa);
+
+        const siswaFound =
+          siswaList.find(([id, siswa]) => {
+
+            const nama =
+              String(siswa.nama || "")
+                .trim()
+                .toLowerCase();
+
+            return nama === username.toLowerCase();
+
+          });
 
 
-        const password =
-          document
-            .getElementById("password")
-            .value;
+        if (siswaFound) {
 
-
-        if (
-          username === "iissumirat123" &&
-          password === "112233"
-        ) {
-
-          sessionStorage.setItem(
-            "kasKelasLogin",
-            username
+          loginSuccess(
+            siswaFound[1].nama,
+            "anggota"
           );
 
-
-          window.appState.currentUser =
-            username;
-
-
-          openApp();
-
-
-        } else {
-
-          showToast(
-            "Username atau password salah.",
-            "error"
-          );
+          return;
 
         }
 
       }
+
+
+      showToast(
+        "Username atau password salah.",
+        "error"
+      );
+
+    });
+
+
+  /* =========================================================
+     LOGIN SUCCESS
+  ========================================================= */
+
+  function loginSuccess(username, role) {
+
+    window.appState.currentUser = username;
+
+    window.appState.currentRole = role;
+
+    window.appState.currentPage = "beranda";
+
+
+    sessionStorage.setItem(
+      "kasKelasUser",
+      username
+    );
+
+    sessionStorage.setItem(
+      "kasKelasRole",
+      role
     );
 
 
-  function checkLogin() {
+    document
+      .getElementById("loginPage")
+      .classList.add("hidden-page");
 
-    const user =
-      sessionStorage.getItem(
-        "kasKelasLogin"
-      );
+    document
+      .getElementById("appPage")
+      .classList.remove("hidden-page");
 
 
-    if (user) {
+    setupRoleMenu();
 
-      window.appState.currentUser =
-        user;
+    navigate("beranda");
 
-      openApp();
+    showWelcomePopup();
+
+    document
+      .getElementById("loginForm")
+      .reset();
+
+  }
+
+
+  /* =========================================================
+     CHECK SESSION
+  ========================================================= */
+
+  function checkSession() {
+
+    const username =
+      sessionStorage.getItem("kasKelasUser");
+
+    const role =
+      sessionStorage.getItem("kasKelasRole");
+
+
+    if (username && role) {
+
+      window.appState.currentUser = username;
+
+      window.appState.currentRole = role;
+
+      document
+        .getElementById("loginPage")
+        .classList.add("hidden-page");
+
+      document
+        .getElementById("appPage")
+        .classList.remove("hidden-page");
+
+      setupRoleMenu();
+
+      navigate("beranda");
 
     }
 
   }
 
 
-  function openApp() {
+  /* =========================================================
+     ROLE MENU
+  ========================================================= */
 
-    document
-      .getElementById("loginPage")
-      .classList.add("hidden");
+  function setupRoleMenu() {
 
-
-    document
-      .getElementById("app")
-      .classList.remove("hidden");
+    const role =
+      window.appState.currentRole;
 
 
-    document
-      .getElementById("sidebarUser")
-      .textContent =
+    const bendaharaMenu =
+      document.getElementById("bendaharaMenu");
+
+    const anggotaMenu =
+      document.getElementById("anggotaMenu");
+
+
+    const roleBadge =
+      document.getElementById("roleBadge");
+
+
+    if (role === "bendahara") {
+
+      bendaharaMenu.classList.remove("hidden-page");
+
+      anggotaMenu.classList.add("hidden-page");
+
+      roleBadge.textContent =
+        "AKSES BENDahara";
+
+    } else {
+
+      bendaharaMenu.classList.add("hidden-page");
+
+      anggotaMenu.classList.remove("hidden-page");
+
+      roleBadge.textContent =
+        "AKSES ANGGOTA";
+
+    }
+
+
+    document.getElementById("topUsername").textContent =
       window.appState.currentUser;
 
-
-    document
-      .getElementById("navbarUser")
-      .textContent =
-      window.appState.currentUser;
-
-
-    navigate("beranda");
-
-  }
-
-
-  function logout() {
-
-    sessionStorage.removeItem(
-      "kasKelasLogin"
-    );
-
-    location.reload();
+    document.getElementById("topRole").textContent =
+      role === "bendahara"
+        ? "Bendahara"
+        : "Anggota";
 
   }
 
@@ -1234,10 +2259,88 @@
      NAVIGATION
   ========================================================= */
 
-  function navigate(page) {
+  window.navigate = function(page) {
 
-    window.appState.activeTab =
-      page;
+    const role =
+      window.appState.currentRole;
+
+
+    /* Anggota tidak boleh membuka halaman pengelolaan */
+
+    if (
+      role === "anggota" &&
+      ["kasMasuk", "kasKeluar", "siswa"].includes(page)
+    ) {
+
+      showToast(
+        "Menu tersebut hanya dapat diakses bendahara.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    window.appState.currentPage = page;
+
+
+    const pages = [
+      "beranda",
+      "kasMasuk",
+      "kasKeluar",
+      "siswa",
+      "riwayat"
+    ];
+
+
+    pages.forEach(item => {
+
+      const element =
+        document.getElementById(
+          "page-" + item
+        );
+
+      if (element) {
+
+        element.classList.add(
+          "hidden-page"
+        );
+
+      }
+
+    });
+
+
+    const selected =
+      document.getElementById(
+        "page-" + page
+      );
+
+    if (selected) {
+
+      selected.classList.remove(
+        "hidden-page"
+      );
+
+    }
+
+
+    document
+      .querySelectorAll(".menu-item")
+      .forEach(item => {
+
+        item.classList.remove("active");
+
+        if (
+          item.dataset.page === page
+        ) {
+
+          item.classList.add("active");
+
+        }
+
+      });
 
 
     const titles = {
@@ -1248,315 +2351,488 @@
 
       kasKeluar: "Kas Keluar",
 
-      siswa: "Daftar Siswa"
+      siswa: "Daftar Siswa",
+
+      riwayat: "Riwayat Kas"
 
     };
 
 
-    document
-      .getElementById("pageTitle")
+    document.getElementById("pageTitle")
       .textContent =
-      titles[page];
+      titles[page] || "Beranda";
 
-
-    document
-      .querySelectorAll(".nav-btn")
-      .forEach(button => {
-
-        const active =
-          button.dataset.nav === page;
-
-
-        button.classList.toggle(
-          "bg-blue-50",
-          active
-        );
-
-
-        button.classList.toggle(
-          "text-blue-600",
-          active
-        );
-
-
-        button.classList.toggle(
-          "font-semibold",
-          active
-        );
-
-      });
-
-
-    refreshAllViews();
 
     closeSidebar();
 
-  }
+    refreshAll();
 
-
-  function toggleSidebar() {
-
-    const sidebar =
-      document.getElementById(
-        "sidebar"
-      );
-
-
-    const overlay =
-      document.getElementById(
-        "sidebarOverlay"
-      );
-
-
-    sidebar.classList.toggle(
-      "-translate-x-full"
-    );
-
-
-    if (
-      sidebar.classList.contains(
-        "-translate-x-full"
-      )
-    ) {
-
-      overlay.classList.add(
-        "hidden"
-      );
-
-    } else {
-
-      overlay.classList.remove(
-        "hidden"
-      );
-
-    }
-
-  }
-
-
-  function closeSidebar() {
-
-    document
-      .getElementById("sidebar")
-      .classList.add(
-        "-translate-x-full"
-      );
-
-
-    document
-      .getElementById("sidebarOverlay")
-      .classList.add(
-        "hidden"
-      );
-
-  }
-
-
-  /* =========================================================
-     MODAL
-  ========================================================= */
-
-  function openModal(id) {
-
-    document
-      .getElementById(id)
-      .classList.add("active");
-
-  }
-
-
-  function closeModal(id) {
-
-    document
-      .getElementById(id)
-      .classList.remove("active");
-
-  }
+  };
 
 
   /* =========================================================
      DASHBOARD
   ========================================================= */
 
-  function totalKasMasuk() {
-
-    return Object
-      .values(
-        window.appState.kasMasuk
-      )
-      .reduce(
-        (sum, item) =>
-          sum + Number(item.nominal || 0),
-        0
-      );
-
-  }
-
-
-  function totalKasKeluar() {
-
-    return Object
-      .values(
-        window.appState.kasKeluar
-      )
-      .reduce(
-        (sum, item) =>
-          sum + Number(item.nominal || 0),
-        0
-      );
-
-  }
-
-
   function renderDashboard() {
 
-    const siswa =
-      Object.keys(
-        window.appState.siswa
-      ).length;
-
-
     const masuk =
-      totalKasMasuk();
-
+      Object.values(window.appState.kasMasuk);
 
     const keluar =
-      totalKasKeluar();
+      Object.values(window.appState.kasKeluar);
+
+    const siswa =
+      Object.values(window.appState.siswa);
+
+
+    const totalMasuk =
+      masuk.reduce(
+        (sum, item) =>
+          sum + Number(item.jumlah || 0),
+        0
+      );
+
+
+    const totalKeluar =
+      keluar.reduce(
+        (sum, item) =>
+          sum + Number(item.jumlah || 0),
+        0
+      );
 
 
     const saldo =
-      masuk - keluar;
+      totalMasuk - totalKeluar;
 
 
-    document
-      .getElementById("pageContent")
-      .innerHTML = `
+    document.getElementById("statMasuk")
+      .textContent =
+      rupiah(totalMasuk);
 
-      <div class="mb-5">
+    document.getElementById("statKeluar")
+      .textContent =
+      rupiah(totalKeluar);
 
-        <h2 class="text-xl font-bold">
-          Selamat Datang 👋
-        </h2>
+    document.getElementById("statSaldo")
+      .textContent =
+      rupiah(saldo);
 
-        <p class="text-gray-500 text-sm">
-          Ringkasan keuangan kelas VII B.
-        </p>
-
-      </div>
-
-
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+    document.getElementById("statSiswa")
+      .textContent =
+      siswa.length;
 
 
-        <div class="bg-white border rounded-xl p-4">
+    if (
+      window.appState.currentRole === "bendahara"
+    ) {
 
-          <div class="text-xs text-gray-400">
-            Total Siswa
-          </div>
+      document.getElementById("dashboardGreeting")
+        .textContent =
+        "Selamat Datang, Bendahara!";
 
-          <div class="text-2xl font-bold mt-1">
-            ${siswa}
-          </div>
+      document.getElementById("dashboardDescription")
+        .textContent =
+        "Kelola pemasukan, pengeluaran, dan data siswa kelas VII B.";
 
+    } else {
+
+      document.getElementById("dashboardGreeting")
+        .textContent =
+        "Selamat Datang, " +
+        window.appState.currentUser + "!";
+
+      document.getElementById("dashboardDescription")
+        .textContent =
+        "Pantau informasi dan riwayat kas kelas VII B.";
+
+    }
+
+
+    renderDashboardTransactions();
+
+  }
+
+
+  /* =========================================================
+     DASHBOARD TRANSACTIONS
+  ========================================================= */
+
+  function getAllTransactions() {
+
+    const result = [];
+
+
+    Object.entries(window.appState.kasMasuk)
+      .forEach(([id, item]) => {
+
+        result.push({
+
+          id,
+
+          tanggal: item.tanggal || "",
+
+          jenis: "Masuk",
+
+          keterangan:
+            item.keterangan || "Kas Masuk",
+
+          nama:
+            item.namaSiswa || "",
+
+          jumlah:
+            Number(item.jumlah || 0)
+
+        });
+
+      });
+
+
+    Object.entries(window.appState.kasKeluar)
+      .forEach(([id, item]) => {
+
+        result.push({
+
+          id,
+
+          tanggal: item.tanggal || "",
+
+          jenis: "Keluar",
+
+          keterangan:
+            item.keterangan || "Kas Keluar",
+
+          nama: "",
+
+          jumlah:
+            Number(item.jumlah || 0)
+
+        });
+
+      });
+
+
+    result.sort(
+      (a, b) =>
+        new Date(b.tanggal) -
+        new Date(a.tanggal)
+    );
+
+
+    return result;
+
+  }
+
+
+  function renderDashboardTransactions() {
+
+    const container =
+      document.getElementById(
+        "dashboardTransactions"
+      );
+
+
+    const transactions =
+      getAllTransactions()
+        .slice(0, 5);
+
+
+    if (!transactions.length) {
+
+      container.innerHTML = `
+        <div class="text-center text-slate-400 py-8">
+          <i class="fa-solid fa-receipt text-3xl mb-3"></i>
+          <div>Belum ada transaksi.</div>
         </div>
+      `;
+
+      return;
+
+    }
 
 
-        <div class="bg-white border rounded-xl p-4">
+    container.innerHTML = transactions
+      .map(item => {
 
-          <div class="text-xs text-gray-400">
-            Kas Masuk
-          </div>
-
-          <div class="text-lg font-bold text-green-600 mt-1">
-            ${rupiah(masuk)}
-          </div>
-
-        </div>
+        const isMasuk =
+          item.jenis === "Masuk";
 
 
-        <div class="bg-white border rounded-xl p-4">
+        return `
 
-          <div class="text-xs text-gray-400">
-            Kas Keluar
-          </div>
+          <div class="flex items-center justify-between
+                      py-3 border-b border-slate-100">
 
-          <div class="text-lg font-bold text-red-600 mt-1">
-            ${rupiah(keluar)}
-          </div>
+            <div class="flex items-center gap-3">
 
-        </div>
+              <div class="w-9 h-9 rounded-full
+                          flex items-center justify-center
+                          ${isMasuk
+                            ? "bg-green-100 text-green-600"
+                            : "bg-red-100 text-red-600"}">
 
+                <i class="fa-solid ${
+                  isMasuk
+                    ? "fa-arrow-down"
+                    : "fa-arrow-up"
+                }"></i>
 
-        <div class="bg-white border rounded-xl p-4">
+              </div>
 
-          <div class="text-xs text-gray-400">
-            Saldo
-          </div>
+              <div>
 
-          <div class="text-lg font-bold text-blue-600 mt-1">
-            ${rupiah(saldo)}
-          </div>
+                <div class="font-bold text-sm">
+                  ${escapeHTML(item.keterangan)}
+                </div>
 
-        </div>
+                <div class="text-xs text-slate-400">
+                  ${formatDate(item.tanggal)}
+                  ${
+                    item.nama
+                      ? " • " +
+                        escapeHTML(item.nama)
+                      : ""
+                  }
+                </div>
 
-      </div>
+              </div>
 
+            </div>
 
-      <div class="bg-white border rounded-xl">
+            <div class="${
+              isMasuk
+                ? "amount-in"
+                : "amount-out"
+            }">
 
-        <div class="p-4 border-b">
+              ${
+                isMasuk ? "+" : "-"
+              }
 
-          <h3 class="font-bold">
-            Ringkasan
-          </h3>
+              ${rupiah(item.jumlah)}
 
-        </div>
-
-        <div class="p-4">
-
-          <div class="flex justify-between py-2 border-b">
-
-            <span class="text-sm">
-              Total pemasukan
-            </span>
-
-            <b class="text-green-600">
-              ${rupiah(masuk)}
-            </b>
-
-          </div>
-
-
-          <div class="flex justify-between py-2 border-b">
-
-            <span class="text-sm">
-              Total pengeluaran
-            </span>
-
-            <b class="text-red-600">
-              ${rupiah(keluar)}
-            </b>
+            </div>
 
           </div>
 
+        `;
 
-          <div class="flex justify-between py-3">
+      })
+      .join("");
 
-            <span class="font-semibold">
-              Saldo
-            </span>
+  }
 
-            <b class="text-blue-600">
-              ${rupiah(saldo)}
-            </b>
 
-          </div>
+  /* =========================================================
+     KAS MASUK
+  ========================================================= */
 
-        </div>
+  function renderKasMasuk() {
 
-      </div>
+    const tbody =
+      document.getElementById(
+        "tableKasMasuk"
+      );
 
-    `;
+
+    const data =
+      Object.entries(
+        window.appState.kasMasuk
+      );
+
+
+    data.sort(
+      ([,a], [,b]) =>
+        new Date(b.tanggal || 0) -
+        new Date(a.tanggal || 0)
+    );
+
+
+    if (!data.length) {
+
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="5"
+              class="text-center text-slate-400 py-8">
+            Belum ada data kas masuk.
+          </td>
+        </tr>
+      `;
+
+      return;
+
+    }
+
+
+    tbody.innerHTML =
+      data.map(([id, item]) => `
+
+        <tr>
+
+          <td>
+            ${formatDate(item.tanggal)}
+          </td>
+
+          <td>
+            ${escapeHTML(item.namaSiswa || "-")}
+          </td>
+
+          <td>
+            ${escapeHTML(item.keterangan || "-")}
+          </td>
+
+          <td class="amount-in">
+            + ${rupiah(item.jumlah)}
+          </td>
+
+          <td>
+
+            ${
+              window.appState.currentRole === "bendahara"
+
+              ? `
+
+                <div class="flex gap-2">
+
+                  <button
+                    class="btn btn-secondary"
+                    onclick="editKasMasuk('${id}')">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                  </button>
+
+                  <button
+                    class="btn btn-danger"
+                    onclick="deleteKasMasuk('${id}')">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                  </button>
+
+                </div>
+
+              `
+
+              : `
+
+                <span class="text-xs text-slate-400">
+                  Hanya lihat
+                </span>
+
+              `
+            }
+
+          </td>
+
+        </tr>
+
+      `).join("");
+
+  }
+
+
+  /* =========================================================
+     KAS KELUAR
+  ========================================================= */
+
+  function renderKasKeluar() {
+
+    const tbody =
+      document.getElementById(
+        "tableKasKeluar"
+      );
+
+
+    const data =
+      Object.entries(
+        window.appState.kasKeluar
+      );
+
+
+    data.sort(
+      ([,a], [,b]) =>
+        new Date(b.tanggal || 0) -
+        new Date(a.tanggal || 0)
+    );
+
+
+    if (!data.length) {
+
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="4"
+              class="text-center text-slate-400 py-8">
+            Belum ada data kas keluar.
+          </td>
+        </tr>
+      `;
+
+      return;
+
+    }
+
+
+    tbody.innerHTML =
+      data.map(([id, item]) => `
+
+        <tr>
+
+          <td>
+            ${formatDate(item.tanggal)}
+          </td>
+
+          <td>
+            ${escapeHTML(item.keterangan || "-")}
+          </td>
+
+          <td class="amount-out">
+            - ${rupiah(item.jumlah)}
+          </td>
+
+          <td>
+
+            ${
+              window.appState.currentRole === "bendahara"
+
+              ? `
+
+                <div class="flex gap-2">
+
+                  <button
+                    class="btn btn-secondary"
+                    onclick="editKasKeluar('${id}')">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                  </button>
+
+                  <button
+                    class="btn btn-danger"
+                    onclick="deleteKasKeluar('${id}')">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                  </button>
+
+                </div>
+
+              `
+
+              : `
+
+                <span class="text-xs text-slate-400">
+                  Hanya lihat
+                </span>
+
+              `
+            }
+
+          </td>
+
+        </tr>
+
+      `).join("");
 
   }
 
@@ -1567,239 +2843,508 @@
 
   function renderSiswa() {
 
+    const tbody =
+      document.getElementById(
+        "tableSiswa"
+      );
+
+
     const data =
       Object.entries(
         window.appState.siswa
-      ).sort(
-        (a, b) =>
-          String(a[1].nama || "")
-            .localeCompare(
-              String(b[1].nama || ""),
-              "id"
-            )
       );
 
 
-    document
-      .getElementById("pageContent")
-      .innerHTML = `
+    if (!data.length) {
 
-      <div class="flex flex-col sm:flex-row justify-between gap-3 mb-5">
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="5"
+              class="text-center text-slate-400 py-8">
+            Belum ada data siswa.
+          </td>
+        </tr>
+      `;
 
-        <div>
+      return;
 
-          <h2 class="text-xl font-bold">
-            Daftar Siswa
-          </h2>
-
-          <p class="text-xs text-gray-400">
-            Data siswa kelas VII B
-          </p>
-
-        </div>
+    }
 
 
-        <button
-          onclick="prepareSiswa()"
-          class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold"
-        >
-          <i class="fa-solid fa-user-plus mr-1"></i>
-          Tambah Siswa
-        </button>
+    tbody.innerHTML =
+      data.map(([id, item], index) => `
 
-      </div>
+        <tr>
 
+          <td>
+            ${index + 1}
+          </td>
 
-      <div class="bg-white border rounded-xl overflow-hidden">
+          <td class="font-semibold">
+            ${escapeHTML(item.nama || "-")}
+          </td>
 
-        <div class="overflow-x-auto">
+          <td>
+            ${escapeHTML(item.nis || "-")}
+          </td>
 
-          <table class="w-full">
+          <td>
+            ${escapeHTML(item.gender || "-")}
+          </td>
 
-            <thead class="bg-gray-50">
+          <td>
 
-              <tr>
+            ${
+              window.appState.currentRole === "bendahara"
 
-                <th class="text-left px-4 py-3">
-                  No
-                </th>
+              ? `
 
-                <th class="text-left px-4 py-3">
-                  Nama
-                </th>
+                <div class="flex gap-2">
 
-                <th class="text-left px-4 py-3">
-                  NIS
-                </th>
+                  <button
+                    class="btn btn-secondary"
+                    onclick="editSiswa('${id}')">
 
-                <th class="text-left px-4 py-3">
-                  Kelas
-                </th>
+                    <i class="fa-solid fa-pen"></i>
 
-                <th class="text-center px-4 py-3">
-                  Aksi
-                </th>
+                  </button>
 
-              </tr>
+                  <button
+                    class="btn btn-danger"
+                    onclick="deleteSiswa('${id}')">
 
-            </thead>
+                    <i class="fa-solid fa-trash"></i>
 
+                  </button>
 
-            <tbody>
+                </div>
 
-              ${
-                data.length === 0
+              `
 
-                ? `
-                  <tr>
+              : `
 
-                    <td
-                      colspan="5"
-                      class="text-center py-10 text-gray-400"
-                    >
-                      Belum ada siswa.
-                    </td>
+                <span class="text-xs text-slate-400">
+                  Hanya lihat
+                </span>
 
-                  </tr>
-                `
+              `
+            }
 
-                :
+          </td>
 
-                data.map(
-                  ([id, item], index) => `
+        </tr>
 
-                    <tr class="border-t">
-
-                      <td class="px-4 py-3">
-                        ${index + 1}
-                      </td>
-
-                      <td class="px-4 py-3 font-semibold">
-                        ${escapeHtml(item.nama)}
-                      </td>
-
-                      <td class="px-4 py-3">
-                        ${escapeHtml(item.nis || "-")}
-                      </td>
-
-                      <td class="px-4 py-3">
-                        ${escapeHtml(item.kelas || "VII B")}
-                      </td>
-
-                      <td class="px-4 py-3">
-
-                        <div class="flex justify-center gap-1">
-
-                          <button
-                            onclick="editSiswa('${id}')"
-                            class="w-8 h-8 rounded bg-blue-50 text-blue-600"
-                          >
-                            <i class="fa-solid fa-pen"></i>
-                          </button>
-
-                          <button
-                            onclick="deleteSiswa('${id}')"
-                            class="w-8 h-8 rounded bg-red-50 text-red-600"
-                          >
-                            <i class="fa-solid fa-trash"></i>
-                          </button>
-
-                        </div>
-
-                      </td>
-
-                    </tr>
-
-                  `
-                ).join("")
-
-              }
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  function prepareSiswa() {
-
-    const form =
-      document.getElementById(
-        "formSiswa"
-      );
-
-
-    form.reset();
-
-    delete form.dataset.editId;
-
-
-    document.getElementById(
-      "siswaKelas"
-    ).value =
-      "VII B";
-
-
-    document.getElementById(
-      "modalSiswaTitle"
-    ).textContent =
-      "Tambah Siswa";
-
-
-    openModal("modalSiswa");
+      `).join("");
 
   }
 
 
   /* =========================================================
-     SIMPAN SISWA KE FIREBASE
+     RIWAYAT
   ========================================================= */
 
-  async function saveSiswa(event) {
+  function renderRiwayat() {
 
-    event.preventDefault();
-
-
-    const form =
-      event.target;
-
-
-    const id =
-      form.dataset.editId || "";
+    const tbody =
+      document.getElementById(
+        "tableRiwayat"
+      );
 
 
-    const nama =
-      document
-        .getElementById("siswaNama")
-        .value
-        .trim();
+    const data =
+      getAllTransactions();
 
 
-    const nis =
-      document
-        .getElementById("siswaNis")
-        .value
-        .trim();
+    if (!data.length) {
+
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="4"
+              class="text-center text-slate-400 py-8">
+            Belum ada riwayat kas.
+          </td>
+        </tr>
+      `;
+
+      return;
+
+    }
 
 
-    const kelas =
-      document
-        .getElementById("siswaKelas")
-        .value
-        .trim();
+    tbody.innerHTML =
+      data.map(item => {
+
+        const masuk =
+          item.jenis === "Masuk";
 
 
-    if (!nama) {
+        return `
+
+          <tr>
+
+            <td>
+              ${formatDate(item.tanggal)}
+            </td>
+
+            <td>
+
+              <span class="
+                inline-flex
+                px-2
+                py-1
+                rounded-full
+                text-xs
+                font-bold
+                ${
+                  masuk
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
+                }
+              ">
+
+                ${
+                  masuk
+                    ? "Kas Masuk"
+                    : "Kas Keluar"
+                }
+
+              </span>
+
+            </td>
+
+            <td>
+
+              ${escapeHTML(item.keterangan)}
+
+              ${
+                item.nama
+                  ? `
+                    <div class="text-xs text-slate-400 mt-1">
+                      ${escapeHTML(item.nama)}
+                    </div>
+                  `
+                  : ""
+              }
+
+            </td>
+
+            <td class="${
+              masuk
+                ? "amount-in"
+                : "amount-out"
+            }">
+
+              ${
+                masuk ? "+" : "-"
+              }
+
+              ${rupiah(item.jumlah)}
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }).join("");
+
+  }
+
+
+  /* =========================================================
+     SISWA SELECT
+  ========================================================= */
+
+  function populateSiswaSelect() {
+
+    const select =
+      document.getElementById(
+        "kasMasukSiswa"
+      );
+
+
+    const current =
+      select.value;
+
+
+    select.innerHTML =
+      `<option value="">
+        Pilih siswa
+      </option>`;
+
+
+    Object.entries(
+      window.appState.siswa
+    ).forEach(([id, siswa]) => {
+
+      const option =
+        document.createElement("option");
+
+      option.value = siswa.nama || "";
+
+      option.textContent =
+        siswa.nama || "Tanpa Nama";
+
+      select.appendChild(option);
+
+    });
+
+
+    if (current) {
+      select.value = current;
+    }
+
+  }
+
+
+  /* =========================================================
+     MODAL HELPERS
+  ========================================================= */
+
+  window.openModal = function(id) {
+
+    document
+      .getElementById(id)
+      .classList.add("show");
+
+  };
+
+
+  window.closeModal = function(id) {
+
+    document
+      .getElementById(id)
+      .classList.remove("show");
+
+  };
+
+
+  /* =========================================================
+     KAS MASUK MODAL
+  ========================================================= */
+
+  window.openKasMasukModal = function() {
+
+    if (
+      window.appState.currentRole !== "bendahara"
+    ) return;
+
+
+    document.getElementById(
+      "kasMasukForm"
+    ).reset();
+
+
+    document.getElementById(
+      "kasMasukId"
+    ).value = "";
+
+
+    document.getElementById(
+      "kasMasukTanggal"
+    ).value = today();
+
+
+    document.getElementById(
+      "kasMasukModalTitle"
+    ).textContent =
+      "Tambah Kas Masuk";
+
+
+    populateSiswaSelect();
+
+    openModal("kasMasukModal");
+
+  };
+
+
+  window.editKasMasuk = function(id) {
+
+    if (
+      window.appState.currentRole !== "bendahara"
+    ) return;
+
+
+    const item =
+      window.appState.kasMasuk[id];
+
+
+    if (!item) return;
+
+
+    document.getElementById(
+      "kasMasukId"
+    ).value = id;
+
+
+    document.getElementById(
+      "kasMasukTanggal"
+    ).value =
+      item.tanggal || today();
+
+
+    populateSiswaSelect();
+
+
+    document.getElementById(
+      "kasMasukSiswa"
+    ).value =
+      item.namaSiswa || "";
+
+
+    document.getElementById(
+      "kasMasukKeterangan"
+    ).value =
+      item.keterangan || "";
+
+
+    document.getElementById(
+      "kasMasukJumlah"
+    ).value =
+      item.jumlah || 0;
+
+
+    document.getElementById(
+      "kasMasukModalTitle"
+    ).textContent =
+      "Edit Kas Masuk";
+
+
+    openModal("kasMasukModal");
+
+  };
+
+
+  document
+    .getElementById("kasMasukForm")
+    .addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        if (
+          window.appState.currentRole !== "bendahara"
+        ) {
+
+          showToast(
+            "Anda tidak memiliki akses.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const id =
+          document.getElementById(
+            "kasMasukId"
+          ).value;
+
+
+        const data = {
+
+          tanggal:
+            document.getElementById(
+              "kasMasukTanggal"
+            ).value,
+
+          namaSiswa:
+            document.getElementById(
+              "kasMasukSiswa"
+            ).value,
+
+          keterangan:
+            document.getElementById(
+              "kasMasukKeterangan"
+            ).value.trim(),
+
+          jumlah:
+            Number(
+              document.getElementById(
+                "kasMasukJumlah"
+              ).value
+            ),
+
+          updatedAt:
+            Date.now()
+
+        };
+
+
+        try {
+
+          if (id) {
+
+            await update(
+              ref(
+                database,
+                "kelasVIIIB/kasMasuk/" + id
+              ),
+              data
+            );
+
+            showToast(
+              "Kas masuk berhasil diperbarui.",
+              "success"
+            );
+
+          } else {
+
+            const newRef =
+              push(
+                ref(
+                  database,
+                  "kelasVIIIB/kasMasuk"
+                )
+              );
+
+
+            await set(
+              newRef,
+              {
+                ...data,
+                createdAt: Date.now()
+              }
+            );
+
+
+            showToast(
+              "Kas masuk berhasil disimpan.",
+              "success"
+            );
+
+          }
+
+
+          closeModal("kasMasukModal");
+
+        } catch (error) {
+
+          console.error(error);
+
+          showToast(
+            "Gagal menyimpan kas masuk: " +
+            error.message,
+            "error"
+          );
+
+        }
+
+      }
+    );
+
+
+  window.deleteKasMasuk = async function(id) {
+
+    if (
+      window.appState.currentRole !== "bendahara"
+    ) {
 
       showToast(
-        "Nama siswa wajib diisi.",
+        "Anda tidak memiliki akses.",
         "error"
       );
 
@@ -1808,114 +3353,318 @@
     }
 
 
-    /*
-     * PASTIKAN FIREBASE SUDAH ADA
-     */
-
-    if (!window.firebaseDB) {
-
-      showToast(
-        "Firebase belum siap. Tunggu sebentar lalu coba lagi.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const data = {
-
-      nama: nama,
-
-      nis: nis,
-
-      kelas: kelas || "VII B",
-
-      updatedAt: Date.now()
-
-    };
+    if (
+      !confirm(
+        "Yakin ingin menghapus data kas masuk ini?"
+      )
+    ) return;
 
 
     try {
 
-      let targetRef;
-
-
-      if (id) {
-
-        targetRef =
-          window.firebaseRef(
-            window.firebaseDB,
-            "kelasVIIIB/siswa/" + id
-          );
-
-
-        await window.firebaseUpdate(
-          targetRef,
-          data
-        );
-
-
-        showToast(
-          "Data siswa berhasil diperbarui."
-        );
-
-      } else {
-
-        targetRef =
-          window.firebasePush(
-            window.firebaseRef(
-              window.firebaseDB,
-              "kelasVIIIB/siswa"
-            )
-          );
-
-
-        data.createdAt =
-          Date.now();
-
-
-        await window.firebaseSet(
-          targetRef,
-          data
-        );
-
-
-        showToast(
-          "Data siswa berhasil disimpan ke database."
-        );
-
-      }
-
-
-      form.reset();
-
-      delete form.dataset.editId;
-
-      closeModal("modalSiswa");
-
-
-    } catch (error) {
-
-      console.error(
-        "Firebase SAVE SISWA ERROR:",
-        error
+      await remove(
+        ref(
+          database,
+          "kelasVIIIB/kasMasuk/" + id
+        )
       );
 
 
       showToast(
-        "Gagal menyimpan: " +
+        "Kas masuk berhasil dihapus.",
+        "success"
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      showToast(
+        "Gagal menghapus: " +
         error.message,
         "error"
       );
 
     }
 
-  }
+  };
 
 
-  function editSiswa(id) {
+  /* =========================================================
+     KAS KELUAR
+  ========================================================= */
+
+  window.openKasKeluarModal = function() {
+
+    if (
+      window.appState.currentRole !== "bendahara"
+    ) return;
+
+
+    document.getElementById(
+      "kasKeluarForm"
+    ).reset();
+
+
+    document.getElementById(
+      "kasKeluarId"
+    ).value = "";
+
+
+    document.getElementById(
+      "kasKeluarTanggal"
+    ).value = today();
+
+
+    document.getElementById(
+      "kasKeluarModalTitle"
+    ).textContent =
+      "Tambah Kas Keluar";
+
+
+    openModal("kasKeluarModal");
+
+  };
+
+
+  window.editKasKeluar = function(id) {
+
+    if (
+      window.appState.currentRole !== "bendahara"
+    ) return;
+
+
+    const item =
+      window.appState.kasKeluar[id];
+
+
+    if (!item) return;
+
+
+    document.getElementById(
+      "kasKeluarId"
+    ).value = id;
+
+
+    document.getElementById(
+      "kasKeluarTanggal"
+    ).value =
+      item.tanggal || today();
+
+
+    document.getElementById(
+      "kasKeluarKeterangan"
+    ).value =
+      item.keterangan || "";
+
+
+    document.getElementById(
+      "kasKeluarJumlah"
+    ).value =
+      item.jumlah || 0;
+
+
+    document.getElementById(
+      "kasKeluarModalTitle"
+    ).textContent =
+      "Edit Kas Keluar";
+
+
+    openModal("kasKeluarModal");
+
+  };
+
+
+  document
+    .getElementById("kasKeluarForm")
+    .addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        if (
+          window.appState.currentRole !== "bendahara"
+        ) return;
+
+
+        const id =
+          document.getElementById(
+            "kasKeluarId"
+          ).value;
+
+
+        const data = {
+
+          tanggal:
+            document.getElementById(
+              "kasKeluarTanggal"
+            ).value,
+
+          keterangan:
+            document.getElementById(
+              "kasKeluarKeterangan"
+            ).value.trim(),
+
+          jumlah:
+            Number(
+              document.getElementById(
+                "kasKeluarJumlah"
+              ).value
+            ),
+
+          updatedAt:
+            Date.now()
+
+        };
+
+
+        try {
+
+          if (id) {
+
+            await update(
+              ref(
+                database,
+                "kelasVIIIB/kasKeluar/" + id
+              ),
+              data
+            );
+
+            showToast(
+              "Kas keluar berhasil diperbarui.",
+              "success"
+            );
+
+          } else {
+
+            const newRef =
+              push(
+                ref(
+                  database,
+                  "kelasVIIIB/kasKeluar"
+                )
+              );
+
+
+            await set(
+              newRef,
+              {
+                ...data,
+                createdAt: Date.now()
+              }
+            );
+
+
+            showToast(
+              "Kas keluar berhasil disimpan.",
+              "success"
+            );
+
+          }
+
+
+          closeModal("kasKeluarModal");
+
+        } catch (error) {
+
+          console.error(error);
+
+          showToast(
+            "Gagal menyimpan kas keluar: " +
+            error.message,
+            "error"
+          );
+
+        }
+
+      }
+    );
+
+
+  window.deleteKasKeluar = async function(id) {
+
+    if (
+      window.appState.currentRole !== "bendahara"
+    ) return;
+
+
+    if (
+      !confirm(
+        "Yakin ingin menghapus data kas keluar ini?"
+      )
+    ) return;
+
+
+    try {
+
+      await remove(
+        ref(
+          database,
+          "kelasVIIIB/kasKeluar/" + id
+        )
+      );
+
+
+      showToast(
+        "Kas keluar berhasil dihapus.",
+        "success"
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      showToast(
+        "Gagal menghapus: " +
+        error.message,
+        "error"
+      );
+
+    }
+
+  };
+
+
+  /* =========================================================
+     SISWA
+  ========================================================= */
+
+  window.openSiswaModal = function() {
+
+    if (
+      window.appState.currentRole !== "bendahara"
+    ) return;
+
+
+    document
+      .getElementById("siswaForm")
+      .reset();
+
+
+    document.getElementById(
+      "siswaId"
+    ).value = "";
+
+
+    document.getElementById(
+      "siswaModalTitle"
+    ).textContent =
+      "Tambah Siswa";
+
+
+    openModal("siswaModal");
+
+  };
+
+
+  window.editSiswa = function(id) {
+
+    if (
+      window.appState.currentRole !== "bendahara"
+    ) return;
+
 
     const item =
       window.appState.siswa[id];
@@ -1924,14 +3673,9 @@
     if (!item) return;
 
 
-    const form =
-      document.getElementById(
-        "formSiswa"
-      );
-
-
-    form.dataset.editId =
-      id;
+    document.getElementById(
+      "siswaId"
+    ).value = id;
 
 
     document.getElementById(
@@ -1947,1447 +3691,317 @@
 
 
     document.getElementById(
-      "siswaKelas"
+      "siswaGender"
     ).value =
-      item.kelas || "VII B";
+      item.gender || "Laki-laki";
 
 
     document.getElementById(
-      "modalSiswaTitle"
+      "siswaModalTitle"
     ).textContent =
       "Edit Siswa";
 
 
-    openModal("modalSiswa");
+    openModal("siswaModal");
 
-  }
+  };
 
 
-  async function deleteSiswa(id) {
+  document
+    .getElementById("siswaForm")
+    .addEventListener(
+      "submit",
+      async function(event) {
 
-    if (!confirm(
-      "Hapus siswa ini?"
-    )) return;
+        event.preventDefault();
 
 
-    try {
+        if (
+          window.appState.currentRole !== "bendahara"
+        ) return;
 
-      await window.firebaseRemove(
 
-        window.firebaseRef(
-          window.firebaseDB,
-          "kelasVIIIB/siswa/" + id
-        )
+        const id =
+          document.getElementById(
+            "siswaId"
+          ).value;
 
-      );
 
+        const data = {
 
-      showToast(
-        "Siswa berhasil dihapus."
-      );
+          nama:
+            document.getElementById(
+              "siswaNama"
+            ).value.trim(),
 
+          nis:
+            document.getElementById(
+              "siswaNis"
+            ).value.trim(),
 
-    } catch (error) {
+          gender:
+            document.getElementById(
+              "siswaGender"
+            ).value,
 
-      console.error(error);
+          updatedAt:
+            Date.now()
 
-      showToast(
-        "Gagal menghapus siswa.",
-        "error"
-      );
+        };
 
-    }
 
-  }
+        if (!data.nama) {
 
-
-  /* =========================================================
-     KAS MASUK
-  ========================================================= */
-
-  function renderKasMasuk() {
-
-    const data =
-      Object.entries(
-        window.appState.kasMasuk
-      ).sort(
-        (a, b) =>
-          Number(b[1].createdAt || 0) -
-          Number(a[1].createdAt || 0)
-      );
-
-
-    document
-      .getElementById("pageContent")
-      .innerHTML = `
-
-      <div class="flex flex-col sm:flex-row justify-between gap-3 mb-5">
-
-        <div>
-
-          <h2 class="text-xl font-bold">
-            Kas Masuk
-          </h2>
-
-          <p class="text-xs text-gray-400">
-            Data pembayaran kas siswa
-          </p>
-
-        </div>
-
-
-        <button
-          onclick="prepareKasMasuk()"
-          class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold"
-        >
-          <i class="fa-solid fa-plus mr-1"></i>
-          Tambah Kas Masuk
-        </button>
-
-      </div>
-
-
-      <div class="bg-white border rounded-xl overflow-hidden">
-
-        <div class="overflow-x-auto">
-
-          <table class="w-full">
-
-            <thead class="bg-gray-50">
-
-              <tr>
-
-                <th class="text-left px-4 py-3">
-                  No
-                </th>
-
-                <th class="text-left px-4 py-3">
-                  Tanggal
-                </th>
-
-                <th class="text-left px-4 py-3">
-                  Siswa
-                </th>
-
-                <th class="text-left px-4 py-3">
-                  Keterangan
-                </th>
-
-                <th class="text-right px-4 py-3">
-                  Nominal
-                </th>
-
-                <th class="text-center px-4 py-3">
-                  Aksi
-                </th>
-
-              </tr>
-
-            </thead>
-
-
-            <tbody>
-
-              ${
-                data.length === 0
-
-                ? `
-                  <tr>
-
-                    <td
-                      colspan="6"
-                      class="text-center py-10 text-gray-400"
-                    >
-                      Belum ada transaksi.
-                    </td>
-
-                  </tr>
-                `
-
-                :
-
-                data.map(
-                  ([id, item], index) => `
-
-                    <tr class="border-t">
-
-                      <td class="px-4 py-3">
-                        ${index + 1}
-                      </td>
-
-                      <td class="px-4 py-3">
-                        ${formatTanggal(item.tanggal)}
-                      </td>
-
-                      <td class="px-4 py-3 font-semibold">
-                        ${escapeHtml(item.namaSiswa)}
-                      </td>
-
-                      <td class="px-4 py-3">
-                        ${escapeHtml(item.keterangan)}
-                      </td>
-
-                      <td class="px-4 py-3 text-right text-green-600 font-semibold">
-                        ${rupiah(item.nominal)}
-                      </td>
-
-                      <td class="px-4 py-3">
-
-                        <div class="flex justify-center gap-1">
-
-                          <button
-                            onclick="editKasMasuk('${id}')"
-                            class="w-8 h-8 rounded bg-blue-50 text-blue-600"
-                          >
-                            <i class="fa-solid fa-pen"></i>
-                          </button>
-
-                          <button
-                            onclick="deleteKasMasuk('${id}')"
-                            class="w-8 h-8 rounded bg-red-50 text-red-600"
-                          >
-                            <i class="fa-solid fa-trash"></i>
-                          </button>
-
-                        </div>
-
-                      </td>
-
-                    </tr>
-
-                  `
-                ).join("")
-
-              }
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  function populateSiswaSelect(selected = "") {
-
-    const select =
-      document.getElementById(
-        "kasMasukSiswa"
-      );
-
-
-    const siswa =
-      Object.entries(
-        window.appState.siswa
-      ).sort(
-        (a, b) =>
-          String(a[1].nama || "")
-            .localeCompare(
-              String(b[1].nama || ""),
-              "id"
-            )
-      );
-
-
-    select.innerHTML =
-      `<option value="">Pilih siswa</option>`;
-
-
-    siswa.forEach(
-      ([id, item]) => {
-
-        const option =
-          document.createElement(
-            "option"
+          showToast(
+            "Nama siswa wajib diisi.",
+            "error"
           );
 
+          return;
 
-        option.value =
-          id;
-
-
-        option.textContent =
-          item.nama || "-";
-
-
-        if (id === selected) {
-          option.selected = true;
         }
 
 
-        select.appendChild(
-          option
-        );
+        try {
+
+          if (id) {
+
+            await update(
+              ref(
+                database,
+                "kelasVIIIB/siswa/" + id
+              ),
+              data
+            );
+
+            showToast(
+              "Data siswa berhasil diperbarui.",
+              "success"
+            );
+
+          } else {
+
+            const newRef =
+              push(
+                ref(
+                  database,
+                  "kelasVIIIB/siswa"
+                )
+              );
+
+
+            await set(
+              newRef,
+              {
+                ...data,
+                createdAt: Date.now()
+              }
+            );
+
+
+            showToast(
+              "Data siswa berhasil ditambahkan.",
+              "success"
+            );
+
+          }
+
+
+          closeModal("siswaModal");
+
+        } catch (error) {
+
+          console.error(error);
+
+          showToast(
+            "Gagal menyimpan siswa: " +
+            error.message,
+            "error"
+          );
+
+        }
 
       }
     );
 
-  }
+
+  window.deleteSiswa = async function(id) {
+
+    if (
+      window.appState.currentRole !== "bendahara"
+    ) return;
 
 
-  function prepareKasMasuk() {
+    if (
+      !confirm(
+        "Yakin ingin menghapus siswa ini?"
+      )
+    ) return;
 
-    const form =
-      document.getElementById(
-        "formKasMasuk"
+
+    try {
+
+      await remove(
+        ref(
+          database,
+          "kelasVIIIB/siswa/" + id
+        )
       );
 
 
-    form.reset();
+      showToast(
+        "Data siswa berhasil dihapus.",
+        "success"
+      );
 
-    delete form.dataset.editId;
+    } catch (error) {
+
+      console.error(error);
+
+      showToast(
+        "Gagal menghapus siswa: " +
+        error.message,
+        "error"
+      );
+
+    }
+
+  };
 
 
-    document.getElementById(
-      "kasMasukTanggal"
-    ).value =
-      today();
+  /* =========================================================
+     REFRESH ALL
+  ========================================================= */
+
+  function refreshAll() {
+
+    if (
+      !window.appState.currentRole
+    ) return;
 
 
-    document.getElementById(
-      "kasMasukKeterangan"
-    ).value =
-      "Pembayaran kas";
+    renderDashboard();
 
+    renderKasMasuk();
 
-    document.getElementById(
-      "modalKasMasukTitle"
-    ).textContent =
-      "Tambah Kas Masuk";
+    renderKasKeluar();
 
+    renderSiswa();
+
+    renderRiwayat();
 
     populateSiswaSelect();
 
-
-    openModal(
-      "modalKasMasuk"
-    );
-
   }
 
 
   /* =========================================================
-     SIMPAN KAS MASUK
+     SIDEBAR MOBILE
   ========================================================= */
 
-  async function saveKasMasuk(event) {
+  window.toggleSidebar = function() {
 
-    event.preventDefault();
+    document
+      .getElementById("sidebar")
+      .classList.toggle("open");
 
+    document
+      .getElementById("mobileOverlay")
+      .classList.toggle("show");
 
-    const form =
-      event.target;
-
-
-    const id =
-      form.dataset.editId || "";
-
-
-    const tanggal =
-      document.getElementById(
-        "kasMasukTanggal"
-      ).value;
+  };
 
 
-    const siswaId =
-      document.getElementById(
-        "kasMasukSiswa"
-      ).value;
+  window.closeSidebar = function() {
+
+    document
+      .getElementById("sidebar")
+      .classList.remove("open");
+
+    document
+      .getElementById("mobileOverlay")
+      .classList.remove("show");
+
+  };
 
 
-    const keterangan =
-      document.getElementById(
-        "kasMasukKeterangan"
-      ).value
-      .trim();
+  /* =========================================================
+     LOGOUT
+  ========================================================= */
 
-
-    const nominal =
-      Number(
-        document.getElementById(
-          "kasMasukNominal"
-        ).value
-      );
-
+  window.logout = function() {
 
     if (
-      !tanggal ||
-      !siswaId ||
-      !nominal
-    ) {
-
-      showToast(
-        "Lengkapi data terlebih dahulu.",
-        "error"
-      );
-
-      return;
-
-    }
+      !confirm(
+        "Apakah Anda yakin ingin keluar?"
+      )
+    ) return;
 
 
-    if (!window.firebaseDB) {
+    sessionStorage.removeItem(
+      "kasKelasUser"
+    );
 
-      showToast(
-        "Firebase belum siap.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const siswa =
-      window.appState.siswa[
-        siswaId
-      ];
-
-
-    const data = {
-
-      tanggal,
-
-      siswaId,
-
-      namaSiswa:
-        siswa?.nama || "",
-
-      keterangan:
-        keterangan ||
-        "Pembayaran kas",
-
-      nominal,
-
-      updatedAt:
-        Date.now(),
-
-      createdBy:
-        window.appState.currentUser ||
-        "bendahara"
-
-    };
-
-
-    try {
-
-      if (id) {
-
-        const targetRef =
-          window.firebaseRef(
-            window.firebaseDB,
-            "kelasVIIIB/kasMasuk/" + id
-          );
-
-
-        await window.firebaseUpdate(
-          targetRef,
-          data
-        );
-
-
-        showToast(
-          "Kas masuk berhasil diperbarui."
-        );
-
-
-      } else {
-
-        data.createdAt =
-          Date.now();
-
-
-        const targetRef =
-          window.firebasePush(
-            window.firebaseRef(
-              window.firebaseDB,
-              "kelasVIIIB/kasMasuk"
-            )
-          );
-
-
-        await window.firebaseSet(
-          targetRef,
-          data
-        );
-
-
-        showToast(
-          "Kas masuk berhasil disimpan."
-        );
-
-      }
-
-
-      form.reset();
-
-      delete form.dataset.editId;
-
-      closeModal(
-        "modalKasMasuk"
-      );
-
-
-    } catch (error) {
-
-      console.error(
-        "SAVE KAS MASUK:",
-        error
-      );
-
-
-      showToast(
-        "Gagal menyimpan: " +
-        error.message,
-        "error"
-      );
-
-    }
-
-  }
-
-
-  function editKasMasuk(id) {
-
-    const item =
-      window.appState.kasMasuk[id];
-
-
-    if (!item) return;
-
-
-    const form =
-      document.getElementById(
-        "formKasMasuk"
-      );
-
-
-    form.dataset.editId =
-      id;
-
-
-    document.getElementById(
-      "kasMasukTanggal"
-    ).value =
-      item.tanggal || "";
-
-
-    populateSiswaSelect(
-      item.siswaId || ""
+    sessionStorage.removeItem(
+      "kasKelasRole"
     );
 
 
-    document.getElementById(
-      "kasMasukKeterangan"
-    ).value =
-      item.keterangan || "";
+    window.appState.currentUser = null;
 
-
-    document.getElementById(
-      "kasMasukNominal"
-    ).value =
-      item.nominal || "";
-
-
-    document.getElementById(
-      "modalKasMasukTitle"
-    ).textContent =
-      "Edit Kas Masuk";
-
-
-    openModal(
-      "modalKasMasuk"
-    );
-
-  }
-
-
-  async function deleteKasMasuk(id) {
-
-    if (!confirm(
-      "Hapus transaksi ini?"
-    )) return;
-
-
-    try {
-
-      await window.firebaseRemove(
-
-        window.firebaseRef(
-          window.firebaseDB,
-          "kelasVIIIB/kasMasuk/" + id
-        )
-
-      );
-
-
-      showToast(
-        "Kas masuk berhasil dihapus."
-      );
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      showToast(
-        "Gagal menghapus data.",
-        "error"
-      );
-
-    }
-
-  }
-
-
-  /* =========================================================
-     KAS KELUAR
-  ========================================================= */
-
-  function renderKasKeluar() {
-
-    const data =
-      Object.entries(
-        window.appState.kasKeluar
-      ).sort(
-        (a, b) =>
-          Number(b[1].createdAt || 0) -
-          Number(a[1].createdAt || 0)
-      );
+    window.appState.currentRole = null;
 
 
     document
-      .getElementById("pageContent")
-      .innerHTML = `
+      .getElementById("appPage")
+      .classList.add("hidden-page");
 
-      <div class="flex flex-col sm:flex-row justify-between gap-3 mb-5">
-
-        <div>
-
-          <h2 class="text-xl font-bold">
-            Kas Keluar
-          </h2>
-
-          <p class="text-xs text-gray-400">
-            Data pengeluaran kas kelas
-          </p>
-
-        </div>
+    document
+      .getElementById("loginPage")
+      .classList.remove("hidden-page");
 
 
-        <button
-          onclick="prepareKasKeluar()"
-          class="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold"
-        >
-          <i class="fa-solid fa-plus mr-1"></i>
-          Tambah Kas Keluar
-        </button>
-
-      </div>
-
-
-      <div class="bg-white border rounded-xl overflow-hidden">
-
-        <div class="overflow-x-auto">
-
-          <table class="w-full">
-
-            <thead class="bg-gray-50">
-
-              <tr>
-
-                <th class="text-left px-4 py-3">
-                  No
-                </th>
-
-                <th class="text-left px-4 py-3">
-                  Tanggal
-                </th>
-
-                <th class="text-left px-4 py-3">
-                  Keterangan
-                </th>
-
-                <th class="text-right px-4 py-3">
-                  Nominal
-                </th>
-
-                <th class="text-center px-4 py-3">
-                  Aksi
-                </th>
-
-              </tr>
-
-            </thead>
-
-
-            <tbody>
-
-              ${
-                data.length === 0
-
-                ? `
-                  <tr>
-
-                    <td
-                      colspan="5"
-                      class="text-center py-10 text-gray-400"
-                    >
-                      Belum ada transaksi.
-                    </td>
-
-                  </tr>
-                `
-
-                :
-
-                data.map(
-                  ([id, item], index) => `
-
-                    <tr class="border-t">
-
-                      <td class="px-4 py-3">
-                        ${index + 1}
-                      </td>
-
-                      <td class="px-4 py-3">
-                        ${formatTanggal(item.tanggal)}
-                      </td>
-
-                      <td class="px-4 py-3">
-                        ${escapeHtml(item.keterangan)}
-                      </td>
-
-                      <td class="px-4 py-3 text-right text-red-600 font-semibold">
-                        ${rupiah(item.nominal)}
-                      </td>
-
-                      <td class="px-4 py-3">
-
-                        <div class="flex justify-center gap-1">
-
-                          <button
-                            onclick="editKasKeluar('${id}')"
-                            class="w-8 h-8 rounded bg-blue-50 text-blue-600"
-                          >
-                            <i class="fa-solid fa-pen"></i>
-                          </button>
-
-                          <button
-                            onclick="deleteKasKeluar('${id}')"
-                            class="w-8 h-8 rounded bg-red-50 text-red-600"
-                          >
-                            <i class="fa-solid fa-trash"></i>
-                          </button>
-
-                        </div>
-
-                      </td>
-
-                    </tr>
-
-                  `
-                ).join("")
-
-              }
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  function prepareKasKeluar() {
-
-    const form =
-      document.getElementById(
-        "formKasKeluar"
-      );
-
-
-    form.reset();
-
-    delete form.dataset.editId;
-
-
-    document.getElementById(
-      "kasKeluarTanggal"
-    ).value =
-      today();
-
-
-    document.getElementById(
-      "modalKasKeluarTitle"
-    ).textContent =
-      "Tambah Kas Keluar";
-
-
-    openModal(
-      "modalKasKeluar"
+    showToast(
+      "Anda telah keluar dari sistem.",
+      "success"
     );
 
-  }
+  };
 
 
   /* =========================================================
-     SIMPAN KAS KELUAR
-  ========================================================= */
-
-  async function saveKasKeluar(event) {
-
-    event.preventDefault();
-
-
-    const form =
-      event.target;
-
-
-    const id =
-      form.dataset.editId || "";
-
-
-    const tanggal =
-      document.getElementById(
-        "kasKeluarTanggal"
-      ).value;
-
-
-    const keterangan =
-      document.getElementById(
-        "kasKeluarKeterangan"
-      ).value
-      .trim();
-
-
-    const nominal =
-      Number(
-        document.getElementById(
-          "kasKeluarNominal"
-        ).value
-      );
-
-
-    if (
-      !tanggal ||
-      !keterangan ||
-      !nominal
-    ) {
-
-      showToast(
-        "Lengkapi data terlebih dahulu.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if (!window.firebaseDB) {
-
-      showToast(
-        "Firebase belum siap.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const data = {
-
-      tanggal,
-
-      keterangan,
-
-      nominal,
-
-      updatedAt:
-        Date.now(),
-
-      createdBy:
-        window.appState.currentUser ||
-        "bendahara"
-
-    };
-
-
-    try {
-
-      if (id) {
-
-        await window.firebaseUpdate(
-
-          window.firebaseRef(
-            window.firebaseDB,
-            "kelasVIIIB/kasKeluar/" + id
-          ),
-
-          data
-
-        );
-
-
-        showToast(
-          "Kas keluar berhasil diperbarui."
-        );
-
-
-      } else {
-
-        data.createdAt =
-          Date.now();
-
-
-        const targetRef =
-          window.firebasePush(
-
-            window.firebaseRef(
-              window.firebaseDB,
-              "kelasVIIIB/kasKeluar"
-            )
-
-          );
-
-
-        await window.firebaseSet(
-          targetRef,
-          data
-        );
-
-
-        showToast(
-          "Kas keluar berhasil disimpan."
-        );
-
-      }
-
-
-      form.reset();
-
-      delete form.dataset.editId;
-
-      closeModal(
-        "modalKasKeluar"
-      );
-
-
-    } catch (error) {
-
-      console.error(
-        "SAVE KAS KELUAR:",
-        error
-      );
-
-
-      showToast(
-        "Gagal menyimpan: " +
-        error.message,
-        "error"
-      );
-
-    }
-
-  }
-
-
-  function editKasKeluar(id) {
-
-    const item =
-      window.appState.kasKeluar[id];
-
-
-    if (!item) return;
-
-
-    const form =
-      document.getElementById(
-        "formKasKeluar"
-      );
-
-
-    form.dataset.editId =
-      id;
-
-
-    document.getElementById(
-      "kasKeluarTanggal"
-    ).value =
-      item.tanggal || "";
-
-
-    document.getElementById(
-      "kasKeluarKeterangan"
-    ).value =
-      item.keterangan || "";
-
-
-    document.getElementById(
-      "kasKeluarNominal"
-    ).value =
-      item.nominal || "";
-
-
-    document.getElementById(
-      "modalKasKeluarTitle"
-    ).textContent =
-      "Edit Kas Keluar";
-
-
-    openModal(
-      "modalKasKeluar"
-    );
-
-  }
-
-
-  async function deleteKasKeluar(id) {
-
-    if (!confirm(
-      "Hapus transaksi ini?"
-    )) return;
-
-
-    try {
-
-      await window.firebaseRemove(
-
-        window.firebaseRef(
-          window.firebaseDB,
-          "kelasVIIIB/kasKeluar/" + id
-        )
-
-      );
-
-
-      showToast(
-        "Kas keluar berhasil dihapus."
-      );
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      showToast(
-        "Gagal menghapus data.",
-        "error"
-      );
-
-    }
-
-  }
-
-
-  /* =========================================================
-     REFRESH
-  ========================================================= */
-
-  function refreshAllViews() {
-
-    if (
-      document
-        .getElementById("app")
-        .classList.contains("hidden")
-    ) {
-
-      return;
-
-    }
-
-
-    switch (
-      window.appState.activeTab
-    ) {
-
-      case "siswa":
-
-        renderSiswa();
-
-        break;
-
-
-      case "kasMasuk":
-
-        renderKasMasuk();
-
-        break;
-
-
-      case "kasKeluar":
-
-        renderKasKeluar();
-
-        break;
-
-
-      default:
-
-        renderDashboard();
-
-    }
-
-  }
-
-
-  /* =========================================================
-     FORM LISTENER
+     CLOSE MODAL WHEN CLICK OUTSIDE
   ========================================================= */
 
   document
-    .getElementById("formSiswa")
-    .addEventListener(
-      "submit",
-      saveSiswa
-    );
+    .querySelectorAll(".modal")
+    .forEach(modal => {
 
+      modal.addEventListener(
+        "click",
+        function(event) {
 
-  document
-    .getElementById("formKasMasuk")
-    .addEventListener(
-      "submit",
-      saveKasMasuk
-    );
+          if (
+            event.target === modal
+          ) {
 
+            modal.classList.remove(
+              "show"
+            );
 
-  document
-    .getElementById("formKasKeluar")
-    .addEventListener(
-      "submit",
-      saveKasKeluar
-    );
+          }
+
+        }
+      );
+
+    });
 
 
   /* =========================================================
      START
   ========================================================= */
 
-  checkLogin();
-
-</script>
-
-
-<!-- =========================================================
-     FIREBASE
-========================================================= -->
-
-<script type="module">
-
-  import {
-    initializeApp
-  } from
-  "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-
-
-  import {
-    getDatabase,
-    ref,
-    push,
-    set,
-    update,
-    remove,
-    onValue
-  } from
-  "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
-
-
-  /* =========================================================
-     FIREBASE CONFIG BARU
-  ========================================================= */
-
-  const firebaseConfig = {
-
-    apiKey:
-      "AIzaSyAmy4PcVbc3bUnIEti0rhkhyPvGiLwFRYc",
-
-    authDomain:
-      "absenguru-615da.firebaseapp.com",
-
-    databaseURL:
-      "https://absenguru-615da-default-rtdb.firebaseio.com",
-
-    projectId:
-      "absenguru-615da",
-
-    storageBucket:
-      "absenguru-615da.firebasestorage.app",
-
-    messagingSenderId:
-      "1014411980118",
-
-    appId:
-      "1:1014411980118:web:6f3f702d8aad89af57faf7"
-
-  };
-
-
-  try {
-
-    /*
-     * INITIALIZE FIREBASE
-     */
-
-    const app =
-      initializeApp(
-        firebaseConfig
-      );
-
-
-    /*
-     * DATABASE
-     */
-
-    const database =
-      getDatabase(app);
-
-
-    /*
-     * SIMPAN API FIREBASE
-     * KE WINDOW AGAR BISA DIPAKAI
-     * OLEH SCRIPT UTAMA
-     */
-
-    window.firebaseDB =
-      database;
-
-
-    window.firebaseRef =
-      ref;
-
-
-    window.firebasePush =
-      push;
-
-
-    window.firebaseSet =
-      set;
-
-
-    window.firebaseUpdate =
-      update;
-
-
-    window.firebaseRemove =
-      remove;
-
-
-    /*
-     * STATUS KONEKSI
-     */
-
-    const connectedRef =
-      ref(
-        database,
-        ".info/connected"
-      );
-
-
-    onValue(
-      connectedRef,
-      snapshot => {
-
-        const status =
-          document.getElementById(
-            "firebaseStatus"
-          );
-
-
-        const connected =
-          snapshot.val() === true;
-
-
-        if (!status) return;
-
-
-        if (connected) {
-
-          status.innerHTML = `
-            <span
-              class="w-2 h-2 bg-green-500 rounded-full"
-            ></span>
-
-            <span class="hidden sm:block">
-              Terhubung
-            </span>
-          `;
-
-
-          status.className =
-            "flex items-center gap-1 text-green-600 text-xs";
-
-
-        } else {
-
-          status.innerHTML = `
-            <span
-              class="w-2 h-2 bg-red-500 rounded-full"
-            ></span>
-
-            <span class="hidden sm:block">
-              Tidak terhubung
-            </span>
-          `;
-
-
-          status.className =
-            "flex items-center gap-1 text-red-500 text-xs";
-
-        }
-
-      }
-    );
-
-
-    /*
-     * ======================================================
-     * REALTIME SISWA
-     * ======================================================
-     */
-
-    onValue(
-
-      ref(
-        database,
-        "kelasVIIIB/siswa"
-      ),
-
-      snapshot => {
-
-        window.appState.siswa =
-          snapshot.val() || {};
-
-
-        refreshAllViews();
-
-      },
-
-      error => {
-
-        console.error(
-          "READ SISWA:",
-          error
-        );
-
-      }
-
-    );
-
-
-    /*
-     * ======================================================
-     * REALTIME KAS MASUK
-     * ======================================================
-     */
-
-    onValue(
-
-      ref(
-        database,
-        "kelasVIIIB/kasMasuk"
-      ),
-
-      snapshot => {
-
-        window.appState.kasMasuk =
-          snapshot.val() || {};
-
-
-        refreshAllViews();
-
-      },
-
-      error => {
-
-        console.error(
-          "READ KAS MASUK:",
-          error
-        );
-
-      }
-
-    );
-
-
-    /*
-     * ======================================================
-     * REALTIME KAS KELUAR
-     * ======================================================
-     */
-
-    onValue(
-
-      ref(
-        database,
-        "kelasVIIIB/kasKeluar"
-      ),
-
-      snapshot => {
-
-        window.appState.kasKeluar =
-          snapshot.val() || {};
-
-
-        refreshAllViews();
-
-      },
-
-      error => {
-
-        console.error(
-          "READ KAS KELUAR:",
-          error
-        );
-
-      }
-
-    );
-
-
-    console.log(
-      "================================="
-    );
-
-    console.log(
-      "FIREBASE REALTIME DATABASE AKTIF"
-    );
-
-    console.log(
-      "Database:",
-      firebaseConfig.databaseURL
-    );
-
-    console.log(
-      "================================="
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      "FIREBASE INITIALIZATION ERROR:",
-      error
-    );
-
-
-    showToast(
-      "Firebase gagal dimuat.",
-      "error"
-    );
-
-  }
+  checkSession();
 
 </script>
 
