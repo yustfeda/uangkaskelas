@@ -1,4007 +1,4982 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kas Kelas VII B</title>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f1f5f9;
-      color: #1e293b;
-    }
-
-    .hidden-page {
-      display: none !important;
-    }
-
-    /* =========================
-       LOGIN
-    ========================= */
-
-    #loginPage {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background:
-        linear-gradient(135deg, #0f172a, #1e3a8a);
-    }
-
-    .login-card {
-      width: 100%;
-      max-width: 400px;
-      background: white;
-      border-radius: 22px;
-      padding: 30px 25px;
-      box-shadow: 0 25px 60px rgba(0,0,0,.25);
-    }
-
-    .login-logo {
-      width: 82px;
-      height: 82px;
-      margin: 0 auto 15px;
-      border-radius: 50%;
-      background: #1d4ed8;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 34px;
-      box-shadow: 0 10px 25px rgba(29,78,216,.3);
-    }
-
-    .login-title {
-      text-align: center;
-      font-size: 24px;
-      font-weight: 800;
-      color: #0f172a;
-    }
-
-    .login-subtitle {
-      text-align: center;
-      font-size: 13px;
-      color: #64748b;
-      margin-top: 5px;
-      margin-bottom: 25px;
-    }
-
-    .input-group {
-      position: relative;
-      margin-bottom: 16px;
-    }
-
-    .input-group i {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #64748b;
-      pointer-events: none;
-    }
-
-    .input-group input,
-    .input-group select {
-      width: 100%;
-      height: 48px;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 0 14px 0 42px;
-      outline: none;
-      background: #f8fafc;
-      font-size: 14px;
-    }
-
-    .input-group input:focus,
-    .input-group select:focus {
-      border-color: #2563eb;
-      background: white;
-      box-shadow: 0 0 0 3px rgba(37,99,235,.1);
-    }
-
-    .login-button {
-      width: 100%;
-      height: 48px;
-      border: 0;
-      border-radius: 12px;
-      background: #2563eb;
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .login-button:hover {
-      background: #1d4ed8;
-    }
-
-    .login-info {
-      margin-top: 18px;
-      padding: 12px;
-      background: #eff6ff;
-      border-radius: 12px;
-      font-size: 12px;
-      color: #1e40af;
-      text-align: center;
-    }
-
-    /* =========================
-       APP
-    ========================= */
-
-    #appPage {
-      min-height: 100vh;
-    }
-
-    .sidebar {
-      width: 260px;
-      position: fixed;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      background: #0f172a;
-      color: white;
-      z-index: 100;
-      overflow-y: auto;
-    }
-
-    .sidebar-header {
-      padding: 25px 20px;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-icon {
-      width: 45px;
-      height: 45px;
-      background: #2563eb;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-    }
-
-    .brand-title {
-      font-weight: 800;
-      font-size: 16px;
-    }
-
-    .brand-subtitle {
-      font-size: 11px;
-      color: #94a3b8;
-      margin-top: 3px;
-    }
-
-    .role-badge {
-      margin-top: 15px;
-      padding: 8px 10px;
-      border-radius: 9px;
-      background: rgba(37,99,235,.2);
-      color: #93c5fd;
-      font-size: 11px;
-      text-align: center;
-      font-weight: 700;
-    }
-
-    .menu-title {
-      padding: 20px 20px 8px;
-      color: #64748b;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .menu-item {
-      margin: 4px 12px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: #cbd5e1;
-      cursor: pointer;
-      font-size: 14px;
-      transition: .2s;
-    }
-
-    .menu-item:hover,
-    .menu-item.active {
-      background: #2563eb;
-      color: white;
-    }
-
-    .menu-item i {
-      width: 20px;
-      text-align: center;
-    }
-
-    .logout-button {
-      margin: 20px 12px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      background: #7f1d1d;
-      color: #fecaca;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 14px;
-    }
-
-    .logout-button:hover {
-      background: #991b1b;
-    }
-
-    .main {
-      margin-left: 260px;
-      min-height: 100vh;
-    }
-
-    .topbar {
-      height: 70px;
-      background: white;
-      border-bottom: 1px solid #e2e8f0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 25px;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
-
-    .topbar-title {
-      font-weight: 800;
-      font-size: 18px;
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .user-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: #dbeafe;
-      color: #1d4ed8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .content {
-      padding: 25px;
-      max-width: 1400px;
-      margin: auto;
-    }
-
-    /* =========================
-       CARDS
-    ========================= */
-
-    .welcome-box {
-      background: linear-gradient(135deg, #2563eb, #1e40af);
-      color: white;
-      border-radius: 18px;
-      padding: 25px;
-      margin-bottom: 22px;
-    }
-
-    .welcome-box h1 {
-      font-size: 24px;
-      font-weight: 800;
-      margin-bottom: 5px;
-    }
-
-    .welcome-box p {
-      color: #dbeafe;
-      font-size: 14px;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .stat-card {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      border: 1px solid #e2e8f0;
-    }
-
-    .stat-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 12px;
-      background: #eff6ff;
-      color: #2563eb;
-    }
-
-    .stat-title {
-      font-size: 12px;
-      color: #64748b;
-    }
-
-    .stat-value {
-      font-size: 21px;
-      font-weight: 800;
-      margin-top: 4px;
-    }
-
-    .card {
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      overflow: hidden;
-    }
-
-    .card-header {
-      padding: 18px 20px;
-      border-bottom: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .card-title {
-      font-weight: 800;
-      font-size: 16px;
-    }
-
-    .card-body {
-      padding: 20px;
-    }
-
-    /* =========================
-       BUTTON
-    ========================= */
-
-    .btn {
-      border: 0;
-      border-radius: 9px;
-      padding: 9px 14px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .btn-primary {
-      background: #2563eb;
-      color: white;
-    }
-
-    .btn-success {
-      background: #16a34a;
-      color: white;
-    }
-
-    .btn-danger {
-      background: #dc2626;
-      color: white;
-    }
-
-    .btn-secondary {
-      background: #e2e8f0;
-      color: #334155;
-    }
-
-    .btn:hover {
-      opacity: .9;
-    }
-
-    /* =========================
-       TABLE
-    ========================= */
-
-    .table-wrapper {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 650px;
-    }
-
-    th,
-    td {
-      padding: 12px 14px;
-      border-bottom: 1px solid #e2e8f0;
-      text-align: left;
-      font-size: 13px;
-    }
-
-    th {
-      background: #f8fafc;
-      font-weight: 800;
-      color: #475569;
-    }
-
-    tr:hover td {
-      background: #f8fafc;
-    }
-
-    .amount-in {
-      color: #15803d;
-      font-weight: 800;
-    }
-
-    .amount-out {
-      color: #dc2626;
-      font-weight: 800;
-    }
-
-    /* =========================
-       FORM
-    ========================= */
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .form-group {
-      margin-bottom: 14px;
-    }
-
-    .form-group.full {
-      grid-column: 1 / -1;
-    }
-
-    .form-label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 13px;
-      font-weight: 700;
-      color: #334155;
-    }
-
-    .form-control {
-      width: 100%;
-      min-height: 44px;
-      border: 1px solid #cbd5e1;
-      border-radius: 9px;
-      padding: 9px 12px;
-      outline: none;
-      background: white;
-    }
-
-    .form-control:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37,99,235,.1);
-    }
-
-    /* =========================
-       MODAL
-    ========================= */
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(15,23,42,.65);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 300;
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-box {
-      width: 100%;
-      max-width: 500px;
-      background: white;
-      border-radius: 18px;
-      box-shadow: 0 25px 60px rgba(0,0,0,.3);
-      overflow: hidden;
-    }
-
-    .modal-header {
-      padding: 18px 20px;
-      border-bottom: 1px solid #e2e8f0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .modal-title {
-      font-weight: 800;
-    }
-
-    .modal-close {
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      font-size: 20px;
-      color: #64748b;
-    }
-
-    .modal-body {
-      padding: 20px;
-    }
-
-    .modal-footer {
-      padding: 15px 20px;
-      border-top: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-
-    /* =========================
-       WELCOME POPUP
-    ========================= */
-
-    #welcomePopup {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 330px;
-      max-width: calc(100% - 40px);
-      background: white;
-      border-radius: 14px;
-      padding: 15px;
-      box-shadow: 0 15px 40px rgba(0,0,0,.2);
-      z-index: 999;
-      transform: translateX(450px);
-      transition: .4s ease;
-      border-left: 5px solid #2563eb;
-    }
-
-    #welcomePopup.show {
-      transform: translateX(0);
-    }
-
-    .welcome-popup-content {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .welcome-popup-icon {
-      width: 42px;
-      height: 42px;
-      min-width: 42px;
-      border-radius: 50%;
-      background: #dbeafe;
-      color: #2563eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .welcome-popup-title {
-      font-weight: 800;
-      font-size: 14px;
-    }
-
-    .welcome-popup-text {
-      font-size: 12px;
-      color: #64748b;
-      margin-top: 3px;
-    }
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    #toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      max-width: 350px;
-      padding: 13px 16px;
-      background: #0f172a;
-      color: white;
-      border-radius: 10px;
-      box-shadow: 0 15px 35px rgba(0,0,0,.25);
-      z-index: 1000;
-      transform: translateY(100px);
-      opacity: 0;
-      transition: .3s;
-      font-size: 13px;
-    }
-
-    #toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    #toast.success {
-      background: #15803d;
-    }
-
-    #toast.error {
-      background: #dc2626;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    #mobileOverlay {
-      display: none;
-    }
-
-    .mobile-menu-button {
-      display: none;
-      border: 0;
-      background: #eff6ff;
-      color: #2563eb;
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 900px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .sidebar {
-        transform: translateX(-100%);
-        transition: .3s;
-      }
-
-      .sidebar.open {
-        transform: translateX(0);
-      }
-
-      .main {
-        margin-left: 0;
-      }
-
-      .mobile-menu-button {
-        display: block;
-      }
-
-      #mobileOverlay.show {
-        display: block;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,.45);
-        z-index: 90;
-      }
-    }
-
-    @media (max-width: 600px) {
-      #loginPage {
-        padding: 12px;
-      }
-
-      .login-card {
-        padding: 25px 18px;
-        border-radius: 18px;
-      }
-
-      .login-title {
-        font-size: 21px;
-      }
-
-      .content {
-        padding: 15px;
-      }
-
-      .topbar {
-        padding: 0 15px;
-      }
-
-      .topbar-title {
-        font-size: 15px;
-      }
-
-      .user-info-text {
-        display: none;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-
-      .stat-card {
-        padding: 15px;
-      }
-
-      .stat-value {
-        font-size: 17px;
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .form-group.full {
-        grid-column: auto;
-      }
-
-      .welcome-box {
-        padding: 20px;
-      }
-
-      .welcome-box h1 {
-        font-size: 20px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kas Kelas VII B</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:#f1f5f9;
+color:#1e293b
+}
+
+.hidden-page{display:none!important}
+
+button{font-family:inherit}
+
+#loginPage{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+background:linear-gradient(135deg,#0f172a,#1d4ed8)
+}
+
+.login-card{
+width:100%;
+max-width:420px;
+background:white;
+border-radius:24px;
+padding:30px 25px;
+box-shadow:0 25px 70px rgba(0,0,0,.3)
+}
+
+.login-logo{
+width:78px;
+height:78px;
+margin:0 auto 15px;
+border-radius:22px;
+background:#2563eb;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+box-shadow:0 10px 30px rgba(37,99,235,.3)
+}
+
+.login-title{
+text-align:center;
+font-size:24px;
+font-weight:800
+}
+
+.login-subtitle{
+text-align:center;
+font-size:13px;
+color:#64748b;
+margin:5px 0 25px
+}
+
+.login-choice{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:20px
+}
+
+.role-choice{
+padding:15px 10px;
+border:2px solid #e2e8f0;
+border-radius:14px;
+background:white;
+cursor:pointer;
+text-align:center;
+transition:.2s
+}
+
+.role-choice:hover{
+border-color:#93c5fd;
+background:#eff6ff
+}
+
+.role-choice.active{
+border-color:#2563eb;
+background:#eff6ff;
+color:#1d4ed8
+}
+
+.role-choice i{
+font-size:22px;
+display:block;
+margin-bottom:7px
+}
+
+.role-choice span{
+font-size:12px;
+font-weight:800
+}
+
+.input-group{
+position:relative;
+margin-bottom:15px
+}
+
+.input-group i{
+position:absolute;
+left:14px;
+top:50%;
+transform:translateY(-50%);
+color:#64748b
+}
+
+.input-group input{
+width:100%;
+height:48px;
+border:1px solid #cbd5e1;
+border-radius:12px;
+padding:0 14px 0 42px;
+outline:none;
+background:#f8fafc
+}
+
+.input-group input:focus{
+border-color:#2563eb;
+background:white;
+box-shadow:0 0 0 3px rgba(37,99,235,.1)
+}
+
+.login-button{
+width:100%;
+height:48px;
+border:0;
+border-radius:12px;
+background:#2563eb;
+color:white;
+font-weight:800;
+cursor:pointer
+}
+
+.login-button:hover{background:#1d4ed8}
+
+.login-hint{
+margin-top:15px;
+padding:11px;
+border-radius:10px;
+background:#eff6ff;
+color:#1e40af;
+font-size:11px;
+text-align:center
+}
+
+/* APP */
+
+.sidebar{
+width:260px;
+position:fixed;
+left:0;
+top:0;
+bottom:0;
+background:#0f172a;
+color:white;
+z-index:100;
+overflow-y:auto
+}
+
+.sidebar-header{
+padding:24px 18px;
+border-bottom:1px solid rgba(255,255,255,.1)
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:11px
+}
+
+.brand-icon{
+width:44px;
+height:44px;
+border-radius:12px;
+background:#2563eb;
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.brand-title{
+font-weight:800;
+font-size:15px
+}
+
+.brand-subtitle{
+font-size:10px;
+color:#94a3b8;
+margin-top:3px
+}
+
+.role-badge{
+margin-top:15px;
+padding:8px;
+border-radius:9px;
+background:rgba(37,99,235,.2);
+color:#93c5fd;
+font-size:10px;
+text-align:center;
+font-weight:800
+}
+
+.menu-title{
+padding:20px 18px 7px;
+font-size:10px;
+color:#64748b;
+font-weight:800;
+text-transform:uppercase
+}
+
+.menu-item{
+margin:3px 10px;
+padding:12px;
+border-radius:10px;
+display:flex;
+gap:12px;
+align-items:center;
+cursor:pointer;
+color:#cbd5e1;
+font-size:13px;
+transition:.2s
+}
+
+.menu-item:hover,
+.menu-item.active{
+background:#2563eb;
+color:white
+}
+
+.menu-item i{
+width:20px;
+text-align:center
+}
+
+.logout-button{
+margin:20px 10px;
+padding:12px;
+border-radius:10px;
+background:#7f1d1d;
+color:#fecaca;
+display:flex;
+gap:12px;
+align-items:center;
+cursor:pointer;
+font-size:13px
+}
+
+.main{
+margin-left:260px;
+min-height:100vh
+}
+
+.topbar{
+height:70px;
+background:white;
+border-bottom:1px solid #e2e8f0;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 25px;
+position:sticky;
+top:0;
+z-index:50
+}
+
+.topbar-title{
+font-size:18px;
+font-weight:800
+}
+
+.user-info{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.avatar{
+width:38px;
+height:38px;
+border-radius:50%;
+background:#dbeafe;
+color:#2563eb;
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.content{
+padding:25px;
+max-width:1450px;
+margin:auto
+}
+
+.welcome-box{
+background:linear-gradient(135deg,#2563eb,#1e40af);
+color:white;
+border-radius:18px;
+padding:25px;
+margin-bottom:20px
+}
+
+.welcome-box h1{
+font-size:23px;
+font-weight:800;
+margin:0 0 5px
+}
+
+.welcome-box p{
+margin:0;
+font-size:13px;
+color:#dbeafe
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin-bottom:20px
+}
+
+.stat-card{
+background:white;
+border:1px solid #e2e8f0;
+border-radius:16px;
+padding:18px
+}
+
+.stat-icon{
+width:40px;
+height:40px;
+border-radius:11px;
+background:#eff6ff;
+color:#2563eb;
+display:flex;
+align-items:center;
+justify-content:center;
+margin-bottom:10px
+}
+
+.stat-title{
+font-size:11px;
+color:#64748b
+}
+
+.stat-value{
+font-size:19px;
+font-weight:800;
+margin-top:4px
+}
+
+.card{
+background:white;
+border:1px solid #e2e8f0;
+border-radius:16px;
+overflow:hidden;
+margin-bottom:20px
+}
+
+.card-header{
+padding:17px 19px;
+border-bottom:1px solid #e2e8f0;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px
+}
+
+.card-title{
+font-size:15px;
+font-weight:800
+}
+
+.card-body{
+padding:19px
+}
+
+.btn{
+border:0;
+border-radius:9px;
+padding:9px 13px;
+font-size:12px;
+font-weight:800;
+cursor:pointer;
+display:inline-flex;
+align-items:center;
+gap:6px
+}
+
+.btn-primary{background:#2563eb;color:white}
+.btn-success{background:#16a34a;color:white}
+.btn-danger{background:#dc2626;color:white}
+.btn-secondary{background:#e2e8f0;color:#334155}
+.btn-warning{background:#f59e0b;color:white}
+
+.btn:hover{opacity:.9}
+
+.table-wrapper{overflow-x:auto}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:650px
+}
+
+th,td{
+padding:12px 13px;
+border-bottom:1px solid #e2e8f0;
+font-size:12px;
+text-align:left
+}
+
+th{
+background:#f8fafc;
+color:#475569;
+font-weight:800
+}
+
+.amount-in{
+color:#15803d;
+font-weight:800
+}
+
+.amount-out{
+color:#dc2626;
+font-weight:800
+}
+
+/* WARNING */
+
+.warning-card{
+border:1px solid #fde68a;
+background:#fffbeb;
+border-radius:15px;
+padding:16px;
+margin-bottom:20px
+}
+
+.warning-title{
+font-weight:800;
+color:#92400e;
+font-size:14px;
+margin-bottom:10px
+}
+
+.warning-item{
+padding:10px;
+background:white;
+border-radius:10px;
+margin-top:7px;
+display:flex;
+justify-content:space-between;
+gap:10px;
+align-items:center
+}
+
+.warning-name{
+font-weight:800;
+font-size:12px
+}
+
+.warning-detail{
+font-size:11px;
+color:#92400e
+}
+
+/* PAYMENT STATUS */
+
+.status-paid{
+display:inline-flex;
+padding:5px 8px;
+border-radius:999px;
+background:#dcfce7;
+color:#166534;
+font-size:10px;
+font-weight:800
+}
+
+.status-unpaid{
+display:inline-flex;
+padding:5px 8px;
+border-radius:999px;
+background:#fee2e2;
+color:#991b1b;
+font-size:10px;
+font-weight:800
+}
+
+/* FORM */
+
+.form-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px
+}
+
+.form-group{margin-bottom:13px}
+
+.form-group.full{
+grid-column:1/-1
+}
+
+.form-label{
+display:block;
+font-size:12px;
+font-weight:800;
+margin-bottom:6px
+}
+
+.form-control{
+width:100%;
+height:43px;
+border:1px solid #cbd5e1;
+border-radius:9px;
+padding:8px 11px;
+outline:none;
+background:white
+}
+
+.form-control:focus{
+border-color:#2563eb;
+box-shadow:0 0 0 3px rgba(37,99,235,.1)
+}
+
+/* MODAL */
+
+.app-modal{
+position:fixed;
+inset:0;
+background:rgba(15,23,42,.65);
+display:none;
+align-items:center;
+justify-content:center;
+padding:18px;
+z-index:500;
+backdrop-filter:blur(4px)
+}
+
+.app-modal.show{display:flex}
+
+.modal-box{
+width:100%;
+max-width:480px;
+background:white;
+border-radius:20px;
+box-shadow:0 25px 70px rgba(0,0,0,.3);
+overflow:hidden;
+animation:modalIn .2s ease
+}
+
+@keyframes modalIn{
+from{transform:scale(.94);opacity:0}
+to{transform:scale(1);opacity:1}
+}
+
+.modal-header{
+padding:18px 20px;
+border-bottom:1px solid #e2e8f0;
+display:flex;
+align-items:center;
+justify-content:space-between
+}
+
+.modal-title{
+font-size:16px;
+font-weight:800
+}
+
+.modal-close{
+width:34px;
+height:34px;
+border:0;
+border-radius:9px;
+background:#f1f5f9;
+cursor:pointer;
+color:#475569
+}
+
+.modal-body{padding:20px}
+
+.modal-footer{
+padding:15px 20px;
+border-top:1px solid #e2e8f0;
+display:flex;
+justify-content:flex-end;
+gap:8px
+}
+
+/* CONFIRM */
+
+.confirm-icon{
+width:62px;
+height:62px;
+border-radius:50%;
+background:#fee2e2;
+color:#dc2626;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+margin:0 auto 14px
+}
+
+.confirm-content{
+text-align:center
+}
+
+.confirm-title{
+font-size:18px;
+font-weight:800;
+margin-bottom:6px
+}
+
+.confirm-text{
+font-size:12px;
+color:#64748b;
+line-height:1.6
+}
+
+.confirm-footer{
+justify-content:center
+}
+
+/* WELCOME */
+
+#welcomePopup{
+position:fixed;
+top:20px;
+right:20px;
+width:340px;
+max-width:calc(100% - 40px);
+background:white;
+border-radius:16px;
+padding:15px;
+box-shadow:0 20px 50px rgba(0,0,0,.22);
+z-index:800;
+border-left:5px solid #2563eb;
+transform:translateX(420px);
+transition:.35s
+}
+
+#welcomePopup.show{
+transform:translateX(0)
+}
+
+.welcome-content{
+display:flex;
+gap:12px;
+align-items:center
+}
+
+.welcome-icon{
+width:43px;
+height:43px;
+min-width:43px;
+border-radius:50%;
+background:#dbeafe;
+color:#2563eb;
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.welcome-title{
+font-size:13px;
+font-weight:800
+}
+
+.welcome-text{
+font-size:11px;
+color:#64748b;
+margin-top:3px
+}
+
+/* TOAST */
+
+#toast{
+position:fixed;
+right:20px;
+bottom:20px;
+padding:13px 16px;
+border-radius:11px;
+background:#0f172a;
+color:white;
+font-size:12px;
+z-index:1000;
+opacity:0;
+transform:translateY(20px);
+pointer-events:none;
+transition:.3s;
+max-width:350px
+}
+
+#toast.show{
+opacity:1;
+transform:translateY(0)
+}
+
+#toast.success{background:#15803d}
+#toast.error{background:#dc2626}
+
+/* MOBILE */
+
+.mobile-button{
+display:none;
+width:40px;
+height:40px;
+border:0;
+border-radius:10px;
+background:#eff6ff;
+color:#2563eb
+}
+
+#mobileOverlay{display:none}
+
+@media(max-width:950px){
+
+.sidebar{
+transform:translateX(-100%);
+transition:.3s
+}
+
+.sidebar.open{
+transform:translateX(0)
+}
+
+.main{
+margin-left:0
+}
+
+.mobile-button{
+display:block
+}
+
+#mobileOverlay.show{
+display:block;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+z-index:90
+}
+
+.stats-grid{
+grid-template-columns:repeat(2,1fr)
+}
+}
+
+@media(max-width:600px){
+
+.login-card{
+padding:25px 18px
+}
+
+.content{
+padding:14px
+}
+
+.topbar{
+padding:0 14px
+}
+
+.topbar-title{
+font-size:15px
+}
+
+.user-info-text{
+display:none
+}
+
+.stats-grid{
+gap:9px
+}
+
+.stat-card{
+padding:13px
+}
+
+.stat-value{
+font-size:16px
+}
+
+.form-grid{
+grid-template-columns:1fr
+}
+
+.form-group.full{
+grid-column:auto
+}
+
+.welcome-box{
+padding:20px
+}
+
+.welcome-box h1{
+font-size:20px
+}
+
+.warning-item{
+align-items:flex-start;
+flex-direction:column
+}
+}
+</style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     LOGIN PAGE
-========================================================= -->
+<!-- =====================================================
+LOGIN
+===================================================== -->
 
 <section id="loginPage">
 
-  <div class="login-card">
+<div class="login-card">
 
-    <div class="login-logo">
-      <i class="fa-solid fa-wallet"></i>
-    </div>
+<div class="login-logo">
+<i class="fa-solid fa-wallet"></i>
+</div>
 
-    <div class="login-title">
-      Kas Kelas VII B
-    </div>
+<div class="login-title">
+Kas Kelas VII B
+</div>
 
-    <div class="login-subtitle">
-      Sistem Informasi Kas Kelas
-    </div>
+<div class="login-subtitle">
+Sistem Informasi Kas Kelas
+</div>
 
-    <form id="loginForm">
 
-      <div class="input-group">
-        <i class="fa-solid fa-user"></i>
-        <input
-          type="text"
-          id="loginUsername"
-          placeholder="Username"
-          autocomplete="username"
-          required>
-      </div>
+<div class="login-choice">
 
-      <div class="input-group">
-        <i class="fa-solid fa-lock"></i>
-        <input
-          type="password"
-          id="loginPassword"
-          placeholder="Password"
-          autocomplete="current-password"
-          required>
-      </div>
+<div id="choiceAnggota"
+class="role-choice active"
+onclick="selectLoginRole('anggota')">
 
-      <button type="submit" class="login-button">
-        <i class="fa-solid fa-right-to-bracket"></i>
-        &nbsp; Masuk
-      </button>
+<i class="fa-solid fa-user"></i>
+<span>Login Anggota</span>
 
-    </form>
+</div>
 
-    <div class="login-info">
-      <i class="fa-solid fa-circle-info"></i>
-      Silakan masuk menggunakan akun yang telah ditentukan.
-    </div>
+<div id="choiceBendahara"
+class="role-choice"
+onclick="selectLoginRole('bendahara')">
 
-  </div>
+<i class="fa-solid fa-user-tie"></i>
+<span>Login Bendahara</span>
 
-</section>
-
-
-<!-- =========================================================
-     APP PAGE
-========================================================= -->
-
-<section id="appPage" class="hidden-page">
-
-  <!-- SIDEBAR -->
-  <aside id="sidebar" class="sidebar">
-
-    <div class="sidebar-header">
-
-      <div class="brand">
-
-        <div class="brand-icon">
-          <i class="fa-solid fa-wallet"></i>
-        </div>
-
-        <div>
-          <div class="brand-title">Kas Kelas VII B</div>
-          <div class="brand-subtitle">Sistem Kas Kelas</div>
-        </div>
-
-      </div>
-
-      <div id="roleBadge" class="role-badge">
-        BENDahara
-      </div>
-
-    </div>
-
-
-    <!-- MENU BENDahara -->
-    <div id="bendaharaMenu">
-
-      <div class="menu-title">
-        Menu Bendahara
-      </div>
-
-      <div
-        class="menu-item active"
-        data-page="beranda"
-        onclick="navigate('beranda')">
-
-        <i class="fa-solid fa-house"></i>
-        <span>Beranda</span>
-
-      </div>
-
-      <div
-        class="menu-item"
-        data-page="kasMasuk"
-        onclick="navigate('kasMasuk')">
-
-        <i class="fa-solid fa-arrow-down"></i>
-        <span>Kas Masuk</span>
-
-      </div>
-
-      <div
-        class="menu-item"
-        data-page="kasKeluar"
-        onclick="navigate('kasKeluar')">
-
-        <i class="fa-solid fa-arrow-up"></i>
-        <span>Kas Keluar</span>
-
-      </div>
-
-      <div
-        class="menu-item"
-        data-page="siswa"
-        onclick="navigate('siswa')">
-
-        <i class="fa-solid fa-users"></i>
-        <span>Daftar Siswa</span>
-
-      </div>
-
-      <div
-        class="menu-item"
-        data-page="riwayat"
-        onclick="navigate('riwayat')">
-
-        <i class="fa-solid fa-clock-rotate-left"></i>
-        <span>Riwayat Kas</span>
-
-      </div>
-
-    </div>
-
-
-    <!-- MENU ANGGOTA -->
-    <div id="anggotaMenu" class="hidden-page">
-
-      <div class="menu-title">
-        Menu Anggota
-      </div>
-
-      <div
-        class="menu-item active"
-        data-page="beranda"
-        onclick="navigate('beranda')">
-
-        <i class="fa-solid fa-house"></i>
-        <span>Beranda</span>
-
-      </div>
-
-      <div
-        class="menu-item"
-        data-page="riwayat"
-        onclick="navigate('riwayat')">
-
-        <i class="fa-solid fa-clock-rotate-left"></i>
-        <span>Riwayat Kas</span>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="logout-button"
-      onclick="logout()">
-
-      <i class="fa-solid fa-right-from-bracket"></i>
-      <span>Keluar</span>
-
-    </div>
-
-  </aside>
-
-
-  <div
-    id="mobileOverlay"
-    onclick="closeSidebar()">
-  </div>
-
-
-  <!-- MAIN -->
-  <main class="main">
-
-    <header class="topbar">
-
-      <div class="flex items-center gap-3">
-
-        <button
-          class="mobile-menu-button"
-          onclick="toggleSidebar()">
-
-          <i class="fa-solid fa-bars"></i>
-
-        </button>
-
-        <div
-          id="pageTitle"
-          class="topbar-title">
-          Beranda
-        </div>
-
-      </div>
-
-
-      <div class="user-info">
-
-        <div class="user-info-text text-right">
-
-          <div
-            id="topUsername"
-            class="font-bold text-sm">
-            -
-          </div>
-
-          <div
-            id="topRole"
-            class="text-xs text-slate-500">
-            -
-          </div>
-
-        </div>
-
-        <div class="user-avatar">
-          <i class="fa-solid fa-user"></i>
-        </div>
-
-      </div>
-
-    </header>
-
-
-    <div class="content">
-
-      <!-- ==============================================
-           PAGE BERANDA
-      =============================================== -->
-
-      <div id="page-beranda">
-
-        <div class="welcome-box">
-
-          <h1 id="dashboardGreeting">
-            Selamat Datang
-          </h1>
-
-          <p id="dashboardDescription">
-            Kelola dan pantau keuangan kelas dengan mudah.
-          </p>
-
-        </div>
-
-
-        <div class="stats-grid">
-
-          <div class="stat-card">
-
-            <div class="stat-icon">
-              <i class="fa-solid fa-wallet"></i>
-            </div>
-
-            <div class="stat-title">
-              Saldo Kas
-            </div>
-
-            <div
-              id="statSaldo"
-              class="stat-value">
-              Rp0
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-icon">
-              <i class="fa-solid fa-arrow-down"></i>
-            </div>
-
-            <div class="stat-title">
-              Total Kas Masuk
-            </div>
-
-            <div
-              id="statMasuk"
-              class="stat-value">
-              Rp0
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-icon">
-              <i class="fa-solid fa-arrow-up"></i>
-            </div>
-
-            <div class="stat-title">
-              Total Kas Keluar
-            </div>
-
-            <div
-              id="statKeluar"
-              class="stat-value">
-              Rp0
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-icon">
-              <i class="fa-solid fa-users"></i>
-            </div>
-
-            <div class="stat-title">
-              Jumlah Siswa
-            </div>
-
-            <div
-              id="statSiswa"
-              class="stat-value">
-              0
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div class="card-title">
-              Transaksi Terbaru
-            </div>
-
-            <button
-              class="btn btn-secondary"
-              onclick="navigate('riwayat')">
-
-              Lihat Semua
-
-              <i class="fa-solid fa-arrow-right"></i>
-
-            </button>
-
-          </div>
-
-          <div
-            id="dashboardTransactions"
-            class="card-body">
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ==============================================
-           PAGE KAS MASUK
-      =============================================== -->
-
-      <div id="page-kasMasuk" class="hidden-page">
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-              <div class="card-title">
-                Kas Masuk
-              </div>
-
-              <div class="text-xs text-slate-500 mt-1">
-                Catatan pemasukan kas kelas
-              </div>
-            </div>
-
-            <button
-              id="btnTambahKasMasuk"
-              class="btn btn-primary"
-              onclick="openKasMasukModal()">
-
-              <i class="fa-solid fa-plus"></i>
-              Tambah
-
-            </button>
-
-          </div>
-
-          <div class="table-wrapper">
-
-            <table>
-
-              <thead>
-
-                <tr>
-                  <th>Tanggal</th>
-                  <th>Nama Siswa</th>
-                  <th>Keterangan</th>
-                  <th>Jumlah</th>
-                  <th id="thAksiMasuk">Aksi</th>
-                </tr>
-
-              </thead>
-
-              <tbody id="tableKasMasuk">
-
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ==============================================
-           PAGE KAS KELUAR
-      =============================================== -->
-
-      <div id="page-kasKeluar" class="hidden-page">
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-
-              <div class="card-title">
-                Kas Keluar
-              </div>
-
-              <div class="text-xs text-slate-500 mt-1">
-                Catatan pengeluaran kas kelas
-              </div>
-
-            </div>
-
-            <button
-              id="btnTambahKasKeluar"
-              class="btn btn-danger"
-              onclick="openKasKeluarModal()">
-
-              <i class="fa-solid fa-plus"></i>
-              Tambah
-
-            </button>
-
-          </div>
-
-          <div class="table-wrapper">
-
-            <table>
-
-              <thead>
-
-                <tr>
-                  <th>Tanggal</th>
-                  <th>Keterangan</th>
-                  <th>Jumlah</th>
-                  <th id="thAksiKeluar">Aksi</th>
-                </tr>
-
-              </thead>
-
-              <tbody id="tableKasKeluar">
-
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ==============================================
-           PAGE SISWA
-      =============================================== -->
-
-      <div id="page-siswa" class="hidden-page">
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-
-              <div class="card-title">
-                Daftar Siswa
-              </div>
-
-              <div class="text-xs text-slate-500 mt-1">
-                Data anggota kelas VII B
-              </div>
-
-            </div>
-
-            <button
-              id="btnTambahSiswa"
-              class="btn btn-primary"
-              onclick="openSiswaModal()">
-
-              <i class="fa-solid fa-user-plus"></i>
-              Tambah Siswa
-
-            </button>
-
-          </div>
-
-          <div class="table-wrapper">
-
-            <table>
-
-              <thead>
-
-                <tr>
-                  <th>No</th>
-                  <th>Nama</th>
-                  <th>NIS</th>
-                  <th>Jenis Kelamin</th>
-                  <th id="thAksiSiswa">Aksi</th>
-                </tr>
-
-              </thead>
-
-              <tbody id="tableSiswa">
-
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ==============================================
-           PAGE RIWAYAT
-      =============================================== -->
-
-      <div id="page-riwayat" class="hidden-page">
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-
-              <div class="card-title">
-                Riwayat Kas
-              </div>
-
-              <div class="text-xs text-slate-500 mt-1">
-                Semua transaksi kas kelas
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="table-wrapper">
-
-            <table>
-
-              <thead>
-
-                <tr>
-                  <th>Tanggal</th>
-                  <th>Jenis</th>
-                  <th>Keterangan</th>
-                  <th>Jumlah</th>
-                </tr>
-
-              </thead>
-
-              <tbody id="tableRiwayat">
-
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </main>
-
-</section>
-
-
-<!-- =========================================================
-     POPUP WELCOME
-========================================================= -->
-
-<div id="welcomePopup">
-
-  <div class="welcome-popup-content">
-
-    <div class="welcome-popup-icon">
-      <i class="fa-solid fa-hand"></i>
-    </div>
-
-    <div>
-
-      <div
-        id="welcomePopupTitle"
-        class="welcome-popup-title">
-        Selamat Datang
-      </div>
-
-      <div
-        id="welcomePopupText"
-        class="welcome-popup-text">
-        Anda berhasil masuk.
-      </div>
-
-    </div>
-
-  </div>
+</div>
 
 </div>
 
 
-<!-- =========================================================
-     TOAST
-========================================================= -->
+<form id="loginForm">
+
+<div class="input-group">
+
+<i class="fa-solid fa-user"></i>
+
+<input
+id="loginUsername"
+type="text"
+placeholder="Nama anggota"
+required>
+
+</div>
+
+
+<div class="input-group">
+
+<i class="fa-solid fa-lock"></i>
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Password"
+required>
+
+</div>
+
+
+<button class="login-button"
+type="submit">
+
+<i class="fa-solid fa-right-to-bracket"></i>
+&nbsp; Masuk
+
+</button>
+
+</form>
+
+
+<div id="loginHint"
+class="login-hint">
+
+Anggota login menggunakan nama siswa dan password anggota.
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+APP
+===================================================== -->
+
+<section id="appPage" class="hidden-page">
+
+
+<aside id="sidebar" class="sidebar">
+
+<div class="sidebar-header">
+
+<div class="brand">
+
+<div class="brand-icon">
+<i class="fa-solid fa-wallet"></i>
+</div>
+
+<div>
+
+<div class="brand-title">
+Kas Kelas VII B
+</div>
+
+<div class="brand-subtitle">
+Sistem Kas Kelas
+</div>
+
+</div>
+
+</div>
+
+
+<div id="roleBadge"
+class="role-badge">
+ANGGOTA
+</div>
+
+</div>
+
+
+<!-- MENU ANGGOTA -->
+
+<div id="anggotaMenu">
+
+<div class="menu-title">
+Menu Anggota
+</div>
+
+<div
+class="menu-item active"
+data-page="beranda"
+onclick="navigate('beranda')">
+
+<i class="fa-solid fa-house"></i>
+<span>Beranda</span>
+
+</div>
+
+<div
+class="menu-item"
+data-page="riwayat"
+onclick="navigate('riwayat')">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+<span>Riwayat Kas</span>
+
+</div>
+
+</div>
+
+
+<!-- MENU BENDAHARA -->
+
+<div id="bendaharaMenu"
+class="hidden-page">
+
+<div class="menu-title">
+Menu Bendahara
+</div>
+
+<div
+class="menu-item active"
+data-page="beranda"
+onclick="navigate('beranda')">
+
+<i class="fa-solid fa-house"></i>
+<span>Beranda</span>
+
+</div>
+
+<div
+class="menu-item"
+data-page="kasMasuk"
+onclick="navigate('kasMasuk')">
+
+<i class="fa-solid fa-arrow-down"></i>
+<span>Kas Masuk</span>
+
+</div>
+
+<div
+class="menu-item"
+data-page="kasKeluar"
+onclick="navigate('kasKeluar')">
+
+<i class="fa-solid fa-arrow-up"></i>
+<span>Kas Keluar</span>
+
+</div>
+
+<div
+class="menu-item"
+data-page="siswa"
+onclick="navigate('siswa')">
+
+<i class="fa-solid fa-users"></i>
+<span>Daftar Siswa</span>
+
+</div>
+
+<div
+class="menu-item"
+data-page="riwayat"
+onclick="navigate('riwayat')">
+
+<i class="fa-solid fa-clock-rotate-left"></i>
+<span>Riwayat Kas</span>
+
+</div>
+
+<div
+class="menu-item"
+data-page="pengaturan"
+onclick="navigate('pengaturan')">
+
+<i class="fa-solid fa-gear"></i>
+<span>Pengaturan Kas</span>
+
+</div>
+
+</div>
+
+
+<div class="logout-button"
+onclick="askLogout()">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+<span>Keluar</span>
+
+</div>
+
+</aside>
+
+
+<div id="mobileOverlay"
+onclick="closeSidebar()">
+</div>
+
+
+<main class="main">
+
+<header class="topbar">
+
+<div class="flex items-center gap-3">
+
+<button
+class="mobile-button"
+onclick="toggleSidebar()">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+<div id="pageTitle"
+class="topbar-title">
+Beranda
+</div>
+
+</div>
+
+
+<div class="user-info">
+
+<div class="user-info-text text-right">
+
+<div id="topUsername"
+class="font-bold text-sm">
+-
+</div>
+
+<div id="topRole"
+class="text-xs text-slate-500">
+-
+</div>
+
+</div>
+
+<div class="avatar">
+<i class="fa-solid fa-user"></i>
+</div>
+
+</div>
+
+</header>
+
+
+<div class="content">
+
+
+<!-- =====================================================
+BERANDA
+===================================================== -->
+
+<div id="page-beranda">
+
+
+<div class="welcome-box">
+
+<h1 id="dashboardGreeting">
+Selamat Datang
+</h1>
+
+<p id="dashboardDescription">
+Pantau informasi kas kelas.
+</p>
+
+</div>
+
+
+<!-- NOTIFIKASI TUNGGAKAN BENDAHARA -->
+
+<div id="bendaharaWarning"
+class="warning-card hidden-page">
+
+<div class="warning-title">
+
+<i class="fa-solid fa-triangle-exclamation"></i>
+&nbsp; Siswa Belum Membayar Kas
+
+</div>
+
+<div id="warningList"></div>
+
+</div>
+
+
+<!-- STATUS ANGGOTA -->
+
+<div id="anggotaPaymentStatus"
+class="warning-card hidden-page">
+
+<div class="warning-title">
+
+<i class="fa-solid fa-circle-exclamation"></i>
+&nbsp; Status Pembayaran Kas
+
+</div>
+
+<div id="anggotaStatusContent"></div>
+
+</div>
+
+
+<div class="stats-grid">
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+<i class="fa-solid fa-wallet"></i>
+</div>
+
+<div class="stat-title">
+Saldo Kas
+</div>
+
+<div id="statSaldo"
+class="stat-value">
+Rp0
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+<i class="fa-solid fa-arrow-down"></i>
+</div>
+
+<div class="stat-title">
+Kas Masuk
+</div>
+
+<div id="statMasuk"
+class="stat-value">
+Rp0
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+<i class="fa-solid fa-arrow-up"></i>
+</div>
+
+<div class="stat-title">
+Kas Keluar
+</div>
+
+<div id="statKeluar"
+class="stat-value">
+Rp0
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+<i class="fa-solid fa-users"></i>
+</div>
+
+<div class="stat-title">
+Jumlah Siswa
+</div>
+
+<div id="statSiswa"
+class="stat-value">
+0
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="card">
+
+<div class="card-header">
+
+<div class="card-title">
+Transaksi Terbaru
+</div>
+
+<button
+class="btn btn-secondary"
+onclick="navigate('riwayat')">
+
+Lihat Semua
+<i class="fa-solid fa-arrow-right"></i>
+
+</button>
+
+</div>
+
+<div id="dashboardTransactions"
+class="card-body">
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+KAS MASUK
+===================================================== -->
+
+<div id="page-kasMasuk"
+class="hidden-page">
+
+<div class="card">
+
+<div class="card-header">
+
+<div>
+
+<div class="card-title">
+Kas Masuk
+</div>
+
+<div class="text-xs text-slate-500 mt-1">
+Catatan pembayaran kas siswa
+</div>
+
+</div>
+
+<button
+class="btn btn-primary"
+onclick="openKasMasukModal()">
+
+<i class="fa-solid fa-plus"></i>
+Tambah Pembayaran
+
+</button>
+
+</div>
+
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Tanggal</th>
+<th>Nama Siswa</th>
+<th>Periode</th>
+<th>Keterangan</th>
+<th>Jumlah</th>
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableKasMasuk">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+KAS KELUAR
+===================================================== -->
+
+<div id="page-kasKeluar"
+class="hidden-page">
+
+<div class="card">
+
+<div class="card-header">
+
+<div>
+
+<div class="card-title">
+Kas Keluar
+</div>
+
+<div class="text-xs text-slate-500 mt-1">
+Catatan pengeluaran kas kelas
+</div>
+
+</div>
+
+<button
+class="btn btn-danger"
+onclick="openKasKeluarModal()">
+
+<i class="fa-solid fa-plus"></i>
+Tambah Pengeluaran
+
+</button>
+
+</div>
+
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Tanggal</th>
+<th>Keterangan</th>
+<th>Jumlah</th>
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableKasKeluar">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+SISWA
+===================================================== -->
+
+<div id="page-siswa"
+class="hidden-page">
+
+<div class="card">
+
+<div class="card-header">
+
+<div>
+
+<div class="card-title">
+Daftar Siswa
+</div>
+
+<div class="text-xs text-slate-500 mt-1">
+Data dan status pembayaran siswa
+</div>
+
+</div>
+
+<button
+class="btn btn-primary"
+onclick="openSiswaModal()">
+
+<i class="fa-solid fa-user-plus"></i>
+Tambah Siswa
+
+</button>
+
+</div>
+
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>No</th>
+<th>Nama</th>
+<th>NIS</th>
+<th>Jenis Kelamin</th>
+<th>Status Kas</th>
+<th>Tunggakan</th>
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableSiswa">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+RIWAYAT
+===================================================== -->
+
+<div id="page-riwayat"
+class="hidden-page">
+
+
+<div class="card">
+
+<div class="card-header">
+
+<div class="card-title">
+Riwayat Kas
+</div>
+
+</div>
+
+
+<div class="flex gap-2 p-4 border-b border-slate-200">
+
+<button
+id="historyInButton"
+class="btn btn-primary"
+onclick="switchHistory('masuk')">
+
+<i class="fa-solid fa-arrow-down"></i>
+Kas Masuk
+
+</button>
+
+<button
+id="historyOutButton"
+class="btn btn-secondary"
+onclick="switchHistory('keluar')">
+
+<i class="fa-solid fa-arrow-up"></i>
+Kas Keluar
+
+</button>
+
+</div>
+
+
+<div id="historyMasuk">
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Tanggal</th>
+<th>Siapa</th>
+<th>Periode</th>
+<th>Keterangan</th>
+<th>Jumlah</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historyMasukTable">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div id="historyKeluar"
+class="hidden-page">
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Tanggal</th>
+<th>Keterangan</th>
+<th>Jumlah</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historyKeluarTable">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+PENGATURAN
+===================================================== -->
+
+<div id="page-pengaturan"
+class="hidden-page">
+
+<div class="card">
+
+<div class="card-header">
+
+<div>
+
+<div class="card-title">
+Pengaturan Kas Mingguan
+</div>
+
+<div class="text-xs text-slate-500 mt-1">
+Atur nominal kas yang harus dibayar setiap minggu
+</div>
+
+</div>
+
+<i class="fa-solid fa-gear text-slate-400"></i>
+
+</div>
+
+
+<div class="card-body">
+
+<form id="settingsForm">
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label class="form-label">
+Nominal Kas Per Minggu
+</label>
+
+<input
+id="settingWeeklyAmount"
+type="number"
+class="form-control"
+min="0"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label class="form-label">
+Mulai Pembayaran Kas
+</label>
+
+<input
+id="settingStartDate"
+type="date"
+class="form-control"
+required>
+
+</div>
+
+
+</div>
+
+
+<div class="mt-3 p-3 rounded-xl bg-blue-50 text-blue-800 text-xs">
+
+<i class="fa-solid fa-circle-info"></i>
+
+Nominal ini digunakan otomatis untuk menghitung
+total tunggakan setiap siswa.
+
+Contoh: kas Rp10.000/minggu dan siswa menunggak
+3 minggu, maka total tunggakannya Rp30.000.
+
+</div>
+
+
+<div class="mt-4">
+
+<button
+class="btn btn-primary"
+type="submit">
+
+<i class="fa-solid fa-save"></i>
+Simpan Pengaturan
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</main>
+
+</section>
+
+
+<!-- =====================================================
+WELCOME POPUP
+===================================================== -->
+
+<div id="welcomePopup">
+
+<div class="welcome-content">
+
+<div class="welcome-icon">
+<i class="fa-solid fa-hand-sparkles"></i>
+</div>
+
+<div>
+
+<div id="welcomeTitle"
+class="welcome-title">
+Selamat Datang
+</div>
+
+<div id="welcomeText"
+class="welcome-text">
+Anda berhasil masuk.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+TOAST
+===================================================== -->
 
 <div id="toast"></div>
 
 
-<!-- =========================================================
-     MODAL KAS MASUK
-========================================================= -->
+<!-- =====================================================
+MODAL KAS MASUK
+===================================================== -->
 
-<div id="kasMasukModal" class="modal">
+<div id="kasMasukModal"
+class="app-modal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div class="modal-header">
+<div class="modal-header">
 
-      <div class="modal-title">
-        <span id="kasMasukModalTitle">
-          Tambah Kas Masuk
-        </span>
-      </div>
+<div class="modal-title">
+Tambah Pembayaran Kas
+</div>
 
-      <button
-        class="modal-close"
-        onclick="closeModal('kasMasukModal')">
+<button
+class="modal-close"
+onclick="closeModal('kasMasukModal')">
 
-        <i class="fa-solid fa-xmark"></i>
+<i class="fa-solid fa-xmark"></i>
 
-      </button>
-
-    </div>
-
-
-    <form id="kasMasukForm">
-
-      <div class="modal-body">
-
-        <input
-          type="hidden"
-          id="kasMasukId">
-
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Tanggal
-          </label>
-
-          <input
-            type="date"
-            id="kasMasukTanggal"
-            class="form-control"
-            required>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Nama Siswa
-          </label>
-
-          <select
-            id="kasMasukSiswa"
-            class="form-control"
-            required>
-
-            <option value="">
-              Pilih siswa
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Keterangan
-          </label>
-
-          <input
-            type="text"
-            id="kasMasukKeterangan"
-            class="form-control"
-            placeholder="Contoh: Bayaran kas minggu 1"
-            required>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Jumlah
-          </label>
-
-          <input
-            type="number"
-            id="kasMasukJumlah"
-            class="form-control"
-            placeholder="10000"
-            min="0"
-            required>
-
-        </div>
-
-      </div>
-
-
-      <div class="modal-footer">
-
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onclick="closeModal('kasMasukModal')">
-
-          Batal
-
-        </button>
-
-        <button
-          type="submit"
-          class="btn btn-primary">
-
-          <i class="fa-solid fa-save"></i>
-          Simpan
-
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
+</button>
 
 </div>
 
 
-<!-- =========================================================
-     MODAL KAS KELUAR
-========================================================= -->
+<form id="kasMasukForm">
 
-<div id="kasKeluarModal" class="modal">
+<div class="modal-body">
 
-  <div class="modal-box">
-
-    <div class="modal-header">
-
-      <div class="modal-title">
-        <span id="kasKeluarModalTitle">
-          Tambah Kas Keluar
-        </span>
-      </div>
-
-      <button
-        class="modal-close"
-        onclick="closeModal('kasKeluarModal')">
-
-        <i class="fa-solid fa-xmark"></i>
-
-      </button>
-
-    </div>
+<input id="kasMasukId"
+type="hidden">
 
 
-    <form id="kasKeluarForm">
+<div class="form-group">
 
-      <div class="modal-body">
+<label class="form-label">
+Tanggal Pembayaran
+</label>
 
-        <input
-          type="hidden"
-          id="kasKeluarId">
-
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Tanggal
-          </label>
-
-          <input
-            type="date"
-            id="kasKeluarTanggal"
-            class="form-control"
-            required>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Keterangan
-          </label>
-
-          <input
-            type="text"
-            id="kasKeluarKeterangan"
-            class="form-control"
-            placeholder="Contoh: Membeli alat kebersihan"
-            required>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Jumlah
-          </label>
-
-          <input
-            type="number"
-            id="kasKeluarJumlah"
-            class="form-control"
-            placeholder="50000"
-            min="0"
-            required>
-
-        </div>
-
-      </div>
-
-
-      <div class="modal-footer">
-
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onclick="closeModal('kasKeluarModal')">
-
-          Batal
-
-        </button>
-
-        <button
-          type="submit"
-          class="btn btn-danger">
-
-          <i class="fa-solid fa-save"></i>
-          Simpan
-
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
+<input
+id="kasMasukTanggal"
+type="date"
+class="form-control"
+required>
 
 </div>
 
 
-<!-- =========================================================
-     MODAL SISWA
-========================================================= -->
+<div class="form-group">
 
-<div id="siswaModal" class="modal">
+<label class="form-label">
+Nama Siswa
+</label>
 
-  <div class="modal-box">
+<select
+id="kasMasukSiswa"
+class="form-control"
+required>
 
-    <div class="modal-header">
+<option value="">
+Pilih siswa
+</option>
 
-      <div class="modal-title">
-        <span id="siswaModalTitle">
-          Tambah Siswa
-        </span>
-      </div>
-
-      <button
-        class="modal-close"
-        onclick="closeModal('siswaModal')">
-
-        <i class="fa-solid fa-xmark"></i>
-
-      </button>
-
-    </div>
-
-
-    <form id="siswaForm">
-
-      <div class="modal-body">
-
-        <input
-          type="hidden"
-          id="siswaId">
-
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Nama Siswa
-          </label>
-
-          <input
-            type="text"
-            id="siswaNama"
-            class="form-control"
-            placeholder="Nama lengkap siswa"
-            required>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label class="form-label">
-            NIS
-          </label>
-
-          <input
-            type="text"
-            id="siswaNis"
-            class="form-control"
-            placeholder="Nomor induk siswa">
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Jenis Kelamin
-          </label>
-
-          <select
-            id="siswaGender"
-            class="form-control">
-
-            <option value="Laki-laki">
-              Laki-laki
-            </option>
-
-            <option value="Perempuan">
-              Perempuan
-            </option>
-
-          </select>
-
-        </div>
-
-      </div>
-
-
-      <div class="modal-footer">
-
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onclick="closeModal('siswaModal')">
-
-          Batal
-
-        </button>
-
-        <button
-          type="submit"
-          class="btn btn-primary">
-
-          <i class="fa-solid fa-save"></i>
-          Simpan
-
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
+</select>
 
 </div>
 
 
-<!-- =========================================================
-     FIREBASE + APPLICATION
-========================================================= -->
+<div class="form-group">
+
+<label class="form-label">
+Bulan dan Minggu Pembayaran
+</label>
+
+<select
+id="kasMasukPeriode"
+class="form-control"
+required>
+
+<option value="">
+Pilih periode
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label class="form-label">
+Jumlah Pembayaran
+</label>
+
+<input
+id="kasMasukJumlah"
+type="number"
+class="form-control"
+readonly>
+
+</div>
+
+
+<div class="p-3 rounded-xl bg-green-50 text-green-700 text-xs">
+
+<i class="fa-solid fa-circle-check"></i>
+
+Jumlah pembayaran otomatis mengikuti
+nominal kas per minggu yang telah ditentukan.
+
+</div>
+
+</div>
+
+
+<div class="modal-footer">
+
+<button
+type="button"
+class="btn btn-secondary"
+onclick="closeModal('kasMasukModal')">
+
+Batal
+
+</button>
+
+<button
+type="submit"
+class="btn btn-success">
+
+<i class="fa-solid fa-save"></i>
+Simpan Pembayaran
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+MODAL KAS KELUAR
+===================================================== -->
+
+<div id="kasKeluarModal"
+class="app-modal">
+
+<div class="modal-box">
+
+<div class="modal-header">
+
+<div class="modal-title">
+Tambah Kas Keluar
+</div>
+
+<button
+class="modal-close"
+onclick="closeModal('kasKeluarModal')">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+
+<form id="kasKeluarForm">
+
+<div class="modal-body">
+
+<input
+id="kasKeluarId"
+type="hidden">
+
+
+<div class="form-group">
+
+<label class="form-label">
+Tanggal
+</label>
+
+<input
+id="kasKeluarTanggal"
+type="date"
+class="form-control"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label class="form-label">
+Keterangan
+</label>
+
+<input
+id="kasKeluarKeterangan"
+type="text"
+class="form-control"
+placeholder="Contoh: Membeli alat kebersihan"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label class="form-label">
+Jumlah
+</label>
+
+<input
+id="kasKeluarJumlah"
+type="number"
+class="form-control"
+min="0"
+required>
+
+</div>
+
+</div>
+
+
+<div class="modal-footer">
+
+<button
+type="button"
+class="btn btn-secondary"
+onclick="closeModal('kasKeluarModal')">
+
+Batal
+
+</button>
+
+<button
+type="submit"
+class="btn btn-danger">
+
+<i class="fa-solid fa-save"></i>
+Simpan
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+MODAL SISWA
+===================================================== -->
+
+<div id="siswaModal"
+class="app-modal">
+
+<div class="modal-box">
+
+<div class="modal-header">
+
+<div id="siswaModalTitle"
+class="modal-title">
+Tambah Siswa
+</div>
+
+<button
+class="modal-close"
+onclick="closeModal('siswaModal')">
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+
+<form id="siswaForm">
+
+<div class="modal-body">
+
+<input
+id="siswaId"
+type="hidden">
+
+
+<div class="form-group">
+
+<label class="form-label">
+Nama Siswa
+</label>
+
+<input
+id="siswaNama"
+type="text"
+class="form-control"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label class="form-label">
+NIS
+</label>
+
+<input
+id="siswaNis"
+type="text"
+class="form-control">
+
+</div>
+
+
+<div class="form-group">
+
+<label class="form-label">
+Jenis Kelamin
+</label>
+
+<select
+id="siswaGender"
+class="form-control">
+
+<option value="Laki-laki">
+Laki-laki
+</option>
+
+<option value="Perempuan">
+Perempuan
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="modal-footer">
+
+<button
+type="button"
+class="btn btn-secondary"
+onclick="closeModal('siswaModal')">
+
+Batal
+
+</button>
+
+<button
+type="submit"
+class="btn btn-primary">
+
+<i class="fa-solid fa-save"></i>
+Simpan
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+MODAL KONFIRMASI
+===================================================== -->
+
+<div id="confirmModal"
+class="app-modal">
+
+<div class="modal-box"
+style="max-width:390px">
+
+<div class="modal-body">
+
+<div class="confirm-icon">
+
+<i id="confirmIcon"
+class="fa-solid fa-triangle-exclamation"></i>
+
+</div>
+
+<div class="confirm-content">
+
+<div id="confirmTitle"
+class="confirm-title">
+Konfirmasi
+</div>
+
+<div id="confirmText"
+class="confirm-text">
+Apakah Anda yakin?
+</div>
+
+</div>
+
+</div>
+
+
+<div class="modal-footer confirm-footer">
+
+<button
+class="btn btn-secondary"
+onclick="closeModal('confirmModal')">
+
+Batal
+
+</button>
+
+<button
+id="confirmYesButton"
+class="btn btn-danger">
+
+Ya, Lanjutkan
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 
 <script type="module">
 
-  import { initializeApp }
-    from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 
-  import {
-    getDatabase,
-    ref,
-    onValue,
-    set,
-    push,
-    update,
-    remove
-  }
-  from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+import {
+getDatabase,
+ref,
+onValue,
+set,
+push,
+update,
+remove
+}
+from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
 
-  /* =========================================================
-     FIREBASE CONFIG
-  ========================================================= */
+/* =====================================================
+FIREBASE
+===================================================== */
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAmy4PcVbc3bUnIEti0rhkhyPvGiLwFRYc",
-    authDomain: "absenguru-615da.firebaseapp.com",
-    databaseURL: "https://absenguru-615da-default-rtdb.firebaseio.com",
-    projectId: "absenguru-615da",
-    storageBucket: "absenguru-615da.firebasestorage.app",
-    messagingSenderId: "1014411980118",
-    appId: "1:1014411980118:web:6f3f702d8aad89af57faf7"
-  };
+const firebaseConfig={
+apiKey:"AIzaSyAmy4PcVbc3bUnIEti0rhkhyPvGiLwFRYc",
+authDomain:"absenguru-615da.firebaseapp.com",
+databaseURL:"https://absenguru-615da-default-rtdb.firebaseio.com",
+projectId:"absenguru-615da",
+storageBucket:"absenguru-615da.firebasestorage.app",
+messagingSenderId:"1014411980118",
+appId:"1:1014411980118:web:6f3f702d8aad89af57faf7"
+};
 
+const app=initializeApp(firebaseConfig);
+const database=getDatabase(app);
 
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
 
+/* =====================================================
+STATE
+===================================================== */
 
-  /* =========================================================
-     GLOBAL FIREBASE
-  ========================================================= */
+window.appState={
+currentUser:null,
+currentRole:null,
+currentPage:"beranda",
+historyType:"masuk",
+siswa:{},
+kasMasuk:{},
+kasKeluar:{},
+settings:{
+weeklyAmount:10000,
+startDate:"2026-01-01"
+}
+};
 
-  window.firebaseDB = database;
-  window.firebaseRef = ref;
-  window.firebaseSet = set;
-  window.firebasePush = push;
-  window.firebaseUpdate = update;
-  window.firebaseRemove = remove;
 
+/* =====================================================
+HELPER
+===================================================== */
 
-  /* =========================================================
-     STATE
-  ========================================================= */
+function rupiah(n){
 
-  window.appState = {
+return new Intl.NumberFormat("id-ID",{
+style:"currency",
+currency:"IDR",
+maximumFractionDigits:0
+}).format(Number(n)||0);
 
-    currentUser: null,
+}
 
-    currentRole: null,
 
-    currentPage: "beranda",
+function escapeHTML(value){
 
-    siswa: {},
+return String(value??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
-    kasMasuk: {},
+}
 
-    kasKeluar: {}
 
-  };
+function today(){
 
+const d=new Date();
 
-  /* =========================================================
-     HELPER
-  ========================================================= */
+return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 
-  function rupiah(number) {
+}
 
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      maximumFractionDigits: 0
-    }).format(Number(number) || 0);
 
-  }
+function formatDate(value){
 
+if(!value)return"-";
 
-  function formatDate(dateString) {
+const d=new Date(value+"T00:00:00");
 
-    if (!dateString) return "-";
+return d.toLocaleDateString("id-ID",{
+day:"2-digit",
+month:"long",
+year:"numeric"
+});
 
-    const date = new Date(dateString + "T00:00:00");
+}
 
-    return date.toLocaleDateString("id-ID", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric"
-    });
 
-  }
+function monthName(month){
 
+return new Date(
+2000,
+month,
+1
+).toLocaleString("id-ID",{
+month:"long"
+});
 
-  function today() {
+}
 
-    const d = new Date();
 
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
+/* =====================================================
+TOAST
+===================================================== */
 
-    return `${d.getFullYear()}-${month}-${day}`;
+window.showToast=function(message,type=""){
 
-  }
+const toast=document.getElementById("toast");
 
+toast.textContent=message;
+toast.className="";
 
-  function escapeHTML(value) {
+toast.id="toast";
 
-    return String(value ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+if(type)toast.classList.add(type);
 
-  }
+setTimeout(()=>{
+toast.classList.add("show");
+},20);
 
+setTimeout(()=>{
+toast.classList.remove("show");
+},3200);
 
-  /* =========================================================
-     TOAST
-  ========================================================= */
+};
 
-  window.showToast = function(message, type = "") {
 
-    const toast = document.getElementById("toast");
+/* =====================================================
+CUSTOM CONFIRM MODAL
+===================================================== */
 
-    toast.textContent = message;
+let confirmAction=null;
 
-    toast.className = "";
+window.askConfirm=function(
+title,
+text,
+callback,
+buttonText="Ya, Lanjutkan"
+){
 
-    toast.id = "toast";
+document.getElementById("confirmTitle")
+.textContent=title;
 
-    if (type) {
-      toast.classList.add(type);
-    }
+document.getElementById("confirmText")
+.textContent=text;
 
-    setTimeout(() => {
-      toast.classList.add("show");
-    }, 10);
+document.getElementById("confirmYesButton")
+.textContent=buttonText;
 
-    setTimeout(() => {
-      toast.classList.remove("show");
-    }, 3000);
+confirmAction=callback;
 
-  };
+openModal("confirmModal");
 
+};
 
-  /* =========================================================
-     WELCOME POPUP
-  ========================================================= */
 
-  function showWelcomePopup() {
+document.getElementById("confirmYesButton")
+.addEventListener("click",async()=>{
 
-    const popup = document.getElementById("welcomePopup");
+const action=confirmAction;
 
-    const title = document.getElementById("welcomePopupTitle");
-    const text = document.getElementById("welcomePopupText");
+confirmAction=null;
 
-    if (window.appState.currentRole === "bendahara") {
+closeModal("confirmModal");
 
-      title.textContent = "Selamat Datang, Bendahara!";
+if(action){
+await action();
+}
 
-      text.textContent =
-        "Anda berhasil masuk ke menu pengelolaan kas kelas.";
+});
 
-    } else {
 
-      title.textContent = "Selamat Datang!";
+/* =====================================================
+MODAL
+===================================================== */
 
-      text.textContent =
-        "Anda berhasil masuk sebagai anggota kelas.";
+window.openModal=function(id){
 
-    }
+document.getElementById(id)
+.classList.add("show");
 
-    popup.classList.add("show");
+};
 
-    setTimeout(() => {
-      popup.classList.remove("show");
-    }, 3500);
 
-  }
+window.closeModal=function(id){
 
+document.getElementById(id)
+.classList.remove("show");
 
-  /* =========================================================
-     FIREBASE REALTIME LISTENER
-  ========================================================= */
+};
 
-  onValue(
-    ref(database, "kelasVIIIB/siswa"),
-    snapshot => {
 
-      window.appState.siswa =
-        snapshot.val() || {};
+/* =====================================================
+LOGIN ROLE
+===================================================== */
 
-      refreshAll();
+let loginRole="anggota";
 
-    }
-  );
+window.selectLoginRole=function(role){
 
+loginRole=role;
 
-  onValue(
-    ref(database, "kelasVIIIB/kasMasuk"),
-    snapshot => {
+document.getElementById("choiceAnggota")
+.classList.toggle(
+"active",
+role==="anggota"
+);
 
-      window.appState.kasMasuk =
-        snapshot.val() || {};
+document.getElementById("choiceBendahara")
+.classList.toggle(
+"active",
+role==="bendahara"
+);
 
-      refreshAll();
 
-    }
-  );
+const username=document.getElementById(
+"loginUsername"
+);
 
+const hint=document.getElementById(
+"loginHint"
+);
 
-  onValue(
-    ref(database, "kelasVIIIB/kasKeluar"),
-    snapshot => {
 
-      window.appState.kasKeluar =
-        snapshot.val() || {};
+if(role==="anggota"){
 
-      refreshAll();
+username.placeholder="Nama siswa";
 
-    }
-  );
+hint.textContent=
+"Anggota login menggunakan nama siswa dan password anggota.";
 
+}else{
 
-  /* =========================================================
-     LOGIN
-  ========================================================= */
+username.placeholder="Username bendahara";
 
-  document
-    .getElementById("loginForm")
-    .addEventListener("submit", async function(event) {
+hint.textContent=
+"Gunakan akun bendahara yang telah ditentukan.";
 
-      event.preventDefault();
+}
 
-      const username =
-        document
-          .getElementById("loginUsername")
-          .value
-          .trim();
+};
 
-      const password =
-        document
-          .getElementById("loginPassword")
-          .value;
 
-      /* -----------------------------------------
-         LOGIN BENDahara
-      ----------------------------------------- */
+/* =====================================================
+LOGIN
+===================================================== */
 
-      if (
-        username === "iissumirat123" &&
-        password === "112233"
-      ) {
+document.getElementById("loginForm")
+.addEventListener("submit",async e=>{
 
-        loginSuccess(
-          username,
-          "bendahara"
-        );
+e.preventDefault();
 
-        return;
+const username=
+document.getElementById("loginUsername")
+.value.trim();
 
-      }
+const password=
+document.getElementById("loginPassword")
+.value;
 
 
-      /* -----------------------------------------
-         LOGIN ANGGOTA
-      ----------------------------------------- */
+if(loginRole==="bendahara"){
 
-      if (password === "123456") {
+if(
+username==="iissumirat123" &&
+password==="112233"
+){
 
-        const siswaList =
-          Object.entries(window.appState.siswa);
+loginSuccess(
+username,
+"bendahara"
+);
 
-        const siswaFound =
-          siswaList.find(([id, siswa]) => {
+}else{
 
-            const nama =
-              String(siswa.nama || "")
-                .trim()
-                .toLowerCase();
+showToast(
+"Username atau password bendahara salah.",
+"error"
+);
 
-            return nama === username.toLowerCase();
+}
 
-          });
+return;
 
+}
 
-        if (siswaFound) {
 
-          loginSuccess(
-            siswaFound[1].nama,
-            "anggota"
-          );
+if(password!=="123456"){
 
-          return;
+showToast(
+"Password anggota salah.",
+"error"
+);
 
-        }
+return;
 
-      }
+}
 
 
-      showToast(
-        "Username atau password salah.",
-        "error"
-      );
+const found=
+Object.entries(window.appState.siswa)
+.find(([id,siswa])=>
+String(siswa.nama||"")
+.trim()
+.toLowerCase()===
+username.toLowerCase()
+);
 
-    });
 
+if(!found){
 
-  /* =========================================================
-     LOGIN SUCCESS
-  ========================================================= */
+showToast(
+"Nama siswa tidak ditemukan.",
+"error"
+);
 
-  function loginSuccess(username, role) {
+return;
 
-    window.appState.currentUser = username;
+}
 
-    window.appState.currentRole = role;
 
-    window.appState.currentPage = "beranda";
+loginSuccess(
+found[1].nama,
+"anggota"
+);
 
+});
 
-    sessionStorage.setItem(
-      "kasKelasUser",
-      username
-    );
 
-    sessionStorage.setItem(
-      "kasKelasRole",
-      role
-    );
+/* =====================================================
+LOGIN SUCCESS
+===================================================== */
 
+function loginSuccess(username,role){
 
-    document
-      .getElementById("loginPage")
-      .classList.add("hidden-page");
+window.appState.currentUser=username;
+window.appState.currentRole=role;
 
-    document
-      .getElementById("appPage")
-      .classList.remove("hidden-page");
+sessionStorage.setItem(
+"kasKelasUser",
+username
+);
 
+sessionStorage.setItem(
+"kasKelasRole",
+role
+);
 
-    setupRoleMenu();
 
-    navigate("beranda");
+document.getElementById("loginPage")
+.classList.add("hidden-page");
 
-    showWelcomePopup();
+document.getElementById("appPage")
+.classList.remove("hidden-page");
 
-    document
-      .getElementById("loginForm")
-      .reset();
 
-  }
+setupRole();
 
+navigate("beranda");
 
-  /* =========================================================
-     CHECK SESSION
-  ========================================================= */
+showWelcome();
 
-  function checkSession() {
 
-    const username =
-      sessionStorage.getItem("kasKelasUser");
+document.getElementById("loginForm").reset();
 
-    const role =
-      sessionStorage.getItem("kasKelasRole");
+}
 
 
-    if (username && role) {
+/* =====================================================
+SESSION
+===================================================== */
 
-      window.appState.currentUser = username;
+function checkSession(){
 
-      window.appState.currentRole = role;
+const user=
+sessionStorage.getItem("kasKelasUser");
 
-      document
-        .getElementById("loginPage")
-        .classList.add("hidden-page");
+const role=
+sessionStorage.getItem("kasKelasRole");
 
-      document
-        .getElementById("appPage")
-        .classList.remove("hidden-page");
 
-      setupRoleMenu();
+if(user&&role){
 
-      navigate("beranda");
+window.appState.currentUser=user;
+window.appState.currentRole=role;
 
-    }
+document.getElementById("loginPage")
+.classList.add("hidden-page");
 
-  }
+document.getElementById("appPage")
+.classList.remove("hidden-page");
 
+setupRole();
 
-  /* =========================================================
-     ROLE MENU
-  ========================================================= */
+navigate("beranda");
 
-  function setupRoleMenu() {
+}
 
-    const role =
-      window.appState.currentRole;
+}
 
 
-    const bendaharaMenu =
-      document.getElementById("bendaharaMenu");
+/* =====================================================
+WELCOME
+===================================================== */
 
-    const anggotaMenu =
-      document.getElementById("anggotaMenu");
+function showWelcome(){
 
+const popup=
+document.getElementById("welcomePopup");
 
-    const roleBadge =
-      document.getElementById("roleBadge");
+if(window.appState.currentRole==="bendahara"){
 
+document.getElementById("welcomeTitle")
+.textContent=
+"Selamat Datang, Bendahara!";
 
-    if (role === "bendahara") {
+document.getElementById("welcomeText")
+.textContent=
+"Anda berhasil masuk ke panel pengelolaan kas.";
 
-      bendaharaMenu.classList.remove("hidden-page");
+}else{
 
-      anggotaMenu.classList.add("hidden-page");
+document.getElementById("welcomeTitle")
+.textContent=
+"Selamat Datang!";
 
-      roleBadge.textContent =
-        "AKSES BENDahara";
+document.getElementById("welcomeText")
+.textContent=
+"Anda berhasil masuk sebagai anggota.";
 
-    } else {
+}
 
-      bendaharaMenu.classList.add("hidden-page");
+popup.classList.add("show");
 
-      anggotaMenu.classList.remove("hidden-page");
+setTimeout(()=>{
+popup.classList.remove("show");
+},3500);
 
-      roleBadge.textContent =
-        "AKSES ANGGOTA";
+}
 
-    }
 
+/* =====================================================
+ROLE MENU
+===================================================== */
 
-    document.getElementById("topUsername").textContent =
-      window.appState.currentUser;
+function setupRole(){
 
-    document.getElementById("topRole").textContent =
-      role === "bendahara"
-        ? "Bendahara"
-        : "Anggota";
+const bendahara=
+document.getElementById("bendaharaMenu");
 
-  }
+const anggota=
+document.getElementById("anggotaMenu");
 
+if(window.appState.currentRole==="bendahara"){
 
-  /* =========================================================
-     NAVIGATION
-  ========================================================= */
+bendahara.classList.remove("hidden-page");
+anggota.classList.add("hidden-page");
 
-  window.navigate = function(page) {
+document.getElementById("roleBadge")
+.textContent="AKSES BENDAHARA";
 
-    const role =
-      window.appState.currentRole;
+}else{
 
+bendahara.classList.add("hidden-page");
+anggota.classList.remove("hidden-page");
 
-    /* Anggota tidak boleh membuka halaman pengelolaan */
+document.getElementById("roleBadge")
+.textContent="AKSES ANGGOTA";
 
-    if (
-      role === "anggota" &&
-      ["kasMasuk", "kasKeluar", "siswa"].includes(page)
-    ) {
+}
 
-      showToast(
-        "Menu tersebut hanya dapat diakses bendahara.",
-        "error"
-      );
 
-      return;
+document.getElementById("topUsername")
+.textContent=
+window.appState.currentUser;
 
-    }
+document.getElementById("topRole")
+.textContent=
+window.appState.currentRole==="bendahara"
+?"Bendahara"
+:"Anggota";
 
+}
 
-    window.appState.currentPage = page;
 
+/* =====================================================
+NAVIGATION
+===================================================== */
 
-    const pages = [
-      "beranda",
-      "kasMasuk",
-      "kasKeluar",
-      "siswa",
-      "riwayat"
-    ];
+window.navigate=function(page){
 
+const role=
+window.appState.currentRole;
 
-    pages.forEach(item => {
 
-      const element =
-        document.getElementById(
-          "page-" + item
-        );
+if(
+role==="anggota" &&
+[
+"kasMasuk",
+"kasKeluar",
+"siswa",
+"pengaturan"
+].includes(page)
+){
 
-      if (element) {
+showToast(
+"Menu ini hanya dapat diakses bendahara.",
+"error"
+);
 
-        element.classList.add(
-          "hidden-page"
-        );
+return;
 
-      }
+}
 
-    });
 
+window.appState.currentPage=page;
 
-    const selected =
-      document.getElementById(
-        "page-" + page
-      );
 
-    if (selected) {
+[
+"beranda",
+"kasMasuk",
+"kasKeluar",
+"siswa",
+"riwayat",
+"pengaturan"
+].forEach(p=>{
 
-      selected.classList.remove(
-        "hidden-page"
-      );
+const el=document.getElementById(
+"page-"+p
+);
 
-    }
+if(el)el.classList.add("hidden-page");
 
+});
 
-    document
-      .querySelectorAll(".menu-item")
-      .forEach(item => {
 
-        item.classList.remove("active");
+document.getElementById(
+"page-"+page
+).classList.remove("hidden-page");
 
-        if (
-          item.dataset.page === page
-        ) {
 
-          item.classList.add("active");
+document.querySelectorAll(".menu-item")
+.forEach(item=>{
 
-        }
+item.classList.toggle(
+"active",
+item.dataset.page===page
+);
 
-      });
+});
 
 
-    const titles = {
+const titles={
+beranda:"Beranda",
+kasMasuk:"Kas Masuk",
+kasKeluar:"Kas Keluar",
+siswa:"Daftar Siswa",
+riwayat:"Riwayat Kas",
+pengaturan:"Pengaturan Kas"
+};
 
-      beranda: "Beranda",
+document.getElementById("pageTitle")
+.textContent=titles[page];
 
-      kasMasuk: "Kas Masuk",
 
-      kasKeluar: "Kas Keluar",
+closeSidebar();
 
-      siswa: "Daftar Siswa",
+refreshAll();
 
-      riwayat: "Riwayat Kas"
+};
 
-    };
 
+/* =====================================================
+FIREBASE LISTENERS
+===================================================== */
 
-    document.getElementById("pageTitle")
-      .textContent =
-      titles[page] || "Beranda";
+onValue(
+ref(database,"kelasVIIIB/siswa"),
+snap=>{
 
+window.appState.siswa=
+snap.val()||{};
 
-    closeSidebar();
+refreshAll();
 
-    refreshAll();
+}
+);
 
-  };
 
+onValue(
+ref(database,"kelasVIIIB/kasMasuk"),
+snap=>{
 
-  /* =========================================================
-     DASHBOARD
-  ========================================================= */
+window.appState.kasMasuk=
+snap.val()||{};
 
-  function renderDashboard() {
+refreshAll();
 
-    const masuk =
-      Object.values(window.appState.kasMasuk);
+}
+);
 
-    const keluar =
-      Object.values(window.appState.kasKeluar);
 
-    const siswa =
-      Object.values(window.appState.siswa);
+onValue(
+ref(database,"kelasVIIIB/kasKeluar"),
+snap=>{
 
+window.appState.kasKeluar=
+snap.val()||{};
 
-    const totalMasuk =
-      masuk.reduce(
-        (sum, item) =>
-          sum + Number(item.jumlah || 0),
-        0
-      );
+refreshAll();
 
+}
+);
 
-    const totalKeluar =
-      keluar.reduce(
-        (sum, item) =>
-          sum + Number(item.jumlah || 0),
-        0
-      );
 
+/* =====================================================
+SETTINGS
+===================================================== */
 
-    const saldo =
-      totalMasuk - totalKeluar;
+onValue(
+ref(database,"kelasVIIIB/settings"),
+snap=>{
 
+const data=snap.val();
 
-    document.getElementById("statMasuk")
-      .textContent =
-      rupiah(totalMasuk);
+if(data){
 
-    document.getElementById("statKeluar")
-      .textContent =
-      rupiah(totalKeluar);
+window.appState.settings={
+weeklyAmount:Number(
+data.weeklyAmount||10000
+),
+startDate:
+data.startDate||"2026-01-01"
+};
 
-    document.getElementById("statSaldo")
-      .textContent =
-      rupiah(saldo);
+}
 
-    document.getElementById("statSiswa")
-      .textContent =
-      siswa.length;
+loadSettingsForm();
 
+refreshAll();
 
-    if (
-      window.appState.currentRole === "bendahara"
-    ) {
+}
+);
 
-      document.getElementById("dashboardGreeting")
-        .textContent =
-        "Selamat Datang, Bendahara!";
 
-      document.getElementById("dashboardDescription")
-        .textContent =
-        "Kelola pemasukan, pengeluaran, dan data siswa kelas VII B.";
+/* =====================================================
+PERHITUNGAN MINGGU
+===================================================== */
 
-    } else {
+/*
+Setiap bulan dibagi menjadi minggu 1, 2, 3, dst.
+Jumlah minggu disesuaikan jumlah hari pada bulan tersebut.
+*/
 
-      document.getElementById("dashboardGreeting")
-        .textContent =
-        "Selamat Datang, " +
-        window.appState.currentUser + "!";
+function getWeeksInMonth(year,month){
 
-      document.getElementById("dashboardDescription")
-        .textContent =
-        "Pantau informasi dan riwayat kas kelas VII B.";
+const days=
+new Date(year,month+1,0).getDate();
 
-    }
+return Math.ceil(days/7);
 
+}
 
-    renderDashboardTransactions();
 
-  }
+function getPeriodKey(year,month,week){
 
+return `${year}-${String(month+1).padStart(2,"0")}-W${week}`;
 
-  /* =========================================================
-     DASHBOARD TRANSACTIONS
-  ========================================================= */
+}
 
-  function getAllTransactions() {
 
-    const result = [];
+function getPeriodLabel(year,month,week){
 
+return `${monthName(month)} ${year} - Minggu ${week}`;
 
-    Object.entries(window.appState.kasMasuk)
-      .forEach(([id, item]) => {
+}
 
-        result.push({
 
-          id,
+/* =====================================================
+SEMUA PERIODE YANG SUDAH JATUH TEMPO
+===================================================== */
 
-          tanggal: item.tanggal || "",
+function getExpectedPeriods(){
 
-          jenis: "Masuk",
+const result=[];
 
-          keterangan:
-            item.keterangan || "Kas Masuk",
+const start=
+new Date(
+window.appState.settings.startDate+
+"T00:00:00"
+);
 
-          nama:
-            item.namaSiswa || "",
+const now=new Date();
 
-          jumlah:
-            Number(item.jumlah || 0)
+let year=start.getFullYear();
+let month=start.getMonth();
 
-        });
+while(
+year<now.getFullYear() ||
+(
+year===now.getFullYear() &&
+month<=now.getMonth()
+)
+){
 
-      });
+const weeks=
+getWeeksInMonth(year,month);
 
+for(let w=1;w<=weeks;w++){
 
-    Object.entries(window.appState.kasKeluar)
-      .forEach(([id, item]) => {
+const day=Math.min(
+w*7,
+new Date(year,month+1,0).getDate()
+);
 
-        result.push({
+const due=
+new Date(
+year,
+month,
+day,
+23,59,59
+);
 
-          id,
 
-          tanggal: item.tanggal || "",
+if(due>=start&&due<=now){
 
-          jenis: "Keluar",
+result.push({
+key:getPeriodKey(year,month,w),
+year,
+month,
+week:w,
+label:getPeriodLabel(year,month,w),
+due
+});
 
-          keterangan:
-            item.keterangan || "Kas Keluar",
+}
 
-          nama: "",
+}
 
-          jumlah:
-            Number(item.jumlah || 0)
 
-        });
+month++;
 
-      });
+if(month>11){
 
+month=0;
+year++;
 
-    result.sort(
-      (a, b) =>
-        new Date(b.tanggal) -
-        new Date(a.tanggal)
-    );
+}
 
+}
 
-    return result;
+return result;
 
-  }
+}
 
 
-  function renderDashboardTransactions() {
+/* =====================================================
+PERIODE DROPDOWN
+===================================================== */
 
-    const container =
-      document.getElementById(
-        "dashboardTransactions"
-      );
+function populatePeriodSelect(){
 
+const select=
+document.getElementById(
+"kasMasukPeriode"
+);
 
-    const transactions =
-      getAllTransactions()
-        .slice(0, 5);
+if(!select)return;
 
+const current=select.value;
 
-    if (!transactions.length) {
+select.innerHTML=
+`<option value="">Pilih periode pembayaran</option>`;
 
-      container.innerHTML = `
-        <div class="text-center text-slate-400 py-8">
-          <i class="fa-solid fa-receipt text-3xl mb-3"></i>
-          <div>Belum ada transaksi.</div>
-        </div>
-      `;
 
-      return;
+const now=new Date();
 
-    }
+const currentYear=
+now.getFullYear();
 
 
-    container.innerHTML = transactions
-      .map(item => {
+/*
+Menampilkan tahun berjalan
+dan tahun sebelumnya jika diperlukan.
+*/
 
-        const isMasuk =
-          item.jenis === "Masuk";
+for(
+let year=currentYear-1;
+year<=currentYear+1;
+year++
+){
 
+for(let month=0;month<12;month++){
 
-        return `
+const weeks=
+getWeeksInMonth(year,month);
 
-          <div class="flex items-center justify-between
-                      py-3 border-b border-slate-100">
+for(let week=1;week<=weeks;week++){
 
-            <div class="flex items-center gap-3">
+const key=
+getPeriodKey(year,month,week);
 
-              <div class="w-9 h-9 rounded-full
-                          flex items-center justify-center
-                          ${isMasuk
-                            ? "bg-green-100 text-green-600"
-                            : "bg-red-100 text-red-600"}">
+const option=
+document.createElement("option");
 
-                <i class="fa-solid ${
-                  isMasuk
-                    ? "fa-arrow-down"
-                    : "fa-arrow-up"
-                }"></i>
+option.value=key;
 
-              </div>
+option.textContent=
+getPeriodLabel(
+year,
+month,
+week
+);
 
-              <div>
+option.dataset.year=year;
+option.dataset.month=month;
+option.dataset.week=week;
 
-                <div class="font-bold text-sm">
-                  ${escapeHTML(item.keterangan)}
-                </div>
+select.appendChild(option);
 
-                <div class="text-xs text-slate-400">
-                  ${formatDate(item.tanggal)}
-                  ${
-                    item.nama
-                      ? " • " +
-                        escapeHTML(item.nama)
-                      : ""
-                  }
-                </div>
+}
 
-              </div>
+}
 
-            </div>
+}
 
-            <div class="${
-              isMasuk
-                ? "amount-in"
-                : "amount-out"
-            }">
 
-              ${
-                isMasuk ? "+" : "-"
-              }
+if(current)select.value=current;
 
-              ${rupiah(item.jumlah)}
+}
 
-            </div>
 
-          </div>
+/* =====================================================
+CEK PEMBAYARAN SISWA
+===================================================== */
 
-        `;
+function getPaidPeriodsForStudent(studentName){
 
-      })
-      .join("");
+const paid=new Set();
 
-  }
+Object.values(window.appState.kasMasuk)
+.forEach(item=>{
 
+if(
+String(item.namaSiswa||"")
+.toLowerCase()===
+String(studentName||"")
+.toLowerCase() &&
+item.periodKey
+){
 
-  /* =========================================================
-     KAS MASUK
-  ========================================================= */
+paid.add(item.periodKey);
 
-  function renderKasMasuk() {
+}
 
-    const tbody =
-      document.getElementById(
-        "tableKasMasuk"
-      );
+});
 
+return paid;
 
-    const data =
-      Object.entries(
-        window.appState.kasMasuk
-      );
+}
 
 
-    data.sort(
-      ([,a], [,b]) =>
-        new Date(b.tanggal || 0) -
-        new Date(a.tanggal || 0)
-    );
+/* =====================================================
+TUNGGAKAN SISWA
+===================================================== */
 
+function getStudentArrears(studentName){
 
-    if (!data.length) {
+const expected=
+getExpectedPeriods();
 
-      tbody.innerHTML = `
-        <tr>
-          <td colspan="5"
-              class="text-center text-slate-400 py-8">
-            Belum ada data kas masuk.
-          </td>
-        </tr>
-      `;
+const paid=
+getPaidPeriodsForStudent(studentName);
 
-      return;
+const unpaid=
+expected.filter(
+period=>!paid.has(period.key)
+);
 
-    }
+return {
 
+unpaid,
+weeks:unpaid.length,
+total:
+unpaid.length*
+Number(
+window.appState.settings.weeklyAmount||0
+)
 
-    tbody.innerHTML =
-      data.map(([id, item]) => `
+};
 
-        <tr>
+}
 
-          <td>
-            ${formatDate(item.tanggal)}
-          </td>
 
-          <td>
-            ${escapeHTML(item.namaSiswa || "-")}
-          </td>
+/* =====================================================
+STATUS ANGGOTA
+===================================================== */
 
-          <td>
-            ${escapeHTML(item.keterangan || "-")}
-          </td>
+function renderAnggotaStatus(){
 
-          <td class="amount-in">
-            + ${rupiah(item.jumlah)}
-          </td>
+const box=
+document.getElementById(
+"anggotaPaymentStatus"
+);
 
-          <td>
+const content=
+document.getElementById(
+"anggotaStatusContent"
+);
 
-            ${
-              window.appState.currentRole === "bendahara"
 
-              ? `
+if(
+window.appState.currentRole!=="anggota"
+){
 
-                <div class="flex gap-2">
+box.classList.add("hidden-page");
+return;
 
-                  <button
-                    class="btn btn-secondary"
-                    onclick="editKasMasuk('${id}')">
+}
 
-                    <i class="fa-solid fa-pen"></i>
 
-                  </button>
+box.classList.remove("hidden-page");
 
-                  <button
-                    class="btn btn-danger"
-                    onclick="deleteKasMasuk('${id}')">
 
-                    <i class="fa-solid fa-trash"></i>
+const arrears=
+getStudentArrears(
+window.appState.currentUser
+);
 
-                  </button>
 
-                </div>
+if(arrears.weeks===0){
 
-              `
+content.innerHTML=`
 
-              : `
+<div class="p-4 rounded-xl bg-green-50 text-green-700">
 
-                <span class="text-xs text-slate-400">
-                  Hanya lihat
-                </span>
+<div class="font-bold">
+<i class="fa-solid fa-circle-check"></i>
+&nbsp; Pembayaran Kas Anda Lengkap
+</div>
 
-              `
-            }
+<div class="text-xs mt-1">
+Tidak ada tunggakan kas sampai periode yang berjalan.
+</div>
 
-          </td>
+</div>
 
-        </tr>
+`;
 
-      `).join("");
+return;
 
-  }
+}
 
 
-  /* =========================================================
-     KAS KELUAR
-  ========================================================= */
+content.innerHTML=`
 
-  function renderKasKeluar() {
+<div class="p-4 rounded-xl bg-red-50 text-red-700">
 
-    const tbody =
-      document.getElementById(
-        "tableKasKeluar"
-      );
+<div class="font-bold">
 
+<i class="fa-solid fa-triangle-exclamation"></i>
 
-    const data =
-      Object.entries(
-        window.appState.kasKeluar
-      );
+&nbsp;
+Anda menunggak ${arrears.weeks} minggu
 
+</div>
 
-    data.sort(
-      ([,a], [,b]) =>
-        new Date(b.tanggal || 0) -
-        new Date(a.tanggal || 0)
-    );
 
+<div class="text-sm font-bold mt-2">
+Total yang harus dibayar:
+${rupiah(arrears.total)}
+</div>
 
-    if (!data.length) {
 
-      tbody.innerHTML = `
-        <tr>
-          <td colspan="4"
-              class="text-center text-slate-400 py-8">
-            Belum ada data kas keluar.
-          </td>
-        </tr>
-      `;
+<div class="text-xs mt-2">
 
-      return;
+Nominal kas:
+${rupiah(
+window.appState.settings.weeklyAmount
+)}
+/minggu
 
-    }
+</div>
 
 
-    tbody.innerHTML =
-      data.map(([id, item]) => `
+<div class="mt-3 text-xs">
 
-        <tr>
+<b>Periode yang belum dibayar:</b>
 
-          <td>
-            ${formatDate(item.tanggal)}
-          </td>
+<div class="mt-2 flex flex-wrap gap-2">
 
-          <td>
-            ${escapeHTML(item.keterangan || "-")}
-          </td>
+${arrears.unpaid.map(p=>`
 
-          <td class="amount-out">
-            - ${rupiah(item.jumlah)}
-          </td>
+<span class="px-2 py-1 rounded-full bg-white">
+${escapeHTML(p.label)}
+</span>
 
-          <td>
+`).join("")}
 
-            ${
-              window.appState.currentRole === "bendahara"
+</div>
 
-              ? `
+</div>
 
-                <div class="flex gap-2">
+</div>
 
-                  <button
-                    class="btn btn-secondary"
-                    onclick="editKasKeluar('${id}')">
+`;
 
-                    <i class="fa-solid fa-pen"></i>
+}
 
-                  </button>
 
-                  <button
-                    class="btn btn-danger"
-                    onclick="deleteKasKeluar('${id}')">
+/* =====================================================
+NOTIFIKASI BENDAHARA
+===================================================== */
 
-                    <i class="fa-solid fa-trash"></i>
+function renderBendaharaWarning(){
 
-                  </button>
+const box=
+document.getElementById(
+"bendaharaWarning"
+);
 
-                </div>
+const list=
+document.getElementById(
+"warningList"
+);
 
-              `
 
-              : `
+if(
+window.appState.currentRole!=="bendahara"
+){
 
-                <span class="text-xs text-slate-400">
-                  Hanya lihat
-                </span>
+box.classList.add("hidden-page");
+return;
 
-              `
-            }
+}
 
-          </td>
 
-        </tr>
+const siswa=
+Object.values(
+window.appState.siswa
+);
 
-      `).join("");
 
-  }
+const tunggakan=
+siswa.map(s=>{
 
+const arrears=
+getStudentArrears(s.nama);
 
-  /* =========================================================
-     SISWA
-  ========================================================= */
+return{
+nama:s.nama,
+...arrears
+};
 
-  function renderSiswa() {
+})
+.filter(s=>s.weeks>0);
 
-    const tbody =
-      document.getElementById(
-        "tableSiswa"
-      );
 
+if(!tunggakan.length){
 
-    const data =
-      Object.entries(
-        window.appState.siswa
-      );
+box.classList.add("hidden-page");
+return;
 
+}
 
-    if (!data.length) {
 
-      tbody.innerHTML = `
-        <tr>
-          <td colspan="5"
-              class="text-center text-slate-400 py-8">
-            Belum ada data siswa.
-          </td>
-        </tr>
-      `;
+box.classList.remove("hidden-page");
 
-      return;
 
-    }
+list.innerHTML=
+tunggakan.map(s=>`
 
+<div class="warning-item">
 
-    tbody.innerHTML =
-      data.map(([id, item], index) => `
+<div>
 
-        <tr>
+<div class="warning-name">
+${escapeHTML(s.nama)}
+</div>
 
-          <td>
-            ${index + 1}
-          </td>
+<div class="warning-detail">
 
-          <td class="font-semibold">
-            ${escapeHTML(item.nama || "-")}
-          </td>
+Menunggak ${s.weeks} minggu
+·
+${rupiah(s.total)}
 
-          <td>
-            ${escapeHTML(item.nis || "-")}
-          </td>
+</div>
 
-          <td>
-            ${escapeHTML(item.gender || "-")}
-          </td>
+</div>
 
-          <td>
+<div class="status-unpaid">
+BELUM LUNAS
+</div>
 
-            ${
-              window.appState.currentRole === "bendahara"
+</div>
 
-              ? `
+`).join("");
 
-                <div class="flex gap-2">
+}
 
-                  <button
-                    class="btn btn-secondary"
-                    onclick="editSiswa('${id}')">
 
-                    <i class="fa-solid fa-pen"></i>
+/* =====================================================
+DASHBOARD
+===================================================== */
 
-                  </button>
+function renderDashboard(){
 
-                  <button
-                    class="btn btn-danger"
-                    onclick="deleteSiswa('${id}')">
+const masuk=
+Object.values(
+window.appState.kasMasuk
+);
 
-                    <i class="fa-solid fa-trash"></i>
+const keluar=
+Object.values(
+window.appState.kasKeluar
+);
 
-                  </button>
 
-                </div>
+const totalMasuk=
+masuk.reduce(
+(a,b)=>a+Number(b.jumlah||0),
+0
+);
 
-              `
+const totalKeluar=
+keluar.reduce(
+(a,b)=>a+Number(b.jumlah||0),
+0
+);
 
-              : `
 
-                <span class="text-xs text-slate-400">
-                  Hanya lihat
-                </span>
+document.getElementById("statMasuk")
+.textContent=rupiah(totalMasuk);
 
-              `
-            }
+document.getElementById("statKeluar")
+.textContent=rupiah(totalKeluar);
 
-          </td>
+document.getElementById("statSaldo")
+.textContent=
+rupiah(totalMasuk-totalKeluar);
 
-        </tr>
+document.getElementById("statSiswa")
+.textContent=
+Object.keys(
+window.appState.siswa
+).length;
 
-      `).join("");
 
-  }
+if(
+window.appState.currentRole==="bendahara"
+){
 
+document.getElementById("dashboardGreeting")
+.textContent=
+"Selamat Datang, Bendahara!";
 
-  /* =========================================================
-     RIWAYAT
-  ========================================================= */
+document.getElementById("dashboardDescription")
+.textContent=
+"Kelola pemasukan, pengeluaran, dan pembayaran kas siswa.";
 
-  function renderRiwayat() {
 
-    const tbody =
-      document.getElementById(
-        "tableRiwayat"
-      );
+}else{
 
+document.getElementById("dashboardGreeting")
+.textContent=
+"Selamat Datang, "+
+window.appState.currentUser+"!";
 
-    const data =
-      getAllTransactions();
+document.getElementById("dashboardDescription")
+.textContent=
+"Pantau status pembayaran dan riwayat kas kelas.";
 
+}
 
-    if (!data.length) {
 
-      tbody.innerHTML = `
-        <tr>
-          <td colspan="4"
-              class="text-center text-slate-400 py-8">
-            Belum ada riwayat kas.
-          </td>
-        </tr>
-      `;
+renderBendaharaWarning();
+renderAnggotaStatus();
+renderDashboardTransactions();
 
-      return;
+}
 
-    }
 
+/* =====================================================
+TRANSAKSI DASHBOARD
+===================================================== */
 
-    tbody.innerHTML =
-      data.map(item => {
+function allTransactions(){
 
-        const masuk =
-          item.jenis === "Masuk";
+const result=[];
 
 
-        return `
+Object.values(window.appState.kasMasuk)
+.forEach(item=>{
 
-          <tr>
+result.push({
+tanggal:item.tanggal,
+jenis:"masuk",
+nama:item.namaSiswa,
+periode:item.periodeLabel,
+keterangan:item.keterangan,
+jumlah:Number(item.jumlah||0)
+});
 
-            <td>
-              ${formatDate(item.tanggal)}
-            </td>
+});
 
-            <td>
 
-              <span class="
-                inline-flex
-                px-2
-                py-1
-                rounded-full
-                text-xs
-                font-bold
-                ${
-                  masuk
-                  ? "bg-green-100 text-green-700"
-                  : "bg-red-100 text-red-700"
-                }
-              ">
+Object.values(window.appState.kasKeluar)
+.forEach(item=>{
 
-                ${
-                  masuk
-                    ? "Kas Masuk"
-                    : "Kas Keluar"
-                }
+result.push({
+tanggal:item.tanggal,
+jenis:"keluar",
+nama:"",
+periode:"",
+keterangan:item.keterangan,
+jumlah:Number(item.jumlah||0)
+});
 
-              </span>
+});
 
-            </td>
 
-            <td>
+result.sort(
+(a,b)=>
+new Date(b.tanggal)-
+new Date(a.tanggal)
+);
 
-              ${escapeHTML(item.keterangan)}
+return result;
 
-              ${
-                item.nama
-                  ? `
-                    <div class="text-xs text-slate-400 mt-1">
-                      ${escapeHTML(item.nama)}
-                    </div>
-                  `
-                  : ""
-              }
+}
 
-            </td>
 
-            <td class="${
-              masuk
-                ? "amount-in"
-                : "amount-out"
-            }">
+function renderDashboardTransactions(){
 
-              ${
-                masuk ? "+" : "-"
-              }
+const box=
+document.getElementById(
+"dashboardTransactions"
+);
 
-              ${rupiah(item.jumlah)}
+const data=
+allTransactions().slice(0,5);
 
-            </td>
 
-          </tr>
+if(!data.length){
 
-        `;
+box.innerHTML=`
 
-      }).join("");
+<div class="text-center text-slate-400 py-8">
 
-  }
+<i class="fa-solid fa-receipt text-3xl mb-3"></i>
 
+<div>Belum ada transaksi.</div>
 
-  /* =========================================================
-     SISWA SELECT
-  ========================================================= */
+</div>
 
-  function populateSiswaSelect() {
+`;
 
-    const select =
-      document.getElementById(
-        "kasMasukSiswa"
-      );
+return;
 
+}
 
-    const current =
-      select.value;
 
+box.innerHTML=
+data.map(item=>`
 
-    select.innerHTML =
-      `<option value="">
-        Pilih siswa
-      </option>`;
+<div class="flex justify-between items-center
+py-3 border-b border-slate-100">
 
+<div class="flex gap-3 items-center">
 
-    Object.entries(
-      window.appState.siswa
-    ).forEach(([id, siswa]) => {
+<div class="w-9 h-9 rounded-full
+flex items-center justify-center
+${
+item.jenis==="masuk"
+?"bg-green-100 text-green-600"
+:"bg-red-100 text-red-600"
+}">
 
-      const option =
-        document.createElement("option");
+<i class="fa-solid ${
+item.jenis==="masuk"
+?"fa-arrow-down"
+:"fa-arrow-up"
+}"></i>
 
-      option.value = siswa.nama || "";
+</div>
 
-      option.textContent =
-        siswa.nama || "Tanpa Nama";
+<div>
 
-      select.appendChild(option);
+<div class="font-bold text-xs">
 
-    });
+${escapeHTML(item.keterangan)}
 
+</div>
 
-    if (current) {
-      select.value = current;
-    }
+<div class="text-xs text-slate-400">
 
-  }
+${formatDate(item.tanggal)}
 
+${
+item.nama
+?" · "+escapeHTML(item.nama)
+:""
+}
 
-  /* =========================================================
-     MODAL HELPERS
-  ========================================================= */
+</div>
 
-  window.openModal = function(id) {
+</div>
 
-    document
-      .getElementById(id)
-      .classList.add("show");
+</div>
 
-  };
+<div class="${
+item.jenis==="masuk"
+?"amount-in"
+:"amount-out"
+}">
 
+${item.jenis==="masuk"?"+":"-"}
+${rupiah(item.jumlah)}
 
-  window.closeModal = function(id) {
+</div>
 
-    document
-      .getElementById(id)
-      .classList.remove("show");
+</div>
 
-  };
+`).join("");
 
+}
 
-  /* =========================================================
-     KAS MASUK MODAL
-  ========================================================= */
 
-  window.openKasMasukModal = function() {
+/* =====================================================
+KAS MASUK
+===================================================== */
 
-    if (
-      window.appState.currentRole !== "bendahara"
-    ) return;
+function populateStudentSelect(){
 
+const select=
+document.getElementById(
+"kasMasukSiswa"
+);
 
-    document.getElementById(
-      "kasMasukForm"
-    ).reset();
+if(!select)return;
 
+select.innerHTML=
+`<option value="">Pilih siswa</option>`;
 
-    document.getElementById(
-      "kasMasukId"
-    ).value = "";
+Object.values(
+window.appState.siswa
+)
+.forEach(s=>{
 
+const option=
+document.createElement("option");
 
-    document.getElementById(
-      "kasMasukTanggal"
-    ).value = today();
+option.value=s.nama;
 
+option.textContent=s.nama;
 
-    document.getElementById(
-      "kasMasukModalTitle"
-    ).textContent =
-      "Tambah Kas Masuk";
+select.appendChild(option);
 
+});
 
-    populateSiswaSelect();
+}
 
-    openModal("kasMasukModal");
 
-  };
+function openKasMasukModal(){
 
+if(
+window.appState.currentRole!=="bendahara"
+)return;
 
-  window.editKasMasuk = function(id) {
 
-    if (
-      window.appState.currentRole !== "bendahara"
-    ) return;
+document.getElementById(
+"kasMasukForm"
+).reset();
 
+document.getElementById(
+"kasMasukId"
+).value="";
 
-    const item =
-      window.appState.kasMasuk[id];
+document.getElementById(
+"kasMasukTanggal"
+).value=today();
 
+document.getElementById(
+"kasMasukJumlah"
+).value=
+window.appState.settings.weeklyAmount||0;
 
-    if (!item) return;
 
+populateStudentSelect();
+populatePeriodSelect();
 
-    document.getElementById(
-      "kasMasukId"
-    ).value = id;
+openModal("kasMasukModal");
 
+}
 
-    document.getElementById(
-      "kasMasukTanggal"
-    ).value =
-      item.tanggal || today();
 
+window.openKasMasukModal=
+openKasMasukModal;
 
-    populateSiswaSelect();
 
+document.getElementById(
+"kasMasukPeriode"
+).addEventListener(
+"change",
+function(){
 
-    document.getElementById(
-      "kasMasukSiswa"
-    ).value =
-      item.namaSiswa || "";
+if(this.value){
 
+document.getElementById(
+"kasMasukJumlah"
+).value=
+window.appState.settings.weeklyAmount||0;
 
-    document.getElementById(
-      "kasMasukKeterangan"
-    ).value =
-      item.keterangan || "";
+}
 
+});
 
-    document.getElementById(
-      "kasMasukJumlah"
-    ).value =
-      item.jumlah || 0;
 
+document.getElementById(
+"kasMasukForm"
+).addEventListener(
+"submit",
+async e=>{
 
-    document.getElementById(
-      "kasMasukModalTitle"
-    ).textContent =
-      "Edit Kas Masuk";
+e.preventDefault();
 
 
-    openModal("kasMasukModal");
+const id=
+document.getElementById(
+"kasMasukId"
+).value;
 
-  };
 
+const siswa=
+document.getElementById(
+"kasMasukSiswa"
+).value;
 
-  document
-    .getElementById("kasMasukForm")
-    .addEventListener(
-      "submit",
-      async function(event) {
 
-        event.preventDefault();
+const periodKey=
+document.getElementById(
+"kasMasukPeriode"
+).value;
 
 
-        if (
-          window.appState.currentRole !== "bendahara"
-        ) {
+if(!siswa||!periodKey){
 
-          showToast(
-            "Anda tidak memiliki akses.",
-            "error"
-          );
+showToast(
+"Nama siswa dan periode wajib dipilih.",
+"error"
+);
 
-          return;
+return;
 
-        }
+}
 
 
-        const id =
-          document.getElementById(
-            "kasMasukId"
-          ).value;
+/*
+Cegah pembayaran periode yang sama
+dua kali untuk siswa yang sama.
+*/
 
+const duplicate=
+Object.values(
+window.appState.kasMasuk
+).some(item=>
+item.namaSiswa===siswa &&
+item.periodKey===periodKey &&
+item.id!==id
+);
 
-        const data = {
 
-          tanggal:
-            document.getElementById(
-              "kasMasukTanggal"
-            ).value,
+if(duplicate){
 
-          namaSiswa:
-            document.getElementById(
-              "kasMasukSiswa"
-            ).value,
+showToast(
+"Siswa tersebut sudah membayar periode ini.",
+"error"
+);
 
-          keterangan:
-            document.getElementById(
-              "kasMasukKeterangan"
-            ).value.trim(),
+return;
 
-          jumlah:
-            Number(
-              document.getElementById(
-                "kasMasukJumlah"
-              ).value
-            ),
+}
 
-          updatedAt:
-            Date.now()
 
-        };
+const option=
+document.querySelector(
+`#kasMasukPeriode option[value="${periodKey}"]`
+);
 
 
-        try {
+const periodeLabel=
+option
+?option.textContent
+:"";
 
-          if (id) {
 
-            await update(
-              ref(
-                database,
-                "kelasVIIIB/kasMasuk/" + id
-              ),
-              data
-            );
+const data={
 
-            showToast(
-              "Kas masuk berhasil diperbarui.",
-              "success"
-            );
+tanggal:
+document.getElementById(
+"kasMasukTanggal"
+).value,
 
-          } else {
+namaSiswa:siswa,
 
-            const newRef =
-              push(
-                ref(
-                  database,
-                  "kelasVIIIB/kasMasuk"
-                )
-              );
+periodKey,
 
+periodeLabel,
 
-            await set(
-              newRef,
-              {
-                ...data,
-                createdAt: Date.now()
-              }
-            );
+keterangan:
+"Pembayaran kas "+periodeLabel,
 
+jumlah:
+Number(
+window.appState.settings.weeklyAmount||0
+),
 
-            showToast(
-              "Kas masuk berhasil disimpan.",
-              "success"
-            );
+updatedAt:Date.now()
 
-          }
+};
 
 
-          closeModal("kasMasukModal");
+try{
 
-        } catch (error) {
+if(id){
 
-          console.error(error);
+await update(
+ref(
+database,
+"kelasVIIIB/kasMasuk/"+id
+),
+data
+);
 
-          showToast(
-            "Gagal menyimpan kas masuk: " +
-            error.message,
-            "error"
-          );
+showToast(
+"Pembayaran berhasil diperbarui.",
+"success"
+);
 
-        }
+}else{
 
-      }
-    );
+const newRef=
+push(
+ref(
+database,
+"kelasVIIIB/kasMasuk"
+)
+);
 
+await set(
+newRef,
+{
+...data,
+createdAt:Date.now()
+}
+);
 
-  window.deleteKasMasuk = async function(id) {
+showToast(
+"Pembayaran kas berhasil disimpan.",
+"success"
+);
 
-    if (
-      window.appState.currentRole !== "bendahara"
-    ) {
+}
 
-      showToast(
-        "Anda tidak memiliki akses.",
-        "error"
-      );
+closeModal("kasMasukModal");
 
-      return;
+}catch(error){
 
-    }
+console.error(error);
 
+showToast(
+"Gagal menyimpan: "+
+error.message,
+"error"
+);
 
-    if (
-      !confirm(
-        "Yakin ingin menghapus data kas masuk ini?"
-      )
-    ) return;
+}
 
+});
 
-    try {
 
-      await remove(
-        ref(
-          database,
-          "kelasVIIIB/kasMasuk/" + id
-        )
-      );
+/* =====================================================
+EDIT KAS MASUK
+===================================================== */
 
+window.editKasMasuk=function(id){
 
-      showToast(
-        "Kas masuk berhasil dihapus.",
-        "success"
-      );
+const item=
+window.appState.kasMasuk[id];
 
-    } catch (error) {
+if(!item)return;
 
-      console.error(error);
 
-      showToast(
-        "Gagal menghapus: " +
-        error.message,
-        "error"
-      );
+document.getElementById(
+"kasMasukId"
+).value=id;
 
-    }
+document.getElementById(
+"kasMasukTanggal"
+).value=
+item.tanggal||today();
 
-  };
+populateStudentSelect();
+populatePeriodSelect();
 
 
-  /* =========================================================
-     KAS KELUAR
-  ========================================================= */
+document.getElementById(
+"kasMasukSiswa"
+).value=
+item.namaSiswa||"";
 
-  window.openKasKeluarModal = function() {
+document.getElementById(
+"kasMasukPeriode"
+).value=
+item.periodKey||"";
 
-    if (
-      window.appState.currentRole !== "bendahara"
-    ) return;
+document.getElementById(
+"kasMasukJumlah"
+).value=
+window.appState.settings.weeklyAmount||0;
 
 
-    document.getElementById(
-      "kasKeluarForm"
-    ).reset();
+openModal("kasMasukModal");
 
+};
 
-    document.getElementById(
-      "kasKeluarId"
-    ).value = "";
 
+/* =====================================================
+DELETE KAS MASUK
+===================================================== */
 
-    document.getElementById(
-      "kasKeluarTanggal"
-    ).value = today();
+window.deleteKasMasuk=function(id){
 
+askConfirm(
+"Hapus Pembayaran?",
+"Data pembayaran ini akan dihapus dari riwayat kas.",
+async()=>{
 
-    document.getElementById(
-      "kasKeluarModalTitle"
-    ).textContent =
-      "Tambah Kas Keluar";
+try{
 
+await remove(
+ref(
+database,
+"kelasVIIIB/kasMasuk/"+id
+)
+);
 
-    openModal("kasKeluarModal");
+showToast(
+"Pembayaran berhasil dihapus.",
+"success"
+);
 
-  };
+}catch(error){
 
+showToast(
+"Gagal menghapus: "+
+error.message,
+"error"
+);
 
-  window.editKasKeluar = function(id) {
+}
 
-    if (
-      window.appState.currentRole !== "bendahara"
-    ) return;
+},
+"Ya, Hapus"
+);
 
+};
 
-    const item =
-      window.appState.kasKeluar[id];
 
+/* =====================================================
+KAS KELUAR
+===================================================== */
 
-    if (!item) return;
+window.openKasKeluarModal=function(){
 
+document.getElementById(
+"kasKeluarForm"
+).reset();
 
-    document.getElementById(
-      "kasKeluarId"
-    ).value = id;
+document.getElementById(
+"kasKeluarId"
+).value="";
 
+document.getElementById(
+"kasKeluarTanggal"
+).value=today();
 
-    document.getElementById(
-      "kasKeluarTanggal"
-    ).value =
-      item.tanggal || today();
+openModal("kasKeluarModal");
 
+};
 
-    document.getElementById(
-      "kasKeluarKeterangan"
-    ).value =
-      item.keterangan || "";
 
+document.getElementById(
+"kasKeluarForm"
+).addEventListener(
+"submit",
+async e=>{
 
-    document.getElementById(
-      "kasKeluarJumlah"
-    ).value =
-      item.jumlah || 0;
+e.preventDefault();
 
 
-    document.getElementById(
-      "kasKeluarModalTitle"
-    ).textContent =
-      "Edit Kas Keluar";
+const id=
+document.getElementById(
+"kasKeluarId"
+).value;
 
 
-    openModal("kasKeluarModal");
+const data={
 
-  };
+tanggal:
+document.getElementById(
+"kasKeluarTanggal"
+).value,
 
+keterangan:
+document.getElementById(
+"kasKeluarKeterangan"
+).value.trim(),
 
-  document
-    .getElementById("kasKeluarForm")
-    .addEventListener(
-      "submit",
-      async function(event) {
+jumlah:
+Number(
+document.getElementById(
+"kasKeluarJumlah"
+).value
+),
 
-        event.preventDefault();
+updatedAt:Date.now()
 
+};
 
-        if (
-          window.appState.currentRole !== "bendahara"
-        ) return;
 
+try{
 
-        const id =
-          document.getElementById(
-            "kasKeluarId"
-          ).value;
+if(id){
 
+await update(
+ref(
+database,
+"kelasVIIIB/kasKeluar/"+id
+),
+data
+);
 
-        const data = {
+showToast(
+"Kas keluar berhasil diperbarui.",
+"success"
+);
 
-          tanggal:
-            document.getElementById(
-              "kasKeluarTanggal"
-            ).value,
+}else{
 
-          keterangan:
-            document.getElementById(
-              "kasKeluarKeterangan"
-            ).value.trim(),
+const newRef=
+push(
+ref(
+database,
+"kelasVIIIB/kasKeluar"
+)
+);
 
-          jumlah:
-            Number(
-              document.getElementById(
-                "kasKeluarJumlah"
-              ).value
-            ),
+await set(
+newRef,
+{
+...data,
+createdAt:Date.now()
+}
+);
 
-          updatedAt:
-            Date.now()
+showToast(
+"Kas keluar berhasil disimpan.",
+"success"
+);
 
-        };
+}
 
+closeModal("kasKeluarModal");
 
-        try {
+}catch(error){
 
-          if (id) {
+showToast(
+"Gagal menyimpan: "+
+error.message,
+"error"
+);
 
-            await update(
-              ref(
-                database,
-                "kelasVIIIB/kasKeluar/" + id
-              ),
-              data
-            );
+}
 
-            showToast(
-              "Kas keluar berhasil diperbarui.",
-              "success"
-            );
+});
 
-          } else {
 
-            const newRef =
-              push(
-                ref(
-                  database,
-                  "kelasVIIIB/kasKeluar"
-                )
-              );
+window.editKasKeluar=function(id){
 
+const item=
+window.appState.kasKeluar[id];
 
-            await set(
-              newRef,
-              {
-                ...data,
-                createdAt: Date.now()
-              }
-            );
+if(!item)return;
 
 
-            showToast(
-              "Kas keluar berhasil disimpan.",
-              "success"
-            );
+document.getElementById(
+"kasKeluarId"
+).value=id;
 
-          }
+document.getElementById(
+"kasKeluarTanggal"
+).value=
+item.tanggal||today();
 
+document.getElementById(
+"kasKeluarKeterangan"
+).value=
+item.keterangan||"";
 
-          closeModal("kasKeluarModal");
+document.getElementById(
+"kasKeluarJumlah"
+).value=
+item.jumlah||0;
 
-        } catch (error) {
+openModal("kasKeluarModal");
 
-          console.error(error);
+};
 
-          showToast(
-            "Gagal menyimpan kas keluar: " +
-            error.message,
-            "error"
-          );
 
-        }
+window.deleteKasKeluar=function(id){
 
-      }
-    );
+askConfirm(
+"Hapus Kas Keluar?",
+"Data pengeluaran ini akan dihapus dari database.",
+async()=>{
 
+try{
 
-  window.deleteKasKeluar = async function(id) {
+await remove(
+ref(
+database,
+"kelasVIIIB/kasKeluar/"+id
+)
+);
 
-    if (
-      window.appState.currentRole !== "bendahara"
-    ) return;
+showToast(
+"Kas keluar berhasil dihapus.",
+"success"
+);
 
+}catch(error){
 
-    if (
-      !confirm(
-        "Yakin ingin menghapus data kas keluar ini?"
-      )
-    ) return;
+showToast(
+"Gagal menghapus: "+
+error.message,
+"error"
+);
 
+}
 
-    try {
+},
+"Ya, Hapus"
+);
 
-      await remove(
-        ref(
-          database,
-          "kelasVIIIB/kasKeluar/" + id
-        )
-      );
+};
 
 
-      showToast(
-        "Kas keluar berhasil dihapus.",
-        "success"
-      );
+/* =====================================================
+SISWA
+===================================================== */
 
-    } catch (error) {
+window.openSiswaModal=function(){
 
-      console.error(error);
+document.getElementById(
+"siswaForm"
+).reset();
 
-      showToast(
-        "Gagal menghapus: " +
-        error.message,
-        "error"
-      );
+document.getElementById(
+"siswaId"
+).value="";
 
-    }
+document.getElementById(
+"siswaModalTitle"
+).textContent=
+"Tambah Siswa";
 
-  };
+openModal("siswaModal");
 
+};
 
-  /* =========================================================
-     SISWA
-  ========================================================= */
 
-  window.openSiswaModal = function() {
+window.editSiswa=function(id){
 
-    if (
-      window.appState.currentRole !== "bendahara"
-    ) return;
+const item=
+window.appState.siswa[id];
 
+if(!item)return;
 
-    document
-      .getElementById("siswaForm")
-      .reset();
 
+document.getElementById(
+"siswaId"
+).value=id;
 
-    document.getElementById(
-      "siswaId"
-    ).value = "";
+document.getElementById(
+"siswaNama"
+).value=
+item.nama||"";
 
+document.getElementById(
+"siswaNis"
+).value=
+item.nis||"";
 
-    document.getElementById(
-      "siswaModalTitle"
-    ).textContent =
-      "Tambah Siswa";
+document.getElementById(
+"siswaGender"
+).value=
+item.gender||"Laki-laki";
 
+document.getElementById(
+"siswaModalTitle"
+).textContent=
+"Edit Siswa";
 
-    openModal("siswaModal");
+openModal("siswaModal");
 
-  };
+};
 
 
-  window.editSiswa = function(id) {
+document.getElementById(
+"siswaForm"
+).addEventListener(
+"submit",
+async e=>{
 
-    if (
-      window.appState.currentRole !== "bendahara"
-    ) return;
+e.preventDefault();
 
 
-    const item =
-      window.appState.siswa[id];
+const id=
+document.getElementById(
+"siswaId"
+).value;
 
 
-    if (!item) return;
+const data={
 
+nama:
+document.getElementById(
+"siswaNama"
+).value.trim(),
 
-    document.getElementById(
-      "siswaId"
-    ).value = id;
+nis:
+document.getElementById(
+"siswaNis"
+).value.trim(),
 
+gender:
+document.getElementById(
+"siswaGender"
+).value,
 
-    document.getElementById(
-      "siswaNama"
-    ).value =
-      item.nama || "";
+updatedAt:Date.now()
 
+};
 
-    document.getElementById(
-      "siswaNis"
-    ).value =
-      item.nis || "";
 
+if(!data.nama){
 
-    document.getElementById(
-      "siswaGender"
-    ).value =
-      item.gender || "Laki-laki";
+showToast(
+"Nama siswa wajib diisi.",
+"error"
+);
 
+return;
 
-    document.getElementById(
-      "siswaModalTitle"
-    ).textContent =
-      "Edit Siswa";
+}
 
 
-    openModal("siswaModal");
+try{
 
-  };
+if(id){
 
+await update(
+ref(
+database,
+"kelasVIIIB/siswa/"+id
+),
+data
+);
 
-  document
-    .getElementById("siswaForm")
-    .addEventListener(
-      "submit",
-      async function(event) {
+showToast(
+"Data siswa diperbarui.",
+"success"
+);
 
-        event.preventDefault();
+}else{
 
+const newRef=
+push(
+ref(
+database,
+"kelasVIIIB/siswa"
+)
+);
 
-        if (
-          window.appState.currentRole !== "bendahara"
-        ) return;
+await set(
+newRef,
+{
+...data,
+createdAt:Date.now()
+}
+);
 
+showToast(
+"Data siswa ditambahkan.",
+"success"
+);
 
-        const id =
-          document.getElementById(
-            "siswaId"
-          ).value;
+}
 
+closeModal("siswaModal");
 
-        const data = {
+}catch(error){
 
-          nama:
-            document.getElementById(
-              "siswaNama"
-            ).value.trim(),
+showToast(
+"Gagal menyimpan: "+
+error.message,
+"error"
+);
 
-          nis:
-            document.getElementById(
-              "siswaNis"
-            ).value.trim(),
+}
 
-          gender:
-            document.getElementById(
-              "siswaGender"
-            ).value,
+});
 
-          updatedAt:
-            Date.now()
 
-        };
+window.deleteSiswa=function(id){
 
+const item=
+window.appState.siswa[id];
 
-        if (!data.nama) {
+askConfirm(
+"Hapus Siswa?",
+`Data ${item?.nama||"siswa"} akan dihapus dari daftar siswa.`,
+async()=>{
 
-          showToast(
-            "Nama siswa wajib diisi.",
-            "error"
-          );
+try{
 
-          return;
+await remove(
+ref(
+database,
+"kelasVIIIB/siswa/"+id
+)
+);
 
-        }
+showToast(
+"Data siswa berhasil dihapus.",
+"success"
+);
 
+}catch(error){
 
-        try {
+showToast(
+"Gagal menghapus: "+
+error.message,
+"error"
+);
 
-          if (id) {
+}
 
-            await update(
-              ref(
-                database,
-                "kelasVIIIB/siswa/" + id
-              ),
-              data
-            );
+},
+"Ya, Hapus"
+);
 
-            showToast(
-              "Data siswa berhasil diperbarui.",
-              "success"
-            );
+};
 
-          } else {
 
-            const newRef =
-              push(
-                ref(
-                  database,
-                  "kelasVIIIB/siswa"
-                )
-              );
+/* =====================================================
+RENDER KAS MASUK
+===================================================== */
 
+function renderKasMasuk(){
 
-            await set(
-              newRef,
-              {
-                ...data,
-                createdAt: Date.now()
-              }
-            );
+const tbody=
+document.getElementById(
+"tableKasMasuk"
+);
 
+const data=
+Object.entries(
+window.appState.kasMasuk
+);
 
-            showToast(
-              "Data siswa berhasil ditambahkan.",
-              "success"
-            );
+data.sort(
+([,a],[,b])=>
+new Date(b.tanggal)-
+new Date(a.tanggal)
+);
 
-          }
 
+if(!data.length){
 
-          closeModal("siswaModal");
+tbody.innerHTML=`
 
-        } catch (error) {
+<tr>
+<td colspan="6"
+class="text-center text-slate-400 py-8">
 
-          console.error(error);
+Belum ada pembayaran kas.
 
-          showToast(
-            "Gagal menyimpan siswa: " +
-            error.message,
-            "error"
-          );
+</td>
+</tr>
 
-        }
+`;
 
-      }
-    );
+return;
 
+}
 
-  window.deleteSiswa = async function(id) {
 
-    if (
-      window.appState.currentRole !== "bendahara"
-    ) return;
+tbody.innerHTML=
+data.map(([id,item])=>`
 
+<tr>
 
-    if (
-      !confirm(
-        "Yakin ingin menghapus siswa ini?"
-      )
-    ) return;
+<td>
+${formatDate(item.tanggal)}
+</td>
 
+<td class="font-bold">
+${escapeHTML(item.namaSiswa)}
+</td>
 
-    try {
+<td>
+${escapeHTML(item.periodeLabel||"-")}
+</td>
 
-      await remove(
-        ref(
-          database,
-          "kelasVIIIB/siswa/" + id
-        )
-      );
+<td>
+${escapeHTML(item.keterangan||"-")}
+</td>
 
+<td class="amount-in">
++ ${rupiah(item.jumlah)}
+</td>
 
-      showToast(
-        "Data siswa berhasil dihapus.",
-        "success"
-      );
+<td>
 
-    } catch (error) {
+<div class="flex gap-2">
 
-      console.error(error);
+<button
+class="btn btn-secondary"
+onclick="editKasMasuk('${id}')">
 
-      showToast(
-        "Gagal menghapus siswa: " +
-        error.message,
-        "error"
-      );
+<i class="fa-solid fa-pen"></i>
 
-    }
+</button>
 
-  };
+<button
+class="btn btn-danger"
+onclick="deleteKasMasuk('${id}')">
 
+<i class="fa-solid fa-trash"></i>
 
-  /* =========================================================
-     REFRESH ALL
-  ========================================================= */
+</button>
 
-  function refreshAll() {
+</div>
 
-    if (
-      !window.appState.currentRole
-    ) return;
+</td>
 
+</tr>
 
-    renderDashboard();
+`).join("");
 
-    renderKasMasuk();
+}
 
-    renderKasKeluar();
 
-    renderSiswa();
+/* =====================================================
+RENDER KAS KELUAR
+===================================================== */
 
-    renderRiwayat();
+function renderKasKeluar(){
 
-    populateSiswaSelect();
+const tbody=
+document.getElementById(
+"tableKasKeluar"
+);
 
-  }
+const data=
+Object.entries(
+window.appState.kasKeluar
+);
 
+data.sort(
+([,a],[,b])=>
+new Date(b.tanggal)-
+new Date(a.tanggal)
+);
 
-  /* =========================================================
-     SIDEBAR MOBILE
-  ========================================================= */
 
-  window.toggleSidebar = function() {
+if(!data.length){
 
-    document
-      .getElementById("sidebar")
-      .classList.toggle("open");
+tbody.innerHTML=`
 
-    document
-      .getElementById("mobileOverlay")
-      .classList.toggle("show");
+<tr>
+<td colspan="4"
+class="text-center text-slate-400 py-8">
 
-  };
+Belum ada pengeluaran.
 
+</td>
+</tr>
 
-  window.closeSidebar = function() {
+`;
 
-    document
-      .getElementById("sidebar")
-      .classList.remove("open");
+return;
 
-    document
-      .getElementById("mobileOverlay")
-      .classList.remove("show");
+}
 
-  };
 
+tbody.innerHTML=
+data.map(([id,item])=>`
 
-  /* =========================================================
-     LOGOUT
-  ========================================================= */
+<tr>
 
-  window.logout = function() {
+<td>
+${formatDate(item.tanggal)}
+</td>
 
-    if (
-      !confirm(
-        "Apakah Anda yakin ingin keluar?"
-      )
-    ) return;
+<td>
+${escapeHTML(item.keterangan)}
+</td>
 
+<td class="amount-out">
+- ${rupiah(item.jumlah)}
+</td>
 
-    sessionStorage.removeItem(
-      "kasKelasUser"
-    );
+<td>
 
-    sessionStorage.removeItem(
-      "kasKelasRole"
-    );
+<div class="flex gap-2">
 
+<button
+class="btn btn-secondary"
+onclick="editKasKeluar('${id}')">
 
-    window.appState.currentUser = null;
+<i class="fa-solid fa-pen"></i>
 
-    window.appState.currentRole = null;
+</button>
 
+<button
+class="btn btn-danger"
+onclick="deleteKasKeluar('${id}')">
 
-    document
-      .getElementById("appPage")
-      .classList.add("hidden-page");
+<i class="fa-solid fa-trash"></i>
 
-    document
-      .getElementById("loginPage")
-      .classList.remove("hidden-page");
+</button>
 
+</div>
 
-    showToast(
-      "Anda telah keluar dari sistem.",
-      "success"
-    );
+</td>
 
-  };
+</tr>
 
+`).join("");
 
-  /* =========================================================
-     CLOSE MODAL WHEN CLICK OUTSIDE
-  ========================================================= */
+}
 
-  document
-    .querySelectorAll(".modal")
-    .forEach(modal => {
 
-      modal.addEventListener(
-        "click",
-        function(event) {
+/* =====================================================
+RENDER SISWA
+===================================================== */
 
-          if (
-            event.target === modal
-          ) {
+function renderSiswa(){
 
-            modal.classList.remove(
-              "show"
-            );
+const tbody=
+document.getElementById(
+"tableSiswa"
+);
 
-          }
+const data=
+Object.entries(
+window.appState.siswa
+);
 
-        }
-      );
 
-    });
+if(!data.length){
 
+tbody.innerHTML=`
 
-  /* =========================================================
-     START
-  ========================================================= */
+<tr>
+<td colspan="7"
+class="text-center text-slate-400 py-8">
 
-  checkSession();
+Belum ada data siswa.
+
+</td>
+</tr>
+
+`;
+
+return;
+
+}
+
+
+tbody.innerHTML=
+data.map(([id,siswa],index)=>{
+
+const arrears=
+getStudentArrears(siswa.nama);
+
+
+return`
+
+<tr>
+
+<td>${index+1}</td>
+
+<td class="font-bold">
+${escapeHTML(siswa.nama)}
+</td>
+
+<td>
+${escapeHTML(siswa.nis||"-")}
+</td>
+
+<td>
+${escapeHTML(siswa.gender||"-")}
+</td>
+
+<td>
+
+${
+arrears.weeks===0
+
+?`
+
+<span class="status-paid">
+<i class="fa-solid fa-check"></i>
+LUNAS
+</span>
+
+`
+
+:`
+
+<span class="status-unpaid">
+<i class="fa-solid fa-triangle-exclamation"></i>
+MENUNGGAK
+</span>
+
+`
+
+}
+
+</td>
+
+<td>
+
+${
+arrears.weeks===0
+
+?"-"
+
+:`
+
+<div class="font-bold text-red-600">
+${arrears.weeks} minggu
+</div>
+
+<div class="text-xs text-red-500">
+${rupiah(arrears.total)}
+</div>
+
+`
+}
+
+</td>
+
+<td>
+
+<div class="flex gap-2">
+
+<button
+class="btn btn-secondary"
+onclick="editSiswa('${id}')">
+
+<i class="fa-solid fa-pen"></i>
+
+</button>
+
+<button
+class="btn btn-danger"
+onclick="deleteSiswa('${id}')">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =====================================================
+HISTORY SWITCH
+===================================================== */
+
+window.switchHistory=function(type){
+
+window.appState.historyType=type;
+
+
+const masuk=
+document.getElementById(
+"historyMasuk"
+);
+
+const keluar=
+document.getElementById(
+"historyKeluar"
+);
+
+const b1=
+document.getElementById(
+"historyInButton"
+);
+
+const b2=
+document.getElementById(
+"historyOutButton"
+);
+
+
+if(type==="masuk"){
+
+masuk.classList.remove("hidden-page");
+keluar.classList.add("hidden-page");
+
+b1.className="btn btn-primary";
+b2.className="btn btn-secondary";
+
+}else{
+
+masuk.classList.add("hidden-page");
+keluar.classList.remove("hidden-page");
+
+b1.className="btn btn-secondary";
+b2.className="btn btn-primary";
+
+}
+
+
+renderHistory();
+
+};
+
+
+function renderHistory(){
+
+const masuk=
+Object.values(
+window.appState.kasMasuk
+).sort(
+(a,b)=>
+new Date(b.tanggal)-
+new Date(a.tanggal)
+);
+
+
+const keluar=
+Object.values(
+window.appState.kasKeluar
+).sort(
+(a,b)=>
+new Date(b.tanggal)-
+new Date(a.tanggal)
+);
+
+
+document.getElementById(
+"historyMasukTable"
+).innerHTML=
+masuk.length
+
+?masuk.map(item=>`
+
+<tr>
+
+<td>
+${formatDate(item.tanggal)}
+</td>
+
+<td class="font-bold">
+${escapeHTML(item.namaSiswa)}
+</td>
+
+<td>
+${escapeHTML(item.periodeLabel||"-")}
+</td>
+
+<td>
+${escapeHTML(item.keterangan||"-")}
+</td>
+
+<td class="amount-in">
++ ${rupiah(item.jumlah)}
+</td>
+
+</tr>
+
+`).join("")
+
+:`
+
+<tr>
+<td colspan="5"
+class="text-center text-slate-400 py-8">
+Belum ada kas masuk.
+</td>
+</tr>
+
+`;
+
+
+document.getElementById(
+"historyKeluarTable"
+).innerHTML=
+keluar.length
+
+?keluar.map(item=>`
+
+<tr>
+
+<td>
+${formatDate(item.tanggal)}
+</td>
+
+<td>
+${escapeHTML(item.keterangan||"-")}
+</td>
+
+<td class="amount-out">
+- ${rupiah(item.jumlah)}
+</td>
+
+</tr>
+
+`).join("")
+
+:`
+
+<tr>
+<td colspan="3"
+class="text-center text-slate-400 py-8">
+Belum ada kas keluar.
+</td>
+</tr>
+
+`;
+
+}
+
+
+/* =====================================================
+SETTINGS
+===================================================== */
+
+function loadSettingsForm(){
+
+const amount=
+document.getElementById(
+"settingWeeklyAmount"
+);
+
+const start=
+document.getElementById(
+"settingStartDate"
+);
+
+if(amount){
+
+amount.value=
+window.appState.settings.weeklyAmount;
+
+}
+
+if(start){
+
+start.value=
+window.appState.settings.startDate;
+
+}
+
+}
+
+
+document.getElementById(
+"settingsForm"
+).addEventListener(
+"submit",
+async e=>{
+
+e.preventDefault();
+
+
+const weeklyAmount=
+Number(
+document.getElementById(
+"settingWeeklyAmount"
+).value
+);
+
+
+const startDate=
+document.getElementById(
+"settingStartDate"
+).value;
+
+
+if(weeklyAmount<0||!startDate){
+
+showToast(
+"Pengaturan belum lengkap.",
+"error"
+);
+
+return;
+
+}
+
+
+try{
+
+await set(
+ref(
+database,
+"kelasVIIIB/settings"
+),
+{
+weeklyAmount,
+startDate,
+updatedAt:Date.now()
+}
+);
+
+
+showToast(
+"Pengaturan kas berhasil disimpan.",
+"success"
+);
+
+}catch(error){
+
+showToast(
+"Gagal menyimpan pengaturan: "+
+error.message,
+"error"
+);
+
+}
+
+});
+
+
+/* =====================================================
+LOGOUT MODAL
+===================================================== */
+
+window.askLogout=function(){
+
+askConfirm(
+"Keluar dari Aplikasi?",
+"Anda akan keluar dari akun dan kembali ke halaman login.",
+()=>{
+logout()
+},
+"Ya, Keluar"
+);
+
+};
+
+
+function logout(){
+
+sessionStorage.removeItem(
+"kasKelasUser"
+);
+
+sessionStorage.removeItem(
+"kasKelasRole"
+);
+
+window.appState.currentUser=null;
+window.appState.currentRole=null;
+
+
+document.getElementById("appPage")
+.classList.add("hidden-page");
+
+document.getElementById("loginPage")
+.classList.remove("hidden-page");
+
+
+selectLoginRole("anggota");
+
+showToast(
+"Anda telah keluar dari aplikasi.",
+"success"
+);
+
+}
+
+
+/* =====================================================
+MOBILE SIDEBAR
+===================================================== */
+
+window.toggleSidebar=function(){
+
+document.getElementById("sidebar")
+.classList.toggle("open");
+
+document.getElementById("mobileOverlay")
+.classList.toggle("show");
+
+};
+
+
+window.closeSidebar=function(){
+
+document.getElementById("sidebar")
+.classList.remove("open");
+
+document.getElementById("mobileOverlay")
+.classList.remove("show");
+
+};
+
+
+/* =====================================================
+REFRESH
+===================================================== */
+
+function refreshAll(){
+
+if(!window.appState.currentRole)
+return;
+
+renderDashboard();
+renderKasMasuk();
+renderKasKeluar();
+renderSiswa();
+renderHistory();
+populateStudentSelect();
+populatePeriodSelect();
+loadSettingsForm();
+
+}
+
+
+/* =====================================================
+CLOSE MODAL CLICK OUTSIDE
+===================================================== */
+
+document.querySelectorAll(".app-modal")
+.forEach(modal=>{
+
+modal.addEventListener("click",e=>{
+
+if(e.target===modal){
+
+modal.classList.remove("show");
+
+}
+
+});
+
+});
+
+
+/* =====================================================
+START
+===================================================== */
+
+checkSession();
 
 </script>
 
