@@ -5,43 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kas Kelas VII B</title>
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: "Inter", sans-serif;
       background: #f5f7fb;
-      color: #1e293b;
+      color: #172033;
+      overflow-x: hidden;
     }
 
+    /* =========================================
+       SIDEBAR
+    ========================================= */
+
     .sidebar {
-      transition: all .3s ease;
+      width: 280px;
+      transition: transform .3s ease;
     }
 
     .menu-item {
-      transition: .2s;
+      transition: all .2s ease;
     }
 
     .menu-item:hover {
-      background: rgba(255,255,255,.12);
+      background: rgba(255,255,255,.10);
     }
 
     .menu-item.active {
       background: white;
-      color: #2563eb;
-      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+      color: #173b7a;
+      box-shadow: 0 8px 20px rgba(0,0,0,.10);
     }
 
-    .overlay {
-      background: rgba(15,23,42,.58);
+    /* =========================================
+       MOBILE SIDEBAR
+    ========================================= */
+
+    @media (max-width: 767px) {
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 100;
+        transform: translateX(-100%);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .mobile-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        background: rgba(0,0,0,.45);
+        backdrop-filter: blur(2px);
+      }
+
+    }
+
+    /* =========================================
+       MODAL
+    ========================================= */
+
+    .modal-overlay {
+      background: rgba(10,25,55,.60);
       backdrop-filter: blur(5px);
     }
 
@@ -50,30 +96,44 @@
     }
 
     @keyframes modalIn {
+
       from {
         opacity: 0;
         transform: scale(.94) translateY(10px);
       }
+
       to {
         opacity: 1;
         transform: scale(1) translateY(0);
       }
+
     }
+
+    /* =========================================
+       WELCOME
+    ========================================= */
 
     .welcome-popup {
       animation: welcomeIn .3s ease;
     }
 
     @keyframes welcomeIn {
+
       from {
         opacity: 0;
         transform: translateY(-15px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
+
     }
+
+    /* =========================================
+       CARD
+    ========================================= */
 
     .stat-card {
       transition: .2s;
@@ -82,6 +142,10 @@
     .stat-card:hover {
       transform: translateY(-2px);
     }
+
+    /* =========================================
+       SCROLL
+    ========================================= */
 
     .scrollbar::-webkit-scrollbar {
       width: 5px;
@@ -92,367 +156,682 @@
       border-radius: 10px;
     }
 
-    @media (max-width: 768px) {
-      .sidebar {
-        position: fixed;
-        z-index: 50;
-        left: -280px;
-      }
+    /* =========================================
+       LOGIN
+    ========================================= */
 
-      .sidebar.open {
-        left: 0;
-      }
-
-      .mobile-overlay.show {
-        display: block;
-      }
+    .login-bg {
+      background: #ffffff;
     }
+
+    .login-container {
+      box-shadow:
+        0 25px 70px rgba(15, 45, 90, .13);
+    }
+
+    .login-role-card {
+      transition: all .2s ease;
+    }
+
+    .login-role-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(15, 45, 90, .10);
+    }
+
+    /* =========================================
+       MOBILE TABLE
+    ========================================= */
+
+    @media (max-width: 640px) {
+
+      .mobile-table {
+        min-width: 850px;
+      }
+
+    }
+
   </style>
 </head>
 
 <body>
 
+
 <!-- =========================================================
-     LOGIN
+     LOGIN SCREEN
 ========================================================= -->
-<div id="loginScreen" class="min-h-screen flex items-center justify-center p-5 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-900">
+
+<div id="loginScreen"
+  class="login-bg min-h-screen flex items-center justify-center p-4">
 
   <div class="w-full max-w-md">
 
-    <div class="text-center text-white mb-7">
-      <div class="w-20 h-20 bg-white rounded-3xl mx-auto flex items-center justify-center shadow-2xl mb-4">
-        <i class="fa-solid fa-wallet text-4xl text-blue-600"></i>
+    <!-- LOGO -->
+    <div class="text-center mb-7">
+
+      <div
+        class="w-20 h-20 bg-[#173b7a] rounded-3xl mx-auto flex items-center justify-center shadow-xl mb-4">
+
+        <i class="fa-solid fa-wallet text-4xl text-white"></i>
+
       </div>
 
-      <h1 class="text-3xl font-extrabold">Kas Kelas VII B</h1>
-      <p class="text-blue-100 mt-1">Sistem Pengelolaan Uang Kas Kelas</p>
-    </div>
+      <h1 class="text-3xl font-extrabold text-[#173b7a]">
+        Kas Kelas VII B
+      </h1>
 
-    <!-- PILIH LOGIN -->
-    <div id="loginChoice" class="bg-white rounded-3xl shadow-2xl p-6">
-
-      <h2 class="text-xl font-bold text-center mb-2">Selamat Datang</h2>
-      <p class="text-gray-500 text-center text-sm mb-6">
-        Silakan pilih jenis login
+      <p class="text-gray-500 mt-2">
+        Sistem Pengelolaan Uang Kas Kelas
       </p>
 
-      <div class="grid grid-cols-1 gap-4">
+    </div>
 
-        <button onclick="showLoginForm('bendahara')"
-          class="p-5 rounded-2xl border-2 border-blue-100 hover:border-blue-500 hover:bg-blue-50 transition text-left flex items-center gap-4">
-          <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center">
+
+    <!-- PILIH LOGIN -->
+    <div id="loginChoice"
+      class="login-container bg-white border border-gray-100 rounded-3xl p-6 md:p-7">
+
+      <h2 class="text-xl font-bold text-center text-[#173b7a]">
+        Selamat Datang
+      </h2>
+
+      <p class="text-gray-500 text-sm text-center mt-1 mb-6">
+        Pilih jenis login untuk melanjutkan
+      </p>
+
+
+      <div class="space-y-4">
+
+        <!-- BENDAHARA -->
+        <button
+          onclick="showLoginForm('bendahara')"
+          class="login-role-card w-full border-2 border-blue-100 hover:border-[#173b7a] rounded-2xl p-5 text-left flex items-center gap-4">
+
+          <div
+            class="w-14 h-14 rounded-2xl bg-blue-50 text-[#173b7a] flex items-center justify-center shrink-0">
+
             <i class="fa-solid fa-user-tie text-2xl"></i>
+
           </div>
 
-          <div>
-            <div class="font-bold text-lg">Login Bendahara</div>
-            <div class="text-sm text-gray-500">Kelola seluruh data kas kelas</div>
+          <div class="flex-1">
+
+            <div class="font-bold text-lg text-[#173b7a]">
+              Login Bendahara
+            </div>
+
+            <div class="text-sm text-gray-500 mt-1">
+              Kelola seluruh data kas kelas
+            </div>
+
           </div>
 
-          <i class="fa-solid fa-chevron-right ml-auto text-gray-400"></i>
+          <i class="fa-solid fa-chevron-right text-gray-400"></i>
+
         </button>
 
-        <button onclick="showLoginForm('anggota')"
-          class="p-5 rounded-2xl border-2 border-green-100 hover:border-green-500 hover:bg-green-50 transition text-left flex items-center gap-4">
-          <div class="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center">
+
+        <!-- ANGGOTA -->
+        <button
+          onclick="showLoginForm('anggota')"
+          class="login-role-card w-full border-2 border-blue-100 hover:border-[#173b7a] rounded-2xl p-5 text-left flex items-center gap-4">
+
+          <div
+            class="w-14 h-14 rounded-2xl bg-blue-50 text-[#173b7a] flex items-center justify-center shrink-0">
+
             <i class="fa-solid fa-users text-2xl"></i>
+
           </div>
 
-          <div>
-            <div class="font-bold text-lg">Login Anggota</div>
-            <div class="text-sm text-gray-500">Lihat pembayaran kas pribadi</div>
+          <div class="flex-1">
+
+            <div class="font-bold text-lg text-[#173b7a]">
+              Login Anggota
+            </div>
+
+            <div class="text-sm text-gray-500 mt-1">
+              Lihat pembayaran kas pribadi
+            </div>
+
           </div>
 
-          <i class="fa-solid fa-chevron-right ml-auto text-gray-400"></i>
+          <i class="fa-solid fa-chevron-right text-gray-400"></i>
+
         </button>
 
       </div>
+
     </div>
 
 
     <!-- LOGIN BENDAHARA -->
-    <div id="bendaharaLogin" class="hidden bg-white rounded-3xl shadow-2xl p-6">
+    <div id="bendaharaLogin"
+      class="hidden login-container bg-white border border-gray-100 rounded-3xl p-6 md:p-7">
 
-      <button onclick="backToLoginChoice()" class="text-gray-500 hover:text-blue-600 mb-5">
-        <i class="fa-solid fa-arrow-left mr-2"></i>Kembali
+      <button
+        onclick="backToLoginChoice()"
+        class="text-gray-500 hover:text-[#173b7a] mb-5">
+
+        <i class="fa-solid fa-arrow-left mr-2"></i>
+        Kembali
+
       </button>
 
+
       <div class="text-center mb-6">
-        <div class="w-16 h-16 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center mx-auto mb-3">
+
+        <div
+          class="w-16 h-16 rounded-2xl bg-blue-50 text-[#173b7a] flex items-center justify-center mx-auto mb-3">
+
           <i class="fa-solid fa-user-tie text-2xl"></i>
+
         </div>
 
-        <h2 class="text-xl font-bold">Login Bendahara</h2>
-        <p class="text-sm text-gray-500">Masukkan akun bendahara</p>
+        <h2 class="text-xl font-bold text-[#173b7a]">
+          Login Bendahara
+        </h2>
+
+        <p class="text-sm text-gray-500">
+          Masukkan akun bendahara
+        </p>
+
       </div>
+
 
       <form id="bendaharaForm" class="space-y-4">
 
         <div>
-          <label class="text-sm font-semibold">Username</label>
+
+          <label class="text-sm font-semibold">
+            Username
+          </label>
+
           <div class="relative mt-2">
-            <i class="fa-solid fa-user absolute left-4 top-3.5 text-gray-400"></i>
-            <input id="bendaharaUsername"
+
+            <i
+              class="fa-solid fa-user absolute left-4 top-3.5 text-gray-400">
+            </i>
+
+            <input
+              id="bendaharaUsername"
               type="text"
-              class="w-full pl-11 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder="Username">
+              autocomplete="username"
+              placeholder="Username"
+              class="w-full pl-11 pr-4 py-3.5 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]">
+
           </div>
+
         </div>
+
 
         <div>
-          <label class="text-sm font-semibold">Password</label>
+
+          <label class="text-sm font-semibold">
+            Password
+          </label>
+
           <div class="relative mt-2">
-            <i class="fa-solid fa-lock absolute left-4 top-3.5 text-gray-400"></i>
-            <input id="bendaharaPassword"
+
+            <i
+              class="fa-solid fa-lock absolute left-4 top-3.5 text-gray-400">
+            </i>
+
+            <input
+              id="bendaharaPassword"
               type="password"
-              class="w-full pl-11 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder="Password">
+              autocomplete="current-password"
+              placeholder="Password"
+              class="w-full pl-11 pr-4 py-3.5 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]">
+
           </div>
+
         </div>
 
-        <button class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold">
+
+        <button
+          class="w-full py-3.5 bg-[#173b7a] hover:bg-[#102e61] text-white rounded-xl font-bold">
+
           <i class="fa-solid fa-right-to-bracket mr-2"></i>
           Masuk sebagai Bendahara
+
         </button>
 
       </form>
+
     </div>
 
 
     <!-- LOGIN ANGGOTA -->
-    <div id="anggotaLogin" class="hidden bg-white rounded-3xl shadow-2xl p-6">
+    <div id="anggotaLogin"
+      class="hidden login-container bg-white border border-gray-100 rounded-3xl p-6 md:p-7">
 
-      <button onclick="backToLoginChoice()" class="text-gray-500 hover:text-green-600 mb-5">
-        <i class="fa-solid fa-arrow-left mr-2"></i>Kembali
+      <button
+        onclick="backToLoginChoice()"
+        class="text-gray-500 hover:text-[#173b7a] mb-5">
+
+        <i class="fa-solid fa-arrow-left mr-2"></i>
+        Kembali
+
       </button>
 
+
       <div class="text-center mb-6">
-        <div class="w-16 h-16 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-3">
+
+        <div
+          class="w-16 h-16 rounded-2xl bg-blue-50 text-[#173b7a] flex items-center justify-center mx-auto mb-3">
+
           <i class="fa-solid fa-user text-2xl"></i>
+
         </div>
 
-        <h2 class="text-xl font-bold">Login Anggota</h2>
-        <p class="text-sm text-gray-500">Pilih nama dan masukkan password</p>
+        <h2 class="text-xl font-bold text-[#173b7a]">
+          Login Anggota
+        </h2>
+
+        <p class="text-sm text-gray-500">
+          Pilih nama dan masukkan password
+        </p>
+
       </div>
+
 
       <form id="anggotaForm" class="space-y-4">
 
         <div>
-          <label class="text-sm font-semibold">Nama Siswa</label>
-          <select id="anggotaSelect"
-            class="w-full mt-2 px-4 py-3 rounded-xl border focus:ring-2 focus:ring-green-500 outline-none">
-            <option value="">Memuat data siswa...</option>
+
+          <label class="text-sm font-semibold">
+            Nama Siswa
+          </label>
+
+          <select
+            id="anggotaSelect"
+            class="w-full mt-2 px-4 py-3.5 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]">
+
+            <option value="">
+              Memuat data siswa...
+            </option>
+
           </select>
+
         </div>
 
+
         <div>
-          <label class="text-sm font-semibold">Password</label>
+
+          <label class="text-sm font-semibold">
+            Password
+          </label>
+
           <div class="relative mt-2">
-            <i class="fa-solid fa-lock absolute left-4 top-3.5 text-gray-400"></i>
-            <input id="anggotaPassword"
+
+            <i
+              class="fa-solid fa-lock absolute left-4 top-3.5 text-gray-400">
+            </i>
+
+            <input
+              id="anggotaPassword"
               type="password"
-              class="w-full pl-11 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-green-500 outline-none"
-              placeholder="Password">
+              placeholder="Password"
+              class="w-full pl-11 pr-4 py-3.5 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]">
+
           </div>
 
           <p class="text-xs text-gray-400 mt-2">
             Password awal siswa: <b>123456</b>
           </p>
+
         </div>
 
-        <button class="w-full py-3.5 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold">
+
+        <button
+          class="w-full py-3.5 bg-[#173b7a] hover:bg-[#102e61] text-white rounded-xl font-bold">
+
           <i class="fa-solid fa-right-to-bracket mr-2"></i>
           Masuk sebagai Anggota
+
         </button>
 
       </form>
+
     </div>
 
   </div>
+
 </div>
 
 
+
 <!-- =========================================================
-     APLIKASI
+     MOBILE OVERLAY
 ========================================================= -->
+
+<div
+  id="mobileOverlay"
+  class="hidden mobile-overlay"
+  onclick="closeMobileSidebar()">
+</div>
+
+
+
+<!-- =========================================================
+     APP
+========================================================= -->
+
 <div id="appScreen" class="hidden min-h-screen">
 
-  <!-- MOBILE OVERLAY -->
-  <div id="mobileOverlay"
-    onclick="toggleSidebar()"
-    class="mobile-overlay hidden fixed inset-0 bg-black/40 z-40">
-  </div>
 
-  <!-- SIDEBAR -->
-  <aside id="sidebar"
-    class="sidebar w-72 bg-gradient-to-b from-blue-700 to-indigo-900 text-white min-h-screen fixed top-0 left-0 flex flex-col">
+  <!-- =======================================================
+       SIDEBAR
+  ======================================================== -->
 
+  <aside
+    id="sidebar"
+    class="sidebar bg-gradient-to-b from-[#173b7a] to-[#0c2857] text-white min-h-screen fixed top-0 left-0 flex flex-col">
+
+    <!-- LOGO -->
     <div class="p-6 border-b border-white/10">
 
       <div class="flex items-center gap-3">
-        <div class="w-12 h-12 bg-white rounded-xl text-blue-600 flex items-center justify-center">
+
+        <div
+          class="w-12 h-12 bg-white rounded-xl text-[#173b7a] flex items-center justify-center">
+
           <i class="fa-solid fa-wallet text-xl"></i>
+
         </div>
 
         <div>
-          <div class="font-extrabold text-lg">Kas Kelas</div>
-          <div class="text-blue-200 text-xs">VII B</div>
+
+          <div class="font-extrabold text-lg">
+            Kas Kelas
+          </div>
+
+          <div class="text-blue-200 text-xs">
+            VII B
+          </div>
+
         </div>
+
       </div>
 
     </div>
 
+
+    <!-- USER -->
     <div class="px-5 py-5">
+
       <div class="bg-white/10 rounded-2xl p-4">
-        <div class="text-xs text-blue-200">Login sebagai</div>
-        <div id="sidebarUserName" class="font-bold mt-1"></div>
-        <div id="sidebarRole" class="text-xs text-blue-200 mt-1"></div>
+
+        <div class="text-xs text-blue-200">
+          Login sebagai
+        </div>
+
+        <div
+          id="sidebarUserName"
+          class="font-bold mt-1">
+        </div>
+
+        <div
+          id="sidebarRole"
+          class="text-xs text-blue-200 mt-1">
+        </div>
+
       </div>
+
     </div>
 
-    <nav id="sidebarMenu" class="px-4 space-y-2 flex-1 overflow-y-auto scrollbar"></nav>
 
+    <!-- MENU -->
+    <nav
+      id="sidebarMenu"
+      class="px-4 space-y-2 flex-1 overflow-y-auto scrollbar">
+    </nav>
+
+
+    <!-- LOGOUT -->
     <div class="p-4 border-t border-white/10">
-      <button onclick="logout()"
-        class="w-full py-3 rounded-xl bg-red-500/20 hover:bg-red-500 text-white font-semibold">
+
+      <button
+        onclick="logout()"
+        class="w-full py-3 rounded-xl bg-white/10 hover:bg-red-500 text-white font-semibold">
+
         <i class="fa-solid fa-right-from-bracket mr-2"></i>
         Keluar
+
       </button>
+
     </div>
 
   </aside>
 
 
-  <!-- MAIN -->
-  <main class="md:ml-72 min-h-screen">
+
+  <!-- =======================================================
+       MAIN
+  ======================================================== -->
+
+  <main class="md:ml-[280px] min-h-screen">
+
 
     <!-- TOPBAR -->
-    <header class="bg-white border-b sticky top-0 z-30">
-      <div class="px-5 md:px-8 py-4 flex items-center gap-4">
+    <header
+      class="bg-white border-b sticky top-0 z-40">
 
-        <button onclick="toggleSidebar()"
-          class="md:hidden w-10 h-10 rounded-xl bg-gray-100">
-          <i class="fa-solid fa-bars"></i>
+      <div
+        class="px-4 md:px-8 py-4 flex items-center gap-3">
+
+        <!-- HAMBURGER -->
+        <button
+          onclick="toggleSidebar()"
+          class="md:hidden w-11 h-11 rounded-xl bg-blue-50 text-[#173b7a] flex items-center justify-center">
+
+          <i class="fa-solid fa-bars text-lg"></i>
+
         </button>
 
+
         <div>
-          <h1 id="pageTitle" class="text-xl font-bold">Beranda</h1>
-          <p class="text-xs text-gray-500">Pengelolaan Kas Kelas VII B</p>
+
+          <h1
+            id="pageTitle"
+            class="text-xl font-bold text-[#173b7a]">
+            Beranda
+          </h1>
+
+          <p class="text-xs text-gray-500">
+            Pengelolaan Kas Kelas VII B
+          </p>
+
         </div>
 
-        <div class="ml-auto flex items-center gap-3">
 
-          <div id="connectionStatus"
-            class="hidden sm:flex items-center gap-2 text-xs px-3 py-2 rounded-full bg-gray-100">
-            <span class="w-2 h-2 rounded-full bg-gray-400"></span>
-            Menghubungkan...
-          </div>
+        <!-- CONNECTION -->
+        <div
+          id="connectionStatus"
+          class="hidden sm:flex ml-auto items-center gap-2 text-xs px-3 py-2 rounded-full bg-gray-100">
+
+          <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+
+          Menghubungkan...
 
         </div>
+
       </div>
+
     </header>
 
 
-    <!-- CONTENT -->
-    <div id="pageContent" class="p-5 md:p-8"></div>
+    <!-- PAGE -->
+    <div
+      id="pageContent"
+      class="p-4 md:p-8">
+    </div>
 
   </main>
+
 </div>
+
 
 
 <!-- =========================================================
      FORM MODAL
 ========================================================= -->
-<div id="formModal"
-  class="hidden fixed inset-0 z-[80] overlay items-center justify-center p-4">
 
-  <div class="modal-box bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto scrollbar">
+<div
+  id="formModal"
+  class="hidden fixed inset-0 z-[200] modal-overlay items-center justify-center p-4">
 
-    <div class="p-5 border-b flex items-center justify-between sticky top-0 bg-white z-10">
+  <div
+    class="modal-box bg-white rounded-3xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto scrollbar">
+
+    <div
+      class="p-5 border-b flex items-center justify-between sticky top-0 bg-white z-10">
+
       <div>
-        <h3 id="formModalTitle" class="font-bold text-lg"></h3>
-        <p id="formModalSubtitle" class="text-xs text-gray-500"></p>
+
+        <h3
+          id="formModalTitle"
+          class="font-bold text-lg text-[#173b7a]">
+        </h3>
+
+        <p
+          id="formModalSubtitle"
+          class="text-xs text-gray-500">
+        </p>
+
       </div>
 
-      <button onclick="closeFormModal()"
+      <button
+        onclick="closeFormModal()"
         class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-red-100 hover:text-red-600">
+
         <i class="fa-solid fa-xmark"></i>
+
       </button>
+
     </div>
 
-    <div id="formModalBody" class="p-5"></div>
+    <div
+      id="formModalBody"
+      class="p-5">
+    </div>
 
   </div>
+
 </div>
+
 
 
 <!-- =========================================================
      CONFIRM MODAL
 ========================================================= -->
-<div id="confirmModal"
-  class="hidden fixed inset-0 z-[100] overlay items-center justify-center p-4">
 
-  <div class="modal-box bg-white rounded-3xl shadow-2xl w-full max-w-sm p-6 text-center">
+<div
+  id="confirmModal"
+  class="hidden fixed inset-0 z-[250] modal-overlay items-center justify-center p-4">
 
-    <div id="confirmIcon"
+  <div
+    class="modal-box bg-white rounded-3xl shadow-2xl w-full max-w-sm p-6 text-center">
+
+    <div
+      id="confirmIcon"
       class="w-16 h-16 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-4">
+
       <i class="fa-solid fa-trash text-2xl"></i>
+
     </div>
 
-    <h3 id="confirmTitle" class="font-bold text-xl"></h3>
+    <h3
+      id="confirmTitle"
+      class="font-bold text-xl text-[#173b7a]">
+    </h3>
 
-    <p id="confirmMessage" class="text-sm text-gray-500 mt-2"></p>
+    <p
+      id="confirmMessage"
+      class="text-sm text-gray-500 mt-2">
+    </p>
+
 
     <div class="grid grid-cols-2 gap-3 mt-6">
 
-      <button onclick="closeConfirmModal()"
+      <button
+        onclick="closeConfirmModal()"
         class="py-3 rounded-xl bg-gray-100 hover:bg-gray-200 font-semibold">
+
         Batal
+
       </button>
 
-      <button id="confirmButton"
+      <button
+        id="confirmButton"
         class="py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold">
-        Ya, Lanjutkan
+
+        Ya
+
       </button>
 
     </div>
+
   </div>
+
 </div>
+
 
 
 <!-- =========================================================
      WELCOME POPUP
 ========================================================= -->
-<div id="welcomePopup"
-  class="hidden fixed top-5 right-5 z-[120] w-[calc(100%-40px)] max-w-sm">
 
-  <div class="welcome-popup bg-white rounded-2xl shadow-2xl border p-4 flex gap-4 items-center">
+<div
+  id="welcomePopup"
+  class="hidden fixed top-5 right-5 z-[300] w-[calc(100%-40px)] max-w-sm">
 
-    <div id="welcomeIcon"
+  <div
+    class="welcome-popup bg-white rounded-2xl shadow-2xl border p-4 flex gap-4 items-center">
+
+    <div
+      id="welcomeIcon"
       class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+
       <i class="fa-solid fa-hand-wave text-xl"></i>
+
     </div>
 
     <div class="min-w-0">
-      <div id="welcomeTitle" class="font-bold"></div>
-      <div id="welcomeMessage" class="text-sm text-gray-500"></div>
+
+      <div
+        id="welcomeTitle"
+        class="font-bold text-[#173b7a]">
+      </div>
+
+      <div
+        id="welcomeMessage"
+        class="text-sm text-gray-500">
+      </div>
+
     </div>
 
   </div>
+
 </div>
 
 
-<!-- TOAST -->
-<div id="toastContainer"
-  class="fixed bottom-5 right-5 z-[150] space-y-3 w-[calc(100%-40px)] max-w-sm">
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+  id="toastContainer"
+  class="fixed bottom-5 right-5 z-[400] space-y-3 w-[calc(100%-40px)] max-w-sm">
 </div>
 
+
+
+<!-- =========================================================
+     FIREBASE + APPLICATION
+========================================================= -->
 
 <script type="module">
-
-/* =========================================================
-   FIREBASE
-========================================================= */
 
 import { initializeApp }
   from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -468,18 +847,42 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
 
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAmy4PcVbc3bUnIEti0rhkhyPvGiLwFRYc",
-  authDomain: "absenguru-615da.firebaseapp.com",
-  databaseURL: "https://absenguru-615da-default-rtdb.firebaseio.com",
-  projectId: "absenguru-615da",
-  storageBucket: "absenguru-615da.firebasestorage.app",
-  messagingSenderId: "1014411980118",
-  appId: "1:1014411980118:web:6f3f702d8aad89af57faf7"
+
+  apiKey:
+    "AIzaSyAmy4PcVbc3bUnIEti0rhkhyPvGiLwFRYc",
+
+  authDomain:
+    "absenguru-615da.firebaseapp.com",
+
+  databaseURL:
+    "https://absenguru-615da-default-rtdb.firebaseio.com",
+
+  projectId:
+    "absenguru-615da",
+
+  storageBucket:
+    "absenguru-615da.firebasestorage.app",
+
+  messagingSenderId:
+    "1014411980118",
+
+  appId:
+    "1:1014411980118:web:6f3f702d8aad89af57faf7"
+
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
-const database = getDatabase(firebaseApp);
+
+const firebaseApp =
+  initializeApp(firebaseConfig);
+
+const database =
+  getDatabase(firebaseApp);
+
 
 window.firebaseDB = database;
 window.firebaseRef = ref;
@@ -490,19 +893,28 @@ window.firebaseRemove = remove;
 
 
 /* =========================================================
-   KONSTANTA
+   CONSTANT
 ========================================================= */
 
-const DB_ROOT = "kelasVIIIB";
+const DB_ROOT =
+  "kelasVIIIB";
 
-const BENDAHARA_USERNAME = "iissumirat123";
-const BENDAHARA_PASSWORD = "112233";
+const BENDAHARA_USERNAME =
+  "iissumirat123";
 
-const DEFAULT_MEMBER_PASSWORD = "123456";
+const BENDAHARA_PASSWORD =
+  "112233";
+
+const DEFAULT_MEMBER_PASSWORD =
+  "123456";
 
 const DEFAULT_SETTINGS = {
+
   weeklyFee: 10000,
-  startDate: `${new Date().getFullYear()}-01-01`
+
+  startDate:
+    `${new Date().getFullYear()}-01-01`
+
 };
 
 
@@ -513,12 +925,15 @@ const DEFAULT_SETTINGS = {
 window.appState = {
 
   currentUser: null,
+
   currentRole: null,
 
   activeTab: "beranda",
 
   siswa: {},
+
   kasMasuk: {},
+
   kasKeluar: {},
 
   settings: {
@@ -526,6 +941,7 @@ window.appState = {
   },
 
   firebaseConnected: false
+
 };
 
 
@@ -535,28 +951,33 @@ window.appState = {
 
 function rupiah(number) {
 
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0
-  }).format(Number(number) || 0);
+  return new Intl.NumberFormat(
+    "id-ID",
+    {
+      style: "currency",
+      currency: "IDR",
+      maximumFractionDigits: 0
+    }
+  ).format(Number(number) || 0);
 
 }
-
-window.rupiah = rupiah;
 
 
 function formatDate(dateString) {
 
   if (!dateString) return "-";
 
-  const date = new Date(dateString + "T00:00:00");
+  const date =
+    new Date(dateString + "T00:00:00");
 
-  return date.toLocaleDateString("id-ID", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric"
-  });
+  return date.toLocaleDateString(
+    "id-ID",
+    {
+      day: "2-digit",
+      month: "long",
+      year: "numeric"
+    }
+  );
 
 }
 
@@ -565,136 +986,223 @@ function todayString() {
 
   const d = new Date();
 
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-
-  return `${year}-${month}-${day}`;
+  return `${d.getFullYear()}-${String(
+    d.getMonth() + 1
+  ).padStart(2, "0")}-${String(
+    d.getDate()
+  ).padStart(2, "0")}`;
 
 }
 
 
 function monthName(month) {
 
-  return new Date(2000, month - 1, 1).toLocaleString("id-ID", {
-    month: "long"
-  });
+  return new Date(
+    2000,
+    month - 1,
+    1
+  ).toLocaleString(
+    "id-ID",
+    {
+      month: "long"
+    }
+  );
 
 }
 
 
 function daysInMonth(year, month) {
 
-  return new Date(year, month, 0).getDate();
+  return new Date(
+    year,
+    month,
+    0
+  ).getDate();
 
 }
 
-
-/*
-  Tahun periode kas hanya tahun berjalan.
-  Minggu:
-  1 = tanggal 1-7
-  2 = tanggal 8-14
-  3 = tanggal 15-21
-  4 = tanggal 22-28
-  5 = tanggal 29-selesai bulan
-*/
 
 function weeksInMonth(year, month) {
 
-  return Math.ceil(daysInMonth(year, month) / 7);
+  return Math.ceil(
+    daysInMonth(year, month) / 7
+  );
 
 }
 
 
-function periodKey(year, month, week) {
+function periodKey(
+  year,
+  month,
+  week
+) {
 
-  return `${year}-${String(month).padStart(2, "0")}-W${week}`;
+  return `${year}-${String(
+    month
+  ).padStart(2, "0")}-W${week}`;
 
 }
 
 
-function periodLabel(year, month, week) {
+function periodLabel(
+  year,
+  month,
+  week
+) {
 
-  const start = ((week - 1) * 7) + 1;
-  const end = Math.min(week * 7, daysInMonth(year, month));
+  const start =
+    ((week - 1) * 7) + 1;
+
+  const end =
+    Math.min(
+      week * 7,
+      daysInMonth(year, month)
+    );
 
   return `${monthName(month)} ${year} - Minggu ${week} (${start}-${end})`;
 
 }
 
 
-function periodStartDate(year, month, week) {
+function periodStartDate(
+  year,
+  month,
+  week
+) {
 
-  const day = ((week - 1) * 7) + 1;
+  const day =
+    ((week - 1) * 7) + 1;
 
-  return new Date(year, month - 1, day);
+  return new Date(
+    year,
+    month - 1,
+    day
+  );
+
+}
+
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 
 }
 
 
 /* =========================================================
-   EXPECTED PERIOD
+   PERIODE KAS
+   HANYA TAHUN BERJALAN
 ========================================================= */
 
 function getExpectedPeriods() {
 
   const periods = [];
 
-  const startDate = new Date(
-    appState.settings.startDate + "T00:00:00"
+  const currentYear =
+    new Date().getFullYear();
+
+  const today =
+    new Date();
+
+  today.setHours(
+    0,0,0,0
   );
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const currentYear = today.getFullYear();
-
-  /*
-    Periode hanya tahun berjalan.
-  */
-
-  const startYear = currentYear;
+  const startDate =
+    new Date(
+      appState.settings.startDate +
+      "T00:00:00"
+    );
 
   let startMonth = 1;
 
-  if (startDate.getFullYear() === currentYear) {
-    startMonth = startDate.getMonth() + 1;
+  if (
+    startDate.getFullYear() ===
+    currentYear
+  ) {
+
+    startMonth =
+      startDate.getMonth() + 1;
+
   }
 
-  for (let month = startMonth; month <= 12; month++) {
 
-    const weekCount = weeksInMonth(currentYear, month);
+  for (
+    let month = startMonth;
+    month <= 12;
+    month++
+  ) {
 
-    for (let week = 1; week <= weekCount; week++) {
-
-      const start = periodStartDate(
+    const totalWeeks =
+      weeksInMonth(
         currentYear,
-        month,
-        week
+        month
       );
 
-      if (start > today) continue;
 
-      /*
-        Jika periode sebelum tanggal mulai kas,
-        jangan dihitung.
-      */
+    for (
+      let week = 1;
+      week <= totalWeeks;
+      week++
+    ) {
 
-      const end = new Date(start);
-      end.setDate(end.getDate() + 6);
+      const start =
+        periodStartDate(
+          currentYear,
+          month,
+          week
+        );
 
-      if (end < startDate) continue;
+      if (start > today) {
+        continue;
+      }
+
+
+      const end =
+        new Date(start);
+
+      end.setDate(
+        end.getDate() + 6
+      );
+
+
+      if (end < startDate) {
+        continue;
+      }
+
 
       periods.push({
-        key: periodKey(currentYear, month, week),
-        label: periodLabel(currentYear, month, week),
-        year: currentYear,
+
+        key:
+          periodKey(
+            currentYear,
+            month,
+            week
+          ),
+
+        label:
+          periodLabel(
+            currentYear,
+            month,
+            week
+          ),
+
+        year:
+          currentYear,
+
         month,
+
         week
+
       });
 
     }
+
   }
 
   return periods;
@@ -703,12 +1211,17 @@ function getExpectedPeriods() {
 
 
 /* =========================================================
-   CEK PEMBAYARAN
+   ARREARS
 ========================================================= */
 
-function getPaymentForPeriod(studentId, key) {
+function getPaymentForPeriod(
+  studentId,
+  key
+) {
 
-  return Object.values(appState.kasMasuk).find(item =>
+  return Object.values(
+    appState.kasMasuk
+  ).find(item =>
     item.siswaId === studentId &&
     item.periodeKey === key
   );
@@ -716,39 +1229,57 @@ function getPaymentForPeriod(studentId, key) {
 }
 
 
-function getStudentArrears(studentId) {
+function getStudentArrears(
+  studentId
+) {
 
-  const expected = getExpectedPeriods();
+  const expected =
+    getExpectedPeriods();
 
-  const unpaid = expected.filter(period =>
-    !getPaymentForPeriod(studentId, period.key)
-  );
+  const unpaid =
+    expected.filter(
+      period =>
+        !getPaymentForPeriod(
+          studentId,
+          period.key
+        )
+    );
+
 
   return {
+
     unpaid,
-    weeks: unpaid.length,
-    amount: unpaid.length * Number(appState.settings.weeklyFee || 0)
+
+    weeks:
+      unpaid.length,
+
+    amount:
+      unpaid.length *
+      Number(
+        appState.settings.weeklyFee || 0
+      )
+
   };
 
 }
 
 
-function getStudentPaidAmount(studentId) {
+function getStudentPaidAmount(
+  studentId
+) {
 
-  return Object.values(appState.kasMasuk)
-    .filter(item => item.siswaId === studentId)
-    .reduce((sum, item) => sum + Number(item.jumlah || 0), 0);
-
-}
-
-
-function getStudentStatus(studentId) {
-
-  const arrears = getStudentArrears(studentId);
-
-  return arrears.weeks > 0
-    ? "Menunggak"
-    : "Lunas";
+  return Object.values(
+    appState.kasMasuk
+  )
+  .filter(
+    item =>
+      item.siswaId === studentId
+  )
+  .reduce(
+    (sum,item) =>
+      sum + Number(item.jumlah || 0),
+    0
+  );
 
 }
 
@@ -758,12 +1289,17 @@ function getStudentStatus(studentId) {
 ========================================================= */
 
 onValue(
-  ref(database, `${DB_ROOT}/siswa`),
+  ref(
+    database,
+    `${DB_ROOT}/siswa`
+  ),
   snapshot => {
 
-    appState.siswa = snapshot.val() || {};
+    appState.siswa =
+      snapshot.val() || {};
 
     populateMemberSelect();
+
     refreshAllViews();
 
   }
@@ -771,10 +1307,14 @@ onValue(
 
 
 onValue(
-  ref(database, `${DB_ROOT}/kasMasuk`),
+  ref(
+    database,
+    `${DB_ROOT}/kasMasuk`
+  ),
   snapshot => {
 
-    appState.kasMasuk = snapshot.val() || {};
+    appState.kasMasuk =
+      snapshot.val() || {};
 
     refreshAllViews();
 
@@ -783,10 +1323,14 @@ onValue(
 
 
 onValue(
-  ref(database, `${DB_ROOT}/kasKeluar`),
+  ref(
+    database,
+    `${DB_ROOT}/kasKeluar`
+  ),
   snapshot => {
 
-    appState.kasKeluar = snapshot.val() || {};
+    appState.kasKeluar =
+      snapshot.val() || {};
 
     refreshAllViews();
 
@@ -795,12 +1339,18 @@ onValue(
 
 
 onValue(
-  ref(database, `${DB_ROOT}/settings`),
+  ref(
+    database,
+    `${DB_ROOT}/settings`
+  ),
   snapshot => {
 
     appState.settings = {
+
       ...DEFAULT_SETTINGS,
+
       ...(snapshot.val() || {})
+
     };
 
     refreshAllViews();
@@ -810,16 +1360,26 @@ onValue(
 
 
 onValue(
-  ref(database, ".info/connected"),
+  ref(
+    database,
+    ".info/connected"
+  ),
   snapshot => {
 
-    appState.firebaseConnected = snapshot.val() === true;
+    appState.firebaseConnected =
+      snapshot.val() === true;
 
-    const status = document.getElementById("connectionStatus");
+    const status =
+      document.getElementById(
+        "connectionStatus"
+      );
 
     if (!status) return;
 
-    if (appState.firebaseConnected) {
+
+    if (
+      appState.firebaseConnected
+    ) {
 
       status.innerHTML = `
         <span class="w-2 h-2 rounded-full bg-green-500"></span>
@@ -827,7 +1387,7 @@ onValue(
       `;
 
       status.className =
-        "hidden sm:flex items-center gap-2 text-xs px-3 py-2 rounded-full bg-green-50 text-green-700";
+        "hidden sm:flex ml-auto items-center gap-2 text-xs px-3 py-2 rounded-full bg-green-50 text-green-700";
 
     } else {
 
@@ -837,7 +1397,7 @@ onValue(
       `;
 
       status.className =
-        "hidden sm:flex items-center gap-2 text-xs px-3 py-2 rounded-full bg-red-50 text-red-700";
+        "hidden sm:flex ml-auto items-center gap-2 text-xs px-3 py-2 rounded-full bg-red-50 text-red-700";
 
     }
 
@@ -846,65 +1406,114 @@ onValue(
 
 
 /* =========================================================
-   LOGIN UI
+   LOGIN
 ========================================================= */
 
-window.showLoginForm = function(role) {
+window.showLoginForm =
+function(role) {
 
-  document.getElementById("loginChoice").classList.add("hidden");
-  document.getElementById("bendaharaLogin").classList.add("hidden");
-  document.getElementById("anggotaLogin").classList.add("hidden");
+  document
+    .getElementById("loginChoice")
+    .classList.add("hidden");
+
+  document
+    .getElementById("bendaharaLogin")
+    .classList.add("hidden");
+
+  document
+    .getElementById("anggotaLogin")
+    .classList.add("hidden");
+
 
   if (role === "bendahara") {
-    document.getElementById("bendaharaLogin").classList.remove("hidden");
+
+    document
+      .getElementById("bendaharaLogin")
+      .classList.remove("hidden");
+
   }
 
+
   if (role === "anggota") {
-    document.getElementById("anggotaLogin").classList.remove("hidden");
+
+    document
+      .getElementById("anggotaLogin")
+      .classList.remove("hidden");
+
   }
 
 };
 
 
-window.backToLoginChoice = function() {
+window.backToLoginChoice =
+function() {
 
-  document.getElementById("loginChoice").classList.remove("hidden");
-  document.getElementById("bendaharaLogin").classList.add("hidden");
-  document.getElementById("anggotaLogin").classList.add("hidden");
+  document
+    .getElementById("loginChoice")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("bendaharaLogin")
+    .classList.add("hidden");
+
+  document
+    .getElementById("anggotaLogin")
+    .classList.add("hidden");
 
 };
 
 
 function populateMemberSelect() {
 
-  const select = document.getElementById("anggotaSelect");
+  const select =
+    document.getElementById(
+      "anggotaSelect"
+    );
 
   if (!select) return;
 
-  const students = Object.entries(appState.siswa)
-    .sort((a,b) =>
-      String(a[1].nama || "").localeCompare(
-        String(b[1].nama || ""),
-        "id"
-      )
+
+  const students =
+    Object.entries(
+      appState.siswa
+    ).sort(
+      (a,b) =>
+        String(
+          a[1].nama || ""
+        ).localeCompare(
+          String(
+            b[1].nama || ""
+          ),
+          "id"
+        )
     );
+
 
   if (!students.length) {
 
     select.innerHTML = `
-      <option value="">Belum ada data siswa</option>
+      <option value="">
+        Belum ada data siswa
+      </option>
     `;
 
     return;
+
   }
 
+
   select.innerHTML = `
-    <option value="">-- Pilih Nama Siswa --</option>
-    ${students.map(([id, student]) => `
-      <option value="${id}">
-        ${escapeHtml(student.nama || "-")}
-      </option>
-    `).join("")}
+    <option value="">
+      -- Pilih Nama Siswa --
+    </option>
+
+    ${students.map(
+      ([id,student]) => `
+        <option value="${id}">
+          ${escapeHtml(student.nama || "-")}
+        </option>
+      `
+    ).join("")}
   `;
 
 }
@@ -914,112 +1523,158 @@ function populateMemberSelect() {
    LOGIN BENDAHARA
 ========================================================= */
 
-document.getElementById("bendaharaForm").addEventListener(
-  "submit",
-  function(e) {
+document
+  .getElementById("bendaharaForm")
+  .addEventListener(
+    "submit",
+    function(e) {
 
-    e.preventDefault();
+      e.preventDefault();
 
-    const username =
-      document.getElementById("bendaharaUsername").value.trim();
 
-    const password =
-      document.getElementById("bendaharaPassword").value;
+      const username =
+        document.getElementById(
+          "bendaharaUsername"
+        ).value.trim();
 
-    if (
-      username !== BENDAHARA_USERNAME ||
-      password !== BENDAHARA_PASSWORD
-    ) {
 
-      showToast(
-        "Username atau password bendahara salah.",
-        "error"
+      const password =
+        document.getElementById(
+          "bendaharaPassword"
+        ).value;
+
+
+      if (
+        username !==
+        BENDAHARA_USERNAME ||
+        password !==
+        BENDAHARA_PASSWORD
+      ) {
+
+        showToast(
+          "Username atau password bendahara salah.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      openApplication(
+        "bendahara",
+        "Bendahara"
       );
 
-      return;
     }
-
-    openApplication(
-      "bendahara",
-      "Bendahara"
-    );
-
-  }
-);
+  );
 
 
 /* =========================================================
    LOGIN ANGGOTA
 ========================================================= */
 
-document.getElementById("anggotaForm").addEventListener(
-  "submit",
-  function(e) {
+document
+  .getElementById("anggotaForm")
+  .addEventListener(
+    "submit",
+    function(e) {
 
-    e.preventDefault();
+      e.preventDefault();
 
-    const studentId =
-      document.getElementById("anggotaSelect").value;
 
-    const password =
-      document.getElementById("anggotaPassword").value;
+      const studentId =
+        document.getElementById(
+          "anggotaSelect"
+        ).value;
 
-    if (!studentId) {
 
-      showToast(
-        "Silakan pilih nama siswa terlebih dahulu.",
-        "error"
-      );
+      const password =
+        document.getElementById(
+          "anggotaPassword"
+        ).value;
 
-      return;
-    }
 
-    const student = appState.siswa[studentId];
+      if (!studentId) {
 
-    if (!student) {
+        showToast(
+          "Silakan pilih nama siswa.",
+          "error"
+        );
 
-      showToast(
-        "Data siswa tidak ditemukan.",
-        "error"
-      );
+        return;
 
-      return;
-    }
-
-    const correctPassword =
-      student.password || DEFAULT_MEMBER_PASSWORD;
-
-    if (password !== correctPassword) {
-
-      showToast(
-        "Password anggota salah.",
-        "error"
-      );
-
-      return;
-    }
-
-    openApplication(
-      "anggota",
-      {
-        id: studentId,
-        nama: student.nama
       }
-    );
 
-  }
-);
+
+      const student =
+        appState.siswa[
+          studentId
+        ];
+
+
+      if (!student) {
+
+        showToast(
+          "Data siswa tidak ditemukan.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const correctPassword =
+        student.password ||
+        DEFAULT_MEMBER_PASSWORD;
+
+
+      if (
+        password !==
+        correctPassword
+      ) {
+
+        showToast(
+          "Password anggota salah.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      openApplication(
+        "anggota",
+        {
+          id: studentId,
+          nama: student.nama
+        }
+      );
+
+    }
+  );
 
 
 /* =========================================================
-   OPEN APPLICATION
+   OPEN APP
 ========================================================= */
 
-function openApplication(role, user) {
+function openApplication(
+  role,
+  user
+) {
 
-  appState.currentRole = role;
-  appState.currentUser = user;
-  appState.activeTab = "beranda";
+  appState.currentRole =
+    role;
+
+  appState.currentUser =
+    user;
+
+  appState.activeTab =
+    "beranda";
+
 
   sessionStorage.setItem(
     "kasKelasSession",
@@ -1029,21 +1684,30 @@ function openApplication(role, user) {
     })
   );
 
-  document.getElementById("loginScreen").classList.add("hidden");
-  document.getElementById("appScreen").classList.remove("hidden");
+
+  document
+    .getElementById("loginScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("appScreen")
+    .classList.remove("hidden");
+
 
   renderSidebar();
+
   renderCurrentPage();
+
 
   const name =
     role === "bendahara"
       ? "Bendahara"
       : user.nama;
 
+
   showWelcomePopup(
     "Selamat Datang 👋",
-    `Halo, ${name}!`,
-    role === "bendahara" ? "blue" : "green"
+    `Halo, ${name}!`
   );
 
 }
@@ -1051,38 +1715,59 @@ function openApplication(role, user) {
 
 function restoreSession() {
 
-  const saved = sessionStorage.getItem(
-    "kasKelasSession"
-  );
+  const saved =
+    sessionStorage.getItem(
+      "kasKelasSession"
+    );
+
 
   if (!saved) return;
 
+
   try {
 
-    const session = JSON.parse(saved);
+    const session =
+      JSON.parse(saved);
+
 
     if (
-      session.role === "bendahara" ||
-      session.role === "anggota"
+      session.role ===
+        "bendahara" ||
+      session.role ===
+        "anggota"
     ) {
 
-      appState.currentRole = session.role;
-      appState.currentUser = session.user;
+      appState.currentRole =
+        session.role;
 
-      document.getElementById("loginScreen")
+      appState.currentUser =
+        session.user;
+
+
+      document
+        .getElementById(
+          "loginScreen"
+        )
         .classList.add("hidden");
 
-      document.getElementById("appScreen")
+      document
+        .getElementById(
+          "appScreen"
+        )
         .classList.remove("hidden");
 
+
       renderSidebar();
+
       renderCurrentPage();
 
     }
 
   } catch {
 
-    sessionStorage.removeItem("kasKelasSession");
+    sessionStorage.removeItem(
+      "kasKelasSession"
+    );
 
   }
 
@@ -1095,84 +1780,170 @@ function restoreSession() {
 
 function renderSidebar() {
 
-  const role = appState.currentRole;
+  const role =
+    appState.currentRole;
 
-  const userName =
+
+  const name =
     role === "bendahara"
       ? "Bendahara"
-      : appState.currentUser?.nama || "-";
+      : appState.currentUser?.nama ||
+        "-";
 
-  document.getElementById("sidebarUserName")
-    .textContent = userName;
 
-  document.getElementById("sidebarRole")
+  document
+    .getElementById(
+      "sidebarUserName"
+    )
+    .textContent = name;
+
+
+  document
+    .getElementById(
+      "sidebarRole"
+    )
     .textContent =
       role === "bendahara"
         ? "Administrator"
         : "Anggota";
 
+
   let menu = [];
 
-  if (role === "bendahara") {
+
+  if (
+    role === "bendahara"
+  ) {
 
     menu = [
-      ["beranda", "fa-house", "Beranda"],
-      ["kasMasuk", "fa-arrow-down", "Kas Masuk"],
-      ["kasKeluar", "fa-arrow-up", "Kas Keluar"],
-      ["siswa", "fa-users", "Data Siswa"],
-      ["nunggak", "fa-user-clock", "Siswa Nunggak"],
-      ["pengaturan", "fa-gear", "Pengaturan Kas"]
+
+      [
+        "beranda",
+        "fa-house",
+        "Beranda"
+      ],
+
+      [
+        "kasMasuk",
+        "fa-arrow-down",
+        "Kas Masuk"
+      ],
+
+      [
+        "kasKeluar",
+        "fa-arrow-up",
+        "Kas Keluar"
+      ],
+
+      [
+        "siswa",
+        "fa-users",
+        "Data Siswa"
+      ],
+
+      [
+        "nunggak",
+        "fa-user-clock",
+        "Siswa Nunggak"
+      ],
+
+      [
+        "pengaturan",
+        "fa-gear",
+        "Pengaturan Kas"
+      ]
+
     ];
 
   } else {
 
     menu = [
-      ["beranda", "fa-house", "Beranda"],
-      ["kasMasuk", "fa-arrow-down", "Kas Masuk"],
-      ["kasKeluar", "fa-arrow-up", "Kas Keluar"]
+
+      [
+        "beranda",
+        "fa-house",
+        "Beranda"
+      ],
+
+      [
+        "kasMasuk",
+        "fa-arrow-down",
+        "Kas Masuk"
+      ],
+
+      [
+        "kasKeluar",
+        "fa-arrow-up",
+        "Kas Keluar"
+      ]
+
     ];
 
   }
 
-  document.getElementById("sidebarMenu").innerHTML =
-    menu.map(item => {
 
-      const active =
-        appState.activeTab === item[0]
-          ? "active"
-          : "";
+  document
+    .getElementById(
+      "sidebarMenu"
+    )
+    .innerHTML =
 
-      return `
-        <button
-          onclick="navigate('${item[0]}')"
-          class="menu-item ${active} w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left">
+      menu.map(
+        item => {
 
-          <i class="fa-solid ${item[1]} w-5"></i>
+          const active =
+            appState.activeTab ===
+            item[0]
+              ? "active"
+              : "";
 
-          <span class="font-semibold text-sm">
-            ${item[2]}
-          </span>
 
-        </button>
-      `;
+          return `
 
-    }).join("");
+            <button
+              onclick="navigate('${item[0]}')"
+              class="menu-item ${active} w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left">
+
+              <i class="fa-solid ${item[1]} w-5"></i>
+
+              <span class="font-semibold text-sm">
+                ${item[2]}
+              </span>
+
+            </button>
+
+          `;
+
+        }
+      ).join("");
 
 }
 
 
-window.navigate = function(tab) {
+window.navigate =
+function(tab) {
 
   if (
-    appState.currentRole === "anggota" &&
-    ["siswa", "nunggak", "pengaturan"].includes(tab)
+    appState.currentRole ===
+      "anggota" &&
+    [
+      "siswa",
+      "nunggak",
+      "pengaturan"
+    ].includes(tab)
   ) {
+
     return;
+
   }
 
-  appState.activeTab = tab;
+
+  appState.activeTab =
+    tab;
+
 
   renderSidebar();
+
   renderCurrentPage();
 
   closeMobileSidebar();
@@ -1182,45 +1953,93 @@ window.navigate = function(tab) {
 
 function renderCurrentPage() {
 
-  const titleMap = {
-    beranda: "Beranda",
-    kasMasuk: "Kas Masuk",
-    kasKeluar: "Kas Keluar",
-    siswa: "Data Siswa",
-    nunggak: "Siswa Nunggak",
-    pengaturan: "Pengaturan Kas"
+  const titles = {
+
+    beranda:
+      "Beranda",
+
+    kasMasuk:
+      "Kas Masuk",
+
+    kasKeluar:
+      "Kas Keluar",
+
+    siswa:
+      "Data Siswa",
+
+    nunggak:
+      "Siswa Nunggak",
+
+    pengaturan:
+      "Pengaturan Kas"
+
   };
 
-  document.getElementById("pageTitle").textContent =
-    titleMap[appState.activeTab] || "Beranda";
+
+  document
+    .getElementById(
+      "pageTitle"
+    )
+    .textContent =
+      titles[
+        appState.activeTab
+      ] || "Beranda";
+
 
   const content =
-    document.getElementById("pageContent");
+    document.getElementById(
+      "pageContent"
+    );
 
-  switch (appState.activeTab) {
+
+  switch (
+    appState.activeTab
+  ) {
 
     case "kasMasuk":
-      content.innerHTML = renderKasMasuk();
+
+      content.innerHTML =
+        renderKasMasuk();
+
       break;
+
 
     case "kasKeluar":
-      content.innerHTML = renderKasKeluar();
+
+      content.innerHTML =
+        renderKasKeluar();
+
       break;
+
 
     case "siswa":
-      content.innerHTML = renderSiswa();
+
+      content.innerHTML =
+        renderSiswa();
+
       break;
+
 
     case "nunggak":
-      content.innerHTML = renderNunggak();
+
+      content.innerHTML =
+        renderNunggak();
+
       break;
+
 
     case "pengaturan":
-      content.innerHTML = renderPengaturan();
+
+      content.innerHTML =
+        renderPengaturan();
+
       break;
 
+
     default:
-      content.innerHTML = renderBeranda();
+
+      content.innerHTML =
+        renderBeranda();
 
   }
 
@@ -1233,11 +2052,15 @@ function renderCurrentPage() {
 
 function renderBeranda() {
 
-  if (appState.currentRole === "anggota") {
+  if (
+    appState.currentRole ===
+    "anggota"
+  ) {
 
     return renderBerandaAnggota();
 
   }
+
 
   return renderBerandaBendahara();
 
@@ -1250,51 +2073,90 @@ function renderBeranda() {
 
 function renderBerandaBendahara() {
 
-  const kasMasuk = Object.values(appState.kasMasuk)
-    .reduce((sum, item) =>
-      sum + Number(item.jumlah || 0), 0);
+  const kasMasuk =
+    Object.values(
+      appState.kasMasuk
+    ).reduce(
+      (sum,item) =>
+        sum +
+        Number(item.jumlah || 0),
+      0
+    );
 
-  const kasKeluar = Object.values(appState.kasKeluar)
-    .reduce((sum, item) =>
-      sum + Number(item.jumlah || 0), 0);
 
-  const saldo = kasMasuk - kasKeluar;
+  const kasKeluar =
+    Object.values(
+      appState.kasKeluar
+    ).reduce(
+      (sum,item) =>
+        sum +
+        Number(item.jumlah || 0),
+      0
+    );
 
-  const arrears = Object.entries(appState.siswa)
-    .map(([id, student]) => {
 
-      const data = getStudentArrears(id);
+  const saldo =
+    kasMasuk - kasKeluar;
 
-      return {
-        id,
-        nama: student.nama,
-        ...data
-      };
 
-    })
-    .filter(student => student.weeks > 0);
+  const arrears =
+    Object.entries(
+      appState.siswa
+    )
+    .map(
+      ([id,student]) => {
+
+        const data =
+          getStudentArrears(id);
+
+        return {
+          id,
+          nama: student.nama,
+          ...data
+        };
+
+      }
+    )
+    .filter(
+      student =>
+        student.weeks > 0
+    );
+
 
   return `
 
     <div class="space-y-6">
 
-      <!-- HEADER -->
-      <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-3xl p-6 md:p-8 text-white">
 
-        <div class="flex flex-col md:flex-row md:items-center gap-5">
+      <!-- HERO -->
+      <div
+        class="bg-gradient-to-r from-[#173b7a] to-[#2456a6] rounded-3xl p-6 md:p-8 text-white">
 
-          <div class="w-16 h-16 rounded-2xl bg-white/15 flex items-center justify-center">
+        <div
+          class="flex flex-col md:flex-row md:items-center gap-5">
+
+          <div
+            class="w-16 h-16 rounded-2xl bg-white/15 flex items-center justify-center">
+
             <i class="fa-solid fa-chart-line text-3xl"></i>
+
           </div>
 
+
           <div>
-            <div class="text-blue-100 text-sm">Dashboard Bendahara</div>
+
+            <div class="text-blue-100 text-sm">
+              Dashboard Bendahara
+            </div>
+
             <h2 class="text-2xl md:text-3xl font-extrabold mt-1">
               Kas Kelas VII B
             </h2>
+
             <p class="text-blue-100 mt-1">
-              Kelola pembayaran dan keuangan kelas dengan mudah.
+              Kelola pembayaran dan keuangan kelas.
             </p>
+
           </div>
 
         </div>
@@ -1303,7 +2165,8 @@ function renderBerandaBendahara() {
 
 
       <!-- STAT -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
         ${statCard(
           "Total Kas Masuk",
@@ -1328,7 +2191,9 @@ function renderBerandaBendahara() {
 
         ${statCard(
           "Kas / Minggu",
-          rupiah(appState.settings.weeklyFee),
+          rupiah(
+            appState.settings.weeklyFee
+          ),
           "fa-calendar-week",
           "purple"
         )}
@@ -1336,31 +2201,44 @@ function renderBerandaBendahara() {
       </div>
 
 
-      <!-- NOTIFIKASI -->
+      <!-- NOTIFICATION -->
       ${
         arrears.length > 0
+
         ? `
-          <div class="bg-white rounded-3xl border shadow-sm p-5 md:p-6">
+
+          <div
+            class="bg-white rounded-3xl border shadow-sm p-5 md:p-6">
 
             <div class="flex items-center gap-4">
 
-              <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center">
+              <div
+                class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center shrink-0">
+
                 <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+
               </div>
 
-              <div class="flex-1">
+
+              <div class="flex-1 min-w-0">
+
                 <div class="font-bold">
-                  Ada siswa yang belum melunasi kas
+                  Ada siswa yang belum membayar kas
                 </div>
 
                 <div class="text-sm text-gray-500 mt-1">
-                  ${arrears.length} siswa masih memiliki tunggakan pembayaran.
+
+                  ${arrears.length}
+                  siswa memiliki tunggakan.
+
                 </div>
+
               </div>
+
 
               <button
                 onclick="navigate('nunggak')"
-                class="px-4 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-semibold text-sm whitespace-nowrap">
+                class="px-4 py-2.5 bg-[#173b7a] hover:bg-[#102e61] text-white rounded-xl font-semibold text-sm whitespace-nowrap">
 
                 Lihat Semua
 
@@ -1371,48 +2249,70 @@ function renderBerandaBendahara() {
             </div>
 
           </div>
+
         `
+
         : `
-          <div class="bg-white rounded-3xl border shadow-sm p-6">
+
+          <div
+            class="bg-white rounded-3xl border shadow-sm p-6">
 
             <div class="flex items-center gap-4">
 
-              <div class="w-12 h-12 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center">
+              <div
+                class="w-12 h-12 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center">
+
                 <i class="fa-solid fa-circle-check text-xl"></i>
+
               </div>
 
               <div>
-                <div class="font-bold">Semua pembayaran aman</div>
-                <div class="text-sm text-gray-500">
+
+                <div class="font-bold">
+                  Semua pembayaran aman
+                </div>
+
+                <div class="text-sm text-gray-500 mt-1">
                   Tidak ada siswa yang memiliki tunggakan.
                 </div>
+
               </div>
 
             </div>
 
           </div>
+
         `
       }
 
 
-      <!-- AKSI CEPAT -->
+      <!-- QUICK ACTION -->
       <div>
 
-        <h3 class="font-bold text-lg mb-4">
+        <h3 class="font-bold text-lg mb-4 text-[#173b7a]">
           Aksi Cepat
         </h3>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
 
           <button
             onclick="openKasMasukModal()"
             class="bg-white border rounded-2xl p-5 text-left hover:shadow-md transition">
 
-            <div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-4">
+            <div
+              class="w-11 h-11 rounded-xl bg-blue-100 text-[#173b7a] flex items-center justify-center mb-4">
+
               <i class="fa-solid fa-plus"></i>
+
             </div>
 
-            <div class="font-bold">Catat Kas Masuk</div>
+            <div class="font-bold">
+              Catat Kas Masuk
+            </div>
+
             <div class="text-sm text-gray-500 mt-1">
               Catat pembayaran kas siswa
             </div>
@@ -1424,11 +2324,17 @@ function renderBerandaBendahara() {
             onclick="openKasKeluarModal()"
             class="bg-white border rounded-2xl p-5 text-left hover:shadow-md transition">
 
-            <div class="w-11 h-11 rounded-xl bg-red-100 text-red-600 flex items-center justify-center mb-4">
+            <div
+              class="w-11 h-11 rounded-xl bg-red-100 text-red-600 flex items-center justify-center mb-4">
+
               <i class="fa-solid fa-arrow-up"></i>
+
             </div>
 
-            <div class="font-bold">Catat Kas Keluar</div>
+            <div class="font-bold">
+              Catat Kas Keluar
+            </div>
+
             <div class="text-sm text-gray-500 mt-1">
               Catat pengeluaran kelas
             </div>
@@ -1440,16 +2346,23 @@ function renderBerandaBendahara() {
             onclick="navigate('nunggak')"
             class="bg-white border rounded-2xl p-5 text-left hover:shadow-md transition">
 
-            <div class="w-11 h-11 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-4">
+            <div
+              class="w-11 h-11 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-4">
+
               <i class="fa-solid fa-user-clock"></i>
+
             </div>
 
-            <div class="font-bold">Siswa Nunggak</div>
+            <div class="font-bold">
+              Siswa Nunggak
+            </div>
+
             <div class="text-sm text-gray-500 mt-1">
               Lihat dan lunaskan tunggakan
             </div>
 
           </button>
+
 
         </div>
 
@@ -1468,49 +2381,75 @@ function renderBerandaBendahara() {
 
 function renderBerandaAnggota() {
 
-  const studentId = appState.currentUser?.id;
+  const studentId =
+    appState.currentUser?.id;
 
-  const student = appState.siswa[studentId];
+
+  const student =
+    appState.siswa[
+      studentId
+    ];
+
 
   if (!student) {
 
     return `
+
       <div class="bg-white rounded-3xl p-8 text-center">
+
         <i class="fa-solid fa-user-slash text-4xl text-gray-300"></i>
+
         <p class="mt-3 text-gray-500">
           Data siswa tidak ditemukan.
         </p>
+
       </div>
+
     `;
 
   }
 
-  const arrears = getStudentArrears(studentId);
 
-  const paid = getStudentPaidAmount(studentId);
+  const arrears =
+    getStudentArrears(
+      studentId
+    );
+
+
+  const paid =
+    getStudentPaidAmount(
+      studentId
+    );
+
 
   return `
 
     <div class="space-y-6">
 
-      <div class="bg-gradient-to-r from-green-600 to-emerald-700 rounded-3xl p-6 md:p-8 text-white">
 
-        <div class="text-green-100 text-sm">
+      <div
+        class="bg-gradient-to-r from-[#173b7a] to-[#2456a6] rounded-3xl p-6 md:p-8 text-white">
+
+        <div class="text-blue-100 text-sm">
           Selamat datang
         </div>
 
-        <h2 class="text-2xl md:text-3xl font-extrabold mt-1">
+        <h2
+          class="text-2xl md:text-3xl font-extrabold mt-1">
+
           ${escapeHtml(student.nama)}
+
         </h2>
 
-        <p class="text-green-100 mt-1">
+        <p class="text-blue-100 mt-1">
           Pantau pembayaran kas kamu di sini.
         </p>
 
       </div>
 
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div
+        class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
         ${statCard(
           "Total Dibayar",
@@ -1523,12 +2462,16 @@ function renderBerandaAnggota() {
           "Tunggakan",
           `${arrears.weeks} minggu`,
           "fa-clock",
-          arrears.weeks > 0 ? "orange" : "green"
+          arrears.weeks > 0
+            ? "orange"
+            : "green"
         )}
 
         ${statCard(
           "Kas / Minggu",
-          rupiah(appState.settings.weeklyFee),
+          rupiah(
+            appState.settings.weeklyFee
+          ),
           "fa-calendar-week",
           "purple"
         )}
@@ -1538,28 +2481,45 @@ function renderBerandaAnggota() {
 
       ${
         arrears.weeks > 0
+
         ? `
-          <div class="bg-orange-50 border border-orange-200 rounded-3xl p-6">
+
+          <div
+            class="bg-orange-50 border border-orange-200 rounded-3xl p-6">
 
             <div class="flex gap-4">
 
-              <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center shrink-0">
+              <div
+                class="w-12 h-12 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center shrink-0">
+
                 <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+
               </div>
+
 
               <div>
 
-                <div class="font-bold text-orange-800 text-lg">
+                <div
+                  class="font-bold text-orange-800 text-lg">
+
                   Kamu masih memiliki tunggakan
+
                 </div>
 
                 <div class="text-orange-700 mt-1">
+
                   Belum membayar
                   <b>${arrears.weeks} minggu</b>.
+
                 </div>
 
-                <div class="text-2xl font-extrabold text-orange-700 mt-2">
-                  ${rupiah(arrears.amount)}
+                <div
+                  class="text-2xl font-extrabold text-orange-700 mt-2">
+
+                  ${rupiah(
+                    arrears.amount
+                  )}
+
                 </div>
 
               </div>
@@ -1567,48 +2527,72 @@ function renderBerandaAnggota() {
             </div>
 
           </div>
+
         `
+
         : `
-          <div class="bg-green-50 border border-green-200 rounded-3xl p-6">
+
+          <div
+            class="bg-green-50 border border-green-200 rounded-3xl p-6">
 
             <div class="flex items-center gap-4">
 
-              <div class="w-12 h-12 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center">
+              <div
+                class="w-12 h-12 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center">
+
                 <i class="fa-solid fa-circle-check text-xl"></i>
+
               </div>
 
               <div>
-                <div class="font-bold text-green-800 text-lg">
+
+                <div
+                  class="font-bold text-green-800 text-lg">
+
                   Pembayaran kas kamu sudah lunas
+
                 </div>
 
                 <div class="text-sm text-green-700 mt-1">
+
                   Tidak ada tunggakan pembayaran.
+
                 </div>
+
               </div>
 
             </div>
 
           </div>
+
         `
       }
 
 
-      <div class="bg-white border rounded-3xl p-6">
+      <div
+        class="bg-white border rounded-3xl p-6">
 
-        <div class="flex items-center justify-between mb-5">
-          <h3 class="font-bold text-lg">
+        <div
+          class="flex items-center justify-between mb-5">
+
+          <h3 class="font-bold text-lg text-[#173b7a]">
             Pembayaran Terbaru
           </h3>
 
           <button
             onclick="navigate('kasMasuk')"
-            class="text-blue-600 text-sm font-semibold">
+            class="text-[#173b7a] text-sm font-semibold">
+
             Lihat Semua
+
           </button>
+
         </div>
 
-        ${renderLatestMemberPayments(studentId)}
+
+        ${renderLatestMemberPayments(
+          studentId
+        )}
 
       </div>
 
@@ -1619,58 +2603,107 @@ function renderBerandaAnggota() {
 }
 
 
-function renderLatestMemberPayments(studentId) {
+function renderLatestMemberPayments(
+  studentId
+) {
 
-  const data = Object.values(appState.kasMasuk)
-    .filter(item => item.siswaId === studentId)
-    .sort((a,b) =>
-      String(b.tanggal || "").localeCompare(
-        String(a.tanggal || "")
-      )
+  const data =
+    Object.values(
+      appState.kasMasuk
     )
-    .slice(0, 5);
+    .filter(
+      item =>
+        item.siswaId === studentId
+    )
+    .sort(
+      (a,b) =>
+        String(
+          b.tanggal || ""
+        ).localeCompare(
+          String(
+            a.tanggal || ""
+          )
+        )
+    )
+    .slice(0,5);
+
 
   if (!data.length) {
 
     return `
-      <div class="text-center py-8 text-gray-400">
+
+      <div
+        class="text-center py-8 text-gray-400">
+
         <i class="fa-solid fa-receipt text-3xl mb-2"></i>
-        <div>Belum ada pembayaran.</div>
+
+        <div>
+          Belum ada pembayaran.
+        </div>
+
       </div>
+
     `;
 
   }
 
+
   return `
+
     <div class="space-y-3">
 
-      ${data.map(item => `
-        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+      ${data.map(
+        item => `
 
-          <div class="w-10 h-10 rounded-xl bg-green-100 text-green-600 flex items-center justify-center">
-            <i class="fa-solid fa-check"></i>
-          </div>
+          <div
+            class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
 
-          <div class="flex-1 min-w-0">
+            <div
+              class="w-10 h-10 rounded-xl bg-blue-100 text-[#173b7a] flex items-center justify-center">
 
-            <div class="font-semibold text-sm">
-              ${escapeHtml(item.periodeLabel || "-")}
+              <i class="fa-solid fa-check"></i>
+
             </div>
 
-            <div class="text-xs text-gray-500">
-              ${formatDate(item.tanggal)}
+
+            <div class="flex-1 min-w-0">
+
+              <div
+                class="font-semibold text-sm">
+
+                ${escapeHtml(
+                  item.periodeLabel || "-"
+                )}
+
+              </div>
+
+              <div class="text-xs text-gray-500">
+
+                ${formatDate(
+                  item.tanggal
+                )}
+
+              </div>
+
+            </div>
+
+
+            <div
+              class="font-bold text-[#173b7a]">
+
+              ${rupiah(
+                item.jumlah
+              )}
+
             </div>
 
           </div>
 
-          <div class="font-bold text-green-600">
-            ${rupiah(item.jumlah)}
-          </div>
-
-        </div>
-      `).join("")}
+        `
+      ).join("")}
 
     </div>
+
   `;
 
 }
@@ -1683,56 +2716,81 @@ function renderLatestMemberPayments(studentId) {
 function renderKasMasuk() {
 
   const isBendahara =
-    appState.currentRole === "bendahara";
+    appState.currentRole ===
+    "bendahara";
 
-  let data = Object.entries(appState.kasMasuk);
+
+  let data =
+    Object.entries(
+      appState.kasMasuk
+    );
+
 
   if (!isBendahara) {
 
-    data = data.filter(([id, item]) =>
-      item.siswaId === appState.currentUser?.id
-    );
+    data =
+      data.filter(
+        ([id,item]) =>
+          item.siswaId ===
+          appState.currentUser?.id
+      );
 
   }
 
-  data.sort((a,b) =>
-    String(b[1].tanggal || "").localeCompare(
-      String(a[1].tanggal || "")
-    )
+
+  data.sort(
+    (a,b) =>
+      String(
+        b[1].tanggal || ""
+      ).localeCompare(
+        String(
+          a[1].tanggal || ""
+        )
+      )
   );
+
 
   return `
 
     <div class="space-y-5">
 
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+
+      <div
+        class="flex flex-col sm:flex-row sm:items-center gap-3">
 
         <div class="flex-1">
 
-          <h2 class="text-xl font-bold">
+          <h2 class="text-xl font-bold text-[#173b7a]">
             Riwayat Kas Masuk
           </h2>
 
           <p class="text-sm text-gray-500">
-            ${isBendahara
-              ? "Seluruh pembayaran kas siswa."
-              : "Riwayat pembayaran kas kamu."
+
+            ${
+              isBendahara
+                ? "Seluruh pembayaran kas siswa."
+                : "Riwayat pembayaran kas kamu."
             }
+
           </p>
 
         </div>
 
+
         ${
           isBendahara
           ? `
+
             <button
               onclick="openKasMasukModal()"
-              class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold">
+              class="px-5 py-3 bg-[#173b7a] hover:bg-[#102e61] text-white rounded-xl font-semibold">
 
               <i class="fa-solid fa-plus mr-2"></i>
+
               Tambah Pembayaran
 
             </button>
+
           `
           : ""
         }
@@ -1740,20 +2798,25 @@ function renderKasMasuk() {
       </div>
 
 
-      <div class="bg-white rounded-3xl border shadow-sm overflow-hidden">
+      <div
+        class="bg-white rounded-3xl border shadow-sm overflow-hidden">
 
         ${
           data.length
+
           ? `
+
             <div class="overflow-x-auto">
 
-              <table class="w-full text-sm">
+              <table class="w-full text-sm mobile-table">
 
                 <thead class="bg-gray-50 border-b">
 
                   <tr>
 
-                    <th class="text-left px-5 py-4">No</th>
+                    <th class="text-left px-5 py-4">
+                      No
+                    </th>
 
                     <th class="text-left px-5 py-4">
                       Siapa
@@ -1777,7 +2840,11 @@ function renderKasMasuk() {
 
                     ${
                       isBendahara
-                      ? `<th class="text-center px-5 py-4">Aksi</th>`
+                      ? `
+                        <th class="text-center px-5 py-4">
+                          Aksi
+                        </th>
+                      `
                       : ""
                     }
 
@@ -1785,74 +2852,113 @@ function renderKasMasuk() {
 
                 </thead>
 
+
                 <tbody class="divide-y">
 
-                  ${data.map(([id,item], index) => `
+                  ${data.map(
+                    ([id,item],index) => `
 
-                    <tr class="hover:bg-gray-50">
+                      <tr class="hover:bg-gray-50">
 
-                      <td class="px-5 py-4">
-                        ${index + 1}
-                      </td>
+                        <td class="px-5 py-4">
+                          ${index + 1}
+                        </td>
 
-                      <td class="px-5 py-4 font-semibold">
-                        ${escapeHtml(item.nama || "-")}
-                      </td>
+                        <td
+                          class="px-5 py-4 font-semibold">
 
-                      <td class="px-5 py-4">
-                        ${escapeHtml(item.periodeLabel || "-")}
-                      </td>
+                          ${escapeHtml(
+                            item.nama || "-"
+                          )}
 
-                      <td class="px-5 py-4">
-                        ${formatDate(item.tanggal)}
-                      </td>
+                        </td>
 
-                      <td class="px-5 py-4 font-bold text-green-600">
-                        ${rupiah(item.jumlah)}
-                      </td>
+                        <td class="px-5 py-4">
 
-                      <td class="px-5 py-4 text-gray-500">
-                        ${escapeHtml(item.keterangan || "-")}
-                      </td>
+                          ${escapeHtml(
+                            item.periodeLabel || "-"
+                          )}
 
-                      ${
-                        isBendahara
-                        ? `
-                          <td class="px-5 py-4">
+                        </td>
 
-                            <div class="flex justify-center gap-2">
+                        <td class="px-5 py-4">
 
-                              <button
-                                onclick="editKasMasuk('${id}')"
-                                class="w-9 h-9 rounded-lg bg-blue-50 text-blue-600">
-                                <i class="fa-solid fa-pen"></i>
-                              </button>
+                          ${formatDate(
+                            item.tanggal
+                          )}
 
-                              <button
-                                onclick="deleteKasMasuk('${id}')"
-                                class="w-9 h-9 rounded-lg bg-red-50 text-red-600">
-                                <i class="fa-solid fa-trash"></i>
-                              </button>
+                        </td>
 
-                            </div>
+                        <td
+                          class="px-5 py-4 font-bold text-green-600">
 
-                          </td>
-                        `
-                        : ""
-                      }
+                          ${rupiah(
+                            item.jumlah
+                          )}
 
-                    </tr>
+                        </td>
 
-                  `).join("")}
+                        <td
+                          class="px-5 py-4 text-gray-500">
+
+                          ${escapeHtml(
+                            item.keterangan || "-"
+                          )}
+
+                        </td>
+
+
+                        ${
+                          isBendahara
+                          ? `
+
+                            <td class="px-5 py-4">
+
+                              <div
+                                class="flex justify-center gap-2">
+
+                                <button
+                                  onclick="editKasMasuk('${id}')"
+                                  class="w-9 h-9 rounded-lg bg-blue-50 text-blue-600">
+
+                                  <i class="fa-solid fa-pen"></i>
+
+                                </button>
+
+
+                                <button
+                                  onclick="deleteKasMasuk('${id}')"
+                                  class="w-9 h-9 rounded-lg bg-red-50 text-red-600">
+
+                                  <i class="fa-solid fa-trash"></i>
+
+                                </button>
+
+                              </div>
+
+                            </td>
+
+                          `
+                          : ""
+                        }
+
+                      </tr>
+
+                    `
+                  ).join("")}
 
                 </tbody>
 
               </table>
 
             </div>
+
           `
+
           : `
-            <div class="py-16 text-center text-gray-400">
+
+            <div
+              class="py-16 text-center text-gray-400">
 
               <i class="fa-solid fa-receipt text-4xl mb-3"></i>
 
@@ -1861,6 +2967,7 @@ function renderKasMasuk() {
               </div>
 
             </div>
+
           `
         }
 
@@ -1877,42 +2984,70 @@ function renderKasMasuk() {
    MODAL KAS MASUK
 ========================================================= */
 
-window.openKasMasukModal = function(editId = null) {
+window.openKasMasukModal =
+function(editId = null) {
 
-  if (appState.currentRole !== "bendahara") return;
+  if (
+    appState.currentRole !==
+    "bendahara"
+  ) return;
+
 
   const existing =
     editId
-      ? appState.kasMasuk[editId]
+      ? appState.kasMasuk[
+          editId
+        ]
       : null;
 
-  const currentYear = new Date().getFullYear();
+
+  const currentYear =
+    new Date().getFullYear();
+
 
   const defaultDate =
-    existing?.tanggal || todayString();
+    existing?.tanggal ||
+    todayString();
+
 
   const selectedMonth =
     existing?.periodeKey
-      ? Number(existing.periodeKey.split("-")[1])
+      ? Number(
+          existing.periodeKey
+            .split("-")[1]
+        )
       : new Date().getMonth() + 1;
+
 
   const selectedWeek =
     existing?.periodeKey
-      ? Number(existing.periodeKey.split("W")[1])
+      ? Number(
+          existing.periodeKey
+            .split("W")[1]
+        )
       : 1;
 
+
   openFormModal(
+
     editId
       ? "Edit Pembayaran Kas"
       : "Tambah Pembayaran Kas",
 
-    "Periode pembayaran otomatis mengikuti tahun berjalan.",
+    "Periode kas hanya tersedia untuk tahun berjalan.",
+
 
     `
 
-      <form id="kasMasukForm" class="space-y-4">
+      <form
+        id="kasMasukForm"
+        class="space-y-4">
 
-        <input type="hidden" id="kasMasukEditId" value="${editId || ""}">
+
+        <input
+          type="hidden"
+          id="kasMasukEditId"
+          value="${editId || ""}">
 
 
         <div>
@@ -1924,26 +3059,47 @@ window.openKasMasukModal = function(editId = null) {
           <select
             id="kasMasukSiswa"
             required
-            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]">
 
             <option value="">
               -- Pilih Siswa --
             </option>
 
-            ${Object.entries(appState.siswa)
-              .sort((a,b) =>
-                String(a[1].nama || "").localeCompare(
-                  String(b[1].nama || ""),
-                  "id"
-                )
+            ${
+              Object.entries(
+                appState.siswa
               )
-              .map(([id,student]) => `
-                <option
-                  value="${id}"
-                  ${existing?.siswaId === id ? "selected" : ""}>
-                  ${escapeHtml(student.nama)}
-                </option>
-              `).join("")}
+              .sort(
+                (a,b) =>
+                  String(
+                    a[1].nama || ""
+                  ).localeCompare(
+                    String(
+                      b[1].nama || ""
+                    ),
+                    "id"
+                  )
+              )
+              .map(
+                ([id,student]) => `
+
+                  <option
+                    value="${id}"
+                    ${
+                      existing?.siswaId === id
+                        ? "selected"
+                        : ""
+                    }>
+
+                    ${escapeHtml(
+                      student.nama
+                    )}
+
+                  </option>
+
+                `
+              ).join("")
+            }
 
           </select>
 
@@ -1960,12 +3116,14 @@ window.openKasMasukModal = function(editId = null) {
             type="text"
             value="${currentYear}"
             readonly
-            class="w-full mt-2 px-4 py-3 rounded-xl border bg-gray-100 text-gray-600">
+            class="w-full mt-2 px-4 py-3 rounded-xl border bg-gray-100 text-gray-600 font-semibold">
 
         </div>
 
 
-        <div class="grid grid-cols-2 gap-3">
+        <div
+          class="grid grid-cols-2 gap-3">
+
 
           <div>
 
@@ -1976,16 +3134,37 @@ window.openKasMasukModal = function(editId = null) {
             <select
               id="kasMasukBulan"
               onchange="updateKasMasukWeeks()"
-              class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+              class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]">
 
-              ${Array.from({length:12}, (_,i) => i+1)
-                .map(month => `
-                  <option
-                    value="${month}"
-                    ${month === selectedMonth ? "selected" : ""}>
-                    ${monthName(month)}
-                  </option>
-                `).join("")}
+              ${
+                Array.from(
+                  {
+                    length: 12
+                  },
+                  (_,i) =>
+                    i + 1
+                )
+                .map(
+                  month => `
+
+                    <option
+                      value="${month}"
+                      ${
+                        month ===
+                        selectedMonth
+                          ? "selected"
+                          : ""
+                      }>
+
+                      ${monthName(
+                        month
+                      )}
+
+                    </option>
+
+                  `
+                ).join("")
+              }
 
             </select>
 
@@ -2000,7 +3179,7 @@ window.openKasMasukModal = function(editId = null) {
 
             <select
               id="kasMasukMinggu"
-              class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+              class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]">
             </select>
 
           </div>
@@ -2016,16 +3195,21 @@ window.openKasMasukModal = function(editId = null) {
 
           <div class="relative mt-2">
 
-            <span class="absolute left-4 top-3.5 text-gray-500">
+            <span
+              class="absolute left-4 top-3.5 text-gray-500">
+
               Rp
+
             </span>
 
             <input
               id="kasMasukJumlah"
               type="text"
               readonly
-              value="${rupiah(appState.settings.weeklyFee)}"
-              class="w-full pl-11 pr-4 py-3 rounded-xl border bg-gray-100 font-bold text-green-600">
+              value="${rupiah(
+                appState.settings.weeklyFee
+              )}"
+              class="w-full pl-11 pr-4 py-3 rounded-xl border bg-gray-100 font-bold text-[#173b7a]">
 
           </div>
 
@@ -2047,7 +3231,7 @@ window.openKasMasukModal = function(editId = null) {
             type="date"
             value="${defaultDate}"
             required
-            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]">
 
         </div>
 
@@ -2061,18 +3245,25 @@ window.openKasMasukModal = function(editId = null) {
           <textarea
             id="kasMasukKeterangan"
             rows="3"
-            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Contoh: Pembayaran kas minggu ke-2">${escapeHtml(existing?.keterangan || "")}</textarea>
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]"
+            placeholder="Contoh: Pembayaran kas minggu ke-2">${escapeHtml(
+              existing?.keterangan || ""
+            )}</textarea>
 
         </div>
 
 
         <button
           type="submit"
-          class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold">
+          class="w-full py-3.5 bg-[#173b7a] hover:bg-[#102e61] text-white rounded-xl font-bold">
 
           <i class="fa-solid fa-floppy-disk mr-2"></i>
-          ${editId ? "Simpan Perubahan" : "Simpan Pembayaran"}
+
+          ${
+            editId
+              ? "Simpan Perubahan"
+              : "Simpan Pembayaran"
+          }
 
         </button>
 
@@ -2081,54 +3272,107 @@ window.openKasMasukModal = function(editId = null) {
     `
   );
 
-  updateKasMasukWeeks(selectedWeek);
 
-  document.getElementById("kasMasukForm")
-    .addEventListener("submit", saveKasMasuk);
+  updateKasMasukWeeks(
+    selectedWeek
+  );
+
+
+  document
+    .getElementById(
+      "kasMasukForm"
+    )
+    .addEventListener(
+      "submit",
+      saveKasMasuk
+    );
 
 };
 
 
-window.updateKasMasukWeeks = function(selectedWeek = null) {
+window.updateKasMasukWeeks =
+function(selectedWeek = null) {
 
-  const selectMonth =
-    document.getElementById("kasMasukBulan");
+  const monthSelect =
+    document.getElementById(
+      "kasMasukBulan"
+    );
 
-  const selectWeek =
-    document.getElementById("kasMasukMinggu");
 
-  if (!selectMonth || !selectWeek) return;
+  const weekSelect =
+    document.getElementById(
+      "kasMasukMinggu"
+    );
+
+
+  if (
+    !monthSelect ||
+    !weekSelect
+  ) return;
+
 
   const month =
-    Number(selectMonth.value);
+    Number(
+      monthSelect.value
+    );
+
 
   const year =
     new Date().getFullYear();
 
+
   const count =
-    weeksInMonth(year, month);
+    weeksInMonth(
+      year,
+      month
+    );
+
 
   let html = "";
 
-  for (let week = 1; week <= count; week++) {
+
+  for (
+    let week = 1;
+    week <= count;
+    week++
+  ) {
+
+    const start =
+      ((week - 1) * 7) + 1;
+
+
+    const end =
+      Math.min(
+        week * 7,
+        daysInMonth(
+          year,
+          month
+        )
+      );
+
 
     html += `
+
       <option
         value="${week}"
-        ${Number(selectedWeek) === week ? "selected" : ""}>
+        ${
+          Number(selectedWeek) === week
+            ? "selected"
+            : ""
+        }>
 
         Minggu ${week}
-        (${((week - 1) * 7) + 1}-${Math.min(
-          week * 7,
-          daysInMonth(year, month)
-        )})
+        (${start}-${end})
 
       </option>
+
     `;
 
   }
 
-  selectWeek.innerHTML = html;
+
+  weekSelect.innerHTML =
+    html;
 
 };
 
@@ -2137,25 +3381,51 @@ async function saveKasMasuk(e) {
 
   e.preventDefault();
 
+
   const editId =
-    document.getElementById("kasMasukEditId").value;
+    document.getElementById(
+      "kasMasukEditId"
+    ).value;
+
 
   const siswaId =
-    document.getElementById("kasMasukSiswa").value;
+    document.getElementById(
+      "kasMasukSiswa"
+    ).value;
+
 
   const month =
-    Number(document.getElementById("kasMasukBulan").value);
+    Number(
+      document.getElementById(
+        "kasMasukBulan"
+      ).value
+    );
+
 
   const week =
-    Number(document.getElementById("kasMasukMinggu").value);
+    Number(
+      document.getElementById(
+        "kasMasukMinggu"
+      ).value
+    );
+
 
   const tanggal =
-    document.getElementById("kasMasukTanggal").value;
+    document.getElementById(
+      "kasMasukTanggal"
+    ).value;
+
 
   const keterangan =
-    document.getElementById("kasMasukKeterangan").value.trim();
+    document.getElementById(
+      "kasMasukKeterangan"
+    ).value.trim();
 
-  if (!siswaId || !tanggal) {
+
+  if (
+    !siswaId ||
+    !tanggal
+  ) {
 
     showToast(
       "Lengkapi data pembayaran.",
@@ -2166,28 +3436,34 @@ async function saveKasMasuk(e) {
 
   }
 
+
   const year =
     new Date().getFullYear();
 
-  const key =
-    periodKey(year, month, week);
 
-  /*
-    Cegah satu siswa membayar periode yang sama dua kali.
-  */
+  const key =
+    periodKey(
+      year,
+      month,
+      week
+    );
+
 
   const duplicate =
-    Object.entries(appState.kasMasuk)
-      .find(([id,item]) =>
+    Object.entries(
+      appState.kasMasuk
+    ).find(
+      ([id,item]) =>
         id !== editId &&
         item.siswaId === siswaId &&
         item.periodeKey === key
-      );
+    );
+
 
   if (duplicate) {
 
     showToast(
-      "Siswa tersebut sudah tercatat membayar periode ini.",
+      "Siswa tersebut sudah membayar periode ini.",
       "error"
     );
 
@@ -2195,27 +3471,40 @@ async function saveKasMasuk(e) {
 
   }
 
+
   const student =
-    appState.siswa[siswaId];
+    appState.siswa[
+      siswaId
+    ];
+
 
   const data = {
 
     siswaId,
 
-    nama: student.nama,
+    nama:
+      student.nama,
 
     jumlah:
-      Number(appState.settings.weeklyFee || 0),
+      Number(
+        appState.settings.weeklyFee || 0
+      ),
 
     tanggal,
 
-    periodeKey: key,
+    periodeKey:
+      key,
 
     periodeLabel:
-      periodLabel(year, month, week),
+      periodLabel(
+        year,
+        month,
+        week
+      ),
 
     keterangan:
-      keterangan || "Pembayaran kas",
+      keterangan ||
+      "Pembayaran kas",
 
     createdAt:
       Date.now()
@@ -2228,25 +3517,39 @@ async function saveKasMasuk(e) {
     if (editId) {
 
       await update(
-        ref(database, `${DB_ROOT}/kasMasuk/${editId}`),
+        ref(
+          database,
+          `${DB_ROOT}/kasMasuk/${editId}`
+        ),
         data
       );
 
     } else {
 
       const newRef =
-        push(ref(database, `${DB_ROOT}/kasMasuk`));
+        push(
+          ref(
+            database,
+            `${DB_ROOT}/kasMasuk`
+          )
+        );
 
-      await set(newRef, data);
+      await set(
+        newRef,
+        data
+      );
 
     }
 
+
     closeFormModal();
+
 
     showToast(
       "Pembayaran kas berhasil disimpan.",
       "success"
     );
+
 
   } catch(error) {
 
@@ -2263,20 +3566,30 @@ async function saveKasMasuk(e) {
 
 
 /* =========================================================
-   LUNASKAN TUNGGAKAN
+   LUNASKAN
 ========================================================= */
 
-window.lunaskanTunggakan = function(studentId) {
+window.lunaskanTunggakan =
+function(studentId) {
 
   const student =
-    appState.siswa[studentId];
+    appState.siswa[
+      studentId
+    ];
+
 
   if (!student) return;
 
-  const arrears =
-    getStudentArrears(studentId);
 
-  if (arrears.weeks <= 0) {
+  const arrears =
+    getStudentArrears(
+      studentId
+    );
+
+
+  if (
+    arrears.weeks <= 0
+  ) {
 
     showToast(
       "Siswa ini sudah lunas.",
@@ -2287,14 +3600,17 @@ window.lunaskanTunggakan = function(studentId) {
 
   }
 
+
   showConfirmModal({
 
-    title: "Lunaskan Tunggakan?",
+    title:
+      "Lunaskan Tunggakan?",
 
     message:
-      `${student.nama} memiliki tunggakan ${arrears.weeks} minggu sebesar ${rupiah(arrears.amount)}. Sistem akan mencatat seluruh minggu yang belum dibayar.`,
+      `${student.nama} memiliki tunggakan ${arrears.weeks} minggu sebesar ${rupiah(arrears.amount)}. Semua periode yang belum dibayar akan dicatat sebagai pembayaran.`,
 
-    icon: "fa-money-bill-wave",
+    icon:
+      "fa-money-bill-wave",
 
     iconClass:
       "bg-green-100 text-green-600",
@@ -2306,83 +3622,102 @@ window.lunaskanTunggakan = function(studentId) {
       "bg-green-600 hover:bg-green-700",
 
     onConfirm:
-      () => processPelunasan(studentId)
+      () =>
+        processPelunasan(
+          studentId
+        )
 
   });
 
 };
 
 
-async function processPelunasan(studentId) {
+async function processPelunasan(
+  studentId
+) {
 
   const student =
-    appState.siswa[studentId];
+    appState.siswa[
+      studentId
+    ];
+
 
   const arrears =
-    getStudentArrears(studentId);
+    getStudentArrears(
+      studentId
+    );
+
 
   if (
     !student ||
     arrears.weeks <= 0
   ) return;
 
-  const year =
-    new Date().getFullYear();
 
   try {
 
-    /*
-      Setiap minggu yang belum dibayar dibuat
-      sebagai transaksi kas masuk.
-
-      Total otomatis:
-      jumlah minggu × kas per minggu.
-    */
-
-    for (const period of arrears.unpaid) {
+    for (
+      const period of
+      arrears.unpaid
+    ) {
 
       const newRef =
-        push(ref(database, `${DB_ROOT}/kasMasuk`));
+        push(
+          ref(
+            database,
+            `${DB_ROOT}/kasMasuk`
+          )
+        );
 
-      await set(newRef, {
 
-        siswaId,
+      await set(
+        newRef,
+        {
 
-        nama: student.nama,
+          siswaId:
+            studentId,
 
-        jumlah:
-          Number(appState.settings.weeklyFee || 0),
+          nama:
+            student.nama,
 
-        tanggal:
-          todayString(),
+          jumlah:
+            Number(
+              appState.settings.weeklyFee || 0
+            ),
 
-        periodeKey:
-          period.key,
+          tanggal:
+            todayString(),
 
-        periodeLabel:
-          period.label,
+          periodeKey:
+            period.key,
 
-        keterangan:
-          "Pelunasan tunggakan",
+          periodeLabel:
+            period.label,
 
-        createdAt:
-          Date.now()
+          keterangan:
+            "Pelunasan tunggakan",
 
-      });
+          createdAt:
+            Date.now()
+
+        }
+      );
 
     }
+
 
     showToast(
       `Tunggakan ${student.nama} sebesar ${rupiah(arrears.amount)} berhasil dilunaskan.`,
       "success"
     );
 
+
   } catch(error) {
 
     console.error(error);
 
     showToast(
-      "Pelunasan gagal. Silakan coba lagi.",
+      "Pelunasan gagal.",
       "error"
     );
 
@@ -2392,31 +3727,41 @@ async function processPelunasan(studentId) {
 
 
 /* =========================================================
-   EDIT / DELETE KAS MASUK
+   EDIT DELETE KAS MASUK
 ========================================================= */
 
-window.editKasMasuk = function(id) {
+window.editKasMasuk =
+function(id) {
 
-  openKasMasukModal(id);
+  openKasMasukModal(
+    id
+  );
 
 };
 
 
-window.deleteKasMasuk = function(id) {
+window.deleteKasMasuk =
+function(id) {
 
   const data =
-    appState.kasMasuk[id];
+    appState.kasMasuk[
+      id
+    ];
+
 
   if (!data) return;
 
+
   showConfirmModal({
 
-    title: "Hapus Pembayaran?",
+    title:
+      "Hapus Pembayaran?",
 
     message:
       `Pembayaran ${data.nama || ""} sebesar ${rupiah(data.jumlah)} akan dihapus.`,
 
-    icon: "fa-trash",
+    icon:
+      "fa-trash",
 
     iconClass:
       "bg-red-100 text-red-600",
@@ -2433,15 +3778,19 @@ window.deleteKasMasuk = function(id) {
         try {
 
           await remove(
-            ref(database, `${DB_ROOT}/kasMasuk/${id}`)
+            ref(
+              database,
+              `${DB_ROOT}/kasMasuk/${id}`
+            )
           );
+
 
           showToast(
             "Pembayaran berhasil dihapus.",
             "success"
           );
 
-        } catch(error) {
+        } catch {
 
           showToast(
             "Gagal menghapus pembayaran.",
@@ -2464,25 +3813,36 @@ window.deleteKasMasuk = function(id) {
 function renderKasKeluar() {
 
   const data =
-    Object.entries(appState.kasKeluar)
-      .sort((a,b) =>
-        String(b[1].tanggal || "").localeCompare(
-          String(a[1].tanggal || "")
+    Object.entries(
+      appState.kasKeluar
+    ).sort(
+      (a,b) =>
+        String(
+          b[1].tanggal || ""
+        ).localeCompare(
+          String(
+            a[1].tanggal || ""
+          )
         )
-      );
+    );
+
 
   const isBendahara =
-    appState.currentRole === "bendahara";
+    appState.currentRole ===
+    "bendahara";
+
 
   return `
 
     <div class="space-y-5">
 
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+
+      <div
+        class="flex flex-col sm:flex-row sm:items-center gap-3">
 
         <div class="flex-1">
 
-          <h2 class="text-xl font-bold">
+          <h2 class="text-xl font-bold text-[#173b7a]">
             Riwayat Kas Keluar
           </h2>
 
@@ -2492,17 +3852,21 @@ function renderKasKeluar() {
 
         </div>
 
+
         ${
           isBendahara
           ? `
+
             <button
               onclick="openKasKeluarModal()"
               class="px-5 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold">
 
               <i class="fa-solid fa-plus mr-2"></i>
+
               Tambah Pengeluaran
 
             </button>
+
           `
           : ""
         }
@@ -2510,20 +3874,27 @@ function renderKasKeluar() {
       </div>
 
 
-      <div class="bg-white rounded-3xl border shadow-sm overflow-hidden">
+      <div
+        class="bg-white rounded-3xl border shadow-sm overflow-hidden">
 
         ${
           data.length
+
           ? `
+
             <div class="overflow-x-auto">
 
-              <table class="w-full text-sm">
+              <table
+                class="w-full text-sm mobile-table">
 
-                <thead class="bg-gray-50 border-b">
+                <thead
+                  class="bg-gray-50 border-b">
 
                   <tr>
 
-                    <th class="text-left px-5 py-4">No</th>
+                    <th class="text-left px-5 py-4">
+                      No
+                    </th>
 
                     <th class="text-left px-5 py-4">
                       Siapa
@@ -2543,7 +3914,11 @@ function renderKasKeluar() {
 
                     ${
                       isBendahara
-                      ? `<th class="text-center px-5 py-4">Aksi</th>`
+                      ? `
+                        <th class="text-center px-5 py-4">
+                          Aksi
+                        </th>
+                      `
                       : ""
                     }
 
@@ -2551,73 +3926,115 @@ function renderKasKeluar() {
 
                 </thead>
 
+
                 <tbody class="divide-y">
 
-                  ${data.map(([id,item],index) => `
+                  ${data.map(
+                    ([id,item],index) => `
 
-                    <tr class="hover:bg-gray-50">
+                      <tr>
 
-                      <td class="px-5 py-4">
-                        ${index + 1}
-                      </td>
+                        <td class="px-5 py-4">
+                          ${index + 1}
+                        </td>
 
-                      <td class="px-5 py-4 font-semibold">
-                        ${escapeHtml(item.dibuatOleh || "Bendahara")}
-                      </td>
+                        <td
+                          class="px-5 py-4 font-semibold">
 
-                      <td class="px-5 py-4">
-                        ${formatDate(item.tanggal)}
-                      </td>
+                          ${escapeHtml(
+                            item.dibuatOleh ||
+                            "Bendahara"
+                          )}
 
-                      <td class="px-5 py-4 font-bold text-red-600">
-                        ${rupiah(item.jumlah)}
-                      </td>
+                        </td>
 
-                      <td class="px-5 py-4 text-gray-500">
-                        ${escapeHtml(item.keterangan || "-")}
-                      </td>
+                        <td class="px-5 py-4">
 
-                      ${
-                        isBendahara
-                        ? `
-                          <td class="px-5 py-4">
+                          ${formatDate(
+                            item.tanggal
+                          )}
 
-                            <div class="flex justify-center gap-2">
+                        </td>
 
-                              <button
-                                onclick="editKasKeluar('${id}')"
-                                class="w-9 h-9 rounded-lg bg-blue-50 text-blue-600">
-                                <i class="fa-solid fa-pen"></i>
-                              </button>
+                        <td
+                          class="px-5 py-4 font-bold text-red-600">
 
-                              <button
-                                onclick="deleteKasKeluar('${id}')"
-                                class="w-9 h-9 rounded-lg bg-red-50 text-red-600">
-                                <i class="fa-solid fa-trash"></i>
-                              </button>
+                          ${rupiah(
+                            item.jumlah
+                          )}
 
-                            </div>
+                        </td>
 
-                          </td>
-                        `
-                        : ""
-                      }
+                        <td
+                          class="px-5 py-4 text-gray-500">
 
-                    </tr>
+                          ${escapeHtml(
+                            item.keterangan || "-"
+                          )}
 
-                  `).join("")}
+                        </td>
+
+
+                        ${
+                          isBendahara
+                          ? `
+
+                            <td class="px-5 py-4">
+
+                              <div
+                                class="flex justify-center gap-2">
+
+                                <button
+                                  onclick="editKasKeluar('${id}')"
+                                  class="w-9 h-9 rounded-lg bg-blue-50 text-blue-600">
+
+                                  <i class="fa-solid fa-pen"></i>
+
+                                </button>
+
+
+                                <button
+                                  onclick="deleteKasKeluar('${id}')"
+                                  class="w-9 h-9 rounded-lg bg-red-50 text-red-600">
+
+                                  <i class="fa-solid fa-trash"></i>
+
+                                </button>
+
+                              </div>
+
+                            </td>
+
+                          `
+                          : ""
+                        }
+
+                      </tr>
+
+                    `
+                  ).join("")}
 
                 </tbody>
 
               </table>
 
             </div>
+
           `
+
           : `
-            <div class="py-16 text-center text-gray-400">
+
+            <div
+              class="py-16 text-center text-gray-400">
+
               <i class="fa-solid fa-arrow-up text-4xl mb-3"></i>
-              <div>Belum ada kas keluar.</div>
+
+              <div>
+                Belum ada kas keluar.
+              </div>
+
             </div>
+
           `
         }
 
@@ -2634,14 +4051,22 @@ function renderKasKeluar() {
    MODAL KAS KELUAR
 ========================================================= */
 
-window.openKasKeluarModal = function(editId = null) {
+window.openKasKeluarModal =
+function(editId = null) {
 
-  if (appState.currentRole !== "bendahara") return;
+  if (
+    appState.currentRole !==
+    "bendahara"
+  ) return;
+
 
   const existing =
     editId
-      ? appState.kasKeluar[editId]
+      ? appState.kasKeluar[
+          editId
+        ]
       : null;
+
 
   openFormModal(
 
@@ -2653,12 +4078,16 @@ window.openKasKeluarModal = function(editId = null) {
 
     `
 
-      <form id="kasKeluarForm" class="space-y-4">
+      <form
+        id="kasKeluarForm"
+        class="space-y-4">
+
 
         <input
           type="hidden"
           id="kasKeluarEditId"
           value="${editId || ""}">
+
 
         <div>
 
@@ -2669,9 +4098,12 @@ window.openKasKeluarModal = function(editId = null) {
           <input
             id="kasKeluarTanggal"
             type="date"
-            value="${existing?.tanggal || todayString()}"
+            value="${
+              existing?.tanggal ||
+              todayString()
+            }"
             required
-            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-red-500">
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-red-200 focus:border-red-500">
 
         </div>
 
@@ -2684,7 +4116,8 @@ window.openKasKeluarModal = function(editId = null) {
 
           <div class="relative mt-2">
 
-            <span class="absolute left-4 top-3.5 text-gray-500">
+            <span
+              class="absolute left-4 top-3.5 text-gray-500">
               Rp
             </span>
 
@@ -2692,9 +4125,11 @@ window.openKasKeluarModal = function(editId = null) {
               id="kasKeluarJumlah"
               type="number"
               min="1"
-              value="${existing?.jumlah || ""}"
+              value="${
+                existing?.jumlah || ""
+              }"
               required
-              class="w-full pl-11 pr-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-red-500">
+              class="w-full pl-11 pr-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-red-200 focus:border-red-500">
 
           </div>
 
@@ -2711,8 +4146,10 @@ window.openKasKeluarModal = function(editId = null) {
             id="kasKeluarKeterangan"
             rows="4"
             required
-            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-red-500"
-            placeholder="Contoh: Membeli alat kebersihan">${escapeHtml(existing?.keterangan || "")}</textarea>
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-red-200 focus:border-red-500"
+            placeholder="Contoh: Membeli alat kebersihan">${escapeHtml(
+              existing?.keterangan || ""
+            )}</textarea>
 
         </div>
 
@@ -2722,7 +4159,12 @@ window.openKasKeluarModal = function(editId = null) {
           class="w-full py-3.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold">
 
           <i class="fa-solid fa-floppy-disk mr-2"></i>
-          ${editId ? "Simpan Perubahan" : "Simpan Pengeluaran"}
+
+          ${
+            editId
+              ? "Simpan Perubahan"
+              : "Simpan Pengeluaran"
+          }
 
         </button>
 
@@ -2732,7 +4174,10 @@ window.openKasKeluarModal = function(editId = null) {
   );
 
 
-  document.getElementById("kasKeluarForm")
+  document
+    .getElementById(
+      "kasKeluarForm"
+    )
     .addEventListener(
       "submit",
       saveKasKeluar
@@ -2745,19 +4190,38 @@ async function saveKasKeluar(e) {
 
   e.preventDefault();
 
+
   const editId =
-    document.getElementById("kasKeluarEditId").value;
+    document.getElementById(
+      "kasKeluarEditId"
+    ).value;
+
 
   const tanggal =
-    document.getElementById("kasKeluarTanggal").value;
+    document.getElementById(
+      "kasKeluarTanggal"
+    ).value;
+
 
   const jumlah =
-    Number(document.getElementById("kasKeluarJumlah").value);
+    Number(
+      document.getElementById(
+        "kasKeluarJumlah"
+      ).value
+    );
+
 
   const keterangan =
-    document.getElementById("kasKeluarKeterangan").value.trim();
+    document.getElementById(
+      "kasKeluarKeterangan"
+    ).value.trim();
 
-  if (!tanggal || !jumlah || !keterangan) {
+
+  if (
+    !tanggal ||
+    !jumlah ||
+    !keterangan
+  ) {
 
     showToast(
       "Lengkapi data kas keluar.",
@@ -2767,6 +4231,7 @@ async function saveKasKeluar(e) {
     return;
 
   }
+
 
   const data = {
 
@@ -2790,25 +4255,40 @@ async function saveKasKeluar(e) {
     if (editId) {
 
       await update(
-        ref(database, `${DB_ROOT}/kasKeluar/${editId}`),
+        ref(
+          database,
+          `${DB_ROOT}/kasKeluar/${editId}`
+        ),
         data
       );
 
     } else {
 
       const newRef =
-        push(ref(database, `${DB_ROOT}/kasKeluar`));
+        push(
+          ref(
+            database,
+            `${DB_ROOT}/kasKeluar`
+          )
+        );
 
-      await set(newRef, data);
+
+      await set(
+        newRef,
+        data
+      );
 
     }
 
+
     closeFormModal();
+
 
     showToast(
       "Kas keluar berhasil disimpan.",
       "success"
     );
+
 
   } catch(error) {
 
@@ -2824,28 +4304,38 @@ async function saveKasKeluar(e) {
 }
 
 
-window.editKasKeluar = function(id) {
+window.editKasKeluar =
+function(id) {
 
-  openKasKeluarModal(id);
+  openKasKeluarModal(
+    id
+  );
 
 };
 
 
-window.deleteKasKeluar = function(id) {
+window.deleteKasKeluar =
+function(id) {
 
   const data =
-    appState.kasKeluar[id];
+    appState.kasKeluar[
+      id
+    ];
+
 
   if (!data) return;
 
+
   showConfirmModal({
 
-    title: "Hapus Kas Keluar?",
+    title:
+      "Hapus Kas Keluar?",
 
     message:
       `Pengeluaran sebesar ${rupiah(data.jumlah)} akan dihapus.`,
 
-    icon: "fa-trash",
+    icon:
+      "fa-trash",
 
     iconClass:
       "bg-red-100 text-red-600",
@@ -2862,8 +4352,12 @@ window.deleteKasKeluar = function(id) {
         try {
 
           await remove(
-            ref(database, `${DB_ROOT}/kasKeluar/${id}`)
+            ref(
+              database,
+              `${DB_ROOT}/kasKeluar/${id}`
+            )
           );
+
 
           showToast(
             "Kas keluar berhasil dihapus.",
@@ -2887,29 +4381,38 @@ window.deleteKasKeluar = function(id) {
 
 
 /* =========================================================
-   DATA SISWA
+   SISWA
 ========================================================= */
 
 function renderSiswa() {
 
   const students =
-    Object.entries(appState.siswa)
-      .sort((a,b) =>
-        String(a[1].nama || "").localeCompare(
-          String(b[1].nama || ""),
+    Object.entries(
+      appState.siswa
+    ).sort(
+      (a,b) =>
+        String(
+          a[1].nama || ""
+        ).localeCompare(
+          String(
+            b[1].nama || ""
+          ),
           "id"
         )
-      );
+    );
+
 
   return `
 
     <div class="space-y-5">
 
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+
+      <div
+        class="flex flex-col sm:flex-row sm:items-center gap-3">
 
         <div class="flex-1">
 
-          <h2 class="text-xl font-bold">
+          <h2 class="text-xl font-bold text-[#173b7a]">
             Data Siswa
           </h2>
 
@@ -2919,11 +4422,13 @@ function renderSiswa() {
 
         </div>
 
+
         <button
           onclick="openSiswaModal()"
-          class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold">
+          class="px-5 py-3 bg-[#173b7a] hover:bg-[#102e61] text-white rounded-xl font-semibold">
 
           <i class="fa-solid fa-user-plus mr-2"></i>
+
           Tambah Siswa
 
         </button>
@@ -2931,116 +4436,167 @@ function renderSiswa() {
       </div>
 
 
-      <div class="bg-white rounded-3xl border shadow-sm overflow-hidden">
+      <div
+        class="bg-white rounded-3xl border shadow-sm overflow-hidden">
 
         ${
           students.length
+
           ? `
+
             <div class="overflow-x-auto">
 
-              <table class="w-full text-sm">
+              <table
+                class="w-full text-sm mobile-table">
 
-                <thead class="bg-gray-50 border-b">
+                <thead
+                  class="bg-gray-50 border-b">
 
                   <tr>
 
-                    <th class="text-left px-5 py-4">No</th>
-                    <th class="text-left px-5 py-4">Nama</th>
-                    <th class="text-left px-5 py-4">NIS</th>
-                    <th class="text-left px-5 py-4">Status Kas</th>
-                    <th class="text-center px-5 py-4">Aksi</th>
+                    <th class="text-left px-5 py-4">
+                      No
+                    </th>
+
+                    <th class="text-left px-5 py-4">
+                      Nama
+                    </th>
+
+                    <th class="text-left px-5 py-4">
+                      NIS
+                    </th>
+
+                    <th class="text-left px-5 py-4">
+                      Status Kas
+                    </th>
+
+                    <th class="text-center px-5 py-4">
+                      Aksi
+                    </th>
 
                   </tr>
 
                 </thead>
 
+
                 <tbody class="divide-y">
 
-                  ${students.map(([id,student],index) => {
+                  ${students.map(
+                    ([id,student],index) => {
 
-                    const arrears =
-                      getStudentArrears(id);
+                      const arrears =
+                        getStudentArrears(
+                          id
+                        );
 
-                    return `
 
-                      <tr class="hover:bg-gray-50">
+                      return `
 
-                        <td class="px-5 py-4">
-                          ${index + 1}
-                        </td>
+                        <tr>
 
-                        <td class="px-5 py-4 font-semibold">
-                          ${escapeHtml(student.nama || "-")}
-                        </td>
+                          <td class="px-5 py-4">
+                            ${index + 1}
+                          </td>
 
-                        <td class="px-5 py-4 text-gray-500">
-                          ${escapeHtml(student.nis || "-")}
-                        </td>
+                          <td
+                            class="px-5 py-4 font-semibold">
 
-                        <td class="px-5 py-4">
+                            ${escapeHtml(
+                              student.nama || "-"
+                            )}
 
-                          ${
-                            arrears.weeks > 0
-                            ? `
-                              <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-bold">
+                          </td>
 
-                                <i class="fa-solid fa-clock"></i>
+                          <td
+                            class="px-5 py-4 text-gray-500">
 
-                                ${arrears.weeks} minggu
+                            ${escapeHtml(
+                              student.nis || "-"
+                            )}
 
-                              </span>
-                            `
-                            : `
-                              <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold">
+                          </td>
 
-                                <i class="fa-solid fa-check"></i>
+                          <td class="px-5 py-4">
 
-                                Lunas
+                            ${
+                              arrears.weeks > 0
 
-                              </span>
-                            `
-                          }
+                              ? `
 
-                        </td>
+                                <span
+                                  class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-bold">
 
-                        <td class="px-5 py-4">
+                                  <i class="fa-solid fa-clock"></i>
 
-                          <div class="flex justify-center gap-2">
+                                  ${arrears.weeks}
+                                  minggu
 
-                            <button
-                              onclick="openSiswaModal('${id}')"
-                              class="w-9 h-9 rounded-lg bg-blue-50 text-blue-600">
+                                </span>
 
-                              <i class="fa-solid fa-pen"></i>
+                              `
 
-                            </button>
+                              : `
 
-                            <button
-                              onclick="deleteSiswa('${id}')"
-                              class="w-9 h-9 rounded-lg bg-red-50 text-red-600">
+                                <span
+                                  class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold">
 
-                              <i class="fa-solid fa-trash"></i>
+                                  <i class="fa-solid fa-check"></i>
 
-                            </button>
+                                  Lunas
 
-                          </div>
+                                </span>
 
-                        </td>
+                              `
+                            }
 
-                      </tr>
+                          </td>
 
-                    `;
 
-                  }).join("")}
+                          <td class="px-5 py-4">
+
+                            <div
+                              class="flex justify-center gap-2">
+
+                              <button
+                                onclick="openSiswaModal('${id}')"
+                                class="w-9 h-9 rounded-lg bg-blue-50 text-blue-600">
+
+                                <i class="fa-solid fa-pen"></i>
+
+                              </button>
+
+
+                              <button
+                                onclick="deleteSiswa('${id}')"
+                                class="w-9 h-9 rounded-lg bg-red-50 text-red-600">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                              </button>
+
+                            </div>
+
+                          </td>
+
+                        </tr>
+
+                      `;
+
+                    }
+                  ).join("")}
 
                 </tbody>
 
               </table>
 
             </div>
+
           `
+
           : `
-            <div class="py-16 text-center text-gray-400">
+
+            <div
+              class="py-16 text-center text-gray-400">
 
               <i class="fa-solid fa-users text-4xl mb-3"></i>
 
@@ -3049,6 +4605,7 @@ function renderSiswa() {
               </div>
 
             </div>
+
           `
         }
 
@@ -3068,43 +4625,71 @@ function renderSiswa() {
 function renderNunggak() {
 
   const students =
-    Object.entries(appState.siswa)
-      .map(([id,student]) => {
+    Object.entries(
+      appState.siswa
+    )
+    .map(
+      ([id,student]) => {
 
         const arrears =
-          getStudentArrears(id);
+          getStudentArrears(
+            id
+          );
+
 
         return {
+
           id,
+
           ...student,
+
           ...arrears
+
         };
 
-      })
-      .filter(student => student.weeks > 0)
-      .sort((a,b) => b.weeks - a.weeks);
+      }
+    )
+    .filter(
+      student =>
+        student.weeks > 0
+    )
+    .sort(
+      (a,b) =>
+        b.weeks -
+        a.weeks
+    );
 
 
   return `
 
     <div class="space-y-5">
 
-      <div class="bg-orange-50 border border-orange-200 rounded-3xl p-6">
+
+      <div
+        class="bg-blue-50 border border-blue-100 rounded-3xl p-6">
 
         <div class="flex items-center gap-4">
 
-          <div class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center">
+          <div
+            class="w-14 h-14 rounded-2xl bg-blue-100 text-[#173b7a] flex items-center justify-center">
+
             <i class="fa-solid fa-user-clock text-2xl"></i>
+
           </div>
 
           <div>
 
-            <h2 class="text-xl font-bold text-orange-900">
+            <h2
+              class="text-xl font-bold text-[#173b7a]">
+
               Siswa Nunggak
+
             </h2>
 
-            <p class="text-sm text-orange-700 mt-1">
+            <p class="text-sm text-gray-600 mt-1">
+
               Daftar siswa yang belum menyelesaikan pembayaran kas.
+
             </p>
 
           </div>
@@ -3114,68 +4699,101 @@ function renderNunggak() {
       </div>
 
 
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+
 
         ${
           students.length
-          ? students.map(student => `
 
-              <div class="bg-white border rounded-3xl p-5 shadow-sm">
+          ? students.map(
+              student => `
 
-                <div class="flex items-start gap-4">
+                <div
+                  class="bg-white border rounded-3xl p-5 shadow-sm">
 
-                  <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center shrink-0">
-                    <i class="fa-solid fa-user"></i>
-                  </div>
 
-                  <div class="flex-1 min-w-0">
+                  <div
+                    class="flex items-start gap-4">
 
-                    <div class="font-bold truncate">
-                      ${escapeHtml(student.nama)}
+                    <div
+                      class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center shrink-0">
+
+                      <i class="fa-solid fa-user"></i>
+
                     </div>
 
-                    <div class="text-sm text-orange-600 font-semibold mt-1">
-                      ${student.weeks} minggu menunggak
+
+                    <div
+                      class="flex-1 min-w-0">
+
+                      <div
+                        class="font-bold truncate">
+
+                        ${escapeHtml(
+                          student.nama
+                        )}
+
+                      </div>
+
+                      <div
+                        class="text-sm text-orange-600 font-semibold mt-1">
+
+                        ${student.weeks}
+                        minggu menunggak
+
+                      </div>
+
                     </div>
 
                   </div>
 
-                </div>
 
+                  <div
+                    class="mt-5 p-4 bg-gray-50 rounded-2xl">
 
-                <div class="mt-5 p-4 bg-gray-50 rounded-2xl">
+                    <div class="text-xs text-gray-500">
 
-                  <div class="text-xs text-gray-500">
-                    Total yang harus dibayar
+                      Total yang harus dibayar
+
+                    </div>
+
+                    <div
+                      class="text-2xl font-extrabold text-orange-600 mt-1">
+
+                      ${rupiah(
+                        student.amount
+                      )}
+
+                    </div>
+
                   </div>
 
-                  <div class="text-2xl font-extrabold text-orange-600 mt-1">
-                    ${rupiah(student.amount)}
-                  </div>
-
-                </div>
-
-
-                <div class="mt-4">
 
                   <button
                     onclick="lunaskanTunggakan('${student.id}')"
-                    class="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold">
+                    class="w-full mt-4 py-3 bg-[#173b7a] hover:bg-[#102e61] text-white rounded-xl font-bold">
 
                     <i class="fa-solid fa-check-double mr-2"></i>
-                    Lunaskan ${student.weeks} Minggu
+
+                    Lunaskan
+                    ${student.weeks}
+                    Minggu
 
                   </button>
 
                 </div>
 
-              </div>
+              `
+            ).join("")
 
-            `).join("")
           : `
-            <div class="md:col-span-2 xl:col-span-3 bg-white rounded-3xl border p-12 text-center">
 
-              <div class="w-16 h-16 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center mx-auto">
+            <div
+              class="md:col-span-2 xl:col-span-3 bg-white rounded-3xl border p-12 text-center">
+
+              <div
+                class="w-16 h-16 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center mx-auto">
 
                 <i class="fa-solid fa-circle-check text-3xl"></i>
 
@@ -3186,10 +4804,13 @@ function renderNunggak() {
               </h3>
 
               <p class="text-gray-500 text-sm mt-1">
+
                 Semua siswa sudah melunasi pembayaran kas.
+
               </p>
 
             </div>
+
           `
         }
 
@@ -3212,22 +4833,27 @@ function renderPengaturan() {
 
     <div class="max-w-2xl space-y-5">
 
+
       <div>
 
-        <h2 class="text-xl font-bold">
+        <h2 class="text-xl font-bold text-[#173b7a]">
           Pengaturan Kas
         </h2>
 
         <p class="text-sm text-gray-500">
-          Tentukan nominal kas mingguan dan awal periode kas.
+          Tentukan nominal kas mingguan.
         </p>
 
       </div>
 
 
-      <div class="bg-white border rounded-3xl p-6">
+      <div
+        class="bg-white border rounded-3xl p-6">
 
-        <form id="settingsForm" class="space-y-5">
+        <form
+          id="settingsForm"
+          class="space-y-5">
+
 
           <div>
 
@@ -3237,7 +4863,8 @@ function renderPengaturan() {
 
             <div class="relative mt-2">
 
-              <span class="absolute left-4 top-3.5 text-gray-500">
+              <span
+                class="absolute left-4 top-3.5 text-gray-500">
                 Rp
               </span>
 
@@ -3245,13 +4872,20 @@ function renderPengaturan() {
                 id="weeklyFee"
                 type="number"
                 min="0"
-                value="${Number(appState.settings.weeklyFee || 0)}"
-                class="w-full pl-11 pr-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+                value="${
+                  Number(
+                    appState.settings.weeklyFee || 0
+                  )
+                }"
+                class="w-full pl-11 pr-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]">
 
             </div>
 
-            <p class="text-xs text-gray-400 mt-2">
-              Nominal ini digunakan otomatis ketika mencatat pembayaran dan menghitung tunggakan.
+            <p
+              class="text-xs text-gray-400 mt-2">
+
+              Nominal ini otomatis digunakan untuk pembayaran dan perhitungan tunggakan.
+
             </p>
 
           </div>
@@ -3266,31 +4900,31 @@ function renderPengaturan() {
             <input
               id="startDate"
               type="date"
-              value="${appState.settings.startDate || `${new Date().getFullYear()}-01-01`}"
-              class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
-
-            <p class="text-xs text-gray-400 mt-2">
-              Perhitungan tunggakan hanya dilakukan pada periode tahun berjalan.
-            </p>
+              value="${
+                appState.settings.startDate ||
+                `${new Date().getFullYear()}-01-01`
+              }"
+              class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]">
 
           </div>
 
 
-          <div class="p-4 bg-blue-50 rounded-2xl text-sm text-blue-700">
+          <div
+            class="p-4 bg-blue-50 rounded-2xl text-sm text-[#173b7a]">
 
             <i class="fa-solid fa-circle-info mr-2"></i>
 
-            Tahun pembayaran otomatis mengikuti
+            Periode kas otomatis menggunakan tahun
             <b>${new Date().getFullYear()}</b>.
-            Tahun sebelumnya tidak dimasukkan ke perhitungan tunggakan.
 
           </div>
 
 
           <button
-            class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold">
+            class="w-full py-3.5 bg-[#173b7a] hover:bg-[#102e61] text-white rounded-xl font-bold">
 
             <i class="fa-solid fa-save mr-2"></i>
+
             Simpan Pengaturan
 
           </button>
@@ -3306,68 +4940,99 @@ function renderPengaturan() {
 }
 
 
-document.addEventListener("submit", async function(e) {
+/* =========================================================
+   SAVE SETTINGS
+========================================================= */
 
-  if (e.target.id !== "settingsForm") return;
+document.addEventListener(
+  "submit",
+  async function(e) {
 
-  e.preventDefault();
+    if (
+      e.target.id !==
+      "settingsForm"
+    ) return;
 
-  const weeklyFee =
-    Number(document.getElementById("weeklyFee").value);
 
-  const startDate =
-    document.getElementById("startDate").value;
+    e.preventDefault();
 
-  if (weeklyFee < 0 || !startDate) {
 
-    showToast(
-      "Pengaturan belum lengkap.",
-      "error"
-    );
+    const weeklyFee =
+      Number(
+        document.getElementById(
+          "weeklyFee"
+        ).value
+      );
 
-    return;
+
+    const startDate =
+      document.getElementById(
+        "startDate"
+      ).value;
+
+
+    if (
+      weeklyFee < 0 ||
+      !startDate
+    ) {
+
+      showToast(
+        "Pengaturan belum lengkap.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    try {
+
+      await update(
+        ref(
+          database,
+          `${DB_ROOT}/settings`
+        ),
+        {
+          weeklyFee,
+          startDate
+        }
+      );
+
+
+      showToast(
+        "Pengaturan kas berhasil disimpan.",
+        "success"
+      );
+
+
+    } catch {
+
+      showToast(
+        "Gagal menyimpan pengaturan.",
+        "error"
+      );
+
+    }
 
   }
-
-  try {
-
-    await update(
-      ref(database, `${DB_ROOT}/settings`),
-      {
-        weeklyFee,
-        startDate
-      }
-    );
-
-    showToast(
-      "Pengaturan kas berhasil disimpan.",
-      "success"
-    );
-
-  } catch(error) {
-
-    console.error(error);
-
-    showToast(
-      "Gagal menyimpan pengaturan.",
-      "error"
-    );
-
-  }
-
-});
+);
 
 
 /* =========================================================
    MODAL SISWA
 ========================================================= */
 
-window.openSiswaModal = function(editId = null) {
+window.openSiswaModal =
+function(editId = null) {
 
   const existing =
     editId
-      ? appState.siswa[editId]
+      ? appState.siswa[
+          editId
+        ]
       : null;
+
 
   openFormModal(
 
@@ -3379,12 +5044,16 @@ window.openSiswaModal = function(editId = null) {
 
     `
 
-      <form id="siswaForm" class="space-y-4">
+      <form
+        id="siswaForm"
+        class="space-y-4">
+
 
         <input
           type="hidden"
           id="siswaEditId"
           value="${editId || ""}">
+
 
         <div>
 
@@ -3396,8 +5065,10 @@ window.openSiswaModal = function(editId = null) {
             id="siswaNama"
             type="text"
             required
-            value="${escapeHtml(existing?.nama || "")}"
-            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500"
+            value="${escapeHtml(
+              existing?.nama || ""
+            )}"
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]"
             placeholder="Nama lengkap">
 
         </div>
@@ -3412,8 +5083,10 @@ window.openSiswaModal = function(editId = null) {
           <input
             id="siswaNis"
             type="text"
-            value="${escapeHtml(existing?.nis || "")}"
-            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500"
+            value="${escapeHtml(
+              existing?.nis || ""
+            )}"
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]"
             placeholder="Nomor induk siswa">
 
         </div>
@@ -3428,8 +5101,11 @@ window.openSiswaModal = function(editId = null) {
           <input
             id="siswaPassword"
             type="text"
-            value="${escapeHtml(existing?.password || DEFAULT_MEMBER_PASSWORD)}"
-            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-500">
+            value="${escapeHtml(
+              existing?.password ||
+              DEFAULT_MEMBER_PASSWORD
+            )}"
+            class="w-full mt-2 px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-blue-200 focus:border-[#173b7a]">
 
           <p class="text-xs text-gray-400 mt-2">
             Password awal: 123456
@@ -3439,10 +5115,15 @@ window.openSiswaModal = function(editId = null) {
 
 
         <button
-          class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold">
+          class="w-full py-3.5 bg-[#173b7a] hover:bg-[#102e61] text-white rounded-xl font-bold">
 
           <i class="fa-solid fa-save mr-2"></i>
-          ${editId ? "Simpan Perubahan" : "Tambah Siswa"}
+
+          ${
+            editId
+              ? "Simpan Perubahan"
+              : "Tambah Siswa"
+          }
 
         </button>
 
@@ -3452,7 +5133,10 @@ window.openSiswaModal = function(editId = null) {
   );
 
 
-  document.getElementById("siswaForm")
+  document
+    .getElementById(
+      "siswaForm"
+    )
     .addEventListener(
       "submit",
       saveSiswa
@@ -3465,18 +5149,31 @@ async function saveSiswa(e) {
 
   e.preventDefault();
 
+
   const editId =
-    document.getElementById("siswaEditId").value;
+    document.getElementById(
+      "siswaEditId"
+    ).value;
+
 
   const nama =
-    document.getElementById("siswaNama").value.trim();
+    document.getElementById(
+      "siswaNama"
+    ).value.trim();
+
 
   const nis =
-    document.getElementById("siswaNis").value.trim();
+    document.getElementById(
+      "siswaNis"
+    ).value.trim();
+
 
   const password =
-    document.getElementById("siswaPassword").value.trim()
-    || DEFAULT_MEMBER_PASSWORD;
+    document.getElementById(
+      "siswaPassword"
+    ).value.trim() ||
+    DEFAULT_MEMBER_PASSWORD;
+
 
   if (!nama) {
 
@@ -3489,13 +5186,24 @@ async function saveSiswa(e) {
 
   }
 
+
   const data = {
+
     nama,
+
     nis,
-    kelas: "VII B",
+
+    kelas:
+      "VII B",
+
     password,
-    aktif: true,
-    updatedAt: Date.now()
+
+    aktif:
+      true,
+
+    updatedAt:
+      Date.now()
+
   };
 
 
@@ -3504,23 +5212,38 @@ async function saveSiswa(e) {
     if (editId) {
 
       await update(
-        ref(database, `${DB_ROOT}/siswa/${editId}`),
+        ref(
+          database,
+          `${DB_ROOT}/siswa/${editId}`
+        ),
         data
       );
 
     } else {
 
       const newRef =
-        push(ref(database, `${DB_ROOT}/siswa`));
+        push(
+          ref(
+            database,
+            `${DB_ROOT}/siswa`
+          )
+        );
 
-      await set(newRef, {
-        ...data,
-        createdAt: Date.now()
-      });
+
+      await set(
+        newRef,
+        {
+          ...data,
+          createdAt:
+            Date.now()
+        }
+      );
 
     }
 
+
     closeFormModal();
+
 
     showToast(
       editId
@@ -3529,9 +5252,8 @@ async function saveSiswa(e) {
       "success"
     );
 
-  } catch(error) {
 
-    console.error(error);
+  } catch {
 
     showToast(
       "Gagal menyimpan data siswa.",
@@ -3543,21 +5265,28 @@ async function saveSiswa(e) {
 }
 
 
-window.deleteSiswa = function(id) {
+window.deleteSiswa =
+function(id) {
 
   const student =
-    appState.siswa[id];
+    appState.siswa[
+      id
+    ];
+
 
   if (!student) return;
 
+
   showConfirmModal({
 
-    title: "Hapus Siswa?",
+    title:
+      "Hapus Siswa?",
 
     message:
       `Data ${student.nama} akan dihapus dari daftar siswa.`,
 
-    icon: "fa-user-minus",
+    icon:
+      "fa-user-minus",
 
     iconClass:
       "bg-red-100 text-red-600",
@@ -3574,17 +5303,19 @@ window.deleteSiswa = function(id) {
         try {
 
           await remove(
-            ref(database, `${DB_ROOT}/siswa/${id}`)
+            ref(
+              database,
+              `${DB_ROOT}/siswa/${id}`
+            )
           );
+
 
           showToast(
             "Data siswa berhasil dihapus.",
             "success"
           );
 
-        } catch(error) {
-
-          console.error(error);
+        } catch {
 
           showToast(
             "Gagal menghapus siswa.",
@@ -3604,33 +5335,69 @@ window.deleteSiswa = function(id) {
    FORM MODAL
 ========================================================= */
 
-function openFormModal(title, subtitle, body) {
+function openFormModal(
+  title,
+  subtitle,
+  body
+) {
 
   const modal =
-    document.getElementById("formModal");
+    document.getElementById(
+      "formModal"
+    );
 
-  document.getElementById("formModalTitle")
-    .textContent = title;
 
-  document.getElementById("formModalSubtitle")
-    .textContent = subtitle;
+  document
+    .getElementById(
+      "formModalTitle"
+    )
+    .textContent =
+      title;
 
-  document.getElementById("formModalBody")
-    .innerHTML = body;
 
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
+  document
+    .getElementById(
+      "formModalSubtitle"
+    )
+    .textContent =
+      subtitle;
+
+
+  document
+    .getElementById(
+      "formModalBody"
+    )
+    .innerHTML =
+      body;
+
+
+  modal.classList.remove(
+    "hidden"
+  );
+
+  modal.classList.add(
+    "flex"
+  );
 
 }
 
 
-window.closeFormModal = function() {
+window.closeFormModal =
+function() {
 
   const modal =
-    document.getElementById("formModal");
+    document.getElementById(
+      "formModal"
+    );
 
-  modal.classList.add("hidden");
-  modal.classList.remove("flex");
+
+  modal.classList.add(
+    "hidden"
+  );
+
+  modal.classList.remove(
+    "flex"
+  );
 
 };
 
@@ -3639,58 +5406,109 @@ window.closeFormModal = function() {
    CONFIRM MODAL
 ========================================================= */
 
-function showConfirmModal(options) {
+function showConfirmModal(
+  options
+) {
 
   const modal =
-    document.getElementById("confirmModal");
+    document.getElementById(
+      "confirmModal"
+    );
+
 
   const icon =
-    document.getElementById("confirmIcon");
+    document.getElementById(
+      "confirmIcon"
+    );
+
 
   icon.className =
-    `w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 ${options.iconClass || "bg-red-100 text-red-600"}`;
+    `w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 ${
+      options.iconClass ||
+      "bg-red-100 text-red-600"
+    }`;
+
 
   icon.innerHTML =
-    `<i class="fa-solid ${options.icon || "fa-circle-question"} text-2xl"></i>`;
+    `<i class="fa-solid ${
+      options.icon ||
+      "fa-circle-question"
+    } text-2xl"></i>`;
 
-  document.getElementById("confirmTitle")
-    .textContent =
-      options.title || "Konfirmasi";
 
-  document.getElementById("confirmMessage")
+  document
+    .getElementById(
+      "confirmTitle"
+    )
     .textContent =
-      options.message || "";
+      options.title ||
+      "Konfirmasi";
+
+
+  document
+    .getElementById(
+      "confirmMessage"
+    )
+    .textContent =
+      options.message ||
+      "";
+
 
   const button =
-    document.getElementById("confirmButton");
+    document.getElementById(
+      "confirmButton"
+    );
+
 
   button.textContent =
-    options.buttonText || "Ya";
+    options.buttonText ||
+    "Ya";
+
 
   button.className =
-    `py-3 rounded-xl text-white font-semibold ${options.buttonClass || "bg-red-600 hover:bg-red-700"}`;
+    `py-3 rounded-xl text-white font-semibold ${
+      options.buttonClass ||
+      "bg-red-600 hover:bg-red-700"
+    }`;
 
-  button.onclick = async function() {
 
-    closeConfirmModal();
+  button.onclick =
+    async function() {
 
-    await options.onConfirm();
+      closeConfirmModal();
 
-  };
+      await options.onConfirm();
 
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
+    };
+
+
+  modal.classList.remove(
+    "hidden"
+  );
+
+  modal.classList.add(
+    "flex"
+  );
 
 }
 
 
-window.closeConfirmModal = function() {
+window.closeConfirmModal =
+function() {
 
   const modal =
-    document.getElementById("confirmModal");
+    document.getElementById(
+      "confirmModal"
+    );
 
-  modal.classList.add("hidden");
-  modal.classList.remove("flex");
+
+  modal.classList.add(
+    "hidden"
+  );
+
+  modal.classList.remove(
+    "flex"
+  );
 
 };
 
@@ -3699,11 +5517,13 @@ window.closeConfirmModal = function() {
    LOGOUT
 ========================================================= */
 
-window.logout = function() {
+window.logout =
+function() {
 
   showConfirmModal({
 
-    title: "Keluar dari Aplikasi?",
+    title:
+      "Keluar dari Aplikasi?",
 
     message:
       "Sesi login akan diakhiri dan kamu akan kembali ke halaman login.",
@@ -3712,13 +5532,13 @@ window.logout = function() {
       "fa-right-from-bracket",
 
     iconClass:
-      "bg-blue-100 text-blue-600",
+      "bg-blue-100 text-[#173b7a]",
 
     buttonText:
       "Keluar",
 
     buttonClass:
-      "bg-blue-600 hover:bg-blue-700",
+      "bg-[#173b7a] hover:bg-[#102e61]",
 
     onConfirm:
       () => {
@@ -3727,21 +5547,51 @@ window.logout = function() {
           "kasKelasSession"
         );
 
-        appState.currentUser = null;
-        appState.currentRole = null;
-        appState.activeTab = "beranda";
 
-        document.getElementById("appScreen")
-          .classList.add("hidden");
+        appState.currentUser =
+          null;
 
-        document.getElementById("loginScreen")
-          .classList.remove("hidden");
+        appState.currentRole =
+          null;
 
-        document.getElementById("bendaharaForm")
+        appState.activeTab =
+          "beranda";
+
+
+        closeMobileSidebar();
+
+
+        document
+          .getElementById(
+            "appScreen"
+          )
+          .classList.add(
+            "hidden"
+          );
+
+
+        document
+          .getElementById(
+            "loginScreen"
+          )
+          .classList.remove(
+            "hidden"
+          );
+
+
+        document
+          .getElementById(
+            "bendaharaForm"
+          )
           .reset();
 
-        document.getElementById("anggotaForm")
+
+        document
+          .getElementById(
+            "anggotaForm"
+          )
           .reset();
+
 
         backToLoginChoice();
 
@@ -3753,39 +5603,51 @@ window.logout = function() {
 
 
 /* =========================================================
-   WELCOME POPUP
+   WELCOME
 ========================================================= */
 
 function showWelcomePopup(
   title,
-  message,
-  color = "blue"
+  message
 ) {
 
   const popup =
-    document.getElementById("welcomePopup");
+    document.getElementById(
+      "welcomePopup"
+    );
 
-  const icon =
-    document.getElementById("welcomeIcon");
 
-  icon.className =
-    color === "green"
-      ? "w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center shrink-0"
-      : "w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0";
+  document
+    .getElementById(
+      "welcomeTitle"
+    )
+    .textContent =
+      title;
 
-  document.getElementById("welcomeTitle")
-    .textContent = title;
 
-  document.getElementById("welcomeMessage")
-    .textContent = message;
+  document
+    .getElementById(
+      "welcomeMessage"
+    )
+    .textContent =
+      message;
 
-  popup.classList.remove("hidden");
 
-  setTimeout(() => {
+  popup.classList.remove(
+    "hidden"
+  );
 
-    popup.classList.add("hidden");
 
-  }, 2500);
+  setTimeout(
+    () => {
+
+      popup.classList.add(
+        "hidden"
+      );
+
+    },
+    2500
+  );
 
 }
 
@@ -3794,121 +5656,206 @@ function showWelcomePopup(
    TOAST
 ========================================================= */
 
-function showToast(message, type = "success") {
+function showToast(
+  message,
+  type = "success"
+) {
 
   const container =
-    document.getElementById("toastContainer");
+    document.getElementById(
+      "toastContainer"
+    );
+
 
   const id =
-    "toast_" + Date.now();
+    "toast_" +
+    Date.now();
+
 
   const config = {
 
     success: {
-      icon: "fa-circle-check",
-      cls: "bg-green-600"
+
+      icon:
+        "fa-circle-check",
+
+      cls:
+        "bg-green-600"
+
     },
 
     error: {
-      icon: "fa-circle-xmark",
-      cls: "bg-red-600"
+
+      icon:
+        "fa-circle-xmark",
+
+      cls:
+        "bg-red-600"
+
     },
 
     info: {
-      icon: "fa-circle-info",
-      cls: "bg-blue-600"
+
+      icon:
+        "fa-circle-info",
+
+      cls:
+        "bg-blue-600"
+
     },
 
     warning: {
-      icon: "fa-triangle-exclamation",
-      cls: "bg-orange-500"
+
+      icon:
+        "fa-triangle-exclamation",
+
+      cls:
+        "bg-orange-500"
+
     }
 
   };
 
+
   const c =
-    config[type] || config.info;
+    config[type] ||
+    config.info;
+
 
   const div =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
-  div.id = id;
+
+  div.id =
+    id;
+
 
   div.className =
     `${c.cls} text-white rounded-2xl shadow-xl p-4 flex items-center gap-3`;
 
+
   div.innerHTML = `
 
-    <i class="fa-solid ${c.icon} text-xl"></i>
+    <i
+      class="fa-solid ${c.icon} text-xl">
+    </i>
 
-    <div class="text-sm font-semibold flex-1">
-      ${escapeHtml(message)}
+    <div
+      class="text-sm font-semibold flex-1">
+
+      ${escapeHtml(
+        message
+      )}
+
     </div>
 
-    <button onclick="document.getElementById('${id}').remove()">
+    <button
+      onclick="document.getElementById('${id}').remove()">
+
       <i class="fa-solid fa-xmark"></i>
+
     </button>
 
   `;
 
-  container.appendChild(div);
 
-  setTimeout(() => {
+  container.appendChild(
+    div
+  );
 
-    const element =
-      document.getElementById(id);
 
-    if (element) element.remove();
+  setTimeout(
+    () => {
 
-  }, 3500);
+      const element =
+        document.getElementById(
+          id
+        );
+
+      if (element) {
+        element.remove();
+      }
+
+    },
+    3500
+  );
 
 }
 
 
-window.showToast = showToast;
+window.showToast =
+  showToast;
 
 
 /* =========================================================
    STAT CARD
 ========================================================= */
 
-function statCard(title, value, icon, color) {
+function statCard(
+  title,
+  value,
+  icon,
+  color
+) {
 
   const colors = {
 
-    blue: "bg-blue-100 text-blue-600",
+    blue:
+      "bg-blue-100 text-[#173b7a]",
 
-    red: "bg-red-100 text-red-600",
+    red:
+      "bg-red-100 text-red-600",
 
-    green: "bg-green-100 text-green-600",
+    green:
+      "bg-green-100 text-green-600",
 
-    purple: "bg-purple-100 text-purple-600",
+    purple:
+      "bg-purple-100 text-purple-600",
 
-    orange: "bg-orange-100 text-orange-600"
+    orange:
+      "bg-orange-100 text-orange-600"
 
   };
 
+
   return `
 
-    <div class="stat-card bg-white border rounded-3xl p-5 shadow-sm">
+    <div
+      class="stat-card bg-white border rounded-3xl p-5 shadow-sm">
 
-      <div class="flex items-center justify-between">
+      <div
+        class="flex items-center justify-between">
 
         <div>
 
-          <div class="text-sm text-gray-500">
+          <div
+            class="text-sm text-gray-500">
+
             ${title}
+
           </div>
 
-          <div class="text-xl font-extrabold mt-2">
+          <div
+            class="text-xl font-extrabold mt-2 text-[#173b7a]">
+
             ${value}
+
           </div>
 
         </div>
 
-        <div class="w-12 h-12 rounded-2xl ${colors[color] || colors.blue} flex items-center justify-center">
 
-          <i class="fa-solid ${icon} text-lg"></i>
+        <div
+          class="w-12 h-12 rounded-2xl ${
+            colors[color] ||
+            colors.blue
+          } flex items-center justify-center">
+
+          <i
+            class="fa-solid ${icon} text-lg">
+          </i>
 
         </div>
 
@@ -3922,63 +5869,72 @@ function statCard(title, value, icon, color) {
 
 
 /* =========================================================
-   ESCAPE HTML
+   MOBILE HAMBURGER
 ========================================================= */
 
-function escapeHtml(value) {
-
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-
-}
-
-
-/* =========================================================
-   SIDEBAR MOBILE
-========================================================= */
-
-window.toggleSidebar = function() {
+window.toggleSidebar =
+function() {
 
   const sidebar =
-    document.getElementById("sidebar");
+    document.getElementById(
+      "sidebar"
+    );
+
 
   const overlay =
-    document.getElementById("mobileOverlay");
+    document.getElementById(
+      "mobileOverlay"
+    );
 
-  sidebar.classList.toggle("open");
 
-  if (sidebar.classList.contains("open")) {
+  if (
+    sidebar.classList.contains(
+      "open"
+    )
+  ) {
 
-    overlay.classList.remove("hidden");
-    overlay.classList.add("show");
+    closeMobileSidebar();
 
   } else {
 
-    overlay.classList.add("hidden");
-    overlay.classList.remove("show");
+    sidebar.classList.add(
+      "open"
+    );
+
+    overlay.classList.remove(
+      "hidden"
+    );
 
   }
 
 };
 
 
-function closeMobileSidebar() {
+window.closeMobileSidebar =
+function() {
 
   const sidebar =
-    document.getElementById("sidebar");
+    document.getElementById(
+      "sidebar"
+    );
+
 
   const overlay =
-    document.getElementById("mobileOverlay");
+    document.getElementById(
+      "mobileOverlay"
+    );
 
-  sidebar.classList.remove("open");
-  overlay.classList.add("hidden");
-  overlay.classList.remove("show");
 
-}
+  sidebar.classList.remove(
+    "open"
+  );
+
+
+  overlay.classList.add(
+    "hidden"
+  );
+
+};
 
 
 /* =========================================================
@@ -3989,10 +5945,17 @@ function refreshAllViews() {
 
   if (
     appState.currentRole &&
-    !document.getElementById("appScreen").classList.contains("hidden")
+    !document
+      .getElementById(
+        "appScreen"
+      )
+      .classList.contains(
+        "hidden"
+      )
   ) {
 
     renderSidebar();
+
     renderCurrentPage();
 
   }
@@ -4001,7 +5964,7 @@ function refreshAllViews() {
 
 
 /* =========================================================
-   INITIAL
+   INIT
 ========================================================= */
 
 populateMemberSelect();
