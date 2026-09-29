@@ -66,12 +66,12 @@
 
     .active-nav-item {
       color: #2563eb !important;
-      font-weight: 600;
+      font-weight: 550;
     }
     .active-sidebar-item {
       background-color: #eff6ff;
       color: #2563eb;
-      font-weight: 600;
+      font-weight: 550;
       border-right: 4px solid #2563eb;
     }
   </style>
@@ -1146,7 +1146,7 @@
       container.innerHTML = unpaidList.map(item => `
         <div class="p-2.5 bg-amber-50/80 border border-amber-100 rounded-xl flex items-center justify-between">
           <div class="flex items-center gap-2 truncate">
-            <span class="w-6 h-6 bg-amber-200 text-amber-900 font-bold text-[10px] rounded-full flex items-center justify-center flex-shrink-0">${item.nomorAbsen}</span>
+            <span class="w-6 h-6 bg-amber-200 text-amber-800 font-bold text-[10px] rounded-full flex items-center justify-center flex-shrink-0">${item.nomorAbsen}</span>
             <span class="font-bold text-slate-800 text-xs truncate">${item.nama}</span>
           </div>
           <span class="px-2 py-0.5 bg-rose-100 text-rose-800 font-extrabold text-[10px] rounded-md flex-shrink-0">
@@ -1456,7 +1456,7 @@
       tableBody.innerHTML = list.map(s => {
         const status = getStudentPaymentStatus(s.id);
         const statusBadge = status.isLunas
-          ? `<span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 font-bold text-xs rounded-lg border border-emerald-100 flex items-center gap-1 w-fit"><i class="fa-solid fa-circle-check"></i> Lunas Kas</span>`
+          ? `<span class="px-2.5 py-1 bg-emerald-50 text-emerald-600 font-bold text-xs rounded-lg border border-emerald-100 flex items-center gap-1 w-fit"><i class="fa-solid fa-circle-check"></i> Lunas Kas</span>`
           : `<span class="px-2.5 py-1 bg-amber-50 text-amber-800 font-bold text-xs rounded-lg border border-amber-200 flex items-center gap-1 w-fit"><i class="fa-solid fa-clock"></i> Nunggak ${status.unpaidCount} Minggu</span>`;
 
         return `
