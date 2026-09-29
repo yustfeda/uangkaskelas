@@ -2,122 +2,252 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#0b1f3a">
 <title>KAS KELAS VII B</title>
 
 <style>
+/* =========================================================
+   KAS KELAS VII B
+   Professional Responsive UI
+   ========================================================= */
+
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
 :root{
     --navy:#0b1f3a;
-    --navy2:#12345b;
+    --navy-2:#102b4d;
+    --navy-3:#173d69;
+
     --green:#16a34a;
-    --green2:#15803d;
+    --green-dark:#15803d;
+    --green-light:#dcfce7;
+
     --white:#ffffff;
     --bg:#f4f7fb;
+    --card:#ffffff;
+
     --text:#172033;
-    --muted:#6b7280;
-    --border:#e5e7eb;
+    --text-soft:#64748b;
+    --border:#e5eaf0;
+
     --yellow:#f59e0b;
+    --yellow-light:#fef3c7;
+
     --red:#dc2626;
-    --shadow:0 8px 25px rgba(15,23,42,.08);
+    --red-light:#fee2e2;
+
+    --blue-light:#eaf2fb;
+
+    --shadow:0 8px 25px rgba(15,23,42,.07);
+    --shadow-lg:0 18px 50px rgba(15,23,42,.13);
+
+    --sidebar-width:255px;
+    --topbar-height:64px;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
     background:var(--bg);
     color:var(--text);
     overflow-x:hidden;
+    font-size:14px;
 }
 
-button,input,select{
+body.sidebar-open{
+    overflow:hidden;
+}
+
+button,
+input,
+select,
+textarea{
     font:inherit;
 }
 
 button{
+    border:0;
     cursor:pointer;
-    border:none;
+}
+
+input,
+select,
+textarea{
+    outline:none;
 }
 
 .hidden{
-    display:none!important;
+    display:none !important;
 }
 
-/* ================= LOGIN ================= */
+/* =========================================================
+   LOGIN
+   ========================================================= */
 
 #loginScreen{
     min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:linear-gradient(135deg,var(--navy),var(--navy2));
-    padding:20px;
+    padding:25px;
+    position:relative;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(22,163,74,.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(59,130,246,.14),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #07172c,
+            #0b1f3a 50%,
+            #12345b
+        );
+}
+
+.login-decoration{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(2px);
+    pointer-events:none;
+}
+
+.login-decoration.one{
+    width:260px;
+    height:260px;
+    background:rgba(22,163,74,.08);
+    top:-90px;
+    right:-70px;
+}
+
+.login-decoration.two{
+    width:200px;
+    height:200px;
+    background:rgba(255,255,255,.04);
+    bottom:-80px;
+    left:-60px;
 }
 
 .login-box{
     width:100%;
     max-width:430px;
-    background:white;
-    border-radius:20px;
+    position:relative;
+    z-index:2;
+}
+
+.login-card{
+    background:rgba(255,255,255,.98);
+    border-radius:24px;
     padding:30px;
-    box-shadow:0 20px 60px rgba(0,0,0,.25);
+    box-shadow:0 25px 80px rgba(0,0,0,.28);
+    border:1px solid rgba(255,255,255,.5);
+}
+
+.login-brand{
+    text-align:center;
+    margin-bottom:24px;
 }
 
 .login-logo{
-    width:75px;
-    height:75px;
-    border-radius:18px;
-    background:var(--navy);
-    color:white;
+    width:72px;
+    height:72px;
+    margin:0 auto 14px;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    margin:0 auto 15px;
-    font-size:30px;
-    font-weight:bold;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--navy),
+            var(--navy-3)
+        );
+
+    color:white;
+    font-weight:900;
+    font-size:22px;
+
+    box-shadow:
+        0 12px 25px rgba(11,31,58,.25),
+        inset 0 1px rgba(255,255,255,.12);
 }
 
 .login-title{
-    text-align:center;
-    font-size:24px;
-    font-weight:800;
     color:var(--navy);
+    font-size:22px;
+    font-weight:850;
+    letter-spacing:-.4px;
 }
 
 .login-subtitle{
-    text-align:center;
-    color:var(--muted);
-    margin:7px 0 25px;
-    font-size:14px;
+    color:var(--text-soft);
+    font-size:12px;
+    margin-top:5px;
 }
 
 .login-tabs{
-    display:flex;
-    gap:8px;
-    background:#f1f5f9;
-    padding:5px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:4px;
+    padding:4px;
+    background:#eef2f7;
     border-radius:12px;
     margin-bottom:20px;
 }
 
 .login-tabs button{
-    flex:1;
-    padding:11px;
-    border-radius:9px;
     background:transparent;
-    color:var(--muted);
-    font-weight:700;
+    color:var(--text-soft);
+    padding:10px;
+    border-radius:9px;
+    font-size:13px;
+    font-weight:750;
+    transition:.2s;
 }
 
 .login-tabs button.active{
-    background:white;
     color:var(--navy);
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    background:white;
+    box-shadow:0 3px 10px rgba(15,23,42,.08);
 }
+
+.login-footer{
+    text-align:center;
+    color:#94a3b8;
+    font-size:10px;
+    margin-top:18px;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
 
 .form-group{
     margin-bottom:15px;
@@ -125,71 +255,113 @@ button{
 
 .form-group label{
     display:block;
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:7px;
+    margin-bottom:6px;
+    font-size:12px;
+    font-weight:750;
+    color:#334155;
 }
 
 .form-group input,
-.form-group select{
+.form-group select,
+.form-group textarea{
     width:100%;
-    padding:12px 14px;
     border:1px solid var(--border);
-    border-radius:10px;
-    outline:none;
     background:white;
+    color:var(--text);
+    border-radius:10px;
+    padding:11px 12px;
+    font-size:13px;
+    transition:.2s;
+}
+
+.form-group textarea{
+    min-height:90px;
+    resize:vertical;
 }
 
 .form-group input:focus,
-.form-group select:focus{
+.form-group select:focus,
+.form-group textarea:focus{
     border-color:var(--green);
+    box-shadow:0 0 0 3px rgba(22,163,74,.08);
 }
 
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
 .btn{
-    padding:11px 16px;
-    border-radius:10px;
-    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:9px 13px;
+    min-height:38px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:750;
     transition:.2s;
+    white-space:nowrap;
 }
 
 .btn:hover{
     transform:translateY(-1px);
 }
 
+.btn:active{
+    transform:translateY(0);
+}
+
 .btn-primary{
-    background:var(--green);
     color:white;
+    background:linear-gradient(
+        135deg,
+        var(--green),
+        var(--green-dark)
+    );
 }
 
 .btn-primary:hover{
-    background:var(--green2);
+    box-shadow:0 7px 18px rgba(22,163,74,.2);
 }
 
 .btn-navy{
-    background:var(--navy);
     color:white;
+    background:linear-gradient(
+        135deg,
+        var(--navy),
+        var(--navy-3)
+    );
 }
 
 .btn-danger{
-    background:var(--red);
     color:white;
+    background:var(--red);
 }
 
 .btn-warning{
-    background:var(--yellow);
     color:white;
+    background:var(--yellow);
 }
 
 .btn-light{
-    background:#eef2f7;
     color:#334155;
+    background:#eef2f7;
+}
+
+.btn-outline{
+    color:var(--navy);
+    border:1px solid var(--border);
+    background:white;
 }
 
 .btn-full{
     width:100%;
 }
 
-/* ================= APP ================= */
+/* =========================================================
+   APP
+   ========================================================= */
 
 #appScreen{
     display:none;
@@ -198,148 +370,335 @@ button{
 
 .sidebar{
     position:fixed;
-    left:0;
+    z-index:1200;
     top:0;
+    left:0;
     bottom:0;
-    width:255px;
-    background:var(--navy);
+    width:var(--sidebar-width);
+
+    background:
+        linear-gradient(
+            180deg,
+            #091c34 0%,
+            #0b1f3a 55%,
+            #09203b 100%
+        );
+
     color:white;
-    z-index:1000;
-    transition:.3s ease;
+    transition:.28s ease;
     overflow-y:auto;
+    overflow-x:hidden;
+
+    box-shadow:
+        5px 0 25px rgba(2,6,23,.08);
+}
+
+.sidebar::-webkit-scrollbar{
+    width:4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.15);
+    border-radius:20px;
 }
 
 .sidebar-header{
-    padding:24px 20px;
-    border-bottom:1px solid rgba(255,255,255,.1);
+    padding:21px 18px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.sidebar-logo{
+    width:38px;
+    height:38px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:11px;
+    background:rgba(255,255,255,.1);
+    color:white;
+    font-weight:900;
+    font-size:13px;
 }
 
 .sidebar-title{
-    font-size:18px;
-    font-weight:800;
+    font-size:14px;
+    font-weight:850;
 }
 
 .sidebar-role{
-    font-size:12px;
-    color:#b8c7da;
-    margin-top:5px;
+    margin-top:3px;
+    color:#9fb2c9;
+    font-size:10px;
 }
 
 .nav{
-    padding:15px 10px;
+    padding:14px 9px;
+}
+
+.nav-label{
+    color:#6f87a4;
+    font-size:9px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    padding:10px 12px 7px;
 }
 
 .nav-item{
     width:100%;
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:13px 14px;
-    margin-bottom:5px;
-    border-radius:10px;
-    color:#dce6f3;
+    gap:10px;
+
+    color:#c8d5e5;
     background:transparent;
+
+    padding:10px 12px;
+    border-radius:9px;
+    margin-bottom:3px;
+
+    font-size:12px;
+    font-weight:650;
+
     text-align:left;
-    font-weight:600;
+    transition:.18s;
 }
 
-.nav-item:hover,
-.nav-item.active{
-    background:rgba(255,255,255,.11);
+.nav-icon{
+    width:25px;
+    height:25px;
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:7px;
+
+    background:rgba(255,255,255,.045);
+    font-size:12px;
+}
+
+.nav-item:hover{
+    background:rgba(255,255,255,.07);
     color:white;
 }
 
+.nav-item.active{
+    color:white;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(22,163,74,.24),
+            rgba(22,163,74,.08)
+        );
+    box-shadow:inset 3px 0 var(--green);
+}
+
+.nav-item.active .nav-icon{
+    background:rgba(22,163,74,.2);
+}
+
 .nav-item.logout{
-    color:#fecaca;
+    margin-top:12px;
+    color:#fca5a5;
 }
 
 .main{
-    margin-left:255px;
     min-height:100vh;
+    margin-left:var(--sidebar-width);
 }
 
 .topbar{
-    height:65px;
-    background:white;
-    border-bottom:1px solid var(--border);
+    height:var(--topbar-height);
+    position:sticky;
+    z-index:800;
+    top:0;
+
     display:flex;
     align-items:center;
-    padding:0 25px;
-    position:sticky;
-    top:0;
-    z-index:500;
+
+    padding:0 22px;
+
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid var(--border);
+}
+
+.topbar-left{
+    display:flex;
+    align-items:center;
+    min-width:0;
 }
 
 .topbar-title{
-    font-size:18px;
+    font-size:16px;
     font-weight:800;
+    color:var(--navy);
+}
+
+.topbar-subtitle{
+    color:#94a3b8;
+    font-size:10px;
+    margin-left:10px;
+    padding-left:10px;
+    border-left:1px solid var(--border);
 }
 
 .hamburger{
     display:none;
-    width:42px;
-    height:42px;
-    border-radius:10px;
+
+    width:38px;
+    height:38px;
+    flex-shrink:0;
+
+    margin-right:10px;
+
+    border-radius:9px;
+
     background:var(--navy);
     color:white;
+
     align-items:center;
     justify-content:center;
-    font-size:22px;
-    margin-right:12px;
+
+    font-size:18px;
 }
+
+/* =========================================================
+   PAGE
+   ========================================================= */
 
 .page{
-    padding:25px;
-    max-width:1500px;
+    width:100%;
+    max-width:1450px;
     margin:auto;
+    padding:22px;
 }
 
-/* ================= DASHBOARD ================= */
+.page-heading{
+    margin-bottom:18px;
+}
+
+.page-heading h1{
+    color:var(--navy);
+    font-size:20px;
+    font-weight:850;
+}
+
+.page-heading p{
+    color:var(--text-soft);
+    font-size:11px;
+    margin-top:4px;
+}
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
 
 .welcome-card{
-    background:linear-gradient(135deg,var(--navy),var(--navy2));
+    position:relative;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(22,163,74,.2),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            var(--navy),
+            var(--navy-2)
+        );
+
     color:white;
+
     border-radius:18px;
-    padding:25px;
-    margin-bottom:20px;
+    padding:22px;
+    margin-bottom:17px;
+
     box-shadow:var(--shadow);
 }
 
+.welcome-card::after{
+    content:"";
+    position:absolute;
+    width:140px;
+    height:140px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:50%;
+    right:-45px;
+    bottom:-65px;
+}
+
 .welcome-card h2{
-    font-size:23px;
-    margin-bottom:6px;
+    position:relative;
+    z-index:1;
+    font-size:20px;
+    font-weight:850;
+    margin-bottom:5px;
 }
 
 .welcome-card p{
-    color:#c9d7e8;
-    font-size:14px;
+    position:relative;
+    z-index:1;
+    color:#bdcce0;
+    font-size:11px;
+    line-height:1.5;
 }
 
 .stats{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:18px;
-    margin-bottom:20px;
+    gap:14px;
+    margin-bottom:17px;
 }
 
 .stat-card{
-    background:white;
-    border-radius:16px;
-    padding:20px;
+    position:relative;
+    overflow:hidden;
+
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+
+    padding:17px;
+
     box-shadow:var(--shadow);
-    border:1px solid #edf0f5;
+}
+
+.stat-card::after{
+    content:"";
+    position:absolute;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    right:-25px;
+    bottom:-25px;
+    background:rgba(22,163,74,.05);
 }
 
 .stat-title{
-    color:var(--muted);
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:10px;
+    color:var(--text-soft);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.3px;
+    margin-bottom:8px;
 }
 
 .stat-value{
-    font-size:23px;
-    font-weight:800;
+    font-size:20px;
+    font-weight:850;
+    letter-spacing:-.4px;
 }
 
 .stat-green .stat-value{
@@ -354,12 +713,17 @@ button{
     color:var(--navy);
 }
 
+/* =========================================================
+   SECTION / CARD
+   ========================================================= */
+
 .section{
     background:white;
-    border-radius:16px;
-    padding:20px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:17px;
+    margin-bottom:17px;
     box-shadow:var(--shadow);
-    margin-bottom:20px;
 }
 
 .section-header{
@@ -367,57 +731,87 @@ button{
     align-items:center;
     justify-content:space-between;
     gap:10px;
-    margin-bottom:16px;
+    margin-bottom:14px;
 }
 
 .section-title{
-    font-size:17px;
-    font-weight:800;
+    color:var(--navy);
+    font-size:14px;
+    font-weight:850;
 }
 
-/* ================= PEMBAYARAN TERBARU ================= */
+.section-subtitle{
+    color:var(--text-soft);
+    font-size:10px;
+    margin-top:3px;
+}
+
+.action-row{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+/* =========================================================
+   PAYMENT LATEST
+   ========================================================= */
 
 .payment-latest{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+    display:grid;
+    gap:8px;
 }
 
 .payment-card{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:15px;
-    padding:13px 15px;
-    border:1px solid #edf0f5;
-    border-radius:13px;
-    background:linear-gradient(135deg,#fff,#f8fafc);
-    transition:.2s;
+    gap:12px;
+
+    padding:11px 12px;
+
+    border:1px solid #edf1f5;
+    border-radius:11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f8fafc
+        );
+
+    transition:.18s;
 }
 
 .payment-card:hover{
     transform:translateY(-1px);
-    box-shadow:0 5px 15px rgba(15,23,42,.06);
+    border-color:#d9e5dd;
+    box-shadow:0 5px 16px rgba(15,23,42,.05);
 }
 
 .payment-left{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:10px;
     min-width:0;
 }
 
 .payment-icon{
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    background:#dcfce7;
-    color:var(--green);
+    width:38px;
+    height:38px;
+    flex-shrink:0;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
+    border-radius:10px;
+
+    color:var(--green);
+    background:var(--green-light);
+
+    font-size:14px;
     font-weight:900;
-    flex-shrink:0;
 }
 
 .payment-info{
@@ -425,144 +819,233 @@ button{
 }
 
 .payment-name{
-    font-weight:800;
-    font-size:14px;
-    white-space:nowrap;
+    max-width:270px;
     overflow:hidden;
     text-overflow:ellipsis;
+    white-space:nowrap;
+
+    color:var(--text);
+    font-size:12px;
+    font-weight:800;
 }
 
 .payment-period{
-    font-size:12px;
-    color:var(--muted);
     margin-top:3px;
+    color:var(--text-soft);
+    font-size:10px;
+
+    max-width:300px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
 
 .payment-right{
-    text-align:right;
     flex-shrink:0;
+    text-align:right;
 }
 
 .payment-amount{
     color:var(--green);
-    font-weight:800;
-    font-size:14px;
+    font-size:11px;
+    font-weight:850;
 }
 
 .payment-date{
-    color:var(--muted);
-    font-size:11px;
+    color:#94a3b8;
+    font-size:9px;
     margin-top:3px;
 }
 
 .view-all{
     width:100%;
-    margin-top:4px;
-    padding:11px;
-    border-radius:10px;
-    background:#eef7f1;
-    color:var(--green2);
+    margin-top:3px;
+
+    padding:10px;
+
+    border-radius:9px;
+
+    color:var(--green-dark);
+    background:#effaf2;
+
+    font-size:11px;
     font-weight:800;
+
+    transition:.2s;
 }
 
 .view-all:hover{
-    background:#dcfce7;
+    background:var(--green-light);
 }
 
 .empty{
-    padding:25px;
+    padding:25px 15px;
+    color:#94a3b8;
     text-align:center;
-    color:var(--muted);
-    font-size:14px;
+    font-size:11px;
 }
 
-/* ================= TABLE ================= */
+/* =========================================================
+   TABLE
+   ========================================================= */
 
 .table-wrap{
     width:100%;
     overflow-x:auto;
+    border:1px solid var(--border);
+    border-radius:10px;
+}
+
+.table-wrap::-webkit-scrollbar{
+    height:5px;
+}
+
+.table-wrap::-webkit-scrollbar-thumb{
+    background:#cbd5e1;
+    border-radius:20px;
 }
 
 table{
     width:100%;
-    border-collapse:collapse;
     min-width:650px;
+    border-collapse:collapse;
 }
 
-th,td{
-    padding:12px 10px;
+th,
+td{
+    padding:10px 11px;
     border-bottom:1px solid var(--border);
     text-align:left;
-    font-size:13px;
+    font-size:11px;
+    white-space:nowrap;
+}
+
+tr:last-child td{
+    border-bottom:0;
 }
 
 th{
+    color:#64748b;
     background:#f8fafc;
+    font-size:10px;
     font-weight:800;
-    color:#475569;
+}
+
+td{
+    color:#334155;
 }
 
 .badge{
-    display:inline-block;
-    padding:5px 9px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:4px 8px;
     border-radius:20px;
-    font-size:11px;
+
+    font-size:9px;
     font-weight:800;
 }
 
 .badge-green{
     color:#166534;
-    background:#dcfce7;
+    background:var(--green-light);
 }
 
 .badge-red{
     color:#991b1b;
-    background:#fee2e2;
+    background:var(--red-light);
 }
 
-.action-row{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:15px;
+.badge-yellow{
+    color:#92400e;
+    background:var(--yellow-light);
 }
 
-/* ================= SETTINGS ================= */
+/* =========================================================
+   SETTINGS
+   ========================================================= */
 
 .settings-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
 }
 
 .setting-card{
     border:1px solid var(--border);
-    border-radius:14px;
-    padding:18px;
+    border-radius:13px;
+    padding:15px;
+    background:#fcfdff;
 }
 
 .setting-card h3{
-    font-size:16px;
-    margin-bottom:5px;
+    color:var(--navy);
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:4px;
 }
 
 .setting-card p{
-    color:var(--muted);
-    font-size:12px;
-    margin-bottom:15px;
+    color:var(--text-soft);
+    font-size:10px;
+    line-height:1.5;
+    margin-bottom:13px;
 }
 
-/* ================= MODAL ================= */
+/* =========================================================
+   NOTICE
+   ========================================================= */
+
+.notice{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+
+    padding:12px;
+
+    border-radius:10px;
+    margin-bottom:15px;
+
+    font-size:11px;
+    line-height:1.5;
+}
+
+.notice.warning{
+    color:#92400e;
+    background:var(--yellow-light);
+    border:1px solid #fde68a;
+}
+
+.notice.danger{
+    color:#991b1b;
+    background:var(--red-light);
+    border:1px solid #fecaca;
+}
+
+.notice.success{
+    color:#166534;
+    background:var(--green-light);
+    border:1px solid #bbf7d0;
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
 
 .modal-overlay{
     position:fixed;
     inset:0;
-    background:rgba(2,6,23,.58);
+    z-index:4000;
+
     display:none;
     align-items:center;
     justify-content:center;
-    z-index:3000;
-    padding:20px;
+
+    padding:18px;
+
+    background:rgba(2,6,23,.6);
+    backdrop-filter:blur(3px);
 }
 
 .modal-overlay.show{
@@ -572,17 +1055,22 @@ th{
 .modal{
     width:100%;
     max-width:430px;
+
     background:white;
+
     border-radius:17px;
-    padding:22px;
-    box-shadow:0 20px 60px rgba(0,0,0,.25);
+
+    padding:20px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+
     animation:modalIn .18s ease;
 }
 
 @keyframes modalIn{
     from{
         opacity:0;
-        transform:translateY(10px) scale(.98);
+        transform:translateY(8px) scale(.98);
     }
     to{
         opacity:1;
@@ -591,49 +1079,60 @@ th{
 }
 
 .modal h3{
-    font-size:18px;
-    margin-bottom:8px;
+    color:var(--navy);
+    font-size:16px;
+    font-weight:850;
+    margin-bottom:7px;
 }
 
 .modal p{
-    color:#64748b;
-    font-size:14px;
-    line-height:1.5;
+    color:var(--text-soft);
+    font-size:12px;
+    line-height:1.6;
 }
 
 .modal-actions{
     display:flex;
     justify-content:flex-end;
-    gap:8px;
-    margin-top:20px;
+    gap:7px;
+    margin-top:18px;
 }
 
-.modal-actions .btn{
-    min-width:85px;
-}
-
-/* ================= TOAST ================= */
+/* =========================================================
+   TOAST
+   ========================================================= */
 
 .toast{
     position:fixed;
-    right:20px;
-    bottom:20px;
-    background:var(--navy);
+    z-index:6000;
+
+    right:18px;
+    bottom:18px;
+
+    max-width:calc(100vw - 36px);
+
+    padding:11px 15px;
+
     color:white;
-    padding:13px 18px;
-    border-radius:11px;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-    z-index:5000;
-    transform:translateY(100px);
+    background:var(--navy);
+
+    border-radius:10px;
+
+    box-shadow:var(--shadow-lg);
+
+    font-size:11px;
+    font-weight:750;
+
     opacity:0;
+    transform:translateY(20px);
+    pointer-events:none;
+
     transition:.25s;
-    font-size:13px;
-    font-weight:700;
 }
 
 .toast.show{
-    transform:translateY(0);
     opacity:1;
+    transform:translateY(0);
 }
 
 .toast.success{
@@ -644,18 +1143,27 @@ th{
     background:var(--red);
 }
 
-/* ================= MOBILE ================= */
+.toast.warning{
+    color:#713f12;
+    background:var(--yellow-light);
+}
+
+/* =========================================================
+   MOBILE SIDEBAR
+   ========================================================= */
 
 .overlay{
     display:none;
 }
 
-@media(max-width:850px){
+@media(max-width:900px){
+
+    :root{
+        --sidebar-width:265px;
+    }
 
     .sidebar{
         transform:translateX(-100%);
-        width:270px;
-        box-shadow:10px 0 30px rgba(0,0,0,.2);
     }
 
     .sidebar.open{
@@ -671,8 +1179,9 @@ th{
     }
 
     /*
-      Saat sidebar terbuka, tombol hamburger disembunyikan
-      agar tidak menutupi tulisan/menu sidebar.
+      Ketika sidebar sudah terbuka,
+      tombol hamburger disembunyikan agar
+      tidak menutupi tulisan menu.
     */
     body.sidebar-open .hamburger{
         display:none;
@@ -681,8 +1190,8 @@ th{
     .overlay{
         position:fixed;
         inset:0;
-        background:rgba(0,0,0,.45);
-        z-index:900;
+        z-index:1100;
+        background:rgba(2,6,23,.5);
     }
 
     .overlay.show{
@@ -694,7 +1203,11 @@ th{
     }
 
     .topbar-title{
-        font-size:16px;
+        font-size:14px;
+    }
+
+    .topbar-subtitle{
+        display:none;
     }
 
     .page{
@@ -703,82 +1216,185 @@ th{
 
     .stats{
         grid-template-columns:1fr;
-        gap:12px;
+        gap:9px;
+    }
+
+    .stat-card{
+        padding:14px;
+    }
+
+    .stat-value{
+        font-size:18px;
     }
 
     .settings-grid{
         grid-template-columns:1fr;
     }
-
-    .welcome-card{
-        padding:20px;
-    }
-
-    .welcome-card h2{
-        font-size:20px;
-    }
-
-    .section{
-        padding:15px;
-    }
-
-    /*
-      Pembayaran terbaru tetap berada di dalam card
-      dan tidak membuat halaman melebar.
-    */
-    .payment-latest-wrap{
-        width:100%;
-        overflow-x:auto;
-    }
-
-    .payment-latest{
-        min-width:0;
-        width:100%;
-    }
-
-    .payment-card{
-        min-width:0;
-    }
-
-    .payment-name{
-        max-width:150px;
-    }
-
-    .btn{
-        padding:10px 13px;
-        font-size:13px;
-    }
 }
 
-@media(max-width:480px){
+@media(max-width:600px){
 
-    .login-box{
-        padding:22px;
+    body{
+        font-size:13px;
     }
 
     .page{
-        padding:12px;
-    }
-
-    .payment-card{
         padding:11px;
     }
 
+    .welcome-card{
+        padding:17px;
+        border-radius:14px;
+    }
+
+    .welcome-card h2{
+        font-size:17px;
+    }
+
+    .welcome-card p{
+        font-size:10px;
+    }
+
+    .section{
+        padding:13px;
+        border-radius:13px;
+        margin-bottom:12px;
+    }
+
+    .section-title{
+        font-size:13px;
+    }
+
+    .section-header{
+        align-items:flex-start;
+    }
+
+    .action-row{
+        width:100%;
+    }
+
+    .action-row .btn{
+        flex:1;
+    }
+
+    .payment-card{
+        padding:9px;
+    }
+
     .payment-icon{
-        width:38px;
-        height:38px;
-    }
-
-    .payment-name{
-        max-width:120px;
-    }
-
-    .payment-amount{
+        width:34px;
+        height:34px;
+        border-radius:9px;
         font-size:12px;
     }
 
-    .payment-date{
+    .payment-name{
+        max-width:135px;
+        font-size:11px;
+    }
+
+    .payment-period{
+        max-width:135px;
+        font-size:9px;
+    }
+
+    .payment-amount{
         font-size:10px;
+    }
+
+    .payment-date{
+        font-size:8px;
+    }
+
+    .btn{
+        min-height:35px;
+        padding:8px 10px;
+        font-size:10px;
+    }
+
+    .page-heading h1{
+        font-size:17px;
+    }
+
+    .page-heading p{
+        font-size:9px;
+    }
+
+    th,
+    td{
+        padding:8px;
+        font-size:10px;
+    }
+
+    .login-card{
+        padding:22px;
+        border-radius:19px;
+    }
+
+    .login-logo{
+        width:62px;
+        height:62px;
+        border-radius:17px;
+        font-size:19px;
+    }
+
+    .login-title{
+        font-size:19px;
+    }
+
+    .login-subtitle{
+        font-size:10px;
+    }
+
+    .modal{
+        padding:17px;
+        border-radius:15px;
+    }
+
+    .modal h3{
+        font-size:15px;
+    }
+
+    .modal p{
+        font-size:11px;
+    }
+}
+
+@media(max-width:380px){
+
+    .page{
+        padding:9px;
+    }
+
+    .payment-name{
+        max-width:105px;
+    }
+
+    .payment-period{
+        max-width:105px;
+    }
+
+    .topbar-title{
+        font-size:13px;
+    }
+
+    .stat-value{
+        font-size:17px;
+    }
+}
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media(min-width:901px){
+
+    .sidebar{
+        transform:translateX(0);
+    }
+
+    .page{
+        min-height:calc(100vh - var(--topbar-height));
     }
 }
 </style>
@@ -786,61 +1402,141 @@ th{
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+<!-- ========================================================
+     LOGIN
+     ======================================================== -->
 
 <div id="loginScreen">
 
+    <div class="login-decoration one"></div>
+    <div class="login-decoration two"></div>
+
     <div class="login-box">
 
-        <div class="login-logo">KB</div>
+        <div class="login-card">
 
-        <div class="login-title">KAS KELAS VII B</div>
-        <div class="login-subtitle">Sistem Pengelolaan Kas Kelas</div>
+            <div class="login-brand">
 
-        <div class="login-tabs">
-            <button id="tabBendahara" class="active" onclick="switchLogin('bendahara')">
-                Bendahara
-            </button>
-            <button id="tabAnggota" onclick="switchLogin('anggota')">
-                Anggota
-            </button>
-        </div>
+                <div class="login-logo">
+                    KB
+                </div>
 
-        <div id="loginBendahara">
+                <div class="login-title">
+                    KAS KELAS VII B
+                </div>
 
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" id="bendaharaUsername" placeholder="Masukkan username">
+                <div class="login-subtitle">
+                    Sistem Pengelolaan Kas Kelas
+                </div>
+
             </div>
 
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="bendaharaPassword" placeholder="Masukkan password">
+
+            <div class="login-tabs">
+
+                <button
+                    id="tabBendahara"
+                    class="active"
+                    onclick="switchLogin('bendahara')">
+                    Bendahara
+                </button>
+
+                <button
+                    id="tabAnggota"
+                    onclick="switchLogin('anggota')">
+                    Anggota
+                </button>
+
             </div>
 
-            <button class="btn btn-primary btn-full" onclick="loginBendahara()">
-                Masuk
-            </button>
 
-        </div>
+            <!-- LOGIN BENDAHARA -->
 
-        <div id="loginAnggota" class="hidden">
+            <div id="loginBendahara">
 
-            <div class="form-group">
-                <label>Nama Siswa</label>
-                <select id="anggotaSiswa">
-                    <option value="">Memuat data siswa...</option>
-                </select>
+                <div class="form-group">
+
+                    <label>Username</label>
+
+                    <input
+                        type="text"
+                        id="bendaharaUsername"
+                        placeholder="Masukkan username"
+                        autocomplete="username"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Password</label>
+
+                    <input
+                        type="password"
+                        id="bendaharaPassword"
+                        placeholder="Masukkan password"
+                        autocomplete="current-password"
+                    >
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary btn-full"
+                    onclick="loginBendahara()">
+                    Masuk sebagai Bendahara
+                </button>
+
             </div>
 
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="anggotaPassword" placeholder="Masukkan password">
+
+            <!-- LOGIN ANGGOTA -->
+
+            <div
+                id="loginAnggota"
+                class="hidden">
+
+                <div class="form-group">
+
+                    <label>Nama Siswa</label>
+
+                    <select id="anggotaSiswa">
+
+                        <option value="">
+                            Memuat data siswa...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Password</label>
+
+                    <input
+                        type="password"
+                        id="anggotaPassword"
+                        placeholder="Masukkan password"
+                    >
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary btn-full"
+                    onclick="loginAnggota()">
+                    Masuk sebagai Anggota
+                </button>
+
             </div>
 
-            <button class="btn btn-primary btn-full" onclick="loginAnggota()">
-                Masuk
-            </button>
+
+            <div class="login-footer">
+                KAS KELAS VII B • Sistem Keuangan Kelas
+            </div>
 
         </div>
 
@@ -849,69 +1545,143 @@ th{
 </div>
 
 
-<!-- ================= APP ================= -->
+<!-- ========================================================
+     APPLICATION
+     ======================================================== -->
 
 <div id="appScreen">
 
-    <div class="overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div
+        class="overlay"
+        id="sidebarOverlay"
+        onclick="closeSidebar()">
+    </div>
 
-    <aside class="sidebar" id="sidebar">
+
+    <!-- SIDEBAR -->
+
+    <aside
+        class="sidebar"
+        id="sidebar">
 
         <div class="sidebar-header">
-            <div class="sidebar-title">KAS KELAS VII B</div>
-            <div class="sidebar-role" id="sidebarRole">-</div>
+
+            <div class="sidebar-brand">
+
+                <div class="sidebar-logo">
+                    KB
+                </div>
+
+                <div>
+
+                    <div class="sidebar-title">
+                        KAS KELAS VII B
+                    </div>
+
+                    <div
+                        class="sidebar-role"
+                        id="sidebarRole">
+                        -
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <nav class="nav" id="navMenu"></nav>
+
+        <nav
+            class="nav"
+            id="navMenu">
+        </nav>
 
     </aside>
 
+
+    <!-- MAIN -->
 
     <main class="main">
 
         <div class="topbar">
 
-            <button class="hamburger" id="hamburgerBtn" onclick="toggleSidebar()">
-                ☰
-            </button>
+            <div class="topbar-left">
 
-            <div class="topbar-title" id="pageTitle">
-                Beranda
+                <button
+                    class="hamburger"
+                    id="hamburgerBtn"
+                    onclick="toggleSidebar()">
+                    ☰
+                </button>
+
+                <div
+                    class="topbar-title"
+                    id="pageTitle">
+                    Beranda
+                </div>
+
+                <div class="topbar-subtitle">
+                    KAS KELAS VII B
+                </div>
+
             </div>
 
         </div>
 
-        <div class="page" id="pageContent"></div>
+
+        <div
+            class="page"
+            id="pageContent">
+        </div>
 
     </main>
 
 </div>
 
 
-<!-- ================= MODAL ================= -->
+<!-- ========================================================
+     MODAL
+     ======================================================== -->
 
-<div class="modal-overlay" id="modalOverlay">
+<div
+    class="modal-overlay"
+    id="modalOverlay">
 
     <div class="modal">
 
-        <h3 id="modalTitle">Konfirmasi</h3>
+        <h3 id="modalTitle">
+            Konfirmasi
+        </h3>
 
         <div id="modalBody"></div>
 
-        <div class="modal-actions" id="modalActions"></div>
+        <div
+            class="modal-actions"
+            id="modalActions">
+        </div>
 
     </div>
 
 </div>
 
 
-<div class="toast" id="toast"></div>
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
 
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+/* =========================================================
+   FIREBASE
+   ========================================================= */
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 
 import {
     getDatabase,
@@ -920,37 +1690,59 @@ import {
     set,
     push,
     update,
-    remove,
-    get
-}
-from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+    remove
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
-
-/* ================= FIREBASE ================= */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAmy4PcVbc3bUnIEti0rhkhyPvGiLwFRYc",
-    authDomain: "absenguru-615da.firebaseapp.com",
-    databaseURL: "https://absenguru-615da-default-rtdb.firebaseio.com",
-    projectId: "absenguru-615da",
-    storageBucket: "absenguru-615da.firebasestorage.app",
-    messagingSenderId: "1014411980118",
-    appId: "1:1014411980118:web:6f3f702d8aad89af57faf7"
+
+    apiKey:
+        "AIzaSyAmy4PcVbc3bUnIEti0rhkhyPvGiLwFRYc",
+
+    authDomain:
+        "absenguru-615da.firebaseapp.com",
+
+    databaseURL:
+        "https://absenguru-615da-default-rtdb.firebaseio.com",
+
+    projectId:
+        "absenguru-615da",
+
+    storageBucket:
+        "absenguru-615da.firebasestorage.app",
+
+    messagingSenderId:
+        "1014411980118",
+
+    appId:
+        "1:1014411980118:web:6f3f702d8aad89af57faf7"
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
-const db = getDatabase(firebaseApp);
 
-const BASE = "kelasVIIIB";
+const firebaseApp =
+    initializeApp(firebaseConfig);
+
+const db =
+    getDatabase(firebaseApp);
+
+const BASE =
+    "kelasVIIIB";
 
 
-/* ================= STATE ================= */
+/* =========================================================
+   STATE
+   ========================================================= */
 
 const appState = {
+
     siswa:{},
+
     kasMasuk:{},
+
     kasKeluar:{},
+
     pembayaranStatus:{},
+
     settings:{
         weeklyFee:10000,
         startDate:"",
@@ -960,17 +1752,23 @@ const appState = {
         },
         deletedStudents:{}
     }
+
 };
 
+
 let currentUser = null;
+
 let currentPage = "dashboard";
-let loginMode = "bendahara";
+
 let reconcileRunning = false;
 
 
-/* ================= HELPER ================= */
+/* =========================================================
+   HELPER
+   ========================================================= */
 
 function escapeHtml(value){
+
     return String(value ?? "")
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
@@ -979,13 +1777,21 @@ function escapeHtml(value){
         .replace(/'/g,"&#039;");
 }
 
+
 function rupiah(value){
-    return new Intl.NumberFormat("id-ID",{
-        style:"currency",
-        currency:"IDR",
-        maximumFractionDigits:0
-    }).format(Number(value)||0);
+
+    return new Intl.NumberFormat(
+        "id-ID",
+        {
+            style:"currency",
+            currency:"IDR",
+            maximumFractionDigits:0
+        }
+    ).format(
+        Number(value) || 0
+    );
 }
+
 
 function formatDate(value){
 
@@ -995,12 +1801,16 @@ function formatDate(value){
 
     if(isNaN(d)) return "-";
 
-    return d.toLocaleDateString("id-ID",{
-        day:"2-digit",
-        month:"short",
-        year:"numeric"
-    });
+    return d.toLocaleDateString(
+        "id-ID",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
 }
+
 
 function formatDateTime(value){
 
@@ -1010,209 +1820,348 @@ function formatDateTime(value){
 
     if(isNaN(d)) return "-";
 
-    return d.toLocaleDateString("id-ID",{
-        day:"2-digit",
-        month:"short",
-        year:"numeric"
-    })+" "+d.toLocaleTimeString("id-ID",{
-        hour:"2-digit",
-        minute:"2-digit"
-    });
+    return (
+        d.toLocaleDateString(
+            "id-ID",
+            {
+                day:"2-digit",
+                month:"short",
+                year:"numeric"
+            }
+        )
+        +" "+
+        d.toLocaleTimeString(
+            "id-ID",
+            {
+                hour:"2-digit",
+                minute:"2-digit"
+            }
+        )
+    );
 }
+
 
 function todayString(){
 
     const d = new Date();
 
-    const y = d.getFullYear();
-    const m = String(d.getMonth()+1).padStart(2,"0");
-    const day = String(d.getDate()).padStart(2,"0");
-
-    return `${y}-${m}-${day}`;
+    return [
+        d.getFullYear(),
+        String(d.getMonth()+1).padStart(2,"0"),
+        String(d.getDate()).padStart(2,"0")
+    ].join("-");
 }
+
 
 function parseLocalDate(value){
 
     if(!value) return null;
 
-    const parts = String(value).split("-");
+    const p =
+        String(value).split("-");
 
-    if(parts.length !== 3) return null;
+    if(p.length !== 3) return null;
 
-    const d = new Date(
-        Number(parts[0]),
-        Number(parts[1])-1,
-        Number(parts[2])
-    );
+    const d =
+        new Date(
+            Number(p[0]),
+            Number(p[1])-1,
+            Number(p[2])
+        );
 
     d.setHours(0,0,0,0);
 
     return d;
 }
 
+
 function dateKey(date){
 
-    return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
-}
-
-function showToast(message,type="success"){
-
-    const toast = document.getElementById("toast");
-
-    toast.textContent = message;
-    toast.className = "toast show "+type;
-
-    setTimeout(()=>{
-        toast.className = "toast";
-    },2500);
+    return [
+        date.getFullYear(),
+        String(date.getMonth()+1).padStart(2,"0"),
+        String(date.getDate()).padStart(2,"0")
+    ].join("-");
 }
 
 
-/* ================= MODAL ================= */
+function showToast(
+    message,
+    type="success"
+){
 
-function openModal(title,body,actions){
+    const toast =
+        document.getElementById("toast");
 
-    document.getElementById("modalTitle").textContent = title;
-    document.getElementById("modalBody").innerHTML = body;
-    document.getElementById("modalActions").innerHTML = actions;
+    toast.textContent =
+        message;
 
-    document.getElementById("modalOverlay").classList.add("show");
+    toast.className =
+        "toast show "+type;
+
+    clearTimeout(
+        window.__toastTimer
+    );
+
+    window.__toastTimer =
+        setTimeout(
+            ()=>{
+                toast.className =
+                    "toast";
+            },
+            2600
+        );
 }
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+function openModal(
+    title,
+    body,
+    actions
+){
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent = title;
+
+    document.getElementById(
+        "modalBody"
+    ).innerHTML = body;
+
+    document.getElementById(
+        "modalActions"
+    ).innerHTML = actions;
+
+    document.getElementById(
+        "modalOverlay"
+    ).classList.add("show");
+}
+
 
 function closeModal(){
 
-    document.getElementById("modalOverlay").classList.remove("show");
+    document.getElementById(
+        "modalOverlay"
+    ).classList.remove("show");
+
+    window.__confirmCallback =
+        null;
 }
 
-window.closeModal = closeModal;
+window.closeModal =
+    closeModal;
 
 
-document.getElementById("modalOverlay").addEventListener("click",function(e){
+document
+.getElementById("modalOverlay")
+.addEventListener(
+    "click",
+    function(e){
 
-    if(e.target === this){
-        closeModal();
+        if(e.target === this){
+            closeModal();
+        }
+
     }
+);
 
-});
 
-document.addEventListener("keydown",function(e){
+document.addEventListener(
+    "keydown",
+    function(e){
 
-    if(e.key === "Escape"){
-        closeModal();
-        closeSidebar();
+        if(e.key === "Escape"){
+
+            closeModal();
+            closeSidebar();
+
+        }
+
     }
+);
 
-});
 
+function confirmAction(
+    title,
+    message,
+    callback
+){
 
-function confirmAction(title,message,callback){
+    window.__confirmCallback =
+        callback;
 
     openModal(
+
         title,
+
         `<p>${escapeHtml(message)}</p>`,
+
         `
-        <button class="btn btn-light" onclick="closeModal()">
-            Tidak
-        </button>
-        <button class="btn btn-danger" onclick="executeConfirm()">
-            Ya
-        </button>
+            <button
+                class="btn btn-light"
+                onclick="closeModal()">
+                Tidak
+            </button>
+
+            <button
+                class="btn btn-danger"
+                onclick="executeConfirm()">
+                Ya
+            </button>
         `
     );
-
-    window.__confirmCallback = callback;
 }
 
-window.executeConfirm = function(){
 
-    const callback = window.__confirmCallback;
+window.executeConfirm =
+    function(){
 
-    closeModal();
+        const callback =
+            window.__confirmCallback;
 
-    if(typeof callback === "function"){
-        window.__confirmCallback = null;
-        callback();
-    }
+        closeModal();
 
-};
+        if(typeof callback === "function"){
+            callback();
+        }
+
+    };
 
 
-/* ================= SIDEBAR ================= */
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
 
 function toggleSidebar(){
 
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("sidebarOverlay");
+    const sidebar =
+        document.getElementById("sidebar");
 
-    sidebar.classList.toggle("open");
-    overlay.classList.toggle("show");
+    const overlay =
+        document.getElementById(
+            "sidebarOverlay"
+        );
 
-    if(sidebar.classList.contains("open")){
-        document.body.classList.add("sidebar-open");
-        document.body.style.overflow = "hidden";
+    const open =
+        !sidebar.classList.contains("open");
+
+    if(open){
+
+        sidebar.classList.add("open");
+        overlay.classList.add("show");
+
+        document.body.classList.add(
+            "sidebar-open"
+        );
+
     }else{
-        document.body.classList.remove("sidebar-open");
-        document.body.style.overflow = "";
+
+        closeSidebar();
+
     }
+
 }
 
-window.toggleSidebar = toggleSidebar;
+
+window.toggleSidebar =
+    toggleSidebar;
 
 
 function closeSidebar(){
 
-    document.getElementById("sidebar").classList.remove("open");
-    document.getElementById("sidebarOverlay").classList.remove("show");
+    document.getElementById(
+        "sidebar"
+    ).classList.remove("open");
 
-    document.body.classList.remove("sidebar-open");
-    document.body.style.overflow = "";
+    document.getElementById(
+        "sidebarOverlay"
+    ).classList.remove("show");
+
+    document.body.classList.remove(
+        "sidebar-open"
+    );
+
 }
 
-window.closeSidebar = closeSidebar;
+window.closeSidebar =
+    closeSidebar;
 
 
-/* ================= LOGIN ================= */
+/* =========================================================
+   LOGIN
+   ========================================================= */
 
 function switchLogin(mode){
 
-    loginMode = mode;
+    const b =
+        document.getElementById(
+            "loginBendahara"
+        );
 
-    const bendahara = document.getElementById("loginBendahara");
-    const anggota = document.getElementById("loginAnggota");
+    const a =
+        document.getElementById(
+            "loginAnggota"
+        );
 
-    const tabB = document.getElementById("tabBendahara");
-    const tabA = document.getElementById("tabAnggota");
+    const tabB =
+        document.getElementById(
+            "tabBendahara"
+        );
+
+    const tabA =
+        document.getElementById(
+            "tabAnggota"
+        );
+
 
     if(mode === "bendahara"){
 
-        bendahara.classList.remove("hidden");
-        anggota.classList.add("hidden");
+        b.classList.remove("hidden");
+        a.classList.add("hidden");
 
         tabB.classList.add("active");
         tabA.classList.remove("active");
 
     }else{
 
-        bendahara.classList.add("hidden");
-        anggota.classList.remove("hidden");
+        b.classList.add("hidden");
+        a.classList.remove("hidden");
 
         tabB.classList.remove("active");
         tabA.classList.add("active");
 
         renderStudentLoginList();
+
     }
+
 }
 
-window.switchLogin = switchLogin;
+
+window.switchLogin =
+    switchLogin;
 
 
 function loginBendahara(){
 
     const username =
-        document.getElementById("bendaharaUsername").value.trim();
+        document
+        .getElementById(
+            "bendaharaUsername"
+        )
+        .value
+        .trim();
 
     const password =
-        document.getElementById("bendaharaPassword").value;
+        document
+        .getElementById(
+            "bendaharaPassword"
+        )
+        .value;
+
 
     if(
         username === "iissumirat123" &&
@@ -1231,254 +2180,480 @@ function loginBendahara(){
 
         showApp();
 
-        showToast("Selamat datang, Bendahara");
+        showToast(
+            "Selamat datang, Bendahara"
+        );
 
     }else{
 
-        showToast("Username atau password salah","error");
+        showToast(
+            "Username atau password salah",
+            "error"
+        );
+
     }
+
 }
 
-window.loginBendahara = loginBendahara;
+
+window.loginBendahara =
+    loginBendahara;
 
 
 function loginAnggota(){
 
-    const id = document.getElementById("anggotaSiswa").value;
-    const password = document.getElementById("anggotaPassword").value;
+    const id =
+        document
+        .getElementById(
+            "anggotaSiswa"
+        )
+        .value;
+
+    const password =
+        document
+        .getElementById(
+            "anggotaPassword"
+        )
+        .value;
+
 
     if(!id){
-        showToast("Silakan pilih nama siswa","error");
+
+        showToast(
+            "Silakan pilih nama siswa",
+            "error"
+        );
+
         return;
     }
 
-    const siswa = appState.siswa[id];
+
+    const siswa =
+        appState.siswa[id];
+
 
     if(!siswa){
-        showToast("Data siswa tidak ditemukan","error");
+
+        showToast(
+            "Data siswa tidak ditemukan",
+            "error"
+        );
+
         return;
     }
+
 
     const correctPassword =
         siswa.password || "123456";
 
+
     if(password !== correctPassword){
-        showToast("Password salah","error");
+
+        showToast(
+            "Password salah",
+            "error"
+        );
+
         return;
     }
 
+
     currentUser = {
+
         role:"anggota",
+
         siswaId:id,
+
         nama:siswa.nama
+
     };
+
 
     sessionStorage.setItem(
         "kasKelasSession",
         JSON.stringify(currentUser)
     );
 
+
     showApp();
 
-    showToast("Selamat datang, "+siswa.nama);
+    showToast(
+        "Selamat datang, "+siswa.nama
+    );
+
 }
 
-window.loginAnggota = loginAnggota;
 
+window.loginAnggota =
+    loginAnggota;
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
 
 function logout(){
 
     confirmAction(
+
         "Logout",
+
         "Apakah Anda yakin ingin keluar dari akun?",
+
         ()=>{
-            sessionStorage.removeItem("kasKelasSession");
+
+            sessionStorage.removeItem(
+                "kasKelasSession"
+            );
+
             currentUser = null;
             currentPage = "dashboard";
 
             closeSidebar();
 
-            document.getElementById("appScreen").style.display = "none";
-            document.getElementById("loginScreen").style.display = "flex";
+            document.getElementById(
+                "appScreen"
+            ).style.display = "none";
 
-            document.getElementById("bendaharaUsername").value = "";
-            document.getElementById("bendaharaPassword").value = "";
-            document.getElementById("anggotaPassword").value = "";
+            document.getElementById(
+                "loginScreen"
+            ).style.display = "flex";
 
-            showToast("Berhasil keluar");
+
+            document.getElementById(
+                "bendaharaUsername"
+            ).value = "";
+
+            document.getElementById(
+                "bendaharaPassword"
+            ).value = "";
+
+            document.getElementById(
+                "anggotaPassword"
+            ).value = "";
+
+
+            showToast(
+                "Berhasil keluar"
+            );
+
         }
     );
+
 }
 
-window.logout = logout;
+
+window.logout =
+    logout;
 
 
-/* ================= DATA FIREBASE ================= */
+/* =========================================================
+   FIREBASE LISTENER
+   ========================================================= */
 
 function initListeners(){
 
-    onValue(ref(db,`${BASE}/siswa`),snapshot=>{
+    onValue(
+        ref(db,`${BASE}/siswa`),
+        snapshot=>{
 
-        appState.siswa = snapshot.val() || {};
+            appState.siswa =
+                snapshot.val() || {};
 
-        renderStudentLoginList();
+            renderStudentLoginList();
 
-        if(currentUser){
-            renderPage();
+            if(currentUser){
+                renderPage();
+            }
+
         }
+    );
 
-    });
 
-    onValue(ref(db,`${BASE}/kasMasuk`),snapshot=>{
+    onValue(
+        ref(db,`${BASE}/kasMasuk`),
+        snapshot=>{
 
-        appState.kasMasuk = snapshot.val() || {};
+            appState.kasMasuk =
+                snapshot.val() || {};
 
-        reconcilePaymentStatus();
+            reconcilePaymentStatus();
 
-        if(currentUser){
-            renderPage();
+            if(currentUser){
+                renderPage();
+            }
+
         }
+    );
 
-    });
 
-    onValue(ref(db,`${BASE}/kasKeluar`),snapshot=>{
+    onValue(
+        ref(db,`${BASE}/kasKeluar`),
+        snapshot=>{
 
-        appState.kasKeluar = snapshot.val() || {};
+            appState.kasKeluar =
+                snapshot.val() || {};
 
-        if(currentUser){
-            renderPage();
+            if(currentUser){
+                renderPage();
+            }
+
         }
+    );
 
-    });
 
-    onValue(ref(db,`${BASE}/pembayaranStatus`),snapshot=>{
+    onValue(
+        ref(db,`${BASE}/pembayaranStatus`),
+        snapshot=>{
 
-        appState.pembayaranStatus = snapshot.val() || {};
+            appState.pembayaranStatus =
+                snapshot.val() || {};
 
-        if(currentUser){
-            renderPage();
+            if(currentUser){
+                renderPage();
+            }
+
         }
+    );
 
-    });
 
-    onValue(ref(db,`${BASE}/settings`),snapshot=>{
+    onValue(
+        ref(db,`${BASE}/settings`),
+        snapshot=>{
 
-        const data = snapshot.val() || {};
+            const data =
+                snapshot.val() || {};
 
-        appState.settings = {
-            weeklyFee:Number(data.weeklyFee) || 10000,
-            startDate:data.startDate || "",
-            resetState:data.resetState || {
-                cashInOffset:0,
-                cashOutOffset:0
-            },
-            deletedStudents:data.deletedStudents || {}
-        };
+            appState.settings = {
 
-        if(currentUser){
-            renderPage();
+                weeklyFee:
+                    Number(data.weeklyFee) ||
+                    10000,
+
+                startDate:
+                    data.startDate ||
+                    "",
+
+                resetState:
+                    data.resetState || {
+                        cashInOffset:0,
+                        cashOutOffset:0
+                    },
+
+                deletedStudents:
+                    data.deletedStudents || {}
+
+            };
+
+
+            if(currentUser){
+                renderPage();
+            }
+
         }
-
-    });
+    );
 
 }
 
 
-/* ================= LOGIN STUDENTS ================= */
+/* =========================================================
+   STUDENT LOGIN LIST
+   ========================================================= */
 
 function renderStudentLoginList(){
 
-    const select = document.getElementById("anggotaSiswa");
+    const select =
+        document.getElementById(
+            "anggotaSiswa"
+        );
 
     if(!select) return;
 
-    const students = Object.entries(appState.siswa)
-        .filter(([id,s])=>s && s.aktif !== false);
+
+    const students =
+        Object.entries(
+            appState.siswa
+        )
+        .filter(
+            ([id,s])=>
+                s &&
+                s.aktif !== false
+        )
+        .sort(
+            (a,b)=>
+                String(a[1].nama || "")
+                .localeCompare(
+                    String(b[1].nama || "")
+                )
+        );
+
 
     if(!students.length){
 
         select.innerHTML =
-            `<option value="">Belum ada data siswa</option>`;
+            `<option value="">
+                Belum ada data siswa
+             </option>`;
 
         return;
     }
 
+
     select.innerHTML =
-        `<option value="">Pilih nama siswa</option>`+
+        `
+        <option value="">
+            Pilih nama siswa
+        </option>
+        `
+        +
         students
-        .sort((a,b)=>
-            String(a[1].nama||"")
-            .localeCompare(String(b[1].nama||""))
-        )
-        .map(([id,s])=>
-            `<option value="${escapeHtml(id)}">
+        .map(
+            ([id,s])=>
+            `
+            <option value="${escapeHtml(id)}">
                 ${escapeHtml(s.nama)}
-            </option>`
+            </option>
+            `
         )
         .join("");
+
 }
 
 
-/* ================= APP ================= */
+/* =========================================================
+   APP
+   ========================================================= */
 
 function showApp(){
 
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("appScreen").style.display = "block";
+    document.getElementById(
+        "loginScreen"
+    ).style.display = "none";
+
+    document.getElementById(
+        "appScreen"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "sidebarRole"
+    ).textContent =
+        currentUser.role === "bendahara"
+        ? "Mode Bendahara"
+        : "Mode Anggota";
+
 
     buildNav();
 
     navigateTo("dashboard");
+
 }
+
 
 function buildNav(){
 
-    const nav = document.getElementById("navMenu");
+    const nav =
+        document.getElementById(
+            "navMenu"
+        );
+
 
     if(!currentUser) return;
 
-    let items = [];
+
+    let items;
+
 
     if(currentUser.role === "bendahara"){
 
         items = [
+
             ["dashboard","⌂","Beranda"],
+
             ["kasMasuk","＋","Kas Masuk"],
+
             ["kasKeluar","−","Kas Keluar"],
-            ["siswa","👥","Daftar Siswa"],
+
+            ["siswa","♙","Daftar Siswa"],
+
             ["nunggak","!","Siswa Nunggak"],
+
             ["riwayat","↺","Riwayat"],
-            ["settings","⚙","Pengaturan"],
-            ["logout","⇥","Logout"]
+
+            ["settings","⚙","Pengaturan"]
+
         ];
 
     }else{
 
         items = [
+
             ["dashboard","⌂","Beranda"],
+
             ["kasMasuk","＋","Kas Masuk"],
+
             ["kasKeluar","−","Kas Keluar"],
-            ["riwayat","↺","Riwayat"],
-            ["logout","⇥","Logout"]
+
+            ["riwayat","↺","Riwayat"]
+
         ];
 
     }
 
-    nav.innerHTML = items.map(item=>{
 
-        const [page,icon,label] = item;
+    nav.innerHTML = `
 
-        return `
-            <button
-                class="nav-item ${page===currentPage?"active":""}"
-                onclick="navigateTo('${page}')"
-            >
-                <span>${icon}</span>
-                <span>${label}</span>
-            </button>
-        `;
+        <div class="nav-label">
+            Menu Utama
+        </div>
 
-    }).join("");
+        ${
+            items
+            .map(
+                ([page,icon,label])=>
+                `
+                <button
+                    class="nav-item ${
+                        page === currentPage
+                        ? "active"
+                        : ""
+                    }"
+                    onclick="navigateTo('${page}')">
+
+                    <span class="nav-icon">
+                        ${icon}
+                    </span>
+
+                    <span>
+                        ${label}
+                    </span>
+
+                </button>
+                `
+            )
+            .join("")
+        }
+
+        <div class="nav-label">
+            Akun
+        </div>
+
+        <button
+            class="nav-item logout"
+            onclick="navigateTo('logout')">
+
+            <span class="nav-icon">
+                ⇥
+            </span>
+
+            <span>
+                Logout
+            </span>
+
+        </button>
+
+    `;
+
 }
 
 
@@ -1487,36 +2662,57 @@ function navigateTo(page){
     if(page === "logout"){
 
         logout();
+
         return;
     }
 
-    currentPage = page;
+
+    currentPage =
+        page;
 
     closeSidebar();
 
     buildNav();
+
     renderPage();
+
 }
 
-window.navigateTo = navigateTo;
+
+window.navigateTo =
+    navigateTo;
 
 
 function renderPage(){
 
     if(!currentUser) return;
 
+
     const titleMap = {
+
         dashboard:"Beranda",
+
         kasMasuk:"Kas Masuk",
+
         kasKeluar:"Kas Keluar",
+
         siswa:"Daftar Siswa",
+
         nunggak:"Siswa Nunggak",
+
         riwayat:"Riwayat",
+
         settings:"Pengaturan"
+
     };
 
-    document.getElementById("pageTitle").textContent =
-        titleMap[currentPage] || "Beranda";
+
+    document.getElementById(
+        "pageTitle"
+    ).textContent =
+        titleMap[currentPage] ||
+        "Beranda";
+
 
     switch(currentPage){
 
@@ -1546,123 +2742,235 @@ function renderPage(){
 
         default:
             renderDashboard();
+
     }
+
 }
 
 
-/* ================= PAYMENT PERIOD ================= */
+/* =========================================================
+   PAYMENT PERIOD
+   ========================================================= */
 
 function getPaymentPeriods(){
 
-    const start = parseLocalDate(appState.settings.startDate);
+    const start =
+        parseLocalDate(
+            appState.settings.startDate
+        );
+
 
     if(!start) return [];
 
-    const now = new Date();
-    now.setHours(0,0,0,0);
 
-    if(start > now) return [];
+    const now =
+        new Date();
+
+    now.setHours(
+        0,0,0,0
+    );
+
+
+    if(start > now){
+        return [];
+    }
+
 
     const periods = [];
 
-    let cursor = new Date(start);
+    let cursor =
+        new Date(start);
+
     let number = 1;
+
 
     while(cursor <= now){
 
-        const periodStart = new Date(cursor);
+        const periodStart =
+            new Date(cursor);
 
-        const periodEnd = new Date(cursor);
-        periodEnd.setDate(periodEnd.getDate()+6);
+        const periodEnd =
+            new Date(cursor);
+
+        periodEnd.setDate(
+            periodEnd.getDate()+6
+        );
+
 
         periods.push({
+
             index:number,
-            key:"P-"+dateKey(periodStart),
-            start:periodStart,
-            end:periodEnd,
+
+            key:
+                "P-"+dateKey(
+                    periodStart
+                ),
+
+            start:
+                periodStart,
+
+            end:
+                periodEnd,
+
             label:
                 `Periode ${number} (${formatDate(periodStart)} - ${formatDate(periodEnd)})`
+
         });
 
-        cursor.setDate(cursor.getDate()+7);
+
+        cursor.setDate(
+            cursor.getDate()+7
+        );
+
         number++;
 
-        if(number > 1000) break;
+
+        if(number > 1000){
+            break;
+        }
+
     }
 
+
     return periods;
+
 }
 
 
-function isPaymentPaid(studentId,periodKey){
+function isPaymentPaid(
+    studentId,
+    periodKey
+){
 
     return Boolean(
-        appState.pembayaranStatus?.[studentId]?.[periodKey]?.paid
+        appState
+        .pembayaranStatus
+        ?.[
+            studentId
+        ]
+        ?.[
+            periodKey
+        ]
+        ?.paid
     );
+
 }
 
 
-/* ================= RECONCILE ================= */
+/* =========================================================
+   RECONCILE PAYMENT
+   ========================================================= */
 
 async function reconcilePaymentStatus(){
 
-    if(reconcileRunning) return;
+    if(reconcileRunning){
+        return;
+    }
+
 
     reconcileRunning = true;
+
 
     try{
 
         const updates = {};
 
-        Object.entries(appState.kasMasuk).forEach(([id,item])=>{
 
-            if(
-                item &&
-                item.jenis === "pembayaran" &&
-                item.siswaId &&
-                item.periodeKey
-            ){
+        Object.entries(
+            appState.kasMasuk
+        )
+        .forEach(
+            ([id,item])=>{
 
-                const current =
-                    appState.pembayaranStatus?.[item.siswaId]?.[item.periodeKey];
+                if(
+                    item &&
+                    item.jenis === "pembayaran" &&
+                    item.siswaId &&
+                    item.periodeKey
+                ){
 
-                if(!current || !current.paid){
+                    const current =
+                        appState
+                        .pembayaranStatus
+                        ?.[
+                            item.siswaId
+                        ]
+                        ?.[
+                            item.periodeKey
+                        ];
 
-                    updates[
-                        `${BASE}/pembayaranStatus/${item.siswaId}/${item.periodeKey}`
-                    ] = {
-                        paid:true,
-                        amount:Number(item.jumlah)||0,
-                        tanggal:item.tanggal||new Date().toISOString(),
-                        kasMasukId:id
-                    };
+
+                    if(
+                        !current ||
+                        !current.paid
+                    ){
+
+                        updates[
+                            `${BASE}/pembayaranStatus/${item.siswaId}/${item.periodeKey}`
+                        ] = {
+
+                            paid:true,
+
+                            amount:
+                                Number(item.jumlah)||0,
+
+                            tanggal:
+                                item.tanggal ||
+                                new Date().toISOString(),
+
+                            kasMasukId:id
+
+                        };
+
+                    }
+
                 }
+
             }
+        );
 
-        });
 
-        if(Object.keys(updates).length){
-            await update(ref(db),updates);
+        if(
+            Object.keys(updates).length
+        ){
+
+            await update(
+                ref(db),
+                updates
+            );
+
         }
 
     }catch(error){
 
-        console.error(error);
+        console.error(
+            "Reconcile error:",
+            error
+        );
 
     }finally{
 
         reconcileRunning = false;
+
     }
+
 }
 
 
-/* ================= CASH TOTAL ================= */
+/* =========================================================
+   CASH CALCULATION
+   ========================================================= */
 
 function getDeletedStudentIds(){
 
     return new Set(
-        Object.keys(appState.settings.deletedStudents || {})
+        Object.keys(
+            appState
+            .settings
+            .deletedStudents || {}
+        )
     );
+
 }
 
 
@@ -1670,24 +2978,53 @@ function getPersistentPaymentTotal(){
 
     let total = 0;
 
-    const deleted = getDeletedStudentIds();
+    const deleted =
+        getDeletedStudentIds();
 
-    Object.entries(appState.pembayaranStatus || {})
-    .forEach(([studentId,periods])=>{
 
-        if(deleted.has(studentId)) return;
+    Object.entries(
+        appState.pembayaranStatus || {}
+    )
+    .forEach(
+        ([studentId,periods])=>{
 
-        Object.values(periods || {}).forEach(payment=>{
-
-            if(payment?.paid){
-                total += Number(payment.amount) || appState.settings.weeklyFee;
+            if(
+                deleted.has(studentId)
+            ){
+                return;
             }
 
-        });
 
-    });
+            Object.values(
+                periods || {}
+            )
+            .forEach(
+                payment=>{
+
+                    if(payment?.paid){
+
+                        total +=
+                            Number(
+                                payment.amount
+                            )
+                            ||
+                            Number(
+                                appState.settings.weeklyFee
+                            )
+                            ||
+                            0;
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
 
     return total;
+
 }
 
 
@@ -1695,97 +3032,173 @@ function getLegacyUnmatchedCashIn(){
 
     let total = 0;
 
-    const deleted = getDeletedStudentIds();
+    const deleted =
+        getDeletedStudentIds();
 
-    Object.entries(appState.kasMasuk || {})
-    .forEach(([id,item])=>{
 
-        if(!item) return;
+    Object.entries(
+        appState.kasMasuk || {}
+    )
+    .forEach(
+        ([id,item])=>{
 
-        if(item.siswaId && deleted.has(item.siswaId)) return;
+            if(!item) return;
 
-        if(
-            item.jenis === "pembayaran" &&
-            item.siswaId &&
-            item.periodeKey
-        ){
 
-            const paid =
-                appState.pembayaranStatus?.[
-                    item.siswaId
-                ]?.[
-                    item.periodeKey
-                ];
+            if(
+                item.siswaId &&
+                deleted.has(item.siswaId)
+            ){
 
-            if(paid?.paid) return;
+                return;
+            }
+
+
+            if(
+                item.jenis === "pembayaran" &&
+                item.siswaId &&
+                item.periodeKey
+            ){
+
+                const paid =
+                    appState
+                    .pembayaranStatus
+                    ?.[
+                        item.siswaId
+                    ]
+                    ?.[
+                        item.periodeKey
+                    ];
+
+
+                if(paid?.paid){
+                    return;
+                }
+
+            }
+
+
+            total +=
+                Number(item.jumlah) || 0;
+
         }
+    );
 
-        total += Number(item.jumlah)||0;
-    });
 
     return total;
+
 }
 
 
 function getRawCashIn(){
 
-    return getPersistentPaymentTotal() +
-           getLegacyUnmatchedCashIn();
+    return (
+        getPersistentPaymentTotal()
+        +
+        getLegacyUnmatchedCashIn()
+    );
+
 }
 
 
 function getRawCashOut(){
 
-    return Object.values(appState.kasKeluar || {})
-        .reduce((sum,item)=>
-            sum+(Number(item?.jumlah)||0),0);
+    return Object
+        .values(
+            appState.kasKeluar || {}
+        )
+        .reduce(
+            (sum,item)=>
+                sum+
+                (
+                    Number(
+                        item?.jumlah
+                    ) || 0
+                ),
+            0
+        );
+
 }
 
 
 function getDisplayedCashIn(){
 
     const offset =
-        Number(appState.settings.resetState?.cashInOffset)||0;
+        Number(
+            appState
+            .settings
+            .resetState
+            ?.cashInOffset
+        ) || 0;
 
-    return Math.max(0,getRawCashIn()-offset);
+
+    return Math.max(
+        0,
+        getRawCashIn()-offset
+    );
+
 }
 
 
 function getDisplayedCashOut(){
 
     const offset =
-        Number(appState.settings.resetState?.cashOutOffset)||0;
+        Number(
+            appState
+            .settings
+            .resetState
+            ?.cashOutOffset
+        ) || 0;
 
-    return Math.max(0,getRawCashOut()-offset);
+
+    return Math.max(
+        0,
+        getRawCashOut()-offset
+    );
+
 }
 
 
 function getBalance(){
 
-    return getDisplayedCashIn()-getDisplayedCashOut();
+    return (
+        getDisplayedCashIn()
+        -
+        getDisplayedCashOut()
+    );
+
 }
 
 
-/* ================= DASHBOARD ================= */
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
 
 function renderDashboard(){
 
-    const content = document.getElementById("pageContent");
+    const content =
+        document.getElementById(
+            "pageContent"
+        );
+
 
     const name =
         currentUser.role === "bendahara"
         ? "Bendahara"
         : currentUser.nama;
 
+
     content.innerHTML = `
 
         <div class="welcome-card">
 
-            <h2>Selamat datang, ${escapeHtml(name)} 👋</h2>
+            <h2>
+                Selamat datang, ${escapeHtml(name)} 👋
+            </h2>
 
             <p>
-                Kelola dan pantau keuangan KAS KELAS VII B
-                dengan mudah.
+                Pantau dan kelola keuangan
+                KAS KELAS VII B dengan mudah.
             </p>
 
         </div>
@@ -1794,43 +3207,45 @@ function renderDashboard(){
         <div class="stats">
 
             <div class="stat-card stat-green">
-                <div class="stat-title">TOTAL KAS MASUK</div>
-                <div class="stat-value">
-                    ${rupiah(getDisplayedCashIn())}
+
+                <div class="stat-title">
+                    TOTAL KAS MASUK
                 </div>
+
+                <div class="stat-value">
+                    ${rupiah(
+                        getDisplayedCashIn()
+                    )}
+                </div>
+
             </div>
+
 
             <div class="stat-card stat-red">
-                <div class="stat-title">TOTAL KAS KELUAR</div>
-                <div class="stat-value">
-                    ${rupiah(getDisplayedCashOut())}
+
+                <div class="stat-title">
+                    TOTAL KAS KELUAR
                 </div>
+
+                <div class="stat-value">
+                    ${rupiah(
+                        getDisplayedCashOut()
+                    )}
+                </div>
+
             </div>
+
 
             <div class="stat-card stat-navy">
-                <div class="stat-title">SALDO</div>
+
+                <div class="stat-title">
+                    SALDO
+                </div>
+
                 <div class="stat-value">
-                    ${rupiah(getBalance())}
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="section">
-
-            <div class="section-header">
-
-                <div class="section-title">
-                    💰 Pembayaran Terbaru
-                </div>
-
-            </div>
-
-            <div class="payment-latest-wrap">
-
-                <div id="latestPayments"
-                     class="payment-latest">
+                    ${rupiah(
+                        getBalance()
+                    )}
                 </div>
 
             </div>
@@ -1842,218 +3257,365 @@ function renderDashboard(){
 
             <div class="section-header">
 
-                <div class="section-title">
-                    📋 Riwayat Terbaru
+                <div>
+
+                    <div class="section-title">
+                        💰 Pembayaran Terbaru
+                    </div>
+
+                    <div class="section-subtitle">
+                        5 pembayaran terakhir
+                    </div>
+
                 </div>
 
-                <button class="btn btn-light"
-                        onclick="navigateTo('riwayat')">
+            </div>
+
+
+            <div id="latestPayments"
+                 class="payment-latest">
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <div class="section-title">
+                        📋 Riwayat Terbaru
+                    </div>
+
+                    <div class="section-subtitle">
+                        Aktivitas kas terbaru
+                    </div>
+
+                </div>
+
+                <button
+                    class="btn btn-light"
+                    onclick="navigateTo('riwayat')">
                     Lihat Semua
                 </button>
 
             </div>
 
-            <div id="dashboardHistory"></div>
+
+            <div id="dashboardHistory">
+            </div>
 
         </div>
 
     `;
 
+
     renderLatestPayments();
+
     renderDashboardHistory();
+
 }
 
 
-/* ================= LATEST PAYMENT ================= */
+/* =========================================================
+   PAYMENT LATEST
+   ========================================================= */
 
 function getPaymentTransactions(){
 
-    return Object.entries(appState.kasMasuk || {})
-        .map(([id,item])=>({
+    return Object
+        .entries(
+            appState.kasMasuk || {}
+        )
+        .map(
+            ([id,item])=>({
+                id,
+                ...item
+            })
+        )
+        .filter(
+            item=>{
 
-            id,
-            ...item
+                if(
+                    item.jenis !==
+                    "pembayaran"
+                ){
+                    return false;
+                }
 
-        }))
-        .filter(item=>{
 
-            if(item.jenis !== "pembayaran") return false;
+                if(
+                    currentUser.role ===
+                    "anggota"
+                    &&
+                    item.siswaId !==
+                    currentUser.siswaId
+                ){
 
-            if(
-                currentUser.role === "anggota" &&
-                item.siswaId !== currentUser.siswaId
-            ){
-                return false;
+                    return false;
+                }
+
+
+                return true;
+
             }
+        )
+        .sort(
+            (a,b)=>
+                new Date(
+                    b.tanggal ||
+                    b.createdAt ||
+                    0
+                )
+                -
+                new Date(
+                    a.tanggal ||
+                    a.createdAt ||
+                    0
+                )
+        );
 
-            return true;
-
-        })
-        .sort((a,b)=>{
-
-            const da =
-                new Date(a.tanggal||a.createdAt||0).getTime();
-
-            const dbb =
-                new Date(b.tanggal||b.createdAt||0).getTime();
-
-            return dbb-da;
-        });
 }
 
 
 function renderLatestPayments(){
 
     const container =
-        document.getElementById("latestPayments");
+        document.getElementById(
+            "latestPayments"
+        );
+
 
     if(!container) return;
 
-    const all = getPaymentTransactions();
 
-    const latest = all.slice(0,5);
+    const all =
+        getPaymentTransactions();
+
+
+    const latest =
+        all.slice(0,5);
+
 
     if(!latest.length){
 
         container.innerHTML = `
+
             <div class="empty">
                 Belum ada pembayaran terbaru.
             </div>
+
         `;
 
         return;
     }
 
-    container.innerHTML = latest.map(item=>{
 
-        const siswa =
-            appState.siswa[item.siswaId];
+    container.innerHTML =
+        latest
+        .map(
+            item=>{
 
-        const nama =
-            siswa?.nama ||
-            item.namaSiswa ||
-            "Siswa";
+                const siswa =
+                    appState
+                    .siswa
+                    [item.siswaId];
 
-        return `
 
-            <div class="payment-card">
+                const nama =
+                    siswa?.nama ||
+                    item.namaSiswa ||
+                    "Siswa";
 
-                <div class="payment-left">
 
-                    <div class="payment-icon">
-                        ✓
-                    </div>
+                return `
 
-                    <div class="payment-info">
+                    <div class="payment-card">
 
-                        <div class="payment-name">
-                            ${escapeHtml(nama)}
+                        <div class="payment-left">
+
+                            <div class="payment-icon">
+                                ✓
+                            </div>
+
+                            <div class="payment-info">
+
+                                <div class="payment-name">
+                                    ${escapeHtml(nama)}
+                                </div>
+
+                                <div class="payment-period">
+                                    ${escapeHtml(
+                                        item.periodeLabel ||
+                                        "Pembayaran kas"
+                                    )}
+                                </div>
+
+                            </div>
+
                         </div>
 
-                        <div class="payment-period">
-                            ${escapeHtml(
-                                item.periodeLabel ||
-                                "Pembayaran kas"
-                            )}
+
+                        <div class="payment-right">
+
+                            <div class="payment-amount">
+                                + ${rupiah(item.jumlah)}
+                            </div>
+
+                            <div class="payment-date">
+                                ${formatDate(
+                                    item.tanggal
+                                )}
+                            </div>
+
                         </div>
 
                     </div>
 
-                </div>
+                `;
 
-                <div class="payment-right">
-
-                    <div class="payment-amount">
-                        + ${rupiah(item.jumlah)}
-                    </div>
-
-                    <div class="payment-date">
-                        ${formatDate(item.tanggal)}
-                    </div>
-
-                </div>
-
-            </div>
-
-        `;
-
-    }).join("");
+            }
+        )
+        .join("");
 
 
     if(all.length > 5){
 
         container.innerHTML += `
 
-            <button class="view-all"
-                    onclick="navigateTo('riwayat')">
-                Lihat Semua Pembayaran →
+            <button
+                class="view-all"
+                onclick="navigateTo('riwayat')">
+
+                Lihat Semua Pembayaran
+                →
+
             </button>
 
         `;
+
     }
+
 }
 
 
-/* ================= DASHBOARD HISTORY ================= */
+/* =========================================================
+   HISTORY
+   ========================================================= */
 
 function getHistoryItems(){
 
     const masuk =
-        Object.entries(appState.kasMasuk || {})
-        .map(([id,item])=>({
-            id,
-            type:"masuk",
-            ...item
-        }));
+        Object
+        .entries(
+            appState.kasMasuk || {}
+        )
+        .map(
+            ([id,item])=>({
+
+                id,
+
+                type:"masuk",
+
+                ...item
+
+            })
+        );
+
 
     const keluar =
-        Object.entries(appState.kasKeluar || {})
-        .map(([id,item])=>({
-            id,
-            type:"keluar",
-            ...item
-        }));
+        Object
+        .entries(
+            appState.kasKeluar || {}
+        )
+        .map(
+            ([id,item])=>({
 
-    let data = [...masuk,...keluar];
+                id,
 
-    if(currentUser.role === "anggota"){
+                type:"keluar",
 
-        data = data.filter(item=>{
+                ...item
 
-            if(item.type === "masuk"){
-                return item.siswaId === currentUser.siswaId;
-            }
+            })
+        );
 
-            return false;
-        });
+
+    let data =
+        [
+            ...masuk,
+            ...keluar
+        ];
+
+
+    if(
+        currentUser.role ===
+        "anggota"
+    ){
+
+        data =
+            data.filter(
+                item=>
+                    item.type === "masuk"
+                    &&
+                    item.siswaId ===
+                    currentUser.siswaId
+            );
 
     }
 
-    return data.sort((a,b)=>
-        new Date(b.tanggal||b.createdAt||0) -
-        new Date(a.tanggal||a.createdAt||0)
+
+    return data.sort(
+        (a,b)=>
+            new Date(
+                b.tanggal ||
+                b.createdAt ||
+                0
+            )
+            -
+            new Date(
+                a.tanggal ||
+                a.createdAt ||
+                0
+            )
     );
+
 }
 
 
 function renderDashboardHistory(){
 
     const container =
-        document.getElementById("dashboardHistory");
+        document.getElementById(
+            "dashboardHistory"
+        );
+
 
     if(!container) return;
 
-    const all = getHistoryItems();
 
-    const data = all.slice(0,6);
+    const all =
+        getHistoryItems();
+
+
+    const data =
+        all.slice(0,6);
+
 
     if(!data.length){
 
         container.innerHTML =
-            `<div class="empty">Belum ada riwayat.</div>`;
+            `
+            <div class="empty">
+                Belum ada riwayat transaksi.
+            </div>
+            `;
 
         return;
     }
+
 
     container.innerHTML = `
 
@@ -2064,57 +3626,84 @@ function renderDashboardHistory(){
                 <thead>
 
                     <tr>
-                        <th>Tanggal</th>
-                        <th>Keterangan</th>
-                        <th>Jenis</th>
-                        <th>Jumlah</th>
+
+                        <th>
+                            Tanggal
+                        </th>
+
+                        <th>
+                            Keterangan
+                        </th>
+
+                        <th>
+                            Jenis
+                        </th>
+
+                        <th>
+                            Jumlah
+                        </th>
+
                     </tr>
 
                 </thead>
 
+
                 <tbody>
 
-                    ${data.map(item=>`
+                    ${
+                        data
+                        .map(
+                            item=>`
 
-                        <tr>
+                                <tr>
 
-                            <td>
-                                ${formatDate(item.tanggal)}
-                            </td>
+                                    <td>
+                                        ${formatDate(
+                                            item.tanggal
+                                        )}
+                                    </td>
 
-                            <td>
-                                ${escapeHtml(
-                                    item.keterangan ||
-                                    item.periodeLabel ||
-                                    "Kas"
-                                )}
-                            </td>
+                                    <td>
+                                        ${escapeHtml(
+                                            item.keterangan ||
+                                            item.periodeLabel ||
+                                            "Kas"
+                                        )}
+                                    </td>
 
-                            <td>
+                                    <td>
 
-                                <span class="badge ${
-                                    item.type==="masuk"
-                                    ?"badge-green"
-                                    :"badge-red"
-                                }">
+                                        <span
+                                            class="badge ${
+                                                item.type ===
+                                                "masuk"
+                                                ? "badge-green"
+                                                : "badge-red"
+                                            }">
 
-                                    ${
-                                        item.type==="masuk"
-                                        ?"Kas Masuk"
-                                        :"Kas Keluar"
-                                    }
+                                            ${
+                                                item.type ===
+                                                "masuk"
+                                                ? "Kas Masuk"
+                                                : "Kas Keluar"
+                                            }
 
-                                </span>
+                                        </span>
 
-                            </td>
+                                    </td>
 
-                            <td>
-                                ${rupiah(item.jumlah)}
-                            </td>
+                                    <td>
+                                        ${rupiah(
+                                            item.jumlah
+                                        )}
+                                    </td>
 
-                        </tr>
+                                </tr>
 
-                    `).join("")}
+                            `
+                        )
+                        .join("")
+                    }
 
                 </tbody>
 
@@ -2124,42 +3713,79 @@ function renderDashboardHistory(){
 
     `;
 
+
     if(all.length > 6){
 
         container.innerHTML += `
 
-            <button class="view-all"
-                    onclick="navigateTo('riwayat')">
+            <button
+                class="view-all"
+                onclick="navigateTo('riwayat')">
+
                 Lihat Semua Riwayat →
+
             </button>
 
         `;
+
     }
+
 }
 
 
-/* ================= KAS MASUK ================= */
+/* =========================================================
+   KAS MASUK
+   ========================================================= */
 
 function renderKasMasukPage(){
 
-    const content = document.getElementById("pageContent");
+    const content =
+        document.getElementById(
+            "pageContent"
+        );
+
 
     const isBendahara =
-        currentUser.role === "bendahara";
+        currentUser.role ===
+        "bendahara";
+
 
     const rows =
-        Object.entries(appState.kasMasuk || {})
-        .map(([id,item])=>({id,...item}))
-        .filter(item=>{
+        Object
+        .entries(
+            appState.kasMasuk || {}
+        )
+        .map(
+            ([id,item])=>({
+                id,
+                ...item
+            })
+        )
+        .filter(
+            item=>{
 
-            if(!isBendahara){
-                return item.siswaId === currentUser.siswaId;
+                if(!isBendahara){
+
+                    return (
+                        item.siswaId ===
+                        currentUser.siswaId
+                    );
+
+                }
+
+                return true;
+
             }
-
-            return true;
-        })
-        .sort((a,b)=>
-            new Date(b.tanggal||0)-new Date(a.tanggal||0)
+        )
+        .sort(
+            (a,b)=>
+                new Date(
+                    b.tanggal || 0
+                )
+                -
+                new Date(
+                    a.tanggal || 0
+                )
         );
 
 
@@ -2169,114 +3795,180 @@ function renderKasMasukPage(){
 
             <div class="section-header">
 
-                <div class="section-title">
-                    Kas Masuk
+                <div>
+
+                    <div class="section-title">
+                        Kas Masuk
+                    </div>
+
+                    <div class="section-subtitle">
+                        Catatan seluruh penerimaan kas
+                    </div>
+
                 </div>
+
 
                 ${
                     isBendahara
                     ? `
+
                         <div class="action-row">
 
-                            <button class="btn btn-primary"
-                                    onclick="openPaymentModal()">
-                                + Pembayaran
+                            <button
+                                class="btn btn-primary"
+                                onclick="openPaymentModal()">
+                                ＋ Pembayaran
                             </button>
 
-                            <button class="btn btn-danger"
-                                    onclick="deleteAllCashIn()">
+                            <button
+                                class="btn btn-danger"
+                                onclick="deleteAllCashIn()">
                                 Hapus Semua
                             </button>
 
                         </div>
+
                     `
-                    :""
+                    : ""
                 }
 
             </div>
+
 
             <div class="table-wrap">
 
                 <table>
 
                     <thead>
+
                         <tr>
-                            <th>Tanggal</th>
-                            <th>Nama</th>
-                            <th>Keterangan</th>
-                            <th>Jumlah</th>
+
+                            <th>
+                                Tanggal
+                            </th>
+
+                            <th>
+                                Nama
+                            </th>
+
+                            <th>
+                                Keterangan
+                            </th>
+
+                            <th>
+                                Jumlah
+                            </th>
+
                             ${
                                 isBendahara
                                 ? "<th>Aksi</th>"
-                                :""
+                                : ""
                             }
+
                         </tr>
+
                     </thead>
+
 
                     <tbody>
 
                         ${
                             rows.length
-                            ? rows.map(item=>{
+                            ?
 
-                                const siswa =
-                                    appState.siswa[item.siswaId];
+                            rows
+                            .map(
+                                item=>{
 
-                                return `
-                                    <tr>
+                                    const siswa =
+                                        appState
+                                        .siswa
+                                        [item.siswaId];
 
-                                        <td>
-                                            ${formatDate(item.tanggal)}
-                                        </td>
 
-                                        <td>
-                                            ${escapeHtml(
-                                                siswa?.nama ||
-                                                item.namaSiswa ||
-                                                "-"
-                                            )}
-                                        </td>
+                                    return `
 
-                                        <td>
-                                            ${escapeHtml(
-                                                item.periodeLabel ||
-                                                item.keterangan ||
-                                                "Kas masuk"
-                                            )}
-                                        </td>
+                                        <tr>
 
-                                        <td>
-                                            <b style="color:var(--green)">
-                                                ${rupiah(item.jumlah)}
-                                            </b>
-                                        </td>
+                                            <td>
+                                                ${formatDate(
+                                                    item.tanggal
+                                                )}
+                                            </td>
 
-                                        ${
-                                            isBendahara
-                                            ? `
+                                            <td>
+                                                ${escapeHtml(
+                                                    siswa?.nama ||
+                                                    item.namaSiswa ||
+                                                    "-"
+                                                )}
+                                            </td>
+
+                                            <td>
+                                                ${escapeHtml(
+                                                    item.periodeLabel ||
+                                                    item.keterangan ||
+                                                    "Kas masuk"
+                                                )}
+                                            </td>
+
+                                            <td>
+                                                <b
+                                                    style="
+                                                        color:var(--green)
+                                                    ">
+                                                    ${rupiah(
+                                                        item.jumlah
+                                                    )}
+                                                </b>
+                                            </td>
+
+                                            ${
+                                                isBendahara
+                                                ?
+
+                                                `
                                                 <td>
+
                                                     <button
                                                         class="btn btn-danger"
-                                                        onclick="deleteCashIn('${item.id}')">
+                                                        onclick="deleteCashIn('${escapeHtml(item.id)}')">
                                                         Hapus
                                                     </button>
+
                                                 </td>
-                                            `
-                                            :""
-                                        }
+                                                `
 
-                                    </tr>
-                                `;
+                                                : ""
+                                            }
 
-                            }).join("")
-                            : `
-                                <tr>
-                                    <td colspan="${isBendahara?5:4}">
-                                        <div class="empty">
-                                            Belum ada data kas masuk.
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </tr>
+
+                                    `;
+
+                                }
+                            )
+                            .join("")
+
+                            :
+
+                            `
+                            <tr>
+
+                                <td
+                                    colspan="${
+                                        isBendahara
+                                        ? 5
+                                        : 4
+                                    }">
+
+                                    <div class="empty">
+                                        Belum ada data kas masuk.
+                                    </div>
+
+                                </td>
+
+                            </tr>
                             `
                         }
 
@@ -2289,51 +3981,95 @@ function renderKasMasukPage(){
         </div>
 
     `;
+
 }
 
 
-/* ================= PAYMENT MODAL ================= */
+/* =========================================================
+   PAYMENT MODAL
+   ========================================================= */
 
 function openPaymentModal(){
 
-    if(currentUser.role !== "bendahara") return;
-
-    const students =
-        Object.entries(appState.siswa)
-        .filter(([id,s])=>s && s.aktif !== false)
-        .sort((a,b)=>
-            String(a[1].nama||"")
-            .localeCompare(String(b[1].nama||""))
-        );
-
-    if(!students.length){
-
-        showToast("Belum ada siswa","error");
+    if(
+        currentUser.role !==
+        "bendahara"
+    ){
         return;
     }
 
+
+    const students =
+        Object
+        .entries(
+            appState.siswa
+        )
+        .filter(
+            ([id,s])=>
+                s &&
+                s.aktif !== false
+        )
+        .sort(
+            (a,b)=>
+                String(
+                    a[1].nama || ""
+                )
+                .localeCompare(
+                    String(
+                        b[1].nama || ""
+                    )
+                )
+        );
+
+
+    if(!students.length){
+
+        showToast(
+            "Belum ada siswa",
+            "error"
+        );
+
+        return;
+    }
+
+
     openModal(
+
         "Catat Pembayaran",
+
         `
 
         <div class="form-group">
 
-            <label>Nama Siswa</label>
+            <label>
+                Nama Siswa
+            </label>
 
-            <select id="paymentStudent"
-                    onchange="updatePaymentPreview()">
+            <select
+                id="paymentStudent"
+                onchange="updatePaymentPeriodList()">
 
                 <option value="">
                     Pilih siswa
                 </option>
 
-                ${students.map(([id,s])=>
-                    `
-                    <option value="${escapeHtml(id)}">
-                        ${escapeHtml(s.nama)}
-                    </option>
-                    `
-                ).join("")}
+                ${
+                    students
+                    .map(
+                        ([id,s])=>
+                        `
+                        <option
+                            value="${escapeHtml(id)}">
+
+                            ${escapeHtml(
+                                s.nama
+                            )}
+
+                        </option>
+                        `
+                    )
+                    .join("")
+                }
 
             </select>
 
@@ -2342,10 +4078,13 @@ function openPaymentModal(){
 
         <div class="form-group">
 
-            <label>Periode Pembayaran</label>
+            <label>
+                Periode Pembayaran
+            </label>
 
-            <select id="paymentPeriod"
-                    onchange="updatePaymentPreview()">
+            <select
+                id="paymentPeriod"
+                onchange="updatePaymentPreview()">
 
                 <option value="">
                     Pilih periode
@@ -2356,150 +4095,277 @@ function openPaymentModal(){
         </div>
 
 
-        <div id="paymentPreview"
-             style="
-                background:#f0fdf4;
-                border-radius:10px;
-                padding:12px;
-                color:#166534;
-                font-size:13px;
-             ">
-            Pilih siswa dan periode.
+        <div
+            id="paymentPreview"
+            class="notice success">
+
+            Pilih siswa dan periode pembayaran.
+
         </div>
 
         `,
+
         `
-        <button class="btn btn-light"
-                onclick="closeModal()">
+
+        <button
+            class="btn btn-light"
+            onclick="closeModal()">
             Batal
         </button>
 
-        <button class="btn btn-primary"
-                onclick="savePayment()">
+        <button
+            class="btn btn-primary"
+            onclick="savePayment()">
             Simpan
         </button>
+
         `
+
     );
 
+
     updatePaymentPeriodList();
+
 }
 
-window.openPaymentModal = openPaymentModal;
+
+window.openPaymentModal =
+    openPaymentModal;
 
 
 function updatePaymentPeriodList(){
 
     const studentId =
-        document.getElementById("paymentStudent")?.value;
+        document.getElementById(
+            "paymentStudent"
+        )?.value;
+
 
     const select =
-        document.getElementById("paymentPeriod");
+        document.getElementById(
+            "paymentPeriod"
+        );
+
 
     if(!select) return;
 
-    const periods = getPaymentPeriods();
+
+    const periods =
+        getPaymentPeriods();
+
 
     if(!studentId){
 
         select.innerHTML =
-            `<option value="">Pilih siswa terlebih dahulu</option>`;
+            `
+            <option value="">
+                Pilih siswa terlebih dahulu
+            </option>
+            `;
+
+        updatePaymentPreview();
 
         return;
     }
 
+
     const unpaid =
-        periods.filter(p=>
-            !isPaymentPaid(studentId,p.key)
+        periods.filter(
+            p=>
+                !isPaymentPaid(
+                    studentId,
+                    p.key
+                )
         );
 
+
     select.innerHTML =
-        `<option value="">Pilih periode</option>`+
-        unpaid.map(p=>
+        `
+        <option value="">
+            Pilih periode
+        </option>
+        `
+        +
+        unpaid
+        .map(
+            p=>
             `
             <option value="${escapeHtml(p.key)}">
                 ${escapeHtml(p.label)}
             </option>
             `
-        ).join("");
+        )
+        .join("");
+
 
     updatePaymentPreview();
+
 }
 
-window.updatePaymentPeriodList = updatePaymentPeriodList;
+
+window.updatePaymentPeriodList =
+    updatePaymentPeriodList;
 
 
 function updatePaymentPreview(){
 
     const studentId =
-        document.getElementById("paymentStudent")?.value;
+        document.getElementById(
+            "paymentStudent"
+        )?.value;
+
 
     const periodKey =
-        document.getElementById("paymentPeriod")?.value;
+        document.getElementById(
+            "paymentPeriod"
+        )?.value;
+
 
     const preview =
-        document.getElementById("paymentPreview");
+        document.getElementById(
+            "paymentPreview"
+        );
+
 
     if(!preview) return;
 
+
     const period =
         getPaymentPeriods()
-        .find(p=>p.key===periodKey);
+        .find(
+            p=>
+                p.key ===
+                periodKey
+        );
+
 
     if(!studentId || !period){
 
-        preview.textContent =
-            "Pilih siswa dan periode.";
+        preview.innerHTML =
+            "Pilih siswa dan periode pembayaran.";
 
         return;
     }
 
+
     preview.innerHTML = `
-        <b>${escapeHtml(
-            appState.siswa[studentId]?.nama || ""
-        )}</b>
-        <br>
-        ${escapeHtml(period.label)}
-        <br>
-        <strong>
-            Jumlah: ${rupiah(appState.settings.weeklyFee)}
-        </strong>
+
+        <div style="
+            font-weight:800;
+            margin-bottom:3px;
+        ">
+            ${escapeHtml(
+                appState
+                .siswa
+                [studentId]
+                ?.nama || ""
+            )}
+        </div>
+
+        <div>
+            ${escapeHtml(
+                period.label
+            )}
+        </div>
+
+        <div style="
+            margin-top:4px;
+            font-weight:850;
+        ">
+            ${rupiah(
+                appState.settings.weeklyFee
+            )}
+        </div>
+
     `;
+
 }
 
-window.updatePaymentPreview = updatePaymentPreview;
+
+window.updatePaymentPreview =
+    updatePaymentPreview;
 
 
 async function savePayment(){
 
     const studentId =
-        document.getElementById("paymentStudent").value;
+        document.getElementById(
+            "paymentStudent"
+        ).value;
+
 
     const periodKey =
-        document.getElementById("paymentPeriod").value;
+        document.getElementById(
+            "paymentPeriod"
+        ).value;
+
 
     if(!studentId || !periodKey){
 
-        showToast("Lengkapi data pembayaran","error");
+        showToast(
+            "Lengkapi data pembayaran",
+            "error"
+        );
+
         return;
     }
 
-    if(isPaymentPaid(studentId,periodKey)){
 
-        showToast("Periode tersebut sudah dibayar","error");
+    if(
+        isPaymentPaid(
+            studentId,
+            periodKey
+        )
+    ){
+
+        showToast(
+            "Periode tersebut sudah dibayar",
+            "error"
+        );
+
         return;
     }
+
 
     const period =
         getPaymentPeriods()
-        .find(p=>p.key===periodKey);
+        .find(
+            p=>
+                p.key ===
+                periodKey
+        );
 
-    if(!period) return;
+
+    if(!period){
+
+        showToast(
+            "Periode tidak ditemukan",
+            "error"
+        );
+
+        return;
+    }
+
 
     const amount =
-        Number(appState.settings.weeklyFee)||0;
+        Number(
+            appState.settings.weeklyFee
+        ) || 0;
+
 
     const newRef =
-        push(ref(db,`${BASE}/kasMasuk`));
+        push(
+            ref(
+                db,
+                `${BASE}/kasMasuk`
+            )
+        );
+
+
+    const now =
+        new Date()
+        .toISOString();
+
 
     const data = {
 
@@ -2508,25 +4374,32 @@ async function savePayment(){
         siswaId:studentId,
 
         namaSiswa:
-            appState.siswa[studentId]?.nama || "",
+            appState
+            .siswa
+            [studentId]
+            ?.nama || "",
 
         periodeKey,
 
-        periodeLabel:period.label,
+        periodeLabel:
+            period.label,
 
         jumlah:amount,
 
-        tanggal:new Date().toISOString(),
+        tanggal:now,
 
-        createdAt:new Date().toISOString()
+        createdAt:now
 
     };
 
+
     const updates = {};
+
 
     updates[
         `${BASE}/kasMasuk/${newRef.key}`
     ] = data;
+
 
     updates[
         `${BASE}/pembayaranStatus/${studentId}/${periodKey}`
@@ -2536,112 +4409,187 @@ async function savePayment(){
 
         amount,
 
-        tanggal:data.tanggal,
+        tanggal:now,
 
-        kasMasukId:newRef.key
+        kasMasukId:
+            newRef.key
 
     };
 
+
     try{
 
-        await update(ref(db),updates);
+        await update(
+            ref(db),
+            updates
+        );
+
 
         closeModal();
 
-        showToast("Pembayaran berhasil disimpan");
+
+        showToast(
+            "Pembayaran berhasil disimpan"
+        );
 
     }catch(error){
 
         console.error(error);
 
-        showToast("Gagal menyimpan pembayaran","error");
+        showToast(
+            "Gagal menyimpan pembayaran",
+            "error"
+        );
+
     }
+
 }
 
-window.savePayment = savePayment;
+
+window.savePayment =
+    savePayment;
 
 
-/* ================= DELETE CASH IN ================= */
+/* =========================================================
+   DELETE CASH IN
+   ========================================================= */
 
 function deleteCashIn(id){
 
     confirmAction(
+
         "Hapus Kas Masuk",
+
         "Apakah Anda yakin ingin menghapus transaksi ini?",
+
         async()=>{
 
             try{
 
                 await remove(
-                    ref(db,`${BASE}/kasMasuk/${id}`)
+                    ref(
+                        db,
+                        `${BASE}/kasMasuk/${id}`
+                    )
                 );
 
+
                 /*
-                  Sengaja tidak menghapus pembayaranStatus.
-                  Status pembayaran tetap tersimpan.
+                  Status pembayaran sengaja
+                  tidak dihapus.
                 */
 
-                showToast("Riwayat kas masuk dihapus");
+                showToast(
+                    "Kas masuk berhasil dihapus"
+                );
 
             }catch(error){
 
                 console.error(error);
 
-                showToast("Gagal menghapus data","error");
+                showToast(
+                    "Gagal menghapus data",
+                    "error"
+                );
+
             }
 
         }
+
     );
+
 }
 
-window.deleteCashIn = deleteCashIn;
+
+window.deleteCashIn =
+    deleteCashIn;
 
 
 function deleteAllCashIn(){
 
     confirmAction(
+
         "Hapus Semua Kas Masuk",
-        "Semua riwayat kas masuk akan dihapus. Status pembayaran siswa tetap tersimpan. Lanjutkan?",
+
+        "Semua transaksi kas masuk akan dihapus. Status pembayaran siswa tetap tersimpan. Lanjutkan?",
+
         async()=>{
 
             try{
 
                 await remove(
-                    ref(db,`${BASE}/kasMasuk`)
+                    ref(
+                        db,
+                        `${BASE}/kasMasuk`
+                    )
                 );
 
-                showToast("Semua kas masuk berhasil dihapus");
+
+                showToast(
+                    "Semua kas masuk berhasil dihapus"
+                );
 
             }catch(error){
 
                 console.error(error);
 
-                showToast("Gagal menghapus kas masuk","error");
+                showToast(
+                    "Gagal menghapus kas masuk",
+                    "error"
+                );
+
             }
 
         }
+
     );
+
 }
 
-window.deleteAllCashIn = deleteAllCashIn;
+
+window.deleteAllCashIn =
+    deleteAllCashIn;
 
 
-/* ================= KAS KELUAR ================= */
+/* =========================================================
+   KAS KELUAR
+   ========================================================= */
 
 function renderKasKeluarPage(){
 
     const content =
-        document.getElementById("pageContent");
+        document.getElementById(
+            "pageContent"
+        );
+
 
     const isBendahara =
-        currentUser.role === "bendahara";
+        currentUser.role ===
+        "bendahara";
+
 
     const rows =
-        Object.entries(appState.kasKeluar || {})
-        .map(([id,item])=>({id,...item}))
-        .sort((a,b)=>
-            new Date(b.tanggal||0)-new Date(a.tanggal||0)
+        Object
+        .entries(
+            appState.kasKeluar || {}
+        )
+        .map(
+            ([id,item])=>({
+                id,
+                ...item
+            })
+        )
+        .sort(
+            (a,b)=>
+                new Date(
+                    b.tanggal || 0
+                )
+                -
+                new Date(
+                    a.tanggal || 0
+                )
         );
+
 
     content.innerHTML = `
 
@@ -2649,28 +4597,44 @@ function renderKasKeluarPage(){
 
             <div class="section-header">
 
-                <div class="section-title">
-                    Kas Keluar
+                <div>
+
+                    <div class="section-title">
+                        Kas Keluar
+                    </div>
+
+                    <div class="section-subtitle">
+                        Catatan penggunaan dana kelas
+                    </div>
+
                 </div>
+
 
                 ${
                     isBendahara
-                    ? `
-                        <div class="action-row">
+                    ?
 
-                            <button class="btn btn-primary"
-                                    onclick="openCashOutModal()">
-                                + Tambah
-                            </button>
-
-                            <button class="btn btn-danger"
-                                    onclick="deleteAllCashOut()">
-                                Hapus Semua
-                            </button>
-
-                        </div>
                     `
-                    :""
+
+                    <div class="action-row">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="openCashOutModal()">
+                            ＋ Tambah
+                        </button>
+
+                        <button
+                            class="btn btn-danger"
+                            onclick="deleteAllCashOut()">
+                            Hapus Semua
+                        </button>
+
+                    </div>
+
+                    `
+
+                    : ""
                 }
 
             </div>
@@ -2683,67 +4647,110 @@ function renderKasKeluarPage(){
                     <thead>
 
                         <tr>
-                            <th>Tanggal</th>
-                            <th>Keterangan</th>
-                            <th>Jumlah</th>
+
+                            <th>
+                                Tanggal
+                            </th>
+
+                            <th>
+                                Keterangan
+                            </th>
+
+                            <th>
+                                Jumlah
+                            </th>
+
                             ${
                                 isBendahara
                                 ? "<th>Aksi</th>"
-                                :""
+                                : ""
                             }
+
                         </tr>
 
                     </thead>
+
 
                     <tbody>
 
                         ${
                             rows.length
-                            ? rows.map(item=>`
+                            ?
 
-                                <tr>
+                            rows
+                            .map(
+                                item=>`
 
-                                    <td>
-                                        ${formatDate(item.tanggal)}
-                                    </td>
+                                    <tr>
 
-                                    <td>
-                                        ${escapeHtml(item.keterangan||"-")}
-                                    </td>
+                                        <td>
+                                            ${formatDate(
+                                                item.tanggal
+                                            )}
+                                        </td>
 
-                                    <td>
-                                        <b style="color:var(--red)">
-                                            ${rupiah(item.jumlah)}
-                                        </b>
-                                    </td>
+                                        <td>
+                                            ${escapeHtml(
+                                                item.keterangan ||
+                                                "-"
+                                            )}
+                                        </td>
 
-                                    ${
-                                        isBendahara
-                                        ? `
+                                        <td>
+                                            <b
+                                                style="
+                                                    color:var(--red)
+                                                ">
+                                                ${rupiah(
+                                                    item.jumlah
+                                                )}
+                                            </b>
+                                        </td>
+
+                                        ${
+                                            isBendahara
+                                            ?
+
+                                            `
                                             <td>
 
                                                 <button
                                                     class="btn btn-danger"
-                                                    onclick="deleteCashOut('${item.id}')">
+                                                    onclick="deleteCashOut('${escapeHtml(item.id)}')">
                                                     Hapus
                                                 </button>
 
                                             </td>
-                                        `
-                                        :""
-                                    }
+                                            `
 
-                                </tr>
+                                            : ""
+                                        }
 
-                            `).join("")
-                            : `
-                                <tr>
-                                    <td colspan="${isBendahara?4:3}">
-                                        <div class="empty">
-                                            Belum ada data kas keluar.
-                                        </div>
-                                    </td>
-                                </tr>
+                                    </tr>
+
+                                `
+                            )
+                            .join("")
+
+                            :
+
+                            `
+                            <tr>
+
+                                <td
+                                    colspan="${
+                                        isBendahara
+                                        ? 4
+                                        : 3
+                                    }">
+
+                                    <div class="empty">
+                                        Belum ada data kas keluar.
+                                    </div>
+
+                                </td>
+
+                            </tr>
                             `
                         }
 
@@ -2756,19 +4763,23 @@ function renderKasKeluarPage(){
         </div>
 
     `;
+
 }
 
 
 function openCashOutModal(){
 
     openModal(
+
         "Tambah Kas Keluar",
 
         `
 
         <div class="form-group">
 
-            <label>Keterangan</label>
+            <label>
+                Keterangan
+            </label>
 
             <input
                 type="text"
@@ -2781,12 +4792,15 @@ function openCashOutModal(){
 
         <div class="form-group">
 
-            <label>Jumlah</label>
+            <label>
+                Jumlah
+            </label>
 
             <input
                 type="number"
                 id="cashOutAmount"
                 placeholder="Masukkan jumlah"
+                min="1"
             >
 
         </div>
@@ -2795,136 +4809,242 @@ function openCashOutModal(){
 
         `
 
-        <button class="btn btn-light"
-                onclick="closeModal()">
+        <button
+            class="btn btn-light"
+            onclick="closeModal()">
             Batal
         </button>
 
-        <button class="btn btn-primary"
-                onclick="saveCashOut()">
+        <button
+            class="btn btn-primary"
+            onclick="saveCashOut()">
             Simpan
         </button>
 
         `
+
     );
+
 }
 
-window.openCashOutModal = openCashOutModal;
+
+window.openCashOutModal =
+    openCashOutModal;
 
 
 async function saveCashOut(){
 
     const keterangan =
-        document.getElementById("cashOutDescription").value.trim();
+        document
+        .getElementById(
+            "cashOutDescription"
+        )
+        .value
+        .trim();
+
 
     const jumlah =
-        Number(document.getElementById("cashOutAmount").value);
+        Number(
+            document
+            .getElementById(
+                "cashOutAmount"
+            )
+            .value
+        );
 
-    if(!keterangan || !jumlah || jumlah<=0){
 
-        showToast("Lengkapi data kas keluar","error");
+    if(
+        !keterangan ||
+        !jumlah ||
+        jumlah <= 0
+    ){
+
+        showToast(
+            "Lengkapi data kas keluar",
+            "error"
+        );
+
         return;
     }
+
 
     try{
 
         const newRef =
-            push(ref(db,`${BASE}/kasKeluar`));
+            push(
+                ref(
+                    db,
+                    `${BASE}/kasKeluar`
+                )
+            );
+
+
+        const now =
+            new Date()
+            .toISOString();
+
 
         await set(
             newRef,
             {
+
                 keterangan,
+
                 jumlah,
-                tanggal:new Date().toISOString(),
-                createdAt:new Date().toISOString()
+
+                tanggal:now,
+
+                createdAt:now
+
             }
         );
 
+
         closeModal();
 
-        showToast("Kas keluar berhasil disimpan");
+
+        showToast(
+            "Kas keluar berhasil disimpan"
+        );
 
     }catch(error){
 
         console.error(error);
 
-        showToast("Gagal menyimpan kas keluar","error");
+        showToast(
+            "Gagal menyimpan kas keluar",
+            "error"
+        );
+
     }
+
 }
 
-window.saveCashOut = saveCashOut;
+
+window.saveCashOut =
+    saveCashOut;
 
 
 function deleteCashOut(id){
 
     confirmAction(
+
         "Hapus Kas Keluar",
+
         "Apakah Anda yakin ingin menghapus transaksi ini?",
+
         async()=>{
 
             try{
 
                 await remove(
-                    ref(db,`${BASE}/kasKeluar/${id}`)
+                    ref(
+                        db,
+                        `${BASE}/kasKeluar/${id}`
+                    )
                 );
 
-                showToast("Kas keluar berhasil dihapus");
+
+                showToast(
+                    "Kas keluar berhasil dihapus"
+                );
 
             }catch(error){
 
                 console.error(error);
 
-                showToast("Gagal menghapus data","error");
+                showToast(
+                    "Gagal menghapus data",
+                    "error"
+                );
+
             }
 
         }
+
     );
+
 }
 
-window.deleteCashOut = deleteCashOut;
+
+window.deleteCashOut =
+    deleteCashOut;
 
 
 function deleteAllCashOut(){
 
     confirmAction(
+
         "Hapus Semua Kas Keluar",
+
         "Semua riwayat kas keluar akan dihapus. Lanjutkan?",
+
         async()=>{
 
             try{
 
                 await remove(
-                    ref(db,`${BASE}/kasKeluar`)
+                    ref(
+                        db,
+                        `${BASE}/kasKeluar`
+                    )
                 );
 
-                showToast("Semua kas keluar berhasil dihapus");
+
+                showToast(
+                    "Semua kas keluar berhasil dihapus"
+                );
 
             }catch(error){
 
                 console.error(error);
 
-                showToast("Gagal menghapus kas keluar","error");
+                showToast(
+                    "Gagal menghapus kas keluar",
+                    "error"
+                );
+
             }
 
         }
+
     );
+
 }
 
-window.deleteAllCashOut = deleteAllCashOut;
+
+window.deleteAllCashOut =
+    deleteAllCashOut;
 
 
-/* ================= SISWA ================= */
+/* =========================================================
+   SISWA
+   ========================================================= */
 
 function renderSiswaPage(){
 
     const content =
-        document.getElementById("pageContent");
+        document.getElementById(
+            "pageContent"
+        );
+
 
     const rows =
-        Object.entries(appState.siswa)
-        .map(([id,s])=>({id,...s}))
-        .filter(s=>s.aktif !== false);
+        Object
+        .entries(
+            appState.siswa
+        )
+        .map(
+            ([id,s])=>({
+                id,
+                ...s
+            })
+        )
+        .filter(
+            s=>
+                s.aktif !== false
+        );
+
 
     content.innerHTML = `
 
@@ -2932,13 +5052,25 @@ function renderSiswaPage(){
 
             <div class="section-header">
 
-                <div class="section-title">
-                    Daftar Siswa
+                <div>
+
+                    <div class="section-title">
+                        Daftar Siswa
+                    </div>
+
+                    <div class="section-subtitle">
+                        Data anggota kelas VII B
+                    </div>
+
                 </div>
 
-                <button class="btn btn-primary"
-                        onclick="openStudentModal()">
-                    + Tambah Siswa
+
+                <button
+                    class="btn btn-primary"
+                    onclick="openStudentModal()">
+
+                    ＋ Tambah Siswa
+
                 </button>
 
             </div>
@@ -2951,60 +5083,102 @@ function renderSiswaPage(){
                     <thead>
 
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>NIS</th>
-                            <th>Kelas</th>
-                            <th>Aksi</th>
+
+                            <th>
+                                No
+                            </th>
+
+                            <th>
+                                Nama
+                            </th>
+
+                            <th>
+                                NIS
+                            </th>
+
+                            <th>
+                                Kelas
+                            </th>
+
+                            <th>
+                                Aksi
+                            </th>
+
                         </tr>
 
                     </thead>
+
 
                     <tbody>
 
                         ${
                             rows.length
-                            ? rows.map((s,index)=>`
+                            ?
 
-                                <tr>
+                            rows
+                            .map(
+                                (s,index)=>`
 
-                                    <td>${index+1}</td>
+                                    <tr>
 
-                                    <td>
-                                        <b>
-                                            ${escapeHtml(s.nama)}
-                                        </b>
-                                    </td>
+                                        <td>
+                                            ${index+1}
+                                        </td>
 
-                                    <td>
-                                        ${escapeHtml(s.nis||"-")}
-                                    </td>
+                                        <td>
+                                            <b>
+                                                ${escapeHtml(
+                                                    s.nama
+                                                )}
+                                            </b>
+                                        </td>
 
-                                    <td>
-                                        ${escapeHtml(s.kelas||"VII B")}
-                                    </td>
+                                        <td>
+                                            ${escapeHtml(
+                                                s.nis ||
+                                                "-"
+                                            )}
+                                        </td>
 
-                                    <td>
+                                        <td>
+                                            ${escapeHtml(
+                                                s.kelas ||
+                                                "VII B"
+                                            )}
+                                        </td>
 
-                                        <button
-                                            class="btn btn-danger"
-                                            onclick="deleteStudent('${s.id}')">
-                                            Hapus
-                                        </button>
+                                        <td>
 
-                                    </td>
+                                            <button
+                                                class="btn btn-danger"
+                                                onclick="deleteStudent('${escapeHtml(s.id)}')">
 
-                                </tr>
+                                                Hapus
 
-                            `).join("")
-                            : `
-                                <tr>
-                                    <td colspan="5">
-                                        <div class="empty">
-                                            Belum ada siswa.
-                                        </div>
-                                    </td>
-                                </tr>
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+                                `
+                            )
+                            .join("")
+
+                            :
+
+                            `
+                            <tr>
+
+                                <td colspan="5">
+
+                                    <div class="empty">
+                                        Belum ada data siswa.
+                                    </div>
+
+                                </td>
+
+                            </tr>
                             `
                         }
 
@@ -3017,19 +5191,23 @@ function renderSiswaPage(){
         </div>
 
     `;
+
 }
 
 
 function openStudentModal(){
 
     openModal(
+
         "Tambah Siswa",
 
         `
 
         <div class="form-group">
 
-            <label>Nama</label>
+            <label>
+                Nama
+            </label>
 
             <input
                 id="studentName"
@@ -3042,7 +5220,9 @@ function openStudentModal(){
 
         <div class="form-group">
 
-            <label>NIS</label>
+            <label>
+                NIS
+            </label>
 
             <input
                 id="studentNis"
@@ -3055,7 +5235,9 @@ function openStudentModal(){
 
         <div class="form-group">
 
-            <label>Kelas</label>
+            <label>
+                Kelas
+            </label>
 
             <input
                 id="studentClass"
@@ -3068,7 +5250,9 @@ function openStudentModal(){
 
         <div class="form-group">
 
-            <label>Password</label>
+            <label>
+                Password
+            </label>
 
             <input
                 id="studentPassword"
@@ -3082,162 +5266,297 @@ function openStudentModal(){
 
         `
 
-        <button class="btn btn-light"
-                onclick="closeModal()">
+        <button
+            class="btn btn-light"
+            onclick="closeModal()">
             Batal
         </button>
 
-        <button class="btn btn-primary"
-                onclick="saveStudent()">
+        <button
+            class="btn btn-primary"
+            onclick="saveStudent()">
             Simpan
         </button>
 
         `
+
     );
+
 }
 
-window.openStudentModal = openStudentModal;
+
+window.openStudentModal =
+    openStudentModal;
 
 
 async function saveStudent(){
 
     const nama =
-        document.getElementById("studentName").value.trim();
+        document
+        .getElementById(
+            "studentName"
+        )
+        .value
+        .trim();
+
 
     const nis =
-        document.getElementById("studentNis").value.trim();
+        document
+        .getElementById(
+            "studentNis"
+        )
+        .value
+        .trim();
+
 
     const kelas =
-        document.getElementById("studentClass").value.trim();
+        document
+        .getElementById(
+            "studentClass"
+        )
+        .value
+        .trim();
+
 
     const password =
-        document.getElementById("studentPassword").value.trim() ||
+        document
+        .getElementById(
+            "studentPassword"
+        )
+        .value
+        .trim()
+        ||
         "123456";
+
 
     if(!nama){
 
-        showToast("Nama siswa wajib diisi","error");
+        showToast(
+            "Nama siswa wajib diisi",
+            "error"
+        );
+
         return;
     }
+
 
     try{
 
         const newRef =
-            push(ref(db,`${BASE}/siswa`));
+            push(
+                ref(
+                    db,
+                    `${BASE}/siswa`
+                )
+            );
+
 
         await set(
             newRef,
             {
+
                 nama,
+
                 nis,
+
                 kelas,
+
                 password,
+
                 aktif:true
+
             }
         );
 
+
         closeModal();
 
-        showToast("Siswa berhasil disimpan");
+
+        showToast(
+            "Siswa berhasil disimpan"
+        );
 
     }catch(error){
 
         console.error(error);
 
-        showToast("Gagal menyimpan siswa","error");
+        showToast(
+            "Gagal menyimpan siswa",
+            "error"
+        );
+
     }
+
 }
 
-window.saveStudent = saveStudent;
+
+window.saveStudent =
+    saveStudent;
 
 
 function deleteStudent(id){
 
-    const siswa = appState.siswa[id];
+    const siswa =
+        appState
+        .siswa
+        [id];
+
 
     confirmAction(
+
         "Hapus Siswa",
-        `Data ${siswa?.nama||"siswa"} akan dihapus dari daftar siswa. Riwayat lama tetap disimpan. Lanjutkan?`,
+
+        `Data ${
+            siswa?.nama ||
+            "siswa"
+        } akan dihapus dari daftar. Riwayat lama tetap disimpan. Lanjutkan?`,
+
         async()=>{
 
             try{
 
                 const totalPaid =
-                    Object.values(
-                        appState.pembayaranStatus?.[id] || {}
+                    Object
+                    .values(
+                        appState
+                        .pembayaranStatus
+                        ?.[id] || {}
                     )
-                    .reduce((sum,p)=>
-                        sum+
-                        (p?.paid
-                            ? Number(p.amount)||appState.settings.weeklyFee
-                            :0),
+                    .reduce(
+                        (sum,p)=>
+                            sum+
+                            (
+                                p?.paid
+                                ?
+                                Number(
+                                    p.amount
+                                )
+                                ||
+                                Number(
+                                    appState
+                                    .settings
+                                    .weeklyFee
+                                )
+                                :
+                                0
+                            ),
                         0
                     );
 
+
                 const updates = {};
+
 
                 updates[
                     `${BASE}/settings/deletedStudents/${id}`
                 ] = {
 
-                    nama:siswa?.nama || "",
+                    nama:
+                        siswa?.nama ||
+                        "",
 
                     totalPaid,
 
-                    deletedAt:new Date().toISOString()
+                    deletedAt:
+                        new Date()
+                        .toISOString()
 
                 };
+
 
                 updates[
                     `${BASE}/siswa/${id}`
                 ] = null;
 
-                await update(ref(db),updates);
 
-                showToast("Siswa berhasil dihapus");
+                await update(
+                    ref(db),
+                    updates
+                );
+
+
+                showToast(
+                    "Siswa berhasil dihapus"
+                );
 
             }catch(error){
 
                 console.error(error);
 
-                showToast("Gagal menghapus siswa","error");
+                showToast(
+                    "Gagal menghapus siswa",
+                    "error"
+                );
+
             }
 
         }
+
     );
+
 }
 
-window.deleteStudent = deleteStudent;
+
+window.deleteStudent =
+    deleteStudent;
 
 
-/* ================= NUNGGAK ================= */
+/* =========================================================
+   NUNGGAK
+   ========================================================= */
 
 function renderNunggakPage(){
 
     const content =
-        document.getElementById("pageContent");
+        document.getElementById(
+            "pageContent"
+        );
+
 
     const periods =
         getPaymentPeriods();
 
+
     const rows =
-        Object.entries(appState.siswa)
-        .filter(([id,s])=>s && s.aktif !== false)
-        .map(([id,s])=>{
+        Object
+        .entries(
+            appState.siswa
+        )
+        .filter(
+            ([id,s])=>
+                s &&
+                s.aktif !== false
+        )
+        .map(
+            ([id,s])=>{
 
-            const unpaid =
-                periods.filter(p=>
-                    !isPaymentPaid(id,p.key)
-                );
+                const unpaid =
+                    periods.filter(
+                        p=>
+                            !isPaymentPaid(
+                                id,
+                                p.key
+                            )
+                    );
 
-            return {
-                id,
-                siswa:s,
-                unpaid
-            };
 
-        })
-        .filter(item=>item.unpaid.length>0);
+                return {
+
+                    id,
+
+                    siswa:s,
+
+                    unpaid
+
+                };
+
+            }
+        )
+        .filter(
+            item=>
+                item.unpaid.length > 0
+        );
+
 
     content.innerHTML = `
 
@@ -3245,11 +5564,40 @@ function renderNunggakPage(){
 
             <div class="section-header">
 
-                <div class="section-title">
-                    Siswa Nunggak
+                <div>
+
+                    <div class="section-title">
+                        Siswa Nunggak
+                    </div>
+
+                    <div class="section-subtitle">
+                        Daftar siswa yang memiliki periode belum dibayar
+                    </div>
+
                 </div>
 
             </div>
+
+
+            ${
+                !appState.settings.startDate
+                ?
+
+                `
+                <div class="notice warning">
+
+                    ⚠️
+                    <span>
+                        Atur tanggal mulai pembayaran
+                        terlebih dahulu di Pengaturan.
+                    </span>
+
+                </div>
+                `
+
+                : ""
+            }
+
 
             <div class="table-wrap">
 
@@ -3258,58 +5606,99 @@ function renderNunggakPage(){
                     <thead>
 
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Jumlah Periode</th>
-                            <th>Total Tunggakan</th>
+
+                            <th>
+                                No
+                            </th>
+
+                            <th>
+                                Nama
+                            </th>
+
+                            <th>
+                                Periode
+                            </th>
+
+                            <th>
+                                Tunggakan
+                            </th>
+
                         </tr>
 
                     </thead>
+
 
                     <tbody>
 
                         ${
                             rows.length
-                            ? rows.map((item,index)=>`
+                            ?
 
-                                <tr>
+                            rows
+                            .map(
+                                (item,index)=>`
 
-                                    <td>${index+1}</td>
+                                    <tr>
 
-                                    <td>
-                                        <b>
-                                            ${escapeHtml(
-                                                item.siswa.nama
-                                            )}
-                                        </b>
-                                    </td>
+                                        <td>
+                                            ${index+1}
+                                        </td>
 
-                                    <td>
-                                        ${item.unpaid.length}
-                                    </td>
+                                        <td>
+                                            <b>
+                                                ${escapeHtml(
+                                                    item.siswa.nama
+                                                )}
+                                            </b>
+                                        </td>
 
-                                    <td>
-                                        <b style="color:var(--red)">
-                                            ${rupiah(
-                                                item.unpaid.length *
-                                                Number(
-                                                    appState.settings.weeklyFee
-                                                )
-                                            )}
-                                        </b>
-                                    </td>
+                                        <td>
+                                            <span
+                                                class="badge badge-yellow">
+                                                ${item.unpaid.length}
+                                                periode
+                                            </span>
+                                        </td>
 
-                                </tr>
+                                        <td>
+                                            <b
+                                                style="
+                                                    color:var(--red)
+                                                ">
+                                                ${rupiah(
+                                                    item.unpaid.length *
+                                                    Number(
+                                                        appState
+                                                        .settings
+                                                        .weeklyFee
+                                                    )
+                                                )}
+                                            </b>
+                                        </td>
 
-                            `).join("")
-                            : `
-                                <tr>
-                                    <td colspan="4">
-                                        <div class="empty">
-                                            Tidak ada siswa yang menunggak.
-                                        </div>
-                                    </td>
-                                </tr>
+                                    </tr>
+
+                                `
+                            )
+                            .join("")
+
+                            :
+
+                            `
+                            <tr>
+
+                                <td colspan="4">
+
+                                    <div class="empty">
+
+                                        Tidak ada siswa
+                                        yang menunggak.
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
                             `
                         }
 
@@ -3322,20 +5711,30 @@ function renderNunggakPage(){
         </div>
 
     `;
+
 }
 
 
-/* ================= RIWAYAT ================= */
+/* =========================================================
+   RIWAYAT
+   ========================================================= */
 
 function renderRiwayatPage(){
 
     const content =
-        document.getElementById("pageContent");
+        document.getElementById(
+            "pageContent"
+        );
+
 
     const isBendahara =
-        currentUser.role === "bendahara";
+        currentUser.role ===
+        "bendahara";
 
-    const rows = getHistoryItems();
+
+    const rows =
+        getHistoryItems();
+
 
     content.innerHTML = `
 
@@ -3343,25 +5742,59 @@ function renderRiwayatPage(){
 
             <div class="section-header">
 
-                <div class="section-title">
-                    Riwayat Transaksi
+                <div>
+
+                    <div class="section-title">
+                        Riwayat Transaksi
+                    </div>
+
+                    <div class="section-subtitle">
+                        Seluruh aktivitas kas yang tercatat
+                    </div>
+
                 </div>
+
 
                 ${
                     isBendahara
-                    ? `
-                        <button
-                            class="btn btn-danger"
-                            onclick="deleteAllHistory()">
-                            Hapus Riwayat
-                        </button>
+                    ?
+
                     `
-                    :""
+                    <button
+                        class="btn btn-danger"
+                        onclick="deleteAllHistory()">
+
+                        Hapus Riwayat
+
+                    </button>
+                    `
+
+                    : ""
                 }
 
             </div>
 
 
+            ${
+                isBendahara
+                ?
+
+                `
+                <div class="notice warning">
+
+                    ⚠️
+                    <span>
+                        Menghapus riwayat tidak menghapus
+                        status pembayaran yang sudah tercatat.
+                    </span>
+
+                </div>
+                `
+
+                : ""
+            }
+
+
             <div class="table-wrap">
 
                 <table>
@@ -3369,69 +5802,107 @@ function renderRiwayatPage(){
                     <thead>
 
                         <tr>
-                            <th>Tanggal</th>
-                            <th>Keterangan</th>
-                            <th>Jenis</th>
-                            <th>Jumlah</th>
+
+                            <th>
+                                Tanggal
+                            </th>
+
+                            <th>
+                                Keterangan
+                            </th>
+
+                            <th>
+                                Jenis
+                            </th>
+
+                            <th>
+                                Jumlah
+                            </th>
+
                         </tr>
 
                     </thead>
+
 
                     <tbody>
 
                         ${
                             rows.length
-                            ? rows.map(item=>`
+                            ?
 
-                                <tr>
+                            rows
+                            .map(
+                                item=>`
 
-                                    <td>
-                                        ${formatDateTime(item.tanggal)}
-                                    </td>
+                                    <tr>
 
-                                    <td>
-                                        ${escapeHtml(
-                                            item.keterangan ||
-                                            item.periodeLabel ||
-                                            "Kas"
-                                        )}
-                                    </td>
+                                        <td>
+                                            ${formatDateTime(
+                                                item.tanggal
+                                            )}
+                                        </td>
 
-                                    <td>
+                                        <td>
+                                            ${escapeHtml(
+                                                item.keterangan ||
+                                                item.periodeLabel ||
+                                                "Kas"
+                                            )}
+                                        </td>
 
-                                        <span class="badge ${
-                                            item.type==="masuk"
-                                            ?"badge-green"
-                                            :"badge-red"
-                                        }">
+                                        <td>
 
-                                            ${
-                                                item.type==="masuk"
-                                                ?"Kas Masuk"
-                                                :"Kas Keluar"
-                                            }
+                                            <span
+                                                class="badge ${
+                                                    item.type ===
+                                                    "masuk"
+                                                    ?
+                                                    "badge-green"
+                                                    :
+                                                    "badge-red"
+                                                }">
 
-                                        </span>
+                                                ${
+                                                    item.type ===
+                                                    "masuk"
+                                                    ?
+                                                    "Kas Masuk"
+                                                    :
+                                                    "Kas Keluar"
+                                                }
 
-                                    </td>
+                                            </span>
 
-                                    <td>
-                                        <b>
-                                            ${rupiah(item.jumlah)}
-                                        </b>
-                                    </td>
+                                        </td>
 
-                                </tr>
+                                        <td>
+                                            <b>
+                                                ${rupiah(
+                                                    item.jumlah
+                                                )}
+                                            </b>
+                                        </td>
 
-                            `).join("")
-                            : `
-                                <tr>
-                                    <td colspan="4">
-                                        <div class="empty">
-                                            Belum ada riwayat.
-                                        </div>
-                                    </td>
-                                </tr>
+                                    </tr>
+
+                                `
+                            )
+                            .join("")
+
+                            :
+
+                            `
+                            <tr>
+
+                                <td colspan="4">
+
+                                    <div class="empty">
+                                        Belum ada riwayat.
+                                    </div>
+
+                                </td>
+
+                            </tr>
                             `
                         }
 
@@ -3444,57 +5915,89 @@ function renderRiwayatPage(){
         </div>
 
     `;
+
 }
 
 
 function deleteAllHistory(){
 
     confirmAction(
+
         "Hapus Semua Riwayat",
+
         "Semua riwayat Kas Masuk dan Kas Keluar akan dihapus. Status pembayaran siswa tetap tersimpan. Lanjutkan?",
+
         async()=>{
 
             try{
 
                 const updates = {};
 
-                updates[`${BASE}/kasMasuk`] = null;
-                updates[`${BASE}/kasKeluar`] = null;
 
-                /*
-                  pembayaranStatus sengaja TIDAK dihapus.
-                */
+                updates[
+                    `${BASE}/kasMasuk`
+                ] = null;
 
-                await update(ref(db),updates);
 
-                showToast("Semua riwayat berhasil dihapus");
+                updates[
+                    `${BASE}/kasKeluar`
+                ] = null;
+
+
+                await update(
+                    ref(db),
+                    updates
+                );
+
+
+                showToast(
+                    "Semua riwayat berhasil dihapus"
+                );
 
             }catch(error){
 
                 console.error(error);
 
-                showToast("Gagal menghapus riwayat","error");
+                showToast(
+                    "Gagal menghapus riwayat",
+                    "error"
+                );
+
             }
 
         }
+
     );
+
 }
 
-window.deleteAllHistory = deleteAllHistory;
+
+window.deleteAllHistory =
+    deleteAllHistory;
 
 
-/* ================= SETTINGS ================= */
+/* =========================================================
+   SETTINGS
+   ========================================================= */
 
 function renderSettingsPage(){
 
-    if(currentUser.role !== "bendahara"){
+    if(
+        currentUser.role !==
+        "bendahara"
+    ){
 
         navigateTo("dashboard");
+
         return;
     }
 
+
     const content =
-        document.getElementById("pageContent");
+        document.getElementById(
+            "pageContent"
+        );
+
 
     content.innerHTML = `
 
@@ -3502,8 +6005,16 @@ function renderSettingsPage(){
 
             <div class="section-header">
 
-                <div class="section-title">
-                    ⚙ Pengaturan Pembayaran
+                <div>
+
+                    <div class="section-title">
+                        ⚙ Pengaturan Pembayaran
+                    </div>
+
+                    <div class="section-subtitle">
+                        Atur nominal dan awal periode kas
+                    </div>
+
                 </div>
 
             </div>
@@ -3513,24 +6024,31 @@ function renderSettingsPage(){
 
                 <div class="setting-card">
 
-                    <h3>Jumlah Kas Perminggu</h3>
+                    <h3>
+                        Jumlah Kas Perminggu
+                    </h3>
 
                     <p>
-                        Tentukan nominal pembayaran kas
-                        setiap minggu.
+                        Nominal yang harus dibayarkan
+                        siswa setiap periode.
                     </p>
+
 
                     <div class="form-group">
 
-                        <label>Nominal Perminggu</label>
+                        <label>
+                            Nominal Perminggu
+                        </label>
 
                         <input
                             type="number"
                             id="settingWeeklyFee"
-                            value="${Number(
-                                appState.settings.weeklyFee
-                            )||0}"
                             min="0"
+                            value="${Number(
+                                appState
+                                .settings
+                                .weeklyFee
+                            ) || 0}"
                         >
 
                     </div>
@@ -3540,23 +6058,30 @@ function renderSettingsPage(){
 
                 <div class="setting-card">
 
-                    <h3>Mulai Periode Pembayaran</h3>
+                    <h3>
+                        Mulai Periode Pembayaran
+                    </h3>
 
                     <p>
-                        Tentukan tanggal awal periode kas.
-                        Setiap periode berikutnya dihitung
-                        setiap 7 hari.
+                        Tentukan tanggal awal.
+                        Periode berikutnya otomatis
+                        dihitung setiap 7 hari.
                     </p>
+
 
                     <div class="form-group">
 
-                        <label>Tanggal Mulai</label>
+                        <label>
+                            Tanggal Mulai
+                        </label>
 
                         <input
                             type="date"
                             id="settingStartDate"
                             value="${escapeHtml(
-                                appState.settings.startDate ||
+                                appState
+                                .settings
+                                .startDate ||
                                 todayString()
                             )}"
                         >
@@ -3568,12 +6093,14 @@ function renderSettingsPage(){
             </div>
 
 
-            <div style="margin-top:18px">
+            <div style="margin-top:15px">
 
                 <button
                     class="btn btn-primary"
                     onclick="saveSettings()">
+
                     💾 Simpan Perubahan
+
                 </button>
 
             </div>
@@ -3585,54 +6112,87 @@ function renderSettingsPage(){
 
             <div class="section-header">
 
-                <div class="section-title">
-                    Reset Saldo Tampilan
+                <div>
+
+                    <div class="section-title">
+                        Reset Saldo Tampilan
+                    </div>
+
+                    <div class="section-subtitle">
+                        Riwayat transaksi tidak dihapus
+                    </div>
+
                 </div>
 
             </div>
 
-            <p style="
-                color:var(--muted);
-                font-size:13px;
-                margin-bottom:15px;
-                line-height:1.6;
-            ">
-                Reset hanya mengatur saldo yang ditampilkan.
-                Riwayat transaksi dan status pembayaran
-                tidak dihapus.
-            </p>
+
+            <div class="notice warning">
+
+                ⚠️
+                <span>
+                    Reset hanya mengatur saldo yang ditampilkan.
+                    Data transaksi dan status pembayaran tetap aman.
+                </span>
+
+            </div>
+
 
             <button
                 class="btn btn-warning"
                 onclick="openResetModal()">
+
                 Reset Saldo
+
             </button>
 
         </div>
 
     `;
+
 }
 
 
 async function saveSettings(){
 
-    const weeklyFee =
-        Number(
-            document.getElementById("settingWeeklyFee").value
+    const feeInput =
+        document.getElementById(
+            "settingWeeklyFee"
         );
 
-    const startDate =
-        document.getElementById("settingStartDate").value;
 
-    if(!weeklyFee || weeklyFee < 0){
+    const dateInput =
+        document.getElementById(
+            "settingStartDate"
+        );
+
+
+    const weeklyFee =
+        Number(
+            feeInput.value
+        );
+
+
+    const startDate =
+        dateInput.value;
+
+
+    if(
+        !Number.isFinite(
+            weeklyFee
+        )
+        ||
+        weeklyFee < 0
+    ){
 
         showToast(
-            "Jumlah kas perminggu tidak valid",
+            "Nominal kas tidak valid",
             "error"
         );
 
         return;
     }
+
 
     if(!startDate){
 
@@ -3644,22 +6204,50 @@ async function saveSettings(){
         return;
     }
 
+
     try{
 
+        /*
+          Simpan langsung ke Firebase.
+        */
+
         await update(
-            ref(db,`${BASE}/settings`),
+            ref(
+                db,
+                `${BASE}/settings`
+            ),
             {
+
                 weeklyFee,
+
                 startDate
+
             }
         );
 
+
         /*
-          Perubahan langsung tersimpan ke Firebase.
-          Popup berhasil muncul setelah proses update berhasil.
+          Popup sukses hanya muncul
+          setelah Firebase berhasil.
         */
 
-        showToast("Berhasil disimpan");
+        showToast(
+            "Berhasil disimpan"
+        );
+
+
+        /*
+          Render ulang agar nilai
+          yang terlihat langsung sesuai.
+        */
+
+        setTimeout(
+            ()=>{
+                renderSettingsPage();
+            },
+            150
+        );
+
 
     }catch(error){
 
@@ -3669,135 +6257,264 @@ async function saveSettings(){
             "Gagal menyimpan pengaturan",
             "error"
         );
+
     }
+
 }
 
-window.saveSettings = saveSettings;
+
+window.saveSettings =
+    saveSettings;
 
 
-/* ================= RESET ================= */
+/* =========================================================
+   RESET
+   ========================================================= */
 
 function openResetModal(){
 
     openModal(
+
         "Reset Saldo",
+
         `
 
-        <p style="margin-bottom:15px">
-            Masukkan kode reset untuk melanjutkan.
+        <p style="margin-bottom:14px">
+
+            Masukkan kode reset untuk
+            melanjutkan proses.
+
         </p>
+
 
         <div class="form-group">
 
             <input
                 type="password"
                 id="resetCode"
-                placeholder="Kode reset"
+                placeholder="Masukkan kode reset"
             >
 
         </div>
 
         `,
+
         `
 
-        <button class="btn btn-light"
-                onclick="closeModal()">
+        <button
+            class="btn btn-light"
+            onclick="closeModal()">
+
             Batal
+
         </button>
 
-        <button class="btn btn-warning"
-                onclick="processReset()">
+
+        <button
+            class="btn btn-warning"
+            onclick="processReset()">
+
             Reset
+
         </button>
 
         `
+
     );
+
 }
 
-window.openResetModal = openResetModal;
+
+window.openResetModal =
+    openResetModal;
 
 
 async function processReset(){
 
     const code =
-        document.getElementById("resetCode").value;
+        document.getElementById(
+            "resetCode"
+        ).value;
+
 
     if(code !== "060999"){
 
-        showToast("Kode reset salah","error");
+        showToast(
+            "Kode reset salah",
+            "error"
+        );
+
         return;
     }
 
+
     try{
 
-        const state =
-            appState.settings.resetState || {};
-
-        const newCashInOffset =
-            getRawCashIn();
-
-        const newCashOutOffset =
-            getRawCashOut();
-
         await update(
-            ref(db,`${BASE}/settings/resetState`),
+            ref(
+                db,
+                `${BASE}/settings/resetState`
+            ),
             {
-                cashInOffset:newCashInOffset,
-                cashOutOffset:newCashOutOffset
+
+                cashInOffset:
+                    getRawCashIn(),
+
+                cashOutOffset:
+                    getRawCashOut()
+
             }
         );
 
+
         closeModal();
 
-        showToast("Saldo berhasil direset");
+
+        showToast(
+            "Saldo berhasil direset"
+        );
 
     }catch(error){
 
         console.error(error);
 
-        showToast("Gagal melakukan reset","error");
+        showToast(
+            "Gagal melakukan reset",
+            "error"
+        );
+
     }
+
 }
 
-window.processReset = processReset;
 
-
-/* ================= SESSION ================= */
+/* =========================================================
+   SESSION RESTORE
+   ========================================================= */
 
 function restoreSession(){
 
     const raw =
-        sessionStorage.getItem("kasKelasSession");
+        sessionStorage.getItem(
+            "kasKelasSession"
+        );
 
-    if(!raw) return;
+
+    if(!raw){
+        return;
+    }
+
 
     try{
 
-        const session = JSON.parse(raw);
+        const session =
+            JSON.parse(raw);
+
 
         if(
             session &&
             (
-                session.role === "bendahara" ||
-                session.role === "anggota"
+                session.role ===
+                "bendahara"
+                ||
+                session.role ===
+                "anggota"
             )
         ){
 
-            currentUser = session;
+            /*
+              Untuk anggota, pastikan siswa
+              masih ada dan aktif.
+            */
+
+            if(
+                session.role ===
+                "anggota"
+                &&
+                (
+                    !session.siswaId ||
+                    !appState.siswa[
+                        session.siswaId
+                    ]
+                )
+            ){
+
+                sessionStorage.removeItem(
+                    "kasKelasSession"
+                );
+
+                return;
+            }
+
+
+            currentUser =
+                session;
+
 
             showApp();
+
         }
 
     }catch(error){
 
-        sessionStorage.removeItem("kasKelasSession");
+        console.error(error);
+
+        sessionStorage.removeItem(
+            "kasKelasSession"
+        );
+
     }
+
 }
 
 
-/* ================= START ================= */
+/* =========================================================
+   ENTER KEY LOGIN
+   ========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(
+            e.key !== "Enter" ||
+            document.getElementById(
+                "loginScreen"
+            ).style.display === "none"
+        ){
+            return;
+        }
+
+
+        const anggotaHidden =
+            document
+            .getElementById(
+                "loginAnggota"
+            )
+            .classList
+            .contains("hidden");
+
+
+        if(anggotaHidden){
+
+            loginBendahara();
+
+        }else{
+
+            loginAnggota();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   START APPLICATION
+   ========================================================= */
 
 initListeners();
+
 restoreSession();
 
 </script>
