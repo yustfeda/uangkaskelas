@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kas Kelas VII B - Sistem Pengelolaan Keuangan Kelas</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Font Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+    
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .modal-backdrop {
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      transition: opacity 0.2s ease-in-out;
+    }
+    .modal-box {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease-in-out;
+    }
+
+    .active-nav-item {
+      color: #2563eb !important;
+      font-weight: 600;
+    }
+    .active-sidebar-item {
+      background-color: #eff6ff;
+      color: #2563eb;
+      font-weight: 600;
+      border-right: 4px solid #2563eb;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased bg-slate-50 min-h-screen flex flex-col">
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full px-4 pointer-events-none"></div>
+
+  <!-- GLOBAL LOADING OVERLAY -->
+  <div id="global-loading" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center transition-opacity duration-200">
+    <div class="bg-white p-6 rounded-2xl shadow-xl flex flex-col items-center gap-3">
+      <div class="w-10 h-10 border-4 border-brand-600 border-t-transparent rounded-full animate-spin"></div>
+      <p class="text-sm font-medium text-slate-700" id="loading-text">Memuat data realtime...</p>
+    </div>
+  </div>
+
+  <!-- LOGIN PAGE SCREEN -->
+  <div id="login-screen" class="fixed inset-0 z-40 bg-slate-100 flex items-center justify-center p-4 overflow-y-auto">
+    <div class="w-full max-w-md bg-white rounded-3xl shadow-xl border border-slate-100 p-6 sm:p-8 space-y-6 my-auto">
+      
+      <div class="text-center space-y-2">
+        <div class="w-16 h-16 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center mx-auto text-2xl font-bold shadow-inner">
+          <i class="fa-solid fa-wallet"></i>
+        </div>
+        <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">KAS KELAS VII B</h1>
+        <p class="text-sm text-slate-500 font-medium">Sistem Pengelolaan Keuangan Kelas</p>
+      </div>
+
+      <!-- Role Selector Buttons -->
+      <div class="space-y-2">
+        <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider">Pilih Role Akses</label>
+        <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl">
+          <button type="button" id="role-bendahara-btn" onclick="selectRole('bendahara')" 
+            class="py-2.5 px-3 text-sm font-semibold rounded-lg transition-all shadow-sm bg-white text-brand-700">
+            Bendahara Kelas
+          </button>
+          <button type="button" id="role-wali-btn" onclick="selectRole('wali')" 
+            class="py-2.5 px-3 text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all">
+            Wali Kelas
+          </button>
+        </div>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+        
+        <!-- Username (Bendahara Only) -->
+        <div id="username-field-group" class="space-y-1">
+          <label for="login-username" class="block text-xs font-semibold text-slate-700">Username</label>
+          <div class="relative">
+            <i class="fa-solid fa-user absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+            <input type="text" id="login-username" placeholder="Masukkan username"
+              class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all">
+          </div>
+        </div>
+
+        <!-- Password with Eye Toggle -->
+        <div class="space-y-1">
+          <label for="login-password" class="block text-xs font-semibold text-slate-700">Password</label>
+          <div class="relative">
+            <i class="fa-solid fa-lock absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+            <input type="password" id="login-password" placeholder="Masukkan password" required
+              class="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition-all">
+            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3.5 top-3.5 text-slate-400 hover:text-slate-600 focus:outline-none">
+              <i id="password-toggle-icon" class="fa-solid fa-eye text-sm"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="login-submit-btn"
+          class="w-full py-3 bg-brand-600 hover:bg-brand-700 active:scale-[0.99] text-white font-semibold rounded-xl shadow-lg shadow-brand-500/30 transition-all flex items-center justify-center gap-2">
+          <span>MASUK</span>
+          <i class="fa-solid fa-arrow-right text-sm"></i>
+        </button>
+      </form>
+
+      <!-- Public Unpaid Kas List (Pre-Login Feature) -->
+      <div class="pt-3 border-t border-slate-100 space-y-2">
+        <div class="flex items-center justify-between">
+          <p class="text-xs font-bold text-amber-800 flex items-center gap-1.5">
+            <i class="fa-solid fa-clock-rotate-left text-amber-600"></i>
+            <span>Daftar Siswa Belum Lunas Kas</span>
+          </p>
+          <span id="public-unpaid-badge" class="px-2 py-0.5 bg-amber-100 text-amber-800 text-[10px] font-bold rounded-full">0 Siswa</span>
+        </div>
+        <div id="public-unpaid-list" class="max-h-36 overflow-y-auto space-y-1.5 pr-1 no-scrollbar">
+          <div class="p-3 bg-slate-50 text-center text-xs text-slate-400 rounded-xl">Memuat data tunggakan...</div>
+        </div>
+      </div>
+
+      <div class="text-center pt-2 border-t border-slate-100">
+        <p class="text-xs text-slate-400">© Kas Kelas VII B • Realtime Database</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN APP CONTAINER -->
+  <div id="app-shell" class="hidden flex-1 flex flex-col md:flex-row pb-24 md:pb-8">
+
+    <!-- DESKTOP SIDEBAR -->
+    <aside class="hidden md:flex flex-col w-64 bg-white border-r border-slate-200 min-h-screen sticky top-0 h-screen z-20">
+      <div class="p-5 border-b border-slate-100 flex items-center gap-3">
+        <div class="w-10 h-10 bg-brand-600 text-white rounded-xl flex items-center justify-center text-lg font-bold shadow-md shadow-brand-500/20">
+          <i class="fa-solid fa-sack-dollar"></i>
+        </div>
+        <div>
+          <h2 class="font-extrabold text-slate-800 text-base leading-snug">Kas Kelas VII B</h2>
+          <p class="text-xs text-slate-500 font-medium">Sistem Keuangan</p>
+        </div>
+      </div>
+
+      <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto">
+        <button onclick="switchTab('beranda')" id="sidebar-tab-beranda" 
+          class="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-xl transition-all active-sidebar-item">
+          <i class="fa-solid fa-house w-5 text-center text-base"></i>
+          <span>Beranda</span>
+        </button>
+
+        <button onclick="switchTab('kas-masuk')" id="sidebar-tab-kas-masuk" 
+          class="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-xl transition-all">
+          <i class="fa-solid fa-circle-arrow-down w-5 text-center text-base"></i>
+          <span>Kas Masuk</span>
+        </button>
+
+        <button onclick="switchTab('kas-keluar')" id="sidebar-tab-kas-keluar" 
+          class="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-xl transition-all">
+          <i class="fa-solid fa-circle-arrow-up w-5 text-center text-base"></i>
+          <span>Kas Keluar</span>
+        </button>
+
+        <button onclick="switchTab('daftar-siswa')" id="sidebar-tab-daftar-siswa" 
+          class="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-xl transition-all">
+          <i class="fa-solid fa-user-graduate w-5 text-center text-base"></i>
+          <span>Daftar Siswa</span>
+        </button>
+      </nav>
+
+      <div class="p-4 border-t border-slate-100 bg-slate-50/50">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2.5 overflow-hidden">
+            <div class="w-8 h-8 bg-brand-100 text-brand-700 rounded-full flex items-center justify-center font-bold text-xs flex-shrink-0">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="truncate">
+              <p class="text-xs font-bold text-slate-800 truncate" id="sidebar-user-role">Bendahara</p>
+              <p class="text-[11px] text-slate-500 truncate" id="sidebar-user-name">Pengguna</p>
+            </div>
+          </div>
+        </div>
+        <button onclick="handleLogout()" class="w-full py-2 px-3 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Keluar (Logout)</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-1 flex flex-col min-w-0">
+      
+      <!-- TOP NAVBAR -->
+      <header class="bg-white border-b border-slate-200 sticky top-0 z-20 glass-effect px-4 py-3 sm:px-6 flex items-center justify-between shadow-sm">
+        <div class="flex items-center gap-3">
+          <div class="md:hidden w-9 h-9 bg-brand-600 text-white rounded-xl flex items-center justify-center font-bold text-sm shadow-md">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+          <div>
+            <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">Kas Kelas VII B</h1>
+            <p class="text-xs text-slate-500 hidden sm:block">Sistem Pengelolaan Keuangan Kelas</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <div class="px-3 py-1 bg-brand-50 border border-brand-100 rounded-full flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-xs font-semibold text-brand-700" id="header-user-badge">Bendahara Kelas</span>
+          </div>
+
+          <!-- Mobile 3-Dots Navbar Menu Trigger -->
+          <button onclick="openMobileDrawer()" class="md:hidden p-2 text-slate-600 hover:text-brand-600 hover:bg-slate-100 active:scale-95 rounded-xl transition-all flex items-center justify-center" title="Menu Navigasi">
+            <i class="fa-solid fa-ellipsis-vertical text-xl"></i>
+          </button>
+
+          <button onclick="handleLogout()" class="hidden md:flex p-2 text-slate-500 hover:text-red-600 rounded-lg transition-colors" title="Logout">
+            <i class="fa-solid fa-right-from-bracket text-lg"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- MOBILE SLIDE-OUT DRAWER / NAVBAR SIDEBAR -->
+      <div id="mobile-drawer-backdrop" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden transition-opacity duration-300 opacity-0" onclick="closeMobileDrawer()"></div>
+      
+      <aside id="mobile-drawer" class="fixed top-0 bottom-0 left-0 w-72 bg-white z-50 transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col shadow-2xl md:hidden">
+        <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 bg-brand-600 text-white rounded-xl flex items-center justify-center font-bold text-sm shadow-md">
+              <i class="fa-solid fa-sack-dollar"></i>
+            </div>
+            <div>
+              <h2 class="font-extrabold text-slate-800 text-sm">Kas Kelas VII B</h2>
+              <p class="text-[11px] text-slate-500 font-medium">Navigasi Utama</p>
+            </div>
+          </div>
+          <button onclick="closeMobileDrawer()" class="p-2 text-slate-400 hover:text-slate-600 rounded-lg transition-colors">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <div class="p-3 bg-brand-50/60 border-b border-slate-100 flex items-center justify-between px-4">
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+            <span class="text-xs font-semibold text-brand-800" id="drawer-user-role">Bendahara Kelas</span>
+          </div>
+          <span class="text-[10px] bg-brand-100 text-brand-700 font-extrabold px-2 py-0.5 rounded-full">VII B</span>
+        </div>
+
+        <nav class="flex-1 p-3 space-y-1.5 overflow-y-auto">
+          <button onclick="switchTab('beranda'); closeMobileDrawer();" id="drawer-tab-beranda" 
+            class="w-full flex items-center gap-3 px-3.5 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-xl transition-all active-sidebar-item">
+            <i class="fa-solid fa-house w-5 text-center text-base"></i>
+            <span>Beranda</span>
+          </button>
+
+          <button onclick="switchTab('kas-masuk'); closeMobileDrawer();" id="drawer-tab-kas-masuk" 
+            class="w-full flex items-center gap-3 px-3.5 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-xl transition-all">
+            <i class="fa-solid fa-circle-arrow-down w-5 text-center text-base"></i>
+            <span>Kas Masuk</span>
+          </button>
+
+          <button onclick="switchTab('kas-keluar'); closeMobileDrawer();" id="drawer-tab-kas-keluar" 
+            class="w-full flex items-center gap-3 px-3.5 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-xl transition-all">
+            <i class="fa-solid fa-circle-arrow-up w-5 text-center text-base"></i>
+            <span>Kas Keluar</span>
+          </button>
+
+          <button onclick="switchTab('daftar-siswa'); closeMobileDrawer();" id="drawer-tab-daftar-siswa" 
+            class="w-full flex items-center gap-3 px-3.5 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 rounded-xl transition-all">
+            <i class="fa-solid fa-user-graduate w-5 text-center text-base"></i>
+            <span>Daftar Siswa</span>
+          </button>
+        </nav>
+
+        <div class="p-4 border-t border-slate-100 bg-slate-50">
+          <button onclick="handleLogout()" class="w-full py-2.5 px-3 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Keluar (Logout)</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- DYNAMIC CONTENT PAGES -->
+      <div class="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6">
+
+        <!-- 1. BERANDA VIEW -->
+        <section id="view-beranda" class="space-y-6">
+          <!-- Alert Tunggakan Kas -->
+          <div id="beranda-unpaid-alert" class="hidden bg-amber-50 border-l-4 border-amber-500 rounded-2xl p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-start gap-3">
+              <div class="p-2.5 bg-amber-100 text-amber-700 rounded-xl flex-shrink-0">
+                <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-amber-900 text-sm" id="beranda-alert-title">Peringatan Tunggakan Uang Kas</h4>
+                <p class="text-xs text-amber-800 mt-0.5" id="beranda-alert-desc">Terdapat siswa yang belum melunasi kas mingguan.</p>
+              </div>
+            </div>
+            <button onclick="switchTab('daftar-siswa')" class="px-3.5 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-semibold self-start sm:self-center transition-all flex items-center gap-2 shadow-sm">
+              <span>Lihat Detail Siswa</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </button>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">Ringkasan Keuangan</h2>
+            <p class="text-xs sm:text-sm text-slate-500">Pantau saldo dan statistik transaksi kas kelas secara terupdate.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+            <div class="sm:col-span-2 lg:col-span-1 bg-gradient-to-br from-brand-600 to-brand-800 text-white rounded-2xl p-4 sm:p-5 shadow-lg shadow-brand-500/20 space-y-2 relative overflow-hidden">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-medium opacity-80 uppercase tracking-wider">Saldo Kas Bersih</span>
+                <span class="p-2 bg-white/10 rounded-xl"><i class="fa-solid fa-wallet text-sm"></i></span>
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight" id="dash-saldo">Rp0</h3>
+              <p class="text-[11px] opacity-80 font-medium">✨ Saldo Kas Masuk - Kas Keluar</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-2">
+              <div class="flex items-center justify-between text-emerald-600">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Kas Masuk</span>
+                <span class="p-2 bg-emerald-50 rounded-xl"><i class="fa-solid fa-circle-arrow-down text-sm"></i></span>
+              </div>
+              <h3 class="text-lg sm:text-2xl font-bold text-slate-800" id="dash-masuk">Rp0</h3>
+              <p class="text-xs text-emerald-600 font-medium">Akumulasi Penerimaan</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-2">
+              <div class="flex items-center justify-between text-rose-600">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Kas Keluar</span>
+                <span class="p-2 bg-rose-50 rounded-xl"><i class="fa-solid fa-circle-arrow-up text-sm"></i></span>
+              </div>
+              <h3 class="text-lg sm:text-2xl font-bold text-slate-800" id="dash-keluar">Rp0</h3>
+              <p class="text-xs text-rose-600 font-medium">Akumulasi Pengeluaran</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-2">
+              <div class="flex items-center justify-between text-slate-600">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Jumlah Siswa</span>
+                <span class="p-2 bg-slate-100 rounded-xl"><i class="fa-solid fa-users text-sm"></i></span>
+              </div>
+              <h3 class="text-lg sm:text-2xl font-bold text-slate-800" id="dash-siswa">0 Siswa</h3>
+              <p class="text-xs text-slate-500 font-medium">Terdaftar di Kelas</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+            <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
+              <div>
+                <h3 class="font-bold text-slate-800 text-base">Transaksi Terbaru</h3>
+                <p class="text-xs text-slate-500">5 Aktivitas catatan transaksi terakhir</p>
+              </div>
+            </div>
+
+            <div class="divide-y divide-slate-100" id="recent-transactions-list">
+              <div class="p-6 text-center text-slate-400 text-sm">Memuat transaksi...</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. KAS MASUK VIEW -->
+        <section id="view-kas-masuk" class="hidden space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-xl font-bold text-slate-900">Kas Masuk</h2>
+              <p class="text-xs sm:text-sm text-slate-500">Catatan penerimaan dan iuran kas kelas.</p>
+            </div>
+
+            <button id="btn-add-kas-masuk" onclick="openKasMasukModal()" 
+              class="bendahara-only hidden px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-semibold shadow-md shadow-brand-500/20 flex items-center justify-center gap-2 transition-all">
+              <i class="fa-solid fa-plus"></i>
+              <span>Tambah Kas Masuk</span>
+            </button>
+          </div>
+
+          <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-emerald-500 text-white rounded-xl flex items-center justify-center text-lg shadow-sm">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+              </div>
+              <div>
+                <p class="text-xs text-emerald-700 font-semibold uppercase tracking-wider">Total Kas Masuk</p>
+                <h3 class="text-xl font-extrabold text-emerald-900" id="total-kas-masuk-badge">Rp0</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row gap-3">
+            <div class="relative flex-1">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
+              <input type="text" id="search-kas-masuk" oninput="filterKasMasuk()" placeholder="Cari nama siswa atau keterangan..."
+                class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+            </div>
+            <div class="flex items-center gap-2">
+              <select id="filter-kas-masuk-time" onchange="filterKasMasuk()" class="w-full sm:w-auto bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500">
+                <option value="semua">Semua Waktu</option>
+                <option value="hari-ini">Hari Ini</option>
+                <option value="bulan-ini">Bulan Ini</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+            <div class="hidden md:block overflow-x-auto">
+              <table class="w-full text-left text-sm text-slate-600">
+                <thead class="bg-slate-50 text-xs text-slate-500 font-semibold uppercase tracking-wider border-b border-slate-100">
+                  <tr>
+                    <th class="px-6 py-3.5">Tanggal</th>
+                    <th class="px-6 py-3.5">Siswa</th>
+                    <th class="px-6 py-3.5">Keterangan</th>
+                    <th class="px-6 py-3.5">Nominal</th>
+                    <th class="px-6 py-3.5 text-right aksi-col">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="kas-masuk-table-body" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+
+            <div class="md:hidden divide-y divide-slate-100" id="kas-masuk-card-list"></div>
+          </div>
+        </section>
+
+        <!-- 3. KAS KELUAR VIEW -->
+        <section id="view-kas-keluar" class="hidden space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-xl font-bold text-slate-900">Kas Keluar</h2>
+              <p class="text-xs sm:text-sm text-slate-500">Catatan pengeluaran dan belanja kebutuhan kelas.</p>
+            </div>
+
+            <button id="btn-add-kas-keluar" onclick="openKasKeluarModal()" 
+              class="bendahara-only hidden px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-sm font-semibold shadow-md shadow-rose-500/20 flex items-center justify-center gap-2 transition-all">
+              <i class="fa-solid fa-plus"></i>
+              <span>Tambah Kas Keluar</span>
+            </button>
+          </div>
+
+          <div class="bg-rose-50 border border-rose-100 rounded-2xl p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-rose-500 text-white rounded-xl flex items-center justify-center text-lg shadow-sm">
+                <i class="fa-solid fa-receipt"></i>
+              </div>
+              <div>
+                <p class="text-xs text-rose-700 font-semibold uppercase tracking-wider">Total Kas Keluar</p>
+                <h3 class="text-xl font-extrabold text-rose-900" id="total-kas-keluar-badge">Rp0</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row gap-3">
+            <div class="relative flex-1">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
+              <input type="text" id="search-kas-keluar" oninput="filterKasKeluar()" placeholder="Cari keterangan atau kategori..."
+                class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+            </div>
+            <div class="flex items-center gap-2">
+              <select id="filter-kas-keluar-time" onchange="filterKasKeluar()" class="w-full sm:w-auto bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-500">
+                <option value="semua">Semua Waktu</option>
+                <option value="hari-ini">Hari Ini</option>
+                <option value="bulan-ini">Bulan Ini</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+            <div class="hidden md:block overflow-x-auto">
+              <table class="w-full text-left text-sm text-slate-600">
+                <thead class="bg-slate-50 text-xs text-slate-500 font-semibold uppercase tracking-wider border-b border-slate-100">
+                  <tr>
+                    <th class="px-6 py-3.5">Tanggal</th>
+                    <th class="px-6 py-3.5">Kategori</th>
+                    <th class="px-6 py-3.5">Keterangan</th>
+                    <th class="px-6 py-3.5">Nominal</th>
+                    <th class="px-6 py-3.5 text-right aksi-col">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="kas-keluar-table-body" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+
+            <div class="md:hidden divide-y divide-slate-100" id="kas-keluar-card-list"></div>
+          </div>
+        </section>
+
+        <!-- 4. DAFTAR SISWA VIEW -->
+        <section id="view-daftar-siswa" class="hidden space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-xl font-bold text-slate-900">Daftar Siswa Kelas VII B</h2>
+              <p class="text-xs sm:text-sm text-slate-500">Data siswa terdaftar untuk pencatatan kas.</p>
+            </div>
+
+            <button id="btn-add-siswa" onclick="openSiswaModal()" 
+              class="bendahara-only hidden px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-semibold shadow-md shadow-brand-500/20 flex items-center justify-center gap-2 transition-all">
+              <i class="fa-solid fa-user-plus"></i>
+              <span>Tambah Siswa</span>
+            </button>
+          </div>
+
+          <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center text-lg shadow-sm">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <div>
+                <p class="text-xs text-indigo-700 font-semibold uppercase tracking-wider">Total Siswa Terdaftar</p>
+                <h3 class="text-xl font-extrabold text-indigo-900" id="total-siswa-badge">0 Siswa</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="relative w-full">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
+              <input type="text" id="search-siswa" oninput="filterSiswa()" placeholder="Cari nama siswa..."
+                class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-sm text-slate-600 min-w-[500px]">
+                <thead class="bg-slate-50 text-xs text-slate-500 font-semibold uppercase tracking-wider border-b border-slate-100">
+                  <tr>
+                    <th class="px-6 py-3.5 w-24">No Absen</th>
+                    <th class="px-6 py-3.5">Nama Siswa</th>
+                    <th class="px-6 py-3.5">Status Kas</th>
+                    <th class="px-6 py-3.5 text-right aksi-col">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="siswa-table-body" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- MOBILE BOTTOM NAVIGATION BAR -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 border-t border-slate-200 z-30 glass-effect px-2 py-2 flex justify-around items-center shadow-lg">
+    <button onclick="switchTab('beranda')" id="mobile-nav-beranda" 
+      class="flex flex-col items-center gap-1 text-slate-400 active-nav-item w-16 py-1">
+      <i class="fa-solid fa-house text-lg"></i>
+      <span class="text-[10px] font-medium">Beranda</span>
+    </button>
+    
+    <button onclick="switchTab('kas-masuk')" id="mobile-nav-kas-masuk" 
+      class="flex flex-col items-center gap-1 text-slate-400 w-16 py-1">
+      <i class="fa-solid fa-circle-arrow-down text-lg"></i>
+      <span class="text-[10px] font-medium">Kas Masuk</span>
+    </button>
+
+    <button onclick="switchTab('kas-keluar')" id="mobile-nav-kas-keluar" 
+      class="flex flex-col items-center gap-1 text-slate-400 w-16 py-1">
+      <i class="fa-solid fa-circle-arrow-up text-lg"></i>
+      <span class="text-[10px] font-medium">Kas Keluar</span>
+    </button>
+
+    <button onclick="switchTab('daftar-siswa')" id="mobile-nav-daftar-siswa" 
+      class="flex flex-col items-center gap-1 text-slate-400 w-16 py-1">
+      <i class="fa-solid fa-user-graduate text-lg"></i>
+      <span class="text-[10px] font-medium">Siswa</span>
+    </button>
+  </nav>
+
+  <!-- MODAL: KAS MASUK FORM -->
+  <div id="modal-kas-masuk" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="modal-backdrop fixed inset-0" onclick="closeKasMasukModal()"></div>
+    <div class="modal-box bg-white w-full max-w-lg rounded-2xl shadow-2xl z-10 overflow-hidden space-y-4 p-5 sm:p-6 border border-slate-100 max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-shrink-0">
+        <h3 class="font-bold text-slate-900 text-lg" id="modal-kas-masuk-title">Tambah Kas Masuk</h3>
+        <button onclick="closeKasMasukModal()" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+
+      <form id="form-kas-masuk" onsubmit="saveKasMasuk(event)" class="space-y-4 overflow-y-auto pr-1 flex-1">
+        <input type="hidden" id="km-id">
+        
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Tanggal</label>
+          <input type="date" id="km-tanggal" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Siswa</label>
+          <select id="km-siswa" onchange="onSiswaKasMasukChange()" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            <option value="">-- Pilih Siswa --</option>
+          </select>
+        </div>
+
+        <!-- Dynamic Week Selection -->
+        <div id="km-week-selection-box" class="hidden p-3 bg-amber-50 border border-amber-200 rounded-xl space-y-2">
+          <label class="block text-xs font-bold text-amber-900 flex items-center gap-1.5">
+            <i class="fa-solid fa-calendar-check text-amber-600"></i>
+            <span>Siswa menunggak <span id="km-unpaid-weeks-count" class="text-rose-600 underline">0</span> minggu kas bulan ini:</span>
+          </label>
+          <p class="text-[11px] text-amber-800">Pilih minggu mana saja yang dibayar saat ini:</p>
+          <div id="km-week-checkboxes" class="grid grid-cols-2 gap-2 text-xs font-medium"></div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Keterangan</label>
+          <input type="text" id="km-keterangan" placeholder="Contoh: Kas Minggu Ke-1" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Nominal (Rp)</label>
+          <input type="text" id="km-nominal-formatted" oninput="formatCurrencyInput(this)" placeholder="0" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-emerald-700 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+          <p class="text-[11px] text-slate-400 mt-1">Ketik angka saja, format Rupiah terisi otomatis.</p>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-3 border-t border-slate-100 sticky bottom-0 bg-white">
+          <button type="button" onclick="closeKasMasukModal()" class="px-4 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl">Batal</button>
+          <button type="submit" id="btn-save-kas-masuk" class="px-5 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-md transition-all flex items-center gap-2">
+            <span>Simpan Data</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: KAS KELUAR FORM -->
+  <div id="modal-kas-keluar" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="modal-backdrop fixed inset-0" onclick="closeKasKeluarModal()"></div>
+    <div class="modal-box bg-white w-full max-w-lg rounded-2xl shadow-2xl z-10 overflow-hidden space-y-4 p-5 sm:p-6 border border-slate-100 max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-shrink-0">
+        <h3 class="font-bold text-slate-900 text-lg" id="modal-kas-keluar-title">Tambah Kas Keluar</h3>
+        <button onclick="closeKasKeluarModal()" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+
+      <form id="form-kas-keluar" onsubmit="saveKasKeluar(event)" class="space-y-4 overflow-y-auto pr-1 flex-1">
+        <input type="hidden" id="kk-id">
+        
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Tanggal</label>
+          <input type="date" id="kk-tanggal" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Kategori</label>
+          <select id="kk-kategori" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            <option value="Konsumsi">Konsumsi</option>
+            <option value="ATK">ATK</option>
+            <option value="Kegiatan">Kegiatan</option>
+            <option value="Kebersihan">Kebersihan</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Keterangan</label>
+          <input type="text" id="kk-keterangan" placeholder="Contoh: Beli Spidol dan Penghapus" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Nominal (Rp)</label>
+          <input type="text" id="kk-nominal-formatted" oninput="formatCurrencyInput(this)" placeholder="0" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-rose-700 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <div class="flex justify-end gap-2 pt-3 border-t border-slate-100 sticky bottom-0 bg-white">
+          <button type="button" onclick="closeKasKeluarModal()" class="px-4 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl">Batal</button>
+          <button type="submit" id="btn-save-kas-keluar" class="px-5 py-2 text-sm font-semibold text-white bg-rose-600 hover:bg-rose-700 rounded-xl shadow-md transition-all flex items-center gap-2">
+            <span>Simpan Data</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: DAFTAR SISWA FORM -->
+  <div id="modal-siswa" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="modal-backdrop fixed inset-0" onclick="closeSiswaModal()"></div>
+    <div class="modal-box bg-white w-full max-w-md rounded-2xl shadow-2xl z-10 overflow-hidden space-y-4 p-5 sm:p-6 border border-slate-100 max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-shrink-0">
+        <h3 class="font-bold text-slate-900 text-lg" id="modal-siswa-title">Tambah Siswa</h3>
+        <button onclick="closeSiswaModal()" class="text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+
+      <form id="form-siswa" onsubmit="saveSiswa(event)" class="space-y-4 overflow-y-auto pr-1 flex-1">
+        <input type="hidden" id="siswa-id">
+        
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Nomor Absen</label>
+          <input type="number" id="siswa-no-absen" min="1" max="100" required placeholder="Contoh: 1" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Siswa</label>
+          <input type="text" id="siswa-nama" required placeholder="Masukkan nama lengkap siswa" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+        </div>
+
+        <div class="flex justify-end gap-2 pt-3 border-t border-slate-100 sticky bottom-0 bg-white">
+          <button type="button" onclick="closeSiswaModal()" class="px-4 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl">Batal</button>
+          <button type="submit" id="btn-save-siswa" class="px-5 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-md transition-all flex items-center gap-2">
+            <span>Simpan Siswa</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: CONFIRMATION DIALOG -->
+  <div id="modal-confirm" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="modal-backdrop fixed inset-0" onclick="closeConfirmModal()"></div>
+    <div class="modal-box bg-white w-full max-w-sm rounded-2xl shadow-2xl z-10 overflow-hidden space-y-4 p-6 border border-slate-100 text-center">
+      <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto text-xl">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <div>
+        <h3 class="font-bold text-slate-900 text-base" id="confirm-title">Konfirmasi Hapus</h3>
+        <p class="text-xs text-slate-500 mt-1" id="confirm-message">Apakah Anda yakin ingin menghapus data ini?</p>
+      </div>
+
+      <div class="flex justify-center gap-3 pt-2">
+        <button type="button" onclick="closeConfirmModal()" class="w-1/2 py-2.5 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl">Batal</button>
+        <button type="button" id="btn-confirm-execute" class="w-1/2 py-2.5 text-sm font-semibold text-white bg-red-600 hover:bg-red-700 rounded-xl shadow-md">Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Global Application State
+    window.appState = {
+      currentUser: null, // { role: 'bendahara' | 'wali', username: string }
+      currentRole: 'bendahara',
+      activeTab: 'beranda',
+      siswa: {},
+      kasMasuk: {},
+      kasKeluar: {},
+      isFirebaseConnected: false
+    };
+
+    const KAS_PER_WEEK = 10000;
+    const TOTAL_WEEKS_PER_MONTH = 4;
+    let pendingConfirmAction = null;
+
+    // Toast Notification Display
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      const bgColor = type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-rose-600' : 'bg-brand-600';
+      const icon = type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-circle-xmark' : 'fa-circle-info';
+
+      toast.className = `${bgColor} text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-3 text-xs font-semibold transform transition-all duration-300 translate-y-[-10px] opacity-0 pointer-events-auto`;
+      toast.innerHTML = `
+        <i class="fa-solid ${icon} text-base"></i>
+        <span class="flex-1">${message}</span>
+      `;
+
+      container.appendChild(toast);
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-[-10px]', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-[-10px]');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // Loading overlay toggle
+    function showLoading(show = true, text = 'Memuat data realtime...') {
+      const el = document.getElementById('global-loading');
+      const textEl = document.getElementById('loading-text');
+      if (textEl) textEl.innerText = text;
+      if (el) {
+        if (show) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      }
+    }
+
+    // Helper to toggle submit button loading state during async save operations
+    function setButtonLoading(btnElement, isLoading, defaultText = 'Simpan Data') {
+      if (!btnElement) return;
+      if (isLoading) {
+        btnElement.disabled = true;
+        btnElement.classList.add('opacity-75', 'cursor-not-allowed');
+        btnElement.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Menyimpan...</span>`;
+      } else {
+        btnElement.disabled = false;
+        btnElement.classList.remove('opacity-75', 'cursor-not-allowed');
+        btnElement.innerHTML = `<span>${defaultText}</span>`;
+      }
+    }
+
+    // Currency Formatter Helpers
+    function formatRupiah(number) {
+      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(number || 0);
+    }
+
+    function parseRupiah(str) {
+      if (!str) return 0;
+      return parseInt(str.toString().replace(/[^0-9]/g, ''), 10) || 0;
+    }
+
+    function formatCurrencyInput(input) {
+      const val = parseRupiah(input.value);
+      input.value = val ? new Intl.NumberFormat('id-ID').format(val) : '';
+    }
+
+    function formatDateIndo(dateStr) {
+      if (!dateStr) return '-';
+      const [year, month, day] = dateStr.split('-');
+      if (!year || !month || !day) return dateStr;
+      return `${day}/${month}/${year}`;
+    }
+
+    // Toggle Password Visibility
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('login-password');
+      const toggleIcon = document.getElementById('password-toggle-icon');
+      if (!passwordInput || !toggleIcon) return;
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.classList.remove('fa-eye');
+        toggleIcon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        toggleIcon.classList.remove('fa-eye-slash');
+        toggleIcon.classList.add('fa-eye');
+      }
+    }
+
+    // Role selection on login screen
+    function selectRole(role) {
+      window.appState.currentRole = role;
+      const btnBendahara = document.getElementById('role-bendahara-btn');
+      const btnWali = document.getElementById('role-wali-btn');
+      const usernameGroup = document.getElementById('username-field-group');
+
+      if (role === 'bendahara') {
+        btnBendahara.className = "py-2.5 px-3 text-sm font-semibold rounded-lg transition-all shadow-sm bg-white text-brand-700";
+        btnWali.className = "py-2.5 px-3 text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all";
+        usernameGroup.classList.remove('hidden');
+      } else {
+        btnWali.className = "py-2.5 px-3 text-sm font-semibold rounded-lg transition-all shadow-sm bg-white text-brand-700";
+        btnBendahara.className = "py-2.5 px-3 text-sm font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition-all";
+        usernameGroup.classList.add('hidden');
+      }
+    }
+
+    // Login Handler
+    function handleLogin(event) {
+      event.preventDefault();
+      const role = window.appState.currentRole;
+      const username = document.getElementById('login-username').value.trim();
+      const password = document.getElementById('login-password').value.trim();
+
+      if (role === 'bendahara') {
+        if (username === 'iissumirat123' && password === '112233') {
+          loginSuccess({ role: 'bendahara', username: 'iissumirat123' });
+        } else {
+          showToast('Username atau password Bendahara tidak sesuai!', 'error');
+        }
+      } else {
+        if (password === '123456') {
+          loginSuccess({ role: 'wali', username: 'Wali Kelas' });
+        } else {
+          showToast('Password Wali Kelas tidak sesuai!', 'error');
+        }
+      }
+    }
+
+    function loginSuccess(user) {
+      window.appState.currentUser = user;
+      sessionStorage.setItem('kas_user_session', JSON.stringify(user));
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('app-shell').classList.remove('hidden');
+      
+      applyUserRolePermissions();
+      refreshAllViews();
+      showToast(`Selamat datang, ${user.role === 'bendahara' ? 'Bendahara Kelas' : 'Wali Kelas'}!`);
+    }
+
+    function handleLogout() {
+      sessionStorage.removeItem('kas_user_session');
+      window.appState.currentUser = null;
+      document.getElementById('app-shell').classList.add('hidden');
+      document.getElementById('login-screen').classList.remove('hidden');
+      showToast('Berhasil keluar dari akun.');
+    }
+
+    function checkSession() {
+      const saved = sessionStorage.getItem('kas_user_session');
+      if (saved) {
+        try {
+          const user = JSON.parse(saved);
+          window.appState.currentUser = user;
+          document.getElementById('login-screen').classList.add('hidden');
+          document.getElementById('app-shell').classList.remove('hidden');
+          applyUserRolePermissions();
+        } catch (e) {
+          sessionStorage.removeItem('kas_user_session');
+        }
+      }
+    }
+
+    // Role Permissions Applicator
+    function applyUserRolePermissions() {
+      const user = window.appState.currentUser;
+      if (!user) return;
+
+      const isBendahara = user.role === 'bendahara';
+      const roleBadge = document.getElementById('header-user-badge');
+      const drawerRole = document.getElementById('drawer-user-role');
+      const sideRole = document.getElementById('sidebar-user-role');
+      const sideName = document.getElementById('sidebar-user-name');
+
+      if (roleBadge) roleBadge.innerText = isBendahara ? 'Bendahara Kelas' : 'Wali Kelas';
+      if (drawerRole) drawerRole.innerText = isBendahara ? 'Bendahara Kelas' : 'Wali Kelas';
+      if (sideRole) sideRole.innerText = isBendahara ? 'Bendahara Kelas' : 'Wali Kelas';
+      if (sideName) sideName.innerText = isBendahara ? user.username : 'Akses Lihat';
+
+      document.querySelectorAll('.bendahara-only').forEach(el => {
+        if (isBendahara) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      });
+
+      document.querySelectorAll('.aksi-col').forEach(el => {
+        if (isBendahara) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      });
+    }
+
+    function openMobileDrawer() {
+      const drawer = document.getElementById('mobile-drawer');
+      const backdrop = document.getElementById('mobile-drawer-backdrop');
+      if (!drawer || !backdrop) return;
+      
+      backdrop.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        backdrop.classList.remove('opacity-0');
+        drawer.classList.remove('-translate-x-full');
+      });
+    }
+
+    function closeMobileDrawer() {
+      const drawer = document.getElementById('mobile-drawer');
+      const backdrop = document.getElementById('mobile-drawer-backdrop');
+      if (!drawer || !backdrop) return;
+
+      drawer.classList.add('-translate-x-full');
+      backdrop.classList.add('opacity-0');
+      setTimeout(() => {
+        backdrop.classList.add('hidden');
+      }, 300);
+    }
+
+    function switchTab(tabId) {
+      window.appState.activeTab = tabId;
+
+      ['beranda', 'kas-masuk', 'kas-keluar', 'daftar-siswa'].forEach(id => {
+        const view = document.getElementById(`view-${id}`);
+        const sideNav = document.getElementById(`sidebar-tab-${id}`);
+        const drawerNav = document.getElementById(`drawer-tab-${id}`);
+        const mobNav = document.getElementById(`mobile-nav-${id}`);
+
+        if (view) {
+          if (id === tabId) view.classList.remove('hidden');
+          else view.classList.add('hidden');
+        }
+
+        if (sideNav) {
+          if (id === tabId) sideNav.classList.add('active-sidebar-item');
+          else sideNav.classList.remove('active-sidebar-item');
+        }
+
+        if (drawerNav) {
+          if (id === tabId) drawerNav.classList.add('active-sidebar-item');
+          else drawerNav.classList.remove('active-sidebar-item');
+        }
+
+        if (mobNav) {
+          if (id === tabId) mobNav.classList.add('active-nav-item');
+          else mobNav.classList.remove('active-nav-item');
+        }
+      });
+
+      refreshAllViews();
+    }
+
+    // Compute student kas payment status
+    function getStudentPaymentStatus(siswaId) {
+      const kasMasukObj = window.appState.kasMasuk || {};
+      let totalPaid = 0;
+      let paidWeeks = new Set();
+
+      Object.values(kasMasukObj).forEach(item => {
+        if (item.siswaId === siswaId) {
+          totalPaid += Number(item.nominal) || 0;
+          const match = (item.keterangan || '').match(/Minggu\s*(?:Ke-)?\s*([\d,\s]+)/i);
+          if (match && match[1]) {
+            match[1].split(',').forEach(w => paidWeeks.add(parseInt(w.trim(), 10)));
+          }
+        }
+      });
+
+      const weeksByAmount = Math.floor(totalPaid / KAS_PER_WEEK);
+      for (let i = 1; i <= Math.min(weeksByAmount, TOTAL_WEEKS_PER_MONTH); i++) {
+        paidWeeks.add(i);
+      }
+
+      const paidWeeksArray = Array.from(paidWeeks).sort((a, b) => a - b);
+      const unpaidWeeks = [];
+      for (let w = 1; w <= TOTAL_WEEKS_PER_MONTH; w++) {
+        if (!paidWeeksArray.includes(w)) unpaidWeeks.push(w);
+      }
+
+      return {
+        totalPaid,
+        paidWeeks: paidWeeksArray,
+        unpaidWeeks,
+        isLunas: unpaidWeeks.length === 0,
+        unpaidCount: unpaidWeeks.length
+      };
+    }
+
+    // Handle student select change in Kas Masuk Modal
+    function onSiswaKasMasukChange() {
+      const siswaId = document.getElementById('km-siswa').value;
+      const weekBox = document.getElementById('km-week-selection-box');
+      const checkboxesDiv = document.getElementById('km-week-checkboxes');
+      const countSpan = document.getElementById('km-unpaid-weeks-count');
+      const keteranganInput = document.getElementById('km-keterangan');
+      const nominalInput = document.getElementById('km-nominal-formatted');
+
+      if (!siswaId) {
+        weekBox.classList.add('hidden');
+        return;
+      }
+
+      const status = getStudentPaymentStatus(siswaId);
+
+      if (status.unpaidCount >= 2) {
+        weekBox.classList.remove('hidden');
+        countSpan.innerText = status.unpaidCount;
+
+        checkboxesDiv.innerHTML = status.unpaidWeeks.map(w => `
+          <label class="flex items-center gap-2 bg-white p-2 border border-amber-200 rounded-lg cursor-pointer hover:bg-amber-100/50">
+            <input type="checkbox" name="km_weeks" value="${w}" onchange="updateSelectedKasWeeks()" class="w-4 h-4 text-brand-600 rounded focus:ring-brand-500">
+            <span class="text-amber-900 font-semibold">Minggu Ke-${w}</span>
+          </label>
+        `).join('');
+
+        keteranganInput.value = `Kas Minggu Ke-${status.unpaidWeeks[0]}`;
+        nominalInput.value = new Intl.NumberFormat('id-ID').format(KAS_PER_WEEK);
+      } else {
+        weekBox.classList.add('hidden');
+        if (status.unpaidCount === 1) {
+          keteranganInput.value = `Kas Minggu Ke-${status.unpaidWeeks[0]}`;
+        } else {
+          keteranganInput.value = `Kas Mingguan (Tambahan)`;
+        }
+        nominalInput.value = new Intl.NumberFormat('id-ID').format(KAS_PER_WEEK);
+      }
+    }
+
+    function updateSelectedKasWeeks() {
+      const selectedBoxes = document.querySelectorAll('input[name="km_weeks"]:checked');
+      const selectedWeeks = Array.from(selectedBoxes).map(cb => cb.value);
+      const keteranganInput = document.getElementById('km-keterangan');
+      const nominalInput = document.getElementById('km-nominal-formatted');
+
+      if (selectedWeeks.length > 0) {
+        keteranganInput.value = `Kas Minggu Ke-${selectedWeeks.join(', ')}`;
+        const totalAmount = selectedWeeks.length * KAS_PER_WEEK;
+        nominalInput.value = new Intl.NumberFormat('id-ID').format(totalAmount);
+      }
+    }
+
+    function renderPublicUnpaidList() {
+      const container = document.getElementById('public-unpaid-list');
+      const badge = document.getElementById('public-unpaid-badge');
+      if (!container) return;
+
+      const siswaObj = window.appState.siswa || {};
+      const unpaidList = [];
+
+      Object.entries(siswaObj).forEach(([id, s]) => {
+        const status = getStudentPaymentStatus(id);
+        if (!status.isLunas) {
+          unpaidList.push({ id, ...s, status });
+        }
+      });
+
+      unpaidList.sort((a, b) => b.status.unpaidCount - a.status.unpaidCount);
+
+      if (badge) badge.innerText = `${unpaidList.length} Siswa`;
+
+      if (unpaidList.length === 0) {
+        container.innerHTML = `
+          <div class="p-3 bg-emerald-50 text-emerald-700 text-center text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-circle-check"></i> Semua siswa telah lunas kas!
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = unpaidList.map(item => `
+        <div class="p-2.5 bg-amber-50/80 border border-amber-100 rounded-xl flex items-center justify-between">
+          <div class="flex items-center gap-2 truncate">
+            <span class="w-6 h-6 bg-amber-200 text-amber-900 font-bold text-[10px] rounded-full flex items-center justify-center flex-shrink-0">${item.nomorAbsen}</span>
+            <span class="font-bold text-slate-800 text-xs truncate">${item.nama}</span>
+          </div>
+          <span class="px-2 py-0.5 bg-rose-100 text-rose-800 font-extrabold text-[10px] rounded-md flex-shrink-0">
+            Nunggak ${item.status.unpaidCount} Minggu
+          </span>
+        </div>
+      `).join('');
+    }
+
+    function renderBeranda() {
+      const kasMasukObj = window.appState.kasMasuk || {};
+      const kasKeluarObj = window.appState.kasKeluar || {};
+      const siswaObj = window.appState.siswa || {};
+
+      let totalMasuk = 0;
+      let totalKeluar = 0;
+      const allTransactions = [];
+
+      Object.entries(kasMasukObj).forEach(([id, item]) => {
+        const amount = Number(item.nominal) || 0;
+        totalMasuk += amount;
+        allTransactions.push({
+          id,
+          type: 'masuk',
+          tanggal: item.tanggal,
+          keterangan: `${item.namaSiswa || 'Siswa'} - ${item.keterangan || 'Kas'}`,
+          nominal: amount,
+          createdAt: item.createdAt || 0
+        });
+      });
+
+      Object.entries(kasKeluarObj).forEach(([id, item]) => {
+        const amount = Number(item.nominal) || 0;
+        totalKeluar += amount;
+        allTransactions.push({
+          id,
+          type: 'keluar',
+          tanggal: item.tanggal,
+          keterangan: `[${item.kategori || 'Pengeluaran'}] ${item.keterangan}`,
+          nominal: amount,
+          createdAt: item.createdAt || 0
+        });
+      });
+
+      const saldo = totalMasuk - totalKeluar;
+      const totalSiswa = Object.keys(siswaObj).length;
+
+      document.getElementById('dash-saldo').innerText = formatRupiah(saldo);
+      document.getElementById('dash-masuk').innerText = formatRupiah(totalMasuk);
+      document.getElementById('dash-keluar').innerText = formatRupiah(totalKeluar);
+      document.getElementById('dash-siswa').innerText = `${totalSiswa} Siswa`;
+
+      const alertBox = document.getElementById('beranda-unpaid-alert');
+      const descEl = document.getElementById('beranda-alert-desc');
+      let unpaidCount = 0;
+      let sampleNames = [];
+
+      Object.entries(siswaObj).forEach(([id, s]) => {
+        const status = getStudentPaymentStatus(id);
+        if (!status.isLunas) {
+          unpaidCount++;
+          if (sampleNames.length < 3) sampleNames.push(s.nama);
+        }
+      });
+
+      if (unpaidCount > 0 && alertBox && descEl) {
+        alertBox.classList.remove('hidden');
+        const extraText = sampleNames.length < unpaidCount ? ` dan ${unpaidCount - sampleNames.length} siswa lainnya` : '';
+        descEl.innerHTML = `Terdapat <strong>${unpaidCount} siswa</strong> yang belum melunasi kas: <em>${sampleNames.join(', ')}${extraText}</em>.`;
+      } else if (alertBox) {
+        alertBox.classList.add('hidden');
+      }
+
+      allTransactions.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      const recentList = document.getElementById('recent-transactions-list');
+      if (!recentList) return;
+
+      if (allTransactions.length === 0) {
+        recentList.innerHTML = `<div class="p-6 text-center text-slate-400 text-sm">Belum ada transaksi tercatat.</div>`;
+        return;
+      }
+
+      const recent5 = allTransactions.slice(0, 5);
+      recentList.innerHTML = recent5.map(t => {
+        const isMasuk = t.type === 'masuk';
+        return `
+          <div class="p-4 flex items-center justify-between hover:bg-slate-50 transition-colors">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-9 h-9 ${isMasuk ? 'bg-emerald-100 text-emerald-600' : 'bg-rose-100 text-rose-600'} rounded-xl flex items-center justify-center text-sm font-bold flex-shrink-0">
+                <i class="fa-solid ${isMasuk ? 'fa-arrow-down' : 'fa-arrow-up'}"></i>
+              </div>
+              <div class="truncate">
+                <p class="text-xs font-bold text-slate-800 truncate">${t.keterangan}</p>
+                <p class="text-[11px] text-slate-400">${formatDateIndo(t.tanggal)}</p>
+              </div>
+            </div>
+            <div class="text-right flex-shrink-0 pl-2">
+              <p class="text-xs font-extrabold ${isMasuk ? 'text-emerald-600' : 'text-rose-600'}">
+                ${isMasuk ? '+' : '-'}${formatRupiah(t.nominal)}
+              </p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderKasMasuk() {
+      const kasMasukObj = window.appState.kasMasuk || {};
+      const isBendahara = window.appState.currentUser?.role === 'bendahara';
+      const searchVal = (document.getElementById('search-kas-masuk')?.value || '').toLowerCase();
+      const timeFilter = document.getElementById('filter-kas-masuk-time')?.value || 'semua';
+
+      const todayStr = new Date().toISOString().split('T')[0];
+      const currentMonthStr = todayStr.substring(0, 7);
+
+      let totalMasuk = 0;
+      const list = [];
+
+      Object.entries(kasMasukObj).forEach(([id, item]) => {
+        const nominal = Number(item.nominal) || 0;
+        totalMasuk += nominal;
+
+        const dateItem = item.tanggal || '';
+        const nameItem = (item.namaSiswa || '').toLowerCase();
+        const ketItem = (item.keterangan || '').toLowerCase();
+
+        if (searchVal && !nameItem.includes(searchVal) && !ketItem.includes(searchVal)) {
+          return;
+        }
+
+        if (timeFilter === 'hari-ini' && dateItem !== todayStr) return;
+        if (timeFilter === 'bulan-ini' && !dateItem.startsWith(currentMonthStr)) return;
+
+        list.push({ id, ...item, nominal });
+      });
+
+      document.getElementById('total-kas-masuk-badge').innerText = formatRupiah(totalMasuk);
+
+      list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+      const tableBody = document.getElementById('kas-masuk-table-body');
+      const cardList = document.getElementById('kas-masuk-card-list');
+
+      if (list.length === 0) {
+        const emptyMsg = `<div class="p-6 text-center text-slate-400 text-sm">Belum ada transaksi kas masuk.</div>`;
+        if (tableBody) tableBody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-400 text-sm">Belum ada transaksi kas masuk.</td></tr>`;
+        if (cardList) cardList.innerHTML = emptyMsg;
+        return;
+      }
+
+      if (tableBody) {
+        tableBody.innerHTML = list.map(item => `
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="px-6 py-4 text-xs font-medium text-slate-500">${formatDateIndo(item.tanggal)}</td>
+            <td class="px-6 py-4 font-bold text-slate-800">${item.namaSiswa || '-'}</td>
+            <td class="px-6 py-4 text-slate-600">${item.keterangan || '-'}</td>
+            <td class="px-6 py-4 font-extrabold text-emerald-600">${formatRupiah(item.nominal)}</td>
+            <td class="px-6 py-4 text-right aksi-col ${isBendahara ? '' : 'hidden'}">
+              <div class="flex items-center justify-end gap-1.5">
+                <button onclick="editKasMasuk('${item.id}')" class="p-1.5 text-slate-400 hover:text-brand-600 rounded-lg hover:bg-brand-50" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button onclick="deleteKasMasuk('${item.id}')" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50" title="Hapus"><i class="fa-solid fa-trash-can"></i></button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      if (cardList) {
+        cardList.innerHTML = list.map(item => `
+          <div class="p-4 flex items-center justify-between hover:bg-slate-50">
+            <div class="space-y-1">
+              <span class="text-[10px] font-semibold text-slate-400 uppercase">${formatDateIndo(item.tanggal)}</span>
+              <h4 class="font-bold text-slate-800 text-sm">${item.namaSiswa}</h4>
+              <p class="text-xs text-slate-500">${item.keterangan}</p>
+            </div>
+            <div class="text-right space-y-1">
+              <span class="font-extrabold text-emerald-600 text-sm">${formatRupiah(item.nominal)}</span>
+              ${isBendahara ? `
+                <div class="flex items-center justify-end gap-2 pt-1">
+                  <button onclick="editKasMasuk('${item.id}')" class="text-xs text-brand-600 font-semibold">Edit</button>
+                  <button onclick="deleteKasMasuk('${item.id}')" class="text-xs text-rose-600 font-semibold">Hapus</button>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function filterKasMasuk() {
+      renderKasMasuk();
+    }
+
+    function renderKasKeluar() {
+      const kasKeluarObj = window.appState.kasKeluar || {};
+      const isBendahara = window.appState.currentUser?.role === 'bendahara';
+      const searchVal = (document.getElementById('search-kas-keluar')?.value || '').toLowerCase();
+      const timeFilter = document.getElementById('filter-kas-keluar-time')?.value || 'semua';
+
+      const todayStr = new Date().toISOString().split('T')[0];
+      const currentMonthStr = todayStr.substring(0, 7);
+
+      let totalKeluar = 0;
+      const list = [];
+
+      Object.entries(kasKeluarObj).forEach(([id, item]) => {
+        const nominal = Number(item.nominal) || 0;
+        totalKeluar += nominal;
+
+        const dateItem = item.tanggal || '';
+        const catItem = (item.kategori || '').toLowerCase();
+        const ketItem = (item.keterangan || '').toLowerCase();
+
+        if (searchVal && !catItem.includes(searchVal) && !ketItem.includes(searchVal)) {
+          return;
+        }
+
+        if (timeFilter === 'hari-ini' && dateItem !== todayStr) return;
+        if (timeFilter === 'bulan-ini' && !dateItem.startsWith(currentMonthStr)) return;
+
+        list.push({ id, ...item, nominal });
+      });
+
+      document.getElementById('total-kas-keluar-badge').innerText = formatRupiah(totalKeluar);
+      list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+      const tableBody = document.getElementById('kas-keluar-table-body');
+      const cardList = document.getElementById('kas-keluar-card-list');
+
+      if (list.length === 0) {
+        const emptyMsg = `<div class="p-6 text-center text-slate-400 text-sm">Belum ada transaksi kas keluar.</div>`;
+        if (tableBody) tableBody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-400 text-sm">Belum ada transaksi kas keluar.</td></tr>`;
+        if (cardList) cardList.innerHTML = emptyMsg;
+        return;
+      }
+
+      if (tableBody) {
+        tableBody.innerHTML = list.map(item => `
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="px-6 py-4 text-xs font-medium text-slate-500">${formatDateIndo(item.tanggal)}</td>
+            <td class="px-6 py-4">
+              <span class="px-2.5 py-1 bg-rose-50 text-rose-700 font-semibold text-xs rounded-lg border border-rose-100">${item.kategori || 'Lainnya'}</span>
+            </td>
+            <td class="px-6 py-4 text-slate-800 font-medium">${item.keterangan || '-'}</td>
+            <td class="px-6 py-4 font-extrabold text-rose-600">${formatRupiah(item.nominal)}</td>
+            <td class="px-6 py-4 text-right aksi-col ${isBendahara ? '' : 'hidden'}">
+              <div class="flex items-center justify-end gap-1.5">
+                <button onclick="editKasKeluar('${item.id}')" class="p-1.5 text-slate-400 hover:text-brand-600 rounded-lg hover:bg-brand-50" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button onclick="deleteKasKeluar('${item.id}')" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50" title="Hapus"><i class="fa-solid fa-trash-can"></i></button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      if (cardList) {
+        cardList.innerHTML = list.map(item => `
+          <div class="p-4 flex items-center justify-between hover:bg-slate-50">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-semibold text-slate-400 uppercase">${formatDateIndo(item.tanggal)}</span>
+                <span class="px-2 py-0.5 bg-rose-50 text-rose-700 font-bold text-[10px] rounded">${item.kategori}</span>
+              </div>
+              <h4 class="font-bold text-slate-800 text-sm">${item.keterangan}</h4>
+            </div>
+            <div class="text-right space-y-1">
+              <span class="font-extrabold text-rose-600 text-sm">${formatRupiah(item.nominal)}</span>
+              ${isBendahara ? `
+                <div class="flex items-center justify-end gap-2 pt-1">
+                  <button onclick="editKasKeluar('${item.id}')" class="text-xs text-brand-600 font-semibold">Edit</button>
+                  <button onclick="deleteKasKeluar('${item.id}')" class="text-xs text-rose-600 font-semibold">Hapus</button>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function filterKasKeluar() {
+      renderKasKeluar();
+    }
+
+    function renderSiswa() {
+      const siswaObj = window.appState.siswa || {};
+      const isBendahara = window.appState.currentUser?.role === 'bendahara';
+      const searchVal = (document.getElementById('search-siswa')?.value || '').toLowerCase();
+
+      const list = [];
+      Object.entries(siswaObj).forEach(([id, item]) => {
+        const nama = item.nama || '';
+        if (searchVal && !nama.toLowerCase().includes(searchVal)) return;
+        list.push({ id, ...item, nomorAbsen: Number(item.nomorAbsen) || 999 });
+      });
+
+      document.getElementById('total-siswa-badge').innerText = `${Object.keys(siswaObj).length} Siswa`;
+      list.sort((a, b) => a.nomorAbsen - b.nomorAbsen);
+
+      const tableBody = document.getElementById('siswa-table-body');
+      if (!tableBody) return;
+
+      if (list.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-slate-400 text-sm">Belum ada data siswa.</td></tr>`;
+        return;
+      }
+
+      tableBody.innerHTML = list.map(s => {
+        const status = getStudentPaymentStatus(s.id);
+        const statusBadge = status.isLunas
+          ? `<span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 font-bold text-xs rounded-lg border border-emerald-100 flex items-center gap-1 w-fit"><i class="fa-solid fa-circle-check"></i> Lunas Kas</span>`
+          : `<span class="px-2.5 py-1 bg-amber-50 text-amber-800 font-bold text-xs rounded-lg border border-amber-200 flex items-center gap-1 w-fit"><i class="fa-solid fa-clock"></i> Nunggak ${status.unpaidCount} Minggu</span>`;
+
+        return `
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="px-6 py-4 font-bold text-brand-700">#${s.nomorAbsen}</td>
+            <td class="px-6 py-4 font-bold text-slate-800">${s.nama}</td>
+            <td class="px-6 py-4">${statusBadge}</td>
+            <td class="px-6 py-4 text-right aksi-col ${isBendahara ? '' : 'hidden'}">
+              <div class="flex items-center justify-end gap-1.5">
+                <button onclick="editSiswa('${s.id}')" class="p-1.5 text-slate-400 hover:text-brand-600 rounded-lg hover:bg-brand-50" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button onclick="deleteSiswa('${s.id}')" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50" title="Hapus"><i class="fa-solid fa-trash-can"></i></button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function filterSiswa() {
+      renderSiswa();
+    }
+
+    function refreshAllViews() {
+      renderPublicUnpaidList();
+      renderBeranda();
+      renderKasMasuk();
+      renderKasKeluar();
+      renderSiswa();
+      applyUserRolePermissions();
+    }
+
+    // Modal Kas Masuk Actions
+    function openKasMasukModal() {
+      document.getElementById('form-kas-masuk').reset();
+      document.getElementById('km-id').value = '';
+      document.getElementById('km-tanggal').value = new Date().toISOString().split('T')[0];
+      document.getElementById('modal-kas-masuk-title').innerText = 'Tambah Kas Masuk';
+      document.getElementById('km-week-selection-box').classList.add('hidden');
+
+      const selectSiswa = document.getElementById('km-siswa');
+      const siswaObj = window.appState.siswa || {};
+      const siswaList = Object.entries(siswaObj).map(([id, s]) => ({ id, ...s, nomorAbsen: Number(s.nomorAbsen) || 999 }));
+      siswaList.sort((a, b) => a.nomorAbsen - b.nomorAbsen);
+
+      selectSiswa.innerHTML = `<option value="">-- Pilih Siswa --</option>` + siswaList.map(s => `
+        <option value="${s.id}">${s.nomorAbsen}. ${s.nama}</option>
+      `).join('');
+
+      document.getElementById('modal-kas-masuk').classList.remove('hidden');
+    }
+
+    function closeKasMasukModal() {
+      document.getElementById('modal-kas-masuk').classList.add('hidden');
+    }
+
+    function editKasMasuk(id) {
+      const item = window.appState.kasMasuk[id];
+      if (!item) return;
+
+      openKasMasukModal();
+      document.getElementById('modal-kas-masuk-title').innerText = 'Edit Kas Masuk';
+      document.getElementById('km-id').value = id;
+      document.getElementById('km-tanggal').value = item.tanggal || '';
+      document.getElementById('km-siswa').value = item.siswaId || '';
+      document.getElementById('km-keterangan').value = item.keterangan || '';
+      document.getElementById('km-nominal-formatted').value = new Intl.NumberFormat('id-ID').format(item.nominal || 0);
+    }
+
+    async function saveKasMasuk(event) {
+      event.preventDefault();
+      const submitBtn = document.getElementById('btn-save-kas-masuk');
+      const id = document.getElementById('km-id').value;
+      const tanggal = document.getElementById('km-tanggal').value;
+      const siswaId = document.getElementById('km-siswa').value;
+      const keterangan = document.getElementById('km-keterangan').value.trim();
+      const nominal = parseRupiah(document.getElementById('km-nominal-formatted').value);
+
+      if (!siswaId) return showToast('Pilih nama siswa terlebih dahulu!', 'error');
+      if (nominal <= 0) return showToast('Nominal transaksi harus lebih dari 0!', 'error');
+
+      const siswaObj = window.appState.siswa[siswaId];
+      const namaSiswa = siswaObj ? siswaObj.nama : 'Siswa';
+
+      const payload = {
+        tanggal,
+        siswaId,
+        namaSiswa,
+        keterangan,
+        nominal,
+        createdAt: id && window.appState.kasMasuk[id]?.createdAt ? window.appState.kasMasuk[id].createdAt : Date.now(),
+        createdBy: window.appState.currentUser?.role || 'bendahara',
+        updatedAt: Date.now()
+      };
+
+      setButtonLoading(submitBtn, true, 'Simpan Data');
+
+      try {
+        if (window.dbRef && window.appState.isFirebaseConnected) {
+          if (id) {
+            await window.dbRef.update(window.dbRef.ref(window.dbRef.db, `kelasVIIIB/kasMasuk/${id}`), payload);
+            showToast('Data kas masuk berhasil diperbarui!');
+          } else {
+            await window.dbRef.push(window.dbRef.ref(window.dbRef.db, 'kelasVIIIB/kasMasuk'), payload);
+            showToast('Data kas masuk berhasil disimpan!');
+          }
+        } else {
+          // Offline local state fallback
+          const localId = id || 'km_' + Date.now();
+          window.appState.kasMasuk[localId] = payload;
+          refreshAllViews();
+          showToast('Data disimpan secara lokal (Mode Offline)');
+        }
+        closeKasMasukModal();
+      } catch (e) {
+        console.error('Error saving kas masuk:', e);
+        showToast(`Gagal menyimpan data: ${e.message || 'Terjadi gangguan koneksi'}`, 'error');
+      } finally {
+        setButtonLoading(submitBtn, false, 'Simpan Data');
+      }
+    }
+
+    function deleteKasMasuk(id) {
+      openConfirmModal('Konfirmasi Hapus Kas Masuk', 'Apakah Anda yakin ingin menghapus transaksi kas masuk ini?', async () => {
+        try {
+          if (window.dbRef && window.appState.isFirebaseConnected) {
+            await window.dbRef.remove(window.dbRef.ref(window.dbRef.db, `kelasVIIIB/kasMasuk/${id}`));
+          } else {
+            delete window.appState.kasMasuk[id];
+            refreshAllViews();
+          }
+          showToast('Data transaksi berhasil dihapus');
+        } catch (e) {
+          console.error('Error deleting kas masuk:', e);
+          showToast(`Gagal menghapus data: ${e.message || 'Kesalahan jaringan'}`, 'error');
+        }
+      });
+    }
+
+    // Modal Kas Keluar Actions
+    function openKasKeluarModal() {
+      document.getElementById('form-kas-keluar').reset();
+      document.getElementById('kk-id').value = '';
+      document.getElementById('kk-tanggal').value = new Date().toISOString().split('T')[0];
+      document.getElementById('modal-kas-keluar-title').innerText = 'Tambah Kas Keluar';
+      document.getElementById('modal-kas-keluar').classList.remove('hidden');
+    }
+
+    function closeKasKeluarModal() {
+      document.getElementById('modal-kas-keluar').classList.add('hidden');
+    }
+
+    function editKasKeluar(id) {
+      const item = window.appState.kasKeluar[id];
+      if (!item) return;
+
+      openKasKeluarModal();
+      document.getElementById('modal-kas-keluar-title').innerText = 'Edit Kas Keluar';
+      document.getElementById('kk-id').value = id;
+      document.getElementById('kk-tanggal').value = item.tanggal || '';
+      document.getElementById('kk-kategori').value = item.kategori || 'Konsumsi';
+      document.getElementById('kk-keterangan').value = item.keterangan || '';
+      document.getElementById('kk-nominal-formatted').value = new Intl.NumberFormat('id-ID').format(item.nominal || 0);
+    }
+
+    async function saveKasKeluar(event) {
+      event.preventDefault();
+      const submitBtn = document.getElementById('btn-save-kas-keluar');
+      const id = document.getElementById('kk-id').value;
+      const tanggal = document.getElementById('kk-tanggal').value;
+      const kategori = document.getElementById('kk-kategori').value;
+      const keterangan = document.getElementById('kk-keterangan').value.trim();
+      const nominal = parseRupiah(document.getElementById('kk-nominal-formatted').value);
+
+      if (nominal <= 0) return showToast('Nominal pengeluaran harus lebih dari 0!', 'error');
+
+      const payload = {
+        tanggal,
+        kategori,
+        keterangan,
+        nominal,
+        createdAt: id && window.appState.kasKeluar[id]?.createdAt ? window.appState.kasKeluar[id].createdAt : Date.now(),
+        createdBy: window.appState.currentUser?.role || 'bendahara',
+        updatedAt: Date.now()
+      };
+
+      setButtonLoading(submitBtn, true, 'Simpan Data');
+
+      try {
+        if (window.dbRef && window.appState.isFirebaseConnected) {
+          if (id) {
+            await window.dbRef.update(window.dbRef.ref(window.dbRef.db, `kelasVIIIB/kasKeluar/${id}`), payload);
+            showToast('Data kas keluar berhasil diperbarui!');
+          } else {
+            await window.dbRef.push(window.dbRef.ref(window.dbRef.db, 'kelasVIIIB/kasKeluar'), payload);
+            showToast('Data kas keluar berhasil disimpan!');
+          }
+        } else {
+          const localId = id || 'kk_' + Date.now();
+          window.appState.kasKeluar[localId] = payload;
+          refreshAllViews();
+          showToast('Data disimpan secara lokal (Mode Offline)');
+        }
+        closeKasKeluarModal();
+      } catch (e) {
+        console.error('Error saving kas keluar:', e);
+        showToast(`Gagal menyimpan data: ${e.message || 'Terjadi gangguan koneksi'}`, 'error');
+      } finally {
+        setButtonLoading(submitBtn, false, 'Simpan Data');
+      }
+    }
+
+    function deleteKasKeluar(id) {
+      openConfirmModal('Konfirmasi Hapus Kas Keluar', 'Apakah Anda yakin ingin menghapus pengeluaran ini?', async () => {
+        try {
+          if (window.dbRef && window.appState.isFirebaseConnected) {
+            await window.dbRef.remove(window.dbRef.ref(window.dbRef.db, `kelasVIIIB/kasKeluar/${id}`));
+          } else {
+            delete window.appState.kasKeluar[id];
+            refreshAllViews();
+          }
+          showToast('Data pengeluaran berhasil dihapus');
+        } catch (e) {
+          console.error('Error deleting kas keluar:', e);
+          showToast(`Gagal menghapus data: ${e.message || 'Kesalahan jaringan'}`, 'error');
+        }
+      });
+    }
+
+    // Modal Siswa Actions
+    function openSiswaModal() {
+      document.getElementById('form-siswa').reset();
+      document.getElementById('siswa-id').value = '';
+      document.getElementById('modal-siswa-title').innerText = 'Tambah Siswa';
+      document.getElementById('modal-siswa').classList.remove('hidden');
+    }
+
+    function closeSiswaModal() {
+      document.getElementById('modal-siswa').classList.add('hidden');
+    }
+
+    function editSiswa(id) {
+      const item = window.appState.siswa[id];
+      if (!item) return;
+
+      openSiswaModal();
+      document.getElementById('modal-siswa-title').innerText = 'Edit Data Siswa';
+      document.getElementById('siswa-id').value = id;
+      document.getElementById('siswa-no-absen').value = item.nomorAbsen || '';
+      document.getElementById('siswa-nama').value = item.nama || '';
+    }
+
+    async function saveSiswa(event) {
+      event.preventDefault();
+      const submitBtn = document.getElementById('btn-save-siswa');
+      const id = document.getElementById('siswa-id').value;
+      const nomorAbsen = parseInt(document.getElementById('siswa-no-absen').value, 10);
+      const nama = document.getElementById('siswa-nama').value.trim();
+
+      if (!nomorAbsen || nomorAbsen < 1) return showToast('Nomor absen harus diisi dengan angka valid!', 'error');
+      if (!nama) return showToast('Nama siswa wajib diisi!', 'error');
+
+      const duplicate = Object.entries(window.appState.siswa).find(([sId, s]) => sId !== id && Number(s.nomorAbsen) === nomorAbsen);
+      if (duplicate) {
+        return showToast(`Nomor Absen ${nomorAbsen} telah digunakan oleh ${duplicate[1].nama}!`, 'error');
+      }
+
+      const payload = {
+        nomorAbsen,
+        nama,
+        status: 'Aktif',
+        updatedAt: Date.now()
+      };
+
+      setButtonLoading(submitBtn, true, 'Simpan Siswa');
+
+      try {
+        if (window.dbRef && window.appState.isFirebaseConnected) {
+          if (id) {
+            await window.dbRef.update(window.dbRef.ref(window.dbRef.db, `kelasVIIIB/siswa/${id}`), payload);
+            showToast('Data siswa berhasil diperbarui!');
+          } else {
+            await window.dbRef.push(window.dbRef.ref(window.dbRef.db, 'kelasVIIIB/siswa'), payload);
+            showToast('Data siswa berhasil ditambahkan!');
+          }
+        } else {
+          const localId = id || 's_' + Date.now();
+          window.appState.siswa[localId] = payload;
+          refreshAllViews();
+          showToast('Siswa disimpan secara lokal (Mode Offline)');
+        }
+        closeSiswaModal();
+      } catch (e) {
+        console.error('Error saving siswa:', e);
+        showToast(`Gagal menyimpan siswa: ${e.message || 'Terjadi kesalahan jaringan'}`, 'error');
+      } finally {
+        setButtonLoading(submitBtn, false, 'Simpan Siswa');
+      }
+    }
+
+    function deleteSiswa(id) {
+      const siswa = window.appState.siswa[id];
+      const namaSiswa = siswa ? siswa.nama : 'siswa ini';
+
+      openConfirmModal('Konfirmasi Hapus Siswa', `Apakah Anda yakin ingin menghapus ${namaSiswa} dari daftar kelas?`, async () => {
+        try {
+          if (window.dbRef && window.appState.isFirebaseConnected) {
+            await window.dbRef.remove(window.dbRef.ref(window.dbRef.db, `kelasVIIIB/siswa/${id}`));
+          } else {
+            delete window.appState.siswa[id];
+            refreshAllViews();
+          }
+          showToast('Siswa berhasil dihapus');
+        } catch (e) {
+          console.error('Error deleting siswa:', e);
+          showToast(`Gagal menghapus siswa: ${e.message || 'Kesalahan jaringan'}`, 'error');
+        }
+      });
+    }
+
+    // Confirm Modal Logic
+    function openConfirmModal(title, message, callback) {
+      document.getElementById('confirm-title').innerText = title;
+      document.getElementById('confirm-message').innerText = message;
+      pendingConfirmAction = callback;
+      document.getElementById('modal-confirm').classList.remove('hidden');
+
+      const btnExecute = document.getElementById('btn-confirm-execute');
+      btnExecute.onclick = async () => {
+        if (pendingConfirmAction) await pendingConfirmAction();
+        closeConfirmModal();
+      };
+    }
+
+    function closeConfirmModal() {
+      document.getElementById('modal-confirm').classList.add('hidden');
+      pendingConfirmAction = null;
+    }
+
+    // App Initialization on Load
+    document.addEventListener('DOMContentLoaded', () => {
+      checkSession();
+      showLoading(true, 'Menghubungkan ke Realtime Database...');
+    });
+  </script>
+
+  <!-- FIREBASE REALTIME DATABASE MODULE INTEGRATION -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getDatabase, ref, onValue, set, push, update, remove } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBk8rEYzpHRlSdtza2B_iek_1yQ-danrqE",
+      authDomain: "absen-iiz.firebaseapp.com",
+      databaseURL: "https://absen-iiz-default-rtdb.firebaseio.com",
+      projectId: "absen-iiz",
+      storageBucket: "absen-iiz.firebasestorage.app",
+      messagingSenderId: "14091466845",
+      appId: "1:14091466845:web:2c7e8320acf0f5759575b4"
+    };
+
+    try {
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      window.dbRef = { ref, set, push, update, remove, db };
+
+      const refSiswa = ref(db, 'kelasVIIIB/siswa');
+      const refKasMasuk = ref(db, 'kelasVIIIB/kasMasuk');
+      const refKasKeluar = ref(db, 'kelasVIIIB/kasKeluar');
+
+      let initialLoadComplete = false;
+
+      const connectionTimeout = setTimeout(() => {
+        if (!initialLoadComplete) {
+          console.warn('Realtime database timeout. Berjalan dengan status ter-cache.');
+          showLoading(false);
+          refreshAllViews();
+        }
+      }, 4000);
+
+      onValue(refSiswa, (snapshot) => {
+        initialLoadComplete = true;
+        clearTimeout(connectionTimeout);
+        const val = snapshot.val();
+        window.appState.siswa = val || {};
+        window.appState.isFirebaseConnected = true;
+        refreshAllViews();
+        showLoading(false);
+      }, (error) => {
+        console.warn('Firebase error:', error);
+        showLoading(false);
+        refreshAllViews();
+      });
+
+      onValue(refKasMasuk, (snapshot) => {
+        const val = snapshot.val();
+        window.appState.kasMasuk = val || {};
+        refreshAllViews();
+      });
+
+      onValue(refKasKeluar, (snapshot) => {
+        const val = snapshot.val();
+        window.appState.kasKeluar = val || {};
+        refreshAllViews();
+      });
+
+    } catch (err) {
+      console.warn('Firebase init fallback:', err);
+      showLoading(false);
+      refreshAllViews();
+    }
+  </script>
+</body>
+</html>
