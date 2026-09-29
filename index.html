@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Kas Kelas VII B</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -13,20 +14,156 @@
   >
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
       font-family: Arial, Helvetica, sans-serif;
       background: #f5f7fb;
       color: #1f2937;
     }
 
+    /* =========================
+       LOGIN
+    ========================= */
+
+    #loginPage {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 390px;
+      background: white;
+      border-radius: 20px;
+      padding: 30px 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.18);
+    }
+
+    .login-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px auto;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .login-logo i {
+      font-size: 28px;
+    }
+
+    .login-title {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .login-title h1 {
+      margin: 0;
+      font-size: 23px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .login-title p {
+      margin: 6px 0 0;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    .login-field {
+      margin-bottom: 16px;
+    }
+
+    .login-field label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .login-input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .login-input-wrapper i {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .login-input {
+      width: 100%;
+      height: 45px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      padding: 0 13px 0 40px;
+      outline: none;
+      font-size: 14px;
+      background: white;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+    }
+
+    .login-button {
+      width: 100%;
+      height: 45px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    .login-button:hover {
+      background: #1d4ed8;
+    }
+
+    /* =========================
+       SIDEBAR
+    ========================= */
+
     .sidebar {
       transition: transform .25s ease;
     }
+
+    /* =========================
+       MODAL
+    ========================= */
 
     .modal {
       display: none;
@@ -36,27 +173,27 @@
       display: flex;
     }
 
+    /* =========================
+       TOAST
+    ========================= */
+
     .toast {
-      transform: translateY(-20px);
       opacity: 0;
+      transform: translateY(-15px);
       pointer-events: none;
-      transition: all .25s ease;
+      transition: .25s;
     }
 
     .toast.show {
-      transform: translateY(0);
       opacity: 1;
+      transform: translateY(0);
     }
 
-    .loading {
-      display: none;
-    }
+    /* =========================
+       MOBILE
+    ========================= */
 
-    .loading.active {
-      display: flex;
-    }
-
-    @media (max-width: 640px) {
+    @media(max-width:640px) {
 
       html {
         font-size: 13px;
@@ -66,26 +203,55 @@
         font-size: 13px;
       }
 
-      .sidebar {
-        width: 245px !important;
+      #loginPage {
+        padding: 15px;
       }
 
-      .desktop-title {
-        font-size: 16px !important;
+      .login-card {
+        max-width: 360px;
+        padding: 25px 19px;
+        border-radius: 17px;
       }
 
-      .mobile-small {
-        font-size: 11px !important;
+      .login-logo {
+        width: 62px;
+        height: 62px;
+        border-radius: 16px;
+        margin-bottom: 15px;
       }
 
-      input,
-      select,
-      textarea {
-        font-size: 13px !important;
-        padding: 8px 10px !important;
+      .login-logo i {
+        font-size: 24px;
       }
 
-      button {
+      .login-title {
+        margin-bottom: 20px;
+      }
+
+      .login-title h1 {
+        font-size: 20px;
+      }
+
+      .login-title p {
+        font-size: 11px;
+      }
+
+      .login-field {
+        margin-bottom: 13px;
+      }
+
+      .login-field label {
+        font-size: 12px;
+        margin-bottom: 5px;
+      }
+
+      .login-input {
+        height: 42px;
+        font-size: 12px;
+      }
+
+      .login-button {
+        height: 42px;
         font-size: 12px;
       }
 
@@ -98,98 +264,77 @@
         padding: 7px 6px !important;
       }
 
-      .card-number {
-        font-size: 20px !important;
-      }
-
-      .modal-box {
-        width: calc(100% - 20px) !important;
-        margin: 10px;
-      }
-
       .page-container {
         padding: 10px !important;
       }
 
-      .dashboard-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      .sidebar {
+        width: 245px !important;
       }
 
-      .desktop-only {
-        display: none !important;
+      .modal-box {
+        width: calc(100% - 20px) !important;
+        max-width: 390px !important;
+        margin: 10px;
+      }
+
+      input,
+      select,
+      textarea {
+        font-size: 12px !important;
+      }
+
+      button {
+        font-size: 12px;
       }
     }
 
-    @media (min-width: 641px) {
-      .mobile-only {
-        display: none !important;
-      }
-    }
   </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     LOADING
-========================================================= -->
-<div
-  id="loading"
-  class="loading fixed inset-0 z-[100] bg-black/40 items-center justify-center"
->
-  <div class="bg-white rounded-xl px-6 py-5 shadow-xl text-center">
-    <i class="fa-solid fa-spinner fa-spin text-blue-600 text-2xl mb-2"></i>
-    <div class="text-sm font-semibold">Memuat data...</div>
-  </div>
-</div>
-
 
 <!-- =========================================================
      LOGIN
 ========================================================= -->
-<div
-  id="loginPage"
-  class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-blue-700 to-indigo-900"
->
 
-  <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-7">
+<div id="loginPage">
 
-    <div class="text-center mb-7">
+  <div class="login-card">
 
-      <div
-        class="mx-auto w-16 h-16 rounded-2xl bg-blue-600 text-white flex items-center justify-center mb-4"
-      >
-        <i class="fa-solid fa-wallet text-2xl"></i>
-      </div>
+    <div class="login-logo">
+      <i class="fa-solid fa-wallet"></i>
+    </div>
 
-      <h1 class="text-2xl font-bold text-gray-800">
-        Kas Kelas VII B
-      </h1>
+    <div class="login-title">
 
-      <p class="text-gray-500 text-sm mt-1">
+      <h1>Kas Kelas VII B</h1>
+
+      <p>
         Sistem Pengelolaan Uang Kas Kelas
       </p>
 
     </div>
 
+
     <form id="loginForm">
 
-      <div class="mb-4">
+      <div class="login-field">
 
-        <label class="block text-sm font-semibold mb-1">
+        <label>
           Username
         </label>
 
-        <div class="relative">
+        <div class="login-input-wrapper">
 
-          <i
-            class="fa-solid fa-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-          ></i>
+          <i class="fa-solid fa-user"></i>
 
           <input
             id="username"
+            class="login-input"
             type="text"
-            class="w-full border rounded-lg pl-10 pr-3 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+            autocomplete="username"
             placeholder="Masukkan username"
             required
           >
@@ -199,22 +344,21 @@
       </div>
 
 
-      <div class="mb-5">
+      <div class="login-field">
 
-        <label class="block text-sm font-semibold mb-1">
+        <label>
           Password
         </label>
 
-        <div class="relative">
+        <div class="login-input-wrapper">
 
-          <i
-            class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-          ></i>
+          <i class="fa-solid fa-lock"></i>
 
           <input
             id="password"
+            class="login-input"
             type="password"
-            class="w-full border rounded-lg pl-10 pr-3 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+            autocomplete="current-password"
             placeholder="Masukkan password"
             required
           >
@@ -226,7 +370,7 @@
 
       <button
         type="submit"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg"
+        class="login-button"
       >
         <i class="fa-solid fa-right-to-bracket mr-2"></i>
         Masuk
@@ -234,21 +378,28 @@
 
     </form>
 
-    <div class="mt-5 text-center text-xs text-gray-400">
+
+    <div class="text-center text-xs text-gray-400 mt-5">
       Kas Kelas VII B
     </div>
 
   </div>
+
 </div>
 
 
 <!-- =========================================================
-     MAIN APP
+     APPLICATION
 ========================================================= -->
-<div id="app" class="hidden min-h-screen">
+
+<div
+  id="app"
+  class="hidden min-h-screen"
+>
 
 
   <!-- SIDEBAR -->
+
   <aside
     id="sidebar"
     class="sidebar fixed z-50 top-0 left-0 h-full w-64 bg-white border-r shadow-sm -translate-x-full lg:translate-x-0"
@@ -263,13 +414,15 @@
       </div>
 
       <div>
-        <div class="font-bold text-gray-800">
+
+        <div class="font-bold">
           Kas Kelas
         </div>
 
         <div class="text-xs text-gray-400">
           VII B
         </div>
+
       </div>
 
     </div>
@@ -278,7 +431,7 @@
     <div class="p-3">
 
       <div class="text-[10px] uppercase text-gray-400 font-bold px-3 py-2">
-        Menu Utama
+        Menu
       </div>
 
 
@@ -329,7 +482,7 @@
       <div class="flex items-center gap-3 mb-3">
 
         <div
-          class="w-9 h-9 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center"
+          class="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center"
         >
           <i class="fa-solid fa-user"></i>
         </div>
@@ -365,7 +518,8 @@
   </aside>
 
 
-  <!-- OVERLAY MOBILE -->
+  <!-- OVERLAY -->
+
   <div
     id="sidebarOverlay"
     onclick="closeSidebar()"
@@ -374,10 +528,12 @@
 
 
   <!-- CONTENT -->
+
   <div class="lg:ml-64 min-h-screen">
 
 
     <!-- NAVBAR -->
+
     <header
       class="h-16 bg-white border-b sticky top-0 z-30 flex items-center justify-between px-4 lg:px-6"
     >
@@ -385,11 +541,10 @@
       <div class="flex items-center gap-3">
 
         <!-- GARIS TIGA -->
+
         <button
-          id="mobileMenuButton"
           onclick="toggleSidebar()"
           class="lg:hidden w-9 h-9 rounded-lg hover:bg-gray-100 flex items-center justify-center"
-          aria-label="Buka menu"
         >
           <i class="fa-solid fa-bars text-lg"></i>
         </button>
@@ -399,12 +554,12 @@
 
           <h1
             id="pageTitle"
-            class="desktop-title font-bold text-lg text-gray-800"
+            class="font-bold text-lg"
           >
             Beranda
           </h1>
 
-          <div class="text-[11px] text-gray-400">
+          <div class="text-[10px] text-gray-400">
             Pengelolaan Kas Kelas VII B
           </div>
 
@@ -417,16 +572,21 @@
 
         <div
           id="firebaseStatus"
-          class="flex items-center gap-1 text-green-600 text-xs"
+          class="flex items-center gap-1 text-xs"
         >
-          <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-          <span class="desktop-only">Terhubung</span>
+          <span
+            class="w-2 h-2 bg-gray-400 rounded-full"
+          ></span>
+
+          <span class="hidden sm:block">
+            Menghubungkan...
+          </span>
+
         </div>
 
 
-        <div
-          class="hidden sm:flex items-center gap-2 bg-gray-50 px-3 py-2 rounded-lg"
-        >
+        <div class="hidden sm:flex items-center gap-2">
+
           <i class="fa-solid fa-user text-gray-400"></i>
 
           <span
@@ -435,6 +595,7 @@
           >
             Bendahara
           </span>
+
         </div>
 
       </div>
@@ -442,9 +603,10 @@
     </header>
 
 
-    <!-- PAGE -->
-    <main id="pageContent" class="page-container p-5 lg:p-6">
-    </main>
+    <main
+      id="pageContent"
+      class="page-container p-5 lg:p-6"
+    ></main>
 
   </div>
 
@@ -454,6 +616,7 @@
 <!-- =========================================================
      MODAL KAS MASUK
 ========================================================= -->
+
 <div
   id="modalKasMasuk"
   class="modal fixed inset-0 z-[80] bg-black/40 items-center justify-center p-4"
@@ -461,26 +624,28 @@
 
   <div class="modal-box bg-white rounded-xl shadow-xl w-full max-w-lg">
 
-    <div class="flex items-center justify-between border-b px-5 py-4">
+    <div class="flex justify-between items-center border-b px-5 py-4">
 
       <h2
         id="modalKasMasukTitle"
-        class="font-bold text-lg"
+        class="font-bold"
       >
         Tambah Kas Masuk
       </h2>
 
       <button
         onclick="closeModal('modalKasMasuk')"
-        class="text-gray-400 hover:text-gray-700"
       >
-        <i class="fa-solid fa-xmark text-xl"></i>
+        <i class="fa-solid fa-xmark text-xl text-gray-400"></i>
       </button>
 
     </div>
 
 
-    <form id="formKasMasuk" class="p-5">
+    <form
+      id="formKasMasuk"
+      class="p-5"
+    >
 
       <div class="mb-4">
 
@@ -509,7 +674,11 @@
           required
           class="w-full border rounded-lg px-3 py-2.5"
         >
-          <option value="">Pilih siswa</option>
+
+          <option value="">
+            Pilih siswa
+          </option>
+
         </select>
 
       </div>
@@ -542,14 +711,14 @@
           type="number"
           min="1"
           required
-          class="w-full border rounded-lg px-3 py-2.5"
           placeholder="Contoh: 10000"
+          class="w-full border rounded-lg px-3 py-2.5"
         >
 
       </div>
 
 
-      <div class="flex gap-2 justify-end">
+      <div class="flex justify-end gap-2">
 
         <button
           type="button"
@@ -561,7 +730,7 @@
 
         <button
           type="submit"
-          class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold"
+          class="px-5 py-2 bg-blue-600 text-white rounded-lg font-semibold"
         >
           <i class="fa-solid fa-floppy-disk mr-1"></i>
           Simpan
@@ -572,12 +741,14 @@
     </form>
 
   </div>
+
 </div>
 
 
 <!-- =========================================================
      MODAL KAS KELUAR
 ========================================================= -->
+
 <div
   id="modalKasKeluar"
   class="modal fixed inset-0 z-[80] bg-black/40 items-center justify-center p-4"
@@ -585,26 +756,28 @@
 
   <div class="modal-box bg-white rounded-xl shadow-xl w-full max-w-lg">
 
-    <div class="flex items-center justify-between border-b px-5 py-4">
+    <div class="flex justify-between items-center border-b px-5 py-4">
 
       <h2
         id="modalKasKeluarTitle"
-        class="font-bold text-lg"
+        class="font-bold"
       >
         Tambah Kas Keluar
       </h2>
 
       <button
         onclick="closeModal('modalKasKeluar')"
-        class="text-gray-400 hover:text-gray-700"
       >
-        <i class="fa-solid fa-xmark text-xl"></i>
+        <i class="fa-solid fa-xmark text-xl text-gray-400"></i>
       </button>
 
     </div>
 
 
-    <form id="formKasKeluar" class="p-5">
+    <form
+      id="formKasKeluar"
+      class="p-5"
+    >
 
       <div class="mb-4">
 
@@ -633,7 +806,6 @@
           required
           rows="3"
           class="w-full border rounded-lg px-3 py-2.5"
-          placeholder="Contoh: Membeli alat kebersihan"
         ></textarea>
 
       </div>
@@ -657,7 +829,7 @@
       </div>
 
 
-      <div class="flex gap-2 justify-end">
+      <div class="flex justify-end gap-2">
 
         <button
           type="button"
@@ -669,7 +841,7 @@
 
         <button
           type="submit"
-          class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold"
+          class="px-5 py-2 bg-red-600 text-white rounded-lg font-semibold"
         >
           <i class="fa-solid fa-floppy-disk mr-1"></i>
           Simpan
@@ -680,12 +852,14 @@
     </form>
 
   </div>
+
 </div>
 
 
 <!-- =========================================================
      MODAL SISWA
 ========================================================= -->
+
 <div
   id="modalSiswa"
   class="modal fixed inset-0 z-[80] bg-black/40 items-center justify-center p-4"
@@ -693,26 +867,28 @@
 
   <div class="modal-box bg-white rounded-xl shadow-xl w-full max-w-lg">
 
-    <div class="flex items-center justify-between border-b px-5 py-4">
+    <div class="flex justify-between items-center border-b px-5 py-4">
 
       <h2
         id="modalSiswaTitle"
-        class="font-bold text-lg"
+        class="font-bold"
       >
         Tambah Siswa
       </h2>
 
       <button
         onclick="closeModal('modalSiswa')"
-        class="text-gray-400 hover:text-gray-700"
       >
-        <i class="fa-solid fa-xmark text-xl"></i>
+        <i class="fa-solid fa-xmark text-xl text-gray-400"></i>
       </button>
 
     </div>
 
 
-    <form id="formSiswa" class="p-5">
+    <form
+      id="formSiswa"
+      class="p-5"
+    >
 
       <div class="mb-4">
 
@@ -741,7 +917,6 @@
           id="siswaNis"
           type="text"
           class="w-full border rounded-lg px-3 py-2.5"
-          placeholder="Nomor induk siswa"
         >
 
       </div>
@@ -763,7 +938,7 @@
       </div>
 
 
-      <div class="flex gap-2 justify-end">
+      <div class="flex justify-end gap-2">
 
         <button
           type="button"
@@ -775,7 +950,7 @@
 
         <button
           type="submit"
-          class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold"
+          class="px-5 py-2 bg-blue-600 text-white rounded-lg font-semibold"
         >
           <i class="fa-solid fa-floppy-disk mr-1"></i>
           Simpan
@@ -786,24 +961,31 @@
     </form>
 
   </div>
-</div>
 
-
-<!-- TOAST -->
-<div
-  id="toast"
-  class="toast fixed top-5 right-5 z-[200] max-w-sm"
->
-  <div
-    id="toastContent"
-    class="bg-gray-900 text-white rounded-lg shadow-xl px-4 py-3 text-sm"
-  ></div>
 </div>
 
 
 <!-- =========================================================
-     JAVASCRIPT UTAMA
+     TOAST
 ========================================================= -->
+
+<div
+  id="toast"
+  class="toast fixed top-5 right-5 z-[200]"
+>
+
+  <div
+    id="toastContent"
+    class="bg-gray-900 text-white rounded-lg shadow-xl px-4 py-3 text-sm max-w-xs"
+  ></div>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
 
   /* =========================================================
@@ -822,44 +1004,48 @@
 
     kasMasuk: {},
 
-    kasKeluar: {},
-
-    isFirebaseConnected: false
+    kasKeluar: {}
 
   };
-
-
-  const KAS_PER_WEEK = 10000;
 
 
   /* =========================================================
      HELPER
   ========================================================= */
 
-  function rupiah(number) {
+  function rupiah(value) {
 
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      maximumFractionDigits: 0
-    }).format(Number(number) || 0);
+    return new Intl.NumberFormat(
+      "id-ID",
+      {
+        style: "currency",
+        currency: "IDR",
+        maximumFractionDigits: 0
+      }
+    ).format(Number(value) || 0);
 
   }
 
 
-  function formatTanggal(date) {
+  function formatTanggal(value) {
 
-    if (!date) return "-";
+    if (!value) return "-";
 
-    const d = new Date(date + "T00:00:00");
+    const d =
+      new Date(value + "T00:00:00");
 
-    if (isNaN(d)) return date;
+    if (isNaN(d.getTime())) {
+      return value;
+    }
 
-    return d.toLocaleDateString("id-ID", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric"
-    });
+    return d.toLocaleDateString(
+      "id-ID",
+      {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      }
+    );
 
   }
 
@@ -868,49 +1054,61 @@
 
     const d = new Date();
 
-    return d.toISOString().split("T")[0];
+    const month =
+      String(d.getMonth() + 1).padStart(2, "0");
+
+    const day =
+      String(d.getDate()).padStart(2, "0");
+
+    return `${d.getFullYear()}-${month}-${day}`;
 
   }
 
 
-  function showToast(message, type = "success") {
+  function escapeHtml(value) {
 
-    const toast = document.getElementById("toast");
-    const content = document.getElementById("toastContent");
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 
-    if (!toast || !content) return;
+  }
 
-    let icon = "fa-circle-check";
 
-    if (type === "error") {
-      icon = "fa-circle-exclamation";
-    }
+  function showToast(
+    message,
+    type = "success"
+  ) {
 
-    if (type === "warning") {
-      icon = "fa-triangle-exclamation";
-    }
+    const toast =
+      document.getElementById("toast");
+
+    const content =
+      document.getElementById("toastContent");
+
+
+    let icon =
+      type === "error"
+        ? "fa-circle-exclamation"
+        : "fa-circle-check";
+
 
     content.innerHTML = `
       <i class="fa-solid ${icon} mr-2"></i>
-      ${message}
+      ${escapeHtml(message)}
     `;
+
 
     toast.classList.add("show");
 
+
     setTimeout(() => {
+
       toast.classList.remove("show");
+
     }, 3000);
-
-  }
-
-
-  function showLoading(status) {
-
-    const loading = document.getElementById("loading");
-
-    if (!loading) return;
-
-    loading.classList.toggle("active", status);
 
   }
 
@@ -921,55 +1119,69 @@
 
   document
     .getElementById("loginForm")
-    .addEventListener("submit", function(event) {
+    .addEventListener(
+      "submit",
+      function(event) {
 
-      event.preventDefault();
+        event.preventDefault();
 
-      const username =
-        document.getElementById("username").value.trim();
 
-      const password =
-        document.getElementById("password").value;
+        const username =
+          document
+            .getElementById("username")
+            .value
+            .trim();
 
-      /*
-       * LOGIN SESUAI LOGIN LAMA
-       */
 
-      if (
-        username === "iissumirat123" &&
-        password === "112233"
-      ) {
+        const password =
+          document
+            .getElementById("password")
+            .value;
 
-        sessionStorage.setItem(
-          "kasKelasLogin",
-          username
-        );
 
-        window.appState.currentUser = username;
+        if (
+          username === "iissumirat123" &&
+          password === "112233"
+        ) {
 
-        openApp();
+          sessionStorage.setItem(
+            "kasKelasLogin",
+            username
+          );
 
-        return;
+
+          window.appState.currentUser =
+            username;
+
+
+          openApp();
+
+
+        } else {
+
+          showToast(
+            "Username atau password salah.",
+            "error"
+          );
+
+        }
 
       }
-
-
-      showToast(
-        "Username atau password salah.",
-        "error"
-      );
-
-    });
+    );
 
 
   function checkLogin() {
 
     const user =
-      sessionStorage.getItem("kasKelasLogin");
+      sessionStorage.getItem(
+        "kasKelasLogin"
+      );
+
 
     if (user) {
 
-      window.appState.currentUser = user;
+      window.appState.currentUser =
+        user;
 
       openApp();
 
@@ -984,15 +1196,23 @@
       .getElementById("loginPage")
       .classList.add("hidden");
 
+
     document
       .getElementById("app")
       .classList.remove("hidden");
 
-    document.getElementById("sidebarUser").textContent =
-      window.appState.currentUser || "Bendahara";
 
-    document.getElementById("navbarUser").textContent =
-      window.appState.currentUser || "Bendahara";
+    document
+      .getElementById("sidebarUser")
+      .textContent =
+      window.appState.currentUser;
+
+
+    document
+      .getElementById("navbarUser")
+      .textContent =
+      window.appState.currentUser;
+
 
     navigate("beranda");
 
@@ -1001,7 +1221,9 @@
 
   function logout() {
 
-    sessionStorage.removeItem("kasKelasLogin");
+    sessionStorage.removeItem(
+      "kasKelasLogin"
+    );
 
     location.reload();
 
@@ -1014,7 +1236,9 @@
 
   function navigate(page) {
 
-    window.appState.activeTab = page;
+    window.appState.activeTab =
+      page;
+
 
     const titles = {
 
@@ -1028,31 +1252,39 @@
 
     };
 
-    document.getElementById("pageTitle").textContent =
-      titles[page] || "Kas Kelas";
+
+    document
+      .getElementById("pageTitle")
+      .textContent =
+      titles[page];
 
 
-    document.querySelectorAll(".nav-btn").forEach(btn => {
+    document
+      .querySelectorAll(".nav-btn")
+      .forEach(button => {
 
-      const active =
-        btn.dataset.nav === page;
+        const active =
+          button.dataset.nav === page;
 
-      btn.classList.toggle(
-        "bg-blue-50",
-        active
-      );
 
-      btn.classList.toggle(
-        "text-blue-600",
-        active
-      );
+        button.classList.toggle(
+          "bg-blue-50",
+          active
+        );
 
-      btn.classList.toggle(
-        "font-semibold",
-        active
-      );
 
-    });
+        button.classList.toggle(
+          "text-blue-600",
+          active
+        );
+
+
+        button.classList.toggle(
+          "font-semibold",
+          active
+        );
+
+      });
 
 
     refreshAllViews();
@@ -1062,29 +1294,40 @@
   }
 
 
-  /* =========================================================
-     MOBILE SIDEBAR
-  ========================================================= */
-
   function toggleSidebar() {
 
     const sidebar =
-      document.getElementById("sidebar");
+      document.getElementById(
+        "sidebar"
+      );
+
 
     const overlay =
-      document.getElementById("sidebarOverlay");
+      document.getElementById(
+        "sidebarOverlay"
+      );
 
-    sidebar.classList.toggle("-translate-x-full");
+
+    sidebar.classList.toggle(
+      "-translate-x-full"
+    );
+
 
     if (
-      sidebar.classList.contains("-translate-x-full")
+      sidebar.classList.contains(
+        "-translate-x-full"
+      )
     ) {
 
-      overlay.classList.add("hidden");
+      overlay.classList.add(
+        "hidden"
+      );
 
     } else {
 
-      overlay.classList.remove("hidden");
+      overlay.classList.remove(
+        "hidden"
+      );
 
     }
 
@@ -1093,17 +1336,18 @@
 
   function closeSidebar() {
 
-    const sidebar =
-      document.getElementById("sidebar");
+    document
+      .getElementById("sidebar")
+      .classList.add(
+        "-translate-x-full"
+      );
 
-    const overlay =
-      document.getElementById("sidebarOverlay");
 
-    if (!sidebar) return;
-
-    sidebar.classList.add("-translate-x-full");
-
-    overlay.classList.add("hidden");
+    document
+      .getElementById("sidebarOverlay")
+      .classList.add(
+        "hidden"
+      );
 
   }
 
@@ -1114,24 +1358,18 @@
 
   function openModal(id) {
 
-    const modal =
-      document.getElementById(id);
-
-    if (!modal) return;
-
-    modal.classList.add("active");
+    document
+      .getElementById(id)
+      .classList.add("active");
 
   }
 
 
   function closeModal(id) {
 
-    const modal =
-      document.getElementById(id);
-
-    if (!modal) return;
-
-    modal.classList.remove("active");
+    document
+      .getElementById(id)
+      .classList.remove("active");
 
   }
 
@@ -1140,180 +1378,123 @@
      DASHBOARD
   ========================================================= */
 
-  function getTotalKasMasuk() {
+  function totalKasMasuk() {
 
-    return Object.values(
-      window.appState.kasMasuk
-    ).reduce(
-      (total, item) =>
-        total + Number(item.nominal || 0),
-      0
-    );
-
-  }
-
-
-  function getTotalKasKeluar() {
-
-    return Object.values(
-      window.appState.kasKeluar
-    ).reduce(
-      (total, item) =>
-        total + Number(item.nominal || 0),
-      0
-    );
+    return Object
+      .values(
+        window.appState.kasMasuk
+      )
+      .reduce(
+        (sum, item) =>
+          sum + Number(item.nominal || 0),
+        0
+      );
 
   }
 
 
-  function getSaldo() {
+  function totalKasKeluar() {
 
-    return (
-      getTotalKasMasuk() -
-      getTotalKasKeluar()
-    );
+    return Object
+      .values(
+        window.appState.kasKeluar
+      )
+      .reduce(
+        (sum, item) =>
+          sum + Number(item.nominal || 0),
+        0
+      );
 
   }
 
 
   function renderDashboard() {
 
-    const totalSiswa =
-      Object.keys(window.appState.siswa).length;
+    const siswa =
+      Object.keys(
+        window.appState.siswa
+      ).length;
+
 
     const masuk =
-      getTotalKasMasuk();
+      totalKasMasuk();
+
 
     const keluar =
-      getTotalKasKeluar();
+      totalKasKeluar();
+
 
     const saldo =
       masuk - keluar;
 
 
-    const recentMasuk =
-      Object.entries(window.appState.kasMasuk)
-        .sort(
-          (a, b) =>
-            Number(b[1].createdAt || 0) -
-            Number(a[1].createdAt || 0)
-        )
-        .slice(0, 5);
-
-
-    document.getElementById("pageContent").innerHTML = `
+    document
+      .getElementById("pageContent")
+      .innerHTML = `
 
       <div class="mb-5">
 
-        <h2 class="text-xl font-bold text-gray-800">
+        <h2 class="text-xl font-bold">
           Selamat Datang 👋
         </h2>
 
         <p class="text-gray-500 text-sm">
-          Berikut ringkasan keuangan kelas VII B.
+          Ringkasan keuangan kelas VII B.
         </p>
 
       </div>
 
 
-      <div class="dashboard-grid grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
 
 
-        <div class="bg-white rounded-xl border p-4">
+        <div class="bg-white border rounded-xl p-4">
 
-          <div class="flex items-center justify-between">
+          <div class="text-xs text-gray-400">
+            Total Siswa
+          </div>
 
-            <div>
-
-              <div class="text-xs text-gray-400">
-                Total Siswa
-              </div>
-
-              <div class="card-number text-2xl font-bold mt-1">
-                ${totalSiswa}
-              </div>
-
-            </div>
-
-            <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-              <i class="fa-solid fa-users"></i>
-            </div>
-
+          <div class="text-2xl font-bold mt-1">
+            ${siswa}
           </div>
 
         </div>
 
 
-        <div class="bg-white rounded-xl border p-4">
+        <div class="bg-white border rounded-xl p-4">
 
-          <div class="flex items-center justify-between">
+          <div class="text-xs text-gray-400">
+            Kas Masuk
+          </div>
 
-            <div>
-
-              <div class="text-xs text-gray-400">
-                Kas Masuk
-              </div>
-
-              <div class="card-number text-xl font-bold mt-1 text-green-600">
-                ${rupiah(masuk)}
-              </div>
-
-            </div>
-
-            <div class="w-10 h-10 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
-              <i class="fa-solid fa-arrow-down"></i>
-            </div>
-
+          <div class="text-lg font-bold text-green-600 mt-1">
+            ${rupiah(masuk)}
           </div>
 
         </div>
 
 
-        <div class="bg-white rounded-xl border p-4">
+        <div class="bg-white border rounded-xl p-4">
 
-          <div class="flex items-center justify-between">
+          <div class="text-xs text-gray-400">
+            Kas Keluar
+          </div>
 
-            <div>
-
-              <div class="text-xs text-gray-400">
-                Kas Keluar
-              </div>
-
-              <div class="card-number text-xl font-bold mt-1 text-red-600">
-                ${rupiah(keluar)}
-              </div>
-
-            </div>
-
-            <div class="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center">
-              <i class="fa-solid fa-arrow-up"></i>
-            </div>
-
+          <div class="text-lg font-bold text-red-600 mt-1">
+            ${rupiah(keluar)}
           </div>
 
         </div>
 
 
-        <div class="bg-white rounded-xl border p-4">
+        <div class="bg-white border rounded-xl p-4">
 
-          <div class="flex items-center justify-between">
+          <div class="text-xs text-gray-400">
+            Saldo
+          </div>
 
-            <div>
-
-              <div class="text-xs text-gray-400">
-                Saldo
-              </div>
-
-              <div class="card-number text-xl font-bold mt-1 text-blue-600">
-                ${rupiah(saldo)}
-              </div>
-
-            </div>
-
-            <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-              <i class="fa-solid fa-wallet"></i>
-            </div>
-
+          <div class="text-lg font-bold text-blue-600 mt-1">
+            ${rupiah(saldo)}
           </div>
 
         </div>
@@ -1321,190 +1502,53 @@
       </div>
 
 
-      <div class="grid lg:grid-cols-2 gap-5">
+      <div class="bg-white border rounded-xl">
 
+        <div class="p-4 border-b">
 
-        <div class="bg-white rounded-xl border">
-
-          <div class="p-4 border-b flex items-center justify-between">
-
-            <div>
-
-              <h3 class="font-bold">
-                Transaksi Terbaru
-              </h3>
-
-              <p class="text-xs text-gray-400">
-                Kas masuk terakhir
-              </p>
-
-            </div>
-
-            <button
-              onclick="navigate('kasMasuk')"
-              class="text-blue-600 text-xs font-semibold"
-            >
-              Lihat semua
-            </button>
-
-          </div>
-
-
-          <div class="overflow-x-auto">
-
-            <table class="w-full">
-
-              <thead class="bg-gray-50">
-
-                <tr>
-
-                  <th class="text-left px-4 py-3 text-xs text-gray-500">
-                    Siswa
-                  </th>
-
-                  <th class="text-left px-4 py-3 text-xs text-gray-500">
-                    Tanggal
-                  </th>
-
-                  <th class="text-right px-4 py-3 text-xs text-gray-500">
-                    Nominal
-                  </th>
-
-                </tr>
-
-              </thead>
-
-              <tbody>
-
-                ${
-                  recentMasuk.length === 0
-
-                  ? `
-                    <tr>
-                      <td
-                        colspan="3"
-                        class="text-center text-gray-400 py-8"
-                      >
-                        Belum ada transaksi
-                      </td>
-                    </tr>
-                  `
-
-                  :
-
-                  recentMasuk.map(([id, item]) => `
-
-                    <tr class="border-t">
-
-                      <td class="px-4 py-3">
-                        <div class="font-semibold text-sm">
-                          ${escapeHtml(item.namaSiswa || "-")}
-                        </div>
-
-                        <div class="text-[10px] text-gray-400">
-                          ${escapeHtml(item.keterangan || "")}
-                        </div>
-                      </td>
-
-                      <td class="px-4 py-3 text-xs">
-                        ${formatTanggal(item.tanggal)}
-                      </td>
-
-                      <td class="px-4 py-3 text-right font-semibold text-green-600">
-                        ${rupiah(item.nominal)}
-                      </td>
-
-                    </tr>
-
-                  `).join("")
-
-                }
-
-              </tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-
-        <div class="bg-white rounded-xl border p-5">
-
-          <h3 class="font-bold mb-1">
-            Informasi Kas
+          <h3 class="font-bold">
+            Ringkasan
           </h3>
 
-          <p class="text-xs text-gray-400 mb-5">
-            Ringkasan kondisi kas kelas.
-          </p>
+        </div>
+
+        <div class="p-4">
+
+          <div class="flex justify-between py-2 border-b">
+
+            <span class="text-sm">
+              Total pemasukan
+            </span>
+
+            <b class="text-green-600">
+              ${rupiah(masuk)}
+            </b>
+
+          </div>
 
 
-          <div class="space-y-4">
+          <div class="flex justify-between py-2 border-b">
 
-            <div>
+            <span class="text-sm">
+              Total pengeluaran
+            </span>
 
-              <div class="flex justify-between text-xs mb-1">
+            <b class="text-red-600">
+              ${rupiah(keluar)}
+            </b>
 
-                <span>
-                  Total Kas Masuk
-                </span>
-
-                <span class="font-semibold">
-                  ${rupiah(masuk)}
-                </span>
-
-              </div>
-
-              <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
-
-                <div
-                  class="h-full bg-green-500 rounded-full"
-                  style="width:${masuk > 0 ? 100 : 0}%"
-                ></div>
-
-              </div>
-
-            </div>
+          </div>
 
 
-            <div>
+          <div class="flex justify-between py-3">
 
-              <div class="flex justify-between text-xs mb-1">
+            <span class="font-semibold">
+              Saldo
+            </span>
 
-                <span>
-                  Total Kas Keluar
-                </span>
-
-                <span class="font-semibold">
-                  ${rupiah(keluar)}
-                </span>
-
-              </div>
-
-              <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
-
-                <div
-                  class="h-full bg-red-500 rounded-full"
-                  style="width:${keluar > 0 && masuk > 0 ? Math.min((keluar / masuk) * 100, 100) : 0}%"
-                ></div>
-
-              </div>
-
-            </div>
-
-
-            <div class="border-t pt-4">
-
-              <div class="text-xs text-gray-400">
-                Saldo saat ini
-              </div>
-
-              <div class="text-2xl font-bold text-blue-600 mt-1">
-                ${rupiah(saldo)}
-              </div>
-
-            </div>
+            <b class="text-blue-600">
+              ${rupiah(saldo)}
+            </b>
 
           </div>
 
@@ -1513,945 +1557,6 @@
       </div>
 
     `;
-
-  }
-
-
-  /* =========================================================
-     KAS MASUK
-  ========================================================= */
-
-  function renderKasMasuk() {
-
-    const data =
-      Object.entries(window.appState.kasMasuk)
-        .sort(
-          (a, b) =>
-            Number(b[1].createdAt || 0) -
-            Number(a[1].createdAt || 0)
-        );
-
-
-    document.getElementById("pageContent").innerHTML = `
-
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
-
-        <div>
-
-          <h2 class="text-xl font-bold">
-            Kas Masuk
-          </h2>
-
-          <p class="text-xs text-gray-400">
-            Semua pemasukan kas kelas
-          </p>
-
-        </div>
-
-
-        <button
-          onclick="prepareKasMasuk()"
-          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg font-semibold"
-        >
-          <i class="fa-solid fa-plus mr-1"></i>
-          Tambah Kas Masuk
-        </button>
-
-      </div>
-
-
-      <div class="bg-white rounded-xl border overflow-hidden">
-
-        <div class="overflow-x-auto">
-
-          <table class="w-full">
-
-            <thead class="bg-gray-50">
-
-              <tr>
-
-                <th class="text-left px-4 py-3 text-xs text-gray-500">
-                  No
-                </th>
-
-                <th class="text-left px-4 py-3 text-xs text-gray-500">
-                  Tanggal
-                </th>
-
-                <th class="text-left px-4 py-3 text-xs text-gray-500">
-                  Siswa
-                </th>
-
-                <th class="text-left px-4 py-3 text-xs text-gray-500">
-                  Keterangan
-                </th>
-
-                <th class="text-right px-4 py-3 text-xs text-gray-500">
-                  Nominal
-                </th>
-
-                <th class="text-center px-4 py-3 text-xs text-gray-500">
-                  Aksi
-                </th>
-
-              </tr>
-
-            </thead>
-
-
-            <tbody>
-
-              ${
-                data.length === 0
-
-                ? `
-                  <tr>
-                    <td colspan="6"
-                      class="text-center py-10 text-gray-400">
-                      Belum ada data kas masuk.
-                    </td>
-                  </tr>
-                `
-
-                :
-
-                data.map(([id, item], index) => `
-
-                  <tr class="border-t hover:bg-gray-50">
-
-                    <td class="px-4 py-3 text-xs">
-                      ${index + 1}
-                    </td>
-
-                    <td class="px-4 py-3 text-xs">
-                      ${formatTanggal(item.tanggal)}
-                    </td>
-
-                    <td class="px-4 py-3">
-
-                      <div class="font-semibold text-sm">
-                        ${escapeHtml(item.namaSiswa || "-")}
-                      </div>
-
-                    </td>
-
-                    <td class="px-4 py-3 text-xs text-gray-500">
-                      ${escapeHtml(item.keterangan || "-")}
-                    </td>
-
-                    <td class="px-4 py-3 text-right font-semibold text-green-600">
-                      ${rupiah(item.nominal)}
-                    </td>
-
-                    <td class="px-4 py-3">
-
-                      <div class="flex justify-center gap-1">
-
-                        <button
-                          onclick="editKasMasuk('${id}')"
-                          class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600"
-                          title="Edit"
-                        >
-                          <i class="fa-solid fa-pen text-xs"></i>
-                        </button>
-
-                        <button
-                          onclick="deleteKasMasuk('${id}')"
-                          class="w-8 h-8 rounded-lg bg-red-50 text-red-600"
-                          title="Hapus"
-                        >
-                          <i class="fa-solid fa-trash text-xs"></i>
-                        </button>
-
-                      </div>
-
-                    </td>
-
-                  </tr>
-
-                `).join("")
-
-              }
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  function prepareKasMasuk() {
-
-    const form =
-      document.getElementById("formKasMasuk");
-
-    form.reset();
-
-    delete form.dataset.editId;
-
-    document.getElementById(
-      "kasMasukTanggal"
-    ).value = today();
-
-    document.getElementById(
-      "kasMasukKeterangan"
-    ).value = "Pembayaran kas";
-
-    document.getElementById(
-      "modalKasMasukTitle"
-    ).textContent = "Tambah Kas Masuk";
-
-    populateSiswaSelect();
-
-    openModal("modalKasMasuk");
-
-  }
-
-
-  function populateSiswaSelect(selected = "") {
-
-    const select =
-      document.getElementById("kasMasukSiswa");
-
-    const siswa =
-      Object.entries(window.appState.siswa)
-        .sort((a, b) =>
-          String(a[1].nama || "")
-            .localeCompare(
-              String(b[1].nama || ""),
-              "id"
-            )
-        );
-
-    select.innerHTML =
-      `<option value="">Pilih siswa</option>` +
-
-      siswa.map(([id, item]) => `
-
-        <option
-          value="${escapeAttribute(id)}"
-          ${id === selected ? "selected" : ""}
-        >
-          ${escapeHtml(item.nama || "-")}
-        </option>
-
-      `).join("");
-
-  }
-
-
-  async function saveKasMasuk(event) {
-
-    event.preventDefault();
-
-    const form = event.target;
-
-    const id =
-      form.dataset.editId || "";
-
-    const tanggal =
-      document.getElementById(
-        "kasMasukTanggal"
-      ).value;
-
-    const siswaId =
-      document.getElementById(
-        "kasMasukSiswa"
-      ).value;
-
-    const keterangan =
-      document.getElementById(
-        "kasMasukKeterangan"
-      ).value.trim();
-
-    const nominal =
-      Number(
-        document.getElementById(
-          "kasMasukNominal"
-        ).value
-      );
-
-
-    if (!tanggal || !siswaId || !nominal) {
-
-      showToast(
-        "Lengkapi data terlebih dahulu.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    if (!window.dbRef?.db) {
-
-      showToast(
-        "Firebase belum siap.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    if (!window.appState.isFirebaseConnected) {
-
-      showToast(
-        "Firebase sedang tidak terhubung.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    const siswa =
-      window.appState.siswa[siswaId];
-
-
-    const payload = {
-
-      tanggal,
-
-      siswaId,
-
-      namaSiswa:
-        siswa?.nama || "",
-
-      keterangan:
-        keterangan || "Pembayaran kas",
-
-      nominal,
-
-      updatedAt:
-        Date.now(),
-
-      createdBy:
-        window.appState.currentUser ||
-        "bendahara"
-
-    };
-
-
-    try {
-
-      const db =
-        window.dbRef.db;
-
-
-      if (id) {
-
-        await window.dbRef.update(
-
-          window.dbRef.ref(
-            db,
-            `kelasVIIIB/kasMasuk/${id}`
-          ),
-
-          payload
-
-        );
-
-
-        showToast(
-          "Kas masuk berhasil diperbarui.",
-          "success"
-        );
-
-      } else {
-
-        payload.createdAt =
-          Date.now();
-
-
-        const newRef =
-          window.dbRef.push(
-            window.dbRef.ref(
-              db,
-              "kelasVIIIB/kasMasuk"
-            )
-          );
-
-
-        await window.dbRef.set(
-          newRef,
-          payload
-        );
-
-
-        showToast(
-          "Kas masuk berhasil disimpan.",
-          "success"
-        );
-
-      }
-
-
-      form.reset();
-
-      delete form.dataset.editId;
-
-      closeModal("modalKasMasuk");
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      showToast(
-        "Gagal menyimpan ke Firebase: " +
-        error.message,
-        "error"
-      );
-
-    }
-
-  }
-
-
-  function editKasMasuk(id) {
-
-    const item =
-      window.appState.kasMasuk[id];
-
-    if (!item) return;
-
-
-    const form =
-      document.getElementById("formKasMasuk");
-
-
-    form.dataset.editId = id;
-
-
-    populateSiswaSelect(
-      item.siswaId || ""
-    );
-
-
-    document.getElementById(
-      "kasMasukTanggal"
-    ).value =
-      item.tanggal || "";
-
-
-    document.getElementById(
-      "kasMasukKeterangan"
-    ).value =
-      item.keterangan || "";
-
-
-    document.getElementById(
-      "kasMasukNominal"
-    ).value =
-      item.nominal || "";
-
-
-    document.getElementById(
-      "modalKasMasukTitle"
-    ).textContent =
-      "Edit Kas Masuk";
-
-
-    openModal("modalKasMasuk");
-
-  }
-
-
-  async function deleteKasMasuk(id) {
-
-    if (!confirm(
-      "Yakin ingin menghapus transaksi ini?"
-    )) {
-      return;
-    }
-
-
-    if (!window.dbRef?.db) {
-
-      showToast(
-        "Firebase belum siap.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    try {
-
-      await window.dbRef.remove(
-
-        window.dbRef.ref(
-          window.dbRef.db,
-          `kelasVIIIB/kasMasuk/${id}`
-        )
-
-      );
-
-
-      showToast(
-        "Kas masuk berhasil dihapus.",
-        "success"
-      );
-
-    } catch (error) {
-
-      console.error(error);
-
-      showToast(
-        "Gagal menghapus data.",
-        "error"
-      );
-
-    }
-
-  }
-
-
-  /* =========================================================
-     KAS KELUAR
-  ========================================================= */
-
-  function renderKasKeluar() {
-
-    const data =
-      Object.entries(window.appState.kasKeluar)
-        .sort(
-          (a, b) =>
-            Number(b[1].createdAt || 0) -
-            Number(a[1].createdAt || 0)
-        );
-
-
-    document.getElementById("pageContent").innerHTML = `
-
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
-
-        <div>
-
-          <h2 class="text-xl font-bold">
-            Kas Keluar
-          </h2>
-
-          <p class="text-xs text-gray-400">
-            Semua pengeluaran kas kelas
-          </p>
-
-        </div>
-
-
-        <button
-          onclick="prepareKasKeluar()"
-          class="bg-red-600 hover:bg-red-700 text-white px-4 py-2.5 rounded-lg font-semibold"
-        >
-          <i class="fa-solid fa-plus mr-1"></i>
-          Tambah Kas Keluar
-        </button>
-
-      </div>
-
-
-      <div class="bg-white rounded-xl border overflow-hidden">
-
-        <div class="overflow-x-auto">
-
-          <table class="w-full">
-
-            <thead class="bg-gray-50">
-
-              <tr>
-
-                <th class="text-left px-4 py-3 text-xs text-gray-500">
-                  No
-                </th>
-
-                <th class="text-left px-4 py-3 text-xs text-gray-500">
-                  Tanggal
-                </th>
-
-                <th class="text-left px-4 py-3 text-xs text-gray-500">
-                  Keterangan
-                </th>
-
-                <th class="text-right px-4 py-3 text-xs text-gray-500">
-                  Nominal
-                </th>
-
-                <th class="text-center px-4 py-3 text-xs text-gray-500">
-                  Aksi
-                </th>
-
-              </tr>
-
-            </thead>
-
-
-            <tbody>
-
-              ${
-                data.length === 0
-
-                ? `
-                  <tr>
-                    <td colspan="5"
-                      class="text-center py-10 text-gray-400">
-                      Belum ada data kas keluar.
-                    </td>
-                  </tr>
-                `
-
-                :
-
-                data.map(([id, item], index) => `
-
-                  <tr class="border-t hover:bg-gray-50">
-
-                    <td class="px-4 py-3 text-xs">
-                      ${index + 1}
-                    </td>
-
-                    <td class="px-4 py-3 text-xs">
-                      ${formatTanggal(item.tanggal)}
-                    </td>
-
-                    <td class="px-4 py-3 text-sm">
-                      ${escapeHtml(item.keterangan || "-")}
-                    </td>
-
-                    <td class="px-4 py-3 text-right font-semibold text-red-600">
-                      ${rupiah(item.nominal)}
-                    </td>
-
-                    <td class="px-4 py-3">
-
-                      <div class="flex justify-center gap-1">
-
-                        <button
-                          onclick="editKasKeluar('${id}')"
-                          class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600"
-                        >
-                          <i class="fa-solid fa-pen text-xs"></i>
-                        </button>
-
-                        <button
-                          onclick="deleteKasKeluar('${id}')"
-                          class="w-8 h-8 rounded-lg bg-red-50 text-red-600"
-                        >
-                          <i class="fa-solid fa-trash text-xs"></i>
-                        </button>
-
-                      </div>
-
-                    </td>
-
-                  </tr>
-
-                `).join("")
-
-              }
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  function prepareKasKeluar() {
-
-    const form =
-      document.getElementById("formKasKeluar");
-
-    form.reset();
-
-    delete form.dataset.editId;
-
-    document.getElementById(
-      "kasKeluarTanggal"
-    ).value = today();
-
-    document.getElementById(
-      "modalKasKeluarTitle"
-    ).textContent =
-      "Tambah Kas Keluar";
-
-    openModal("modalKasKeluar");
-
-  }
-
-
-  async function saveKasKeluar(event) {
-
-    event.preventDefault();
-
-    const form = event.target;
-
-    const id =
-      form.dataset.editId || "";
-
-
-    const tanggal =
-      document.getElementById(
-        "kasKeluarTanggal"
-      ).value;
-
-
-    const keterangan =
-      document.getElementById(
-        "kasKeluarKeterangan"
-      ).value.trim();
-
-
-    const nominal =
-      Number(
-        document.getElementById(
-          "kasKeluarNominal"
-        ).value
-      );
-
-
-    if (
-      !tanggal ||
-      !keterangan ||
-      !nominal
-    ) {
-
-      showToast(
-        "Lengkapi data terlebih dahulu.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if (!window.dbRef?.db) {
-
-      showToast(
-        "Firebase belum siap.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if (!window.appState.isFirebaseConnected) {
-
-      showToast(
-        "Firebase sedang tidak terhubung.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const payload = {
-
-      tanggal,
-
-      keterangan,
-
-      nominal,
-
-      updatedAt:
-        Date.now(),
-
-      createdBy:
-        window.appState.currentUser ||
-        "bendahara"
-
-    };
-
-
-    try {
-
-      const db =
-        window.dbRef.db;
-
-
-      if (id) {
-
-        await window.dbRef.update(
-
-          window.dbRef.ref(
-            db,
-            `kelasVIIIB/kasKeluar/${id}`
-          ),
-
-          payload
-
-        );
-
-
-        showToast(
-          "Kas keluar berhasil diperbarui.",
-          "success"
-        );
-
-      } else {
-
-        payload.createdAt =
-          Date.now();
-
-
-        const newRef =
-          window.dbRef.push(
-
-            window.dbRef.ref(
-              db,
-              "kelasVIIIB/kasKeluar"
-            )
-
-          );
-
-
-        await window.dbRef.set(
-          newRef,
-          payload
-        );
-
-
-        showToast(
-          "Kas keluar berhasil disimpan.",
-          "success"
-        );
-
-      }
-
-
-      form.reset();
-
-      delete form.dataset.editId;
-
-      closeModal("modalKasKeluar");
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      showToast(
-        "Gagal menyimpan ke Firebase: " +
-        error.message,
-        "error"
-      );
-
-    }
-
-  }
-
-
-  function editKasKeluar(id) {
-
-    const item =
-      window.appState.kasKeluar[id];
-
-    if (!item) return;
-
-
-    const form =
-      document.getElementById(
-        "formKasKeluar"
-      );
-
-
-    form.dataset.editId = id;
-
-
-    document.getElementById(
-      "kasKeluarTanggal"
-    ).value =
-      item.tanggal || "";
-
-
-    document.getElementById(
-      "kasKeluarKeterangan"
-    ).value =
-      item.keterangan || "";
-
-
-    document.getElementById(
-      "kasKeluarNominal"
-    ).value =
-      item.nominal || "";
-
-
-    document.getElementById(
-      "modalKasKeluarTitle"
-    ).textContent =
-      "Edit Kas Keluar";
-
-
-    openModal("modalKasKeluar");
-
-  }
-
-
-  async function deleteKasKeluar(id) {
-
-    if (!confirm(
-      "Yakin ingin menghapus transaksi ini?"
-    )) {
-      return;
-    }
-
-
-    if (!window.dbRef?.db) {
-
-      showToast(
-        "Firebase belum siap.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    try {
-
-      await window.dbRef.remove(
-
-        window.dbRef.ref(
-          window.dbRef.db,
-          `kelasVIIIB/kasKeluar/${id}`
-        )
-
-      );
-
-
-      showToast(
-        "Kas keluar berhasil dihapus.",
-        "success"
-      );
-
-    } catch (error) {
-
-      console.error(error);
-
-      showToast(
-        "Gagal menghapus data.",
-        "error"
-      );
-
-    }
 
   }
 
@@ -2463,19 +1568,23 @@
   function renderSiswa() {
 
     const data =
-      Object.entries(window.appState.siswa)
-        .sort((a, b) =>
+      Object.entries(
+        window.appState.siswa
+      ).sort(
+        (a, b) =>
           String(a[1].nama || "")
             .localeCompare(
               String(b[1].nama || ""),
               "id"
             )
-        );
+      );
 
 
-    document.getElementById("pageContent").innerHTML = `
+    document
+      .getElementById("pageContent")
+      .innerHTML = `
 
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+      <div class="flex flex-col sm:flex-row justify-between gap-3 mb-5">
 
         <div>
 
@@ -2492,7 +1601,7 @@
 
         <button
           onclick="prepareSiswa()"
-          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg font-semibold"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold"
         >
           <i class="fa-solid fa-user-plus mr-1"></i>
           Tambah Siswa
@@ -2501,7 +1610,7 @@
       </div>
 
 
-      <div class="bg-white rounded-xl border overflow-hidden">
+      <div class="bg-white border rounded-xl overflow-hidden">
 
         <div class="overflow-x-auto">
 
@@ -2511,23 +1620,23 @@
 
               <tr>
 
-                <th class="text-left px-4 py-3 text-xs text-gray-500">
+                <th class="text-left px-4 py-3">
                   No
                 </th>
 
-                <th class="text-left px-4 py-3 text-xs text-gray-500">
+                <th class="text-left px-4 py-3">
                   Nama
                 </th>
 
-                <th class="text-left px-4 py-3 text-xs text-gray-500">
+                <th class="text-left px-4 py-3">
                   NIS
                 </th>
 
-                <th class="text-left px-4 py-3 text-xs text-gray-500">
+                <th class="text-left px-4 py-3">
                   Kelas
                 </th>
 
-                <th class="text-center px-4 py-3 text-xs text-gray-500">
+                <th class="text-center px-4 py-3">
                   Aksi
                 </th>
 
@@ -2543,74 +1652,66 @@
 
                 ? `
                   <tr>
-                    <td colspan="5"
-                      class="text-center py-10 text-gray-400">
+
+                    <td
+                      colspan="5"
+                      class="text-center py-10 text-gray-400"
+                    >
                       Belum ada siswa.
                     </td>
+
                   </tr>
                 `
 
                 :
 
-                data.map(([id, item], index) => `
+                data.map(
+                  ([id, item], index) => `
 
-                  <tr class="border-t hover:bg-gray-50">
+                    <tr class="border-t">
 
-                    <td class="px-4 py-3 text-xs">
-                      ${index + 1}
-                    </td>
+                      <td class="px-4 py-3">
+                        ${index + 1}
+                      </td>
 
-                    <td class="px-4 py-3">
+                      <td class="px-4 py-3 font-semibold">
+                        ${escapeHtml(item.nama)}
+                      </td>
 
-                      <div class="flex items-center gap-2">
+                      <td class="px-4 py-3">
+                        ${escapeHtml(item.nis || "-")}
+                      </td>
 
-                        <div
-                          class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center"
-                        >
-                          <i class="fa-solid fa-user text-xs"></i>
+                      <td class="px-4 py-3">
+                        ${escapeHtml(item.kelas || "VII B")}
+                      </td>
+
+                      <td class="px-4 py-3">
+
+                        <div class="flex justify-center gap-1">
+
+                          <button
+                            onclick="editSiswa('${id}')"
+                            class="w-8 h-8 rounded bg-blue-50 text-blue-600"
+                          >
+                            <i class="fa-solid fa-pen"></i>
+                          </button>
+
+                          <button
+                            onclick="deleteSiswa('${id}')"
+                            class="w-8 h-8 rounded bg-red-50 text-red-600"
+                          >
+                            <i class="fa-solid fa-trash"></i>
+                          </button>
+
                         </div>
 
-                        <span class="font-semibold text-sm">
-                          ${escapeHtml(item.nama || "-")}
-                        </span>
+                      </td>
 
-                      </div>
+                    </tr>
 
-                    </td>
-
-                    <td class="px-4 py-3 text-xs">
-                      ${escapeHtml(item.nis || "-")}
-                    </td>
-
-                    <td class="px-4 py-3 text-xs">
-                      ${escapeHtml(item.kelas || "VII B")}
-                    </td>
-
-                    <td class="px-4 py-3">
-
-                      <div class="flex justify-center gap-1">
-
-                        <button
-                          onclick="editSiswa('${id}')"
-                          class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600"
-                        >
-                          <i class="fa-solid fa-pen text-xs"></i>
-                        </button>
-
-                        <button
-                          onclick="deleteSiswa('${id}')"
-                          class="w-8 h-8 rounded-lg bg-red-50 text-red-600"
-                        >
-                          <i class="fa-solid fa-trash text-xs"></i>
-                        </button>
-
-                      </div>
-
-                    </td>
-
-                  </tr>
-
-                `).join("")
+                  `
+                ).join("")
 
               }
 
@@ -2630,52 +1731,69 @@
   function prepareSiswa() {
 
     const form =
-      document.getElementById("formSiswa");
+      document.getElementById(
+        "formSiswa"
+      );
+
 
     form.reset();
 
     delete form.dataset.editId;
 
+
     document.getElementById(
       "siswaKelas"
-    ).value = "VII B";
+    ).value =
+      "VII B";
+
 
     document.getElementById(
       "modalSiswaTitle"
     ).textContent =
       "Tambah Siswa";
 
+
     openModal("modalSiswa");
 
   }
 
 
+  /* =========================================================
+     SIMPAN SISWA KE FIREBASE
+  ========================================================= */
+
   async function saveSiswa(event) {
 
     event.preventDefault();
 
-    const form = event.target;
+
+    const form =
+      event.target;
+
 
     const id =
       form.dataset.editId || "";
 
 
     const nama =
-      document.getElementById(
-        "siswaNama"
-      ).value.trim();
+      document
+        .getElementById("siswaNama")
+        .value
+        .trim();
 
 
     const nis =
-      document.getElementById(
-        "siswaNis"
-      ).value.trim();
+      document
+        .getElementById("siswaNis")
+        .value
+        .trim();
 
 
     const kelas =
-      document.getElementById(
-        "siswaKelas"
-      ).value.trim();
+      document
+        .getElementById("siswaKelas")
+        .value
+        .trim();
 
 
     if (!nama) {
@@ -2690,10 +1808,14 @@
     }
 
 
-    if (!window.dbRef?.db) {
+    /*
+     * PASTIKAN FIREBASE SUDAH ADA
+     */
+
+    if (!window.firebaseDB) {
 
       showToast(
-        "Firebase belum siap.",
+        "Firebase belum siap. Tunggu sebentar lalu coba lagi.",
         "error"
       );
 
@@ -2702,84 +1824,66 @@
     }
 
 
-    if (!window.appState.isFirebaseConnected) {
+    const data = {
 
-      showToast(
-        "Firebase sedang tidak terhubung.",
-        "error"
-      );
+      nama: nama,
 
-      return;
+      nis: nis,
 
-    }
+      kelas: kelas || "VII B",
 
-
-    const payload = {
-
-      nama,
-
-      nis,
-
-      kelas:
-        kelas || "VII B",
-
-      updatedAt:
-        Date.now()
+      updatedAt: Date.now()
 
     };
 
 
     try {
 
-      const db =
-        window.dbRef.db;
+      let targetRef;
 
 
       if (id) {
 
-        await window.dbRef.update(
+        targetRef =
+          window.firebaseRef(
+            window.firebaseDB,
+            "kelasVIIIB/siswa/" + id
+          );
 
-          window.dbRef.ref(
-            db,
-            `kelasVIIIB/siswa/${id}`
-          ),
 
-          payload
-
+        await window.firebaseUpdate(
+          targetRef,
+          data
         );
 
 
         showToast(
-          "Data siswa berhasil diperbarui.",
-          "success"
+          "Data siswa berhasil diperbarui."
         );
 
       } else {
 
-        payload.createdAt =
-          Date.now();
-
-
-        const newRef =
-          window.dbRef.push(
-
-            window.dbRef.ref(
-              db,
+        targetRef =
+          window.firebasePush(
+            window.firebaseRef(
+              window.firebaseDB,
               "kelasVIIIB/siswa"
             )
-
           );
 
 
-        await window.dbRef.set(
-          newRef,
-          payload
+        data.createdAt =
+          Date.now();
+
+
+        await window.firebaseSet(
+          targetRef,
+          data
         );
 
 
         showToast(
-          "Siswa berhasil disimpan.",
-          "success"
+          "Data siswa berhasil disimpan ke database."
         );
 
       }
@@ -2794,10 +1898,14 @@
 
     } catch (error) {
 
-      console.error(error);
+      console.error(
+        "Firebase SAVE SISWA ERROR:",
+        error
+      );
+
 
       showToast(
-        "Gagal menyimpan siswa: " +
+        "Gagal menyimpan: " +
         error.message,
         "error"
       );
@@ -2812,6 +1920,7 @@
     const item =
       window.appState.siswa[id];
 
+
     if (!item) return;
 
 
@@ -2821,7 +1930,8 @@
       );
 
 
-    form.dataset.editId = id;
+    form.dataset.editId =
+      id;
 
 
     document.getElementById(
@@ -2856,39 +1966,26 @@
   async function deleteSiswa(id) {
 
     if (!confirm(
-      "Yakin ingin menghapus siswa ini?"
-    )) {
-      return;
-    }
-
-
-    if (!window.dbRef?.db) {
-
-      showToast(
-        "Firebase belum siap.",
-        "error"
-      );
-
-      return;
-    }
+      "Hapus siswa ini?"
+    )) return;
 
 
     try {
 
-      await window.dbRef.remove(
+      await window.firebaseRemove(
 
-        window.dbRef.ref(
-          window.dbRef.db,
-          `kelasVIIIB/siswa/${id}`
+        window.firebaseRef(
+          window.firebaseDB,
+          "kelasVIIIB/siswa/" + id
         )
 
       );
 
 
       showToast(
-        "Data siswa berhasil dihapus.",
-        "success"
+        "Siswa berhasil dihapus."
       );
+
 
     } catch (error) {
 
@@ -2905,18 +2002,1010 @@
 
 
   /* =========================================================
-     REFRESH VIEW
+     KAS MASUK
+  ========================================================= */
+
+  function renderKasMasuk() {
+
+    const data =
+      Object.entries(
+        window.appState.kasMasuk
+      ).sort(
+        (a, b) =>
+          Number(b[1].createdAt || 0) -
+          Number(a[1].createdAt || 0)
+      );
+
+
+    document
+      .getElementById("pageContent")
+      .innerHTML = `
+
+      <div class="flex flex-col sm:flex-row justify-between gap-3 mb-5">
+
+        <div>
+
+          <h2 class="text-xl font-bold">
+            Kas Masuk
+          </h2>
+
+          <p class="text-xs text-gray-400">
+            Data pembayaran kas siswa
+          </p>
+
+        </div>
+
+
+        <button
+          onclick="prepareKasMasuk()"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold"
+        >
+          <i class="fa-solid fa-plus mr-1"></i>
+          Tambah Kas Masuk
+        </button>
+
+      </div>
+
+
+      <div class="bg-white border rounded-xl overflow-hidden">
+
+        <div class="overflow-x-auto">
+
+          <table class="w-full">
+
+            <thead class="bg-gray-50">
+
+              <tr>
+
+                <th class="text-left px-4 py-3">
+                  No
+                </th>
+
+                <th class="text-left px-4 py-3">
+                  Tanggal
+                </th>
+
+                <th class="text-left px-4 py-3">
+                  Siswa
+                </th>
+
+                <th class="text-left px-4 py-3">
+                  Keterangan
+                </th>
+
+                <th class="text-right px-4 py-3">
+                  Nominal
+                </th>
+
+                <th class="text-center px-4 py-3">
+                  Aksi
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              ${
+                data.length === 0
+
+                ? `
+                  <tr>
+
+                    <td
+                      colspan="6"
+                      class="text-center py-10 text-gray-400"
+                    >
+                      Belum ada transaksi.
+                    </td>
+
+                  </tr>
+                `
+
+                :
+
+                data.map(
+                  ([id, item], index) => `
+
+                    <tr class="border-t">
+
+                      <td class="px-4 py-3">
+                        ${index + 1}
+                      </td>
+
+                      <td class="px-4 py-3">
+                        ${formatTanggal(item.tanggal)}
+                      </td>
+
+                      <td class="px-4 py-3 font-semibold">
+                        ${escapeHtml(item.namaSiswa)}
+                      </td>
+
+                      <td class="px-4 py-3">
+                        ${escapeHtml(item.keterangan)}
+                      </td>
+
+                      <td class="px-4 py-3 text-right text-green-600 font-semibold">
+                        ${rupiah(item.nominal)}
+                      </td>
+
+                      <td class="px-4 py-3">
+
+                        <div class="flex justify-center gap-1">
+
+                          <button
+                            onclick="editKasMasuk('${id}')"
+                            class="w-8 h-8 rounded bg-blue-50 text-blue-600"
+                          >
+                            <i class="fa-solid fa-pen"></i>
+                          </button>
+
+                          <button
+                            onclick="deleteKasMasuk('${id}')"
+                            class="w-8 h-8 rounded bg-red-50 text-red-600"
+                          >
+                            <i class="fa-solid fa-trash"></i>
+                          </button>
+
+                        </div>
+
+                      </td>
+
+                    </tr>
+
+                  `
+                ).join("")
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  function populateSiswaSelect(selected = "") {
+
+    const select =
+      document.getElementById(
+        "kasMasukSiswa"
+      );
+
+
+    const siswa =
+      Object.entries(
+        window.appState.siswa
+      ).sort(
+        (a, b) =>
+          String(a[1].nama || "")
+            .localeCompare(
+              String(b[1].nama || ""),
+              "id"
+            )
+      );
+
+
+    select.innerHTML =
+      `<option value="">Pilih siswa</option>`;
+
+
+    siswa.forEach(
+      ([id, item]) => {
+
+        const option =
+          document.createElement(
+            "option"
+          );
+
+
+        option.value =
+          id;
+
+
+        option.textContent =
+          item.nama || "-";
+
+
+        if (id === selected) {
+          option.selected = true;
+        }
+
+
+        select.appendChild(
+          option
+        );
+
+      }
+    );
+
+  }
+
+
+  function prepareKasMasuk() {
+
+    const form =
+      document.getElementById(
+        "formKasMasuk"
+      );
+
+
+    form.reset();
+
+    delete form.dataset.editId;
+
+
+    document.getElementById(
+      "kasMasukTanggal"
+    ).value =
+      today();
+
+
+    document.getElementById(
+      "kasMasukKeterangan"
+    ).value =
+      "Pembayaran kas";
+
+
+    document.getElementById(
+      "modalKasMasukTitle"
+    ).textContent =
+      "Tambah Kas Masuk";
+
+
+    populateSiswaSelect();
+
+
+    openModal(
+      "modalKasMasuk"
+    );
+
+  }
+
+
+  /* =========================================================
+     SIMPAN KAS MASUK
+  ========================================================= */
+
+  async function saveKasMasuk(event) {
+
+    event.preventDefault();
+
+
+    const form =
+      event.target;
+
+
+    const id =
+      form.dataset.editId || "";
+
+
+    const tanggal =
+      document.getElementById(
+        "kasMasukTanggal"
+      ).value;
+
+
+    const siswaId =
+      document.getElementById(
+        "kasMasukSiswa"
+      ).value;
+
+
+    const keterangan =
+      document.getElementById(
+        "kasMasukKeterangan"
+      ).value
+      .trim();
+
+
+    const nominal =
+      Number(
+        document.getElementById(
+          "kasMasukNominal"
+        ).value
+      );
+
+
+    if (
+      !tanggal ||
+      !siswaId ||
+      !nominal
+    ) {
+
+      showToast(
+        "Lengkapi data terlebih dahulu.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!window.firebaseDB) {
+
+      showToast(
+        "Firebase belum siap.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const siswa =
+      window.appState.siswa[
+        siswaId
+      ];
+
+
+    const data = {
+
+      tanggal,
+
+      siswaId,
+
+      namaSiswa:
+        siswa?.nama || "",
+
+      keterangan:
+        keterangan ||
+        "Pembayaran kas",
+
+      nominal,
+
+      updatedAt:
+        Date.now(),
+
+      createdBy:
+        window.appState.currentUser ||
+        "bendahara"
+
+    };
+
+
+    try {
+
+      if (id) {
+
+        const targetRef =
+          window.firebaseRef(
+            window.firebaseDB,
+            "kelasVIIIB/kasMasuk/" + id
+          );
+
+
+        await window.firebaseUpdate(
+          targetRef,
+          data
+        );
+
+
+        showToast(
+          "Kas masuk berhasil diperbarui."
+        );
+
+
+      } else {
+
+        data.createdAt =
+          Date.now();
+
+
+        const targetRef =
+          window.firebasePush(
+            window.firebaseRef(
+              window.firebaseDB,
+              "kelasVIIIB/kasMasuk"
+            )
+          );
+
+
+        await window.firebaseSet(
+          targetRef,
+          data
+        );
+
+
+        showToast(
+          "Kas masuk berhasil disimpan."
+        );
+
+      }
+
+
+      form.reset();
+
+      delete form.dataset.editId;
+
+      closeModal(
+        "modalKasMasuk"
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "SAVE KAS MASUK:",
+        error
+      );
+
+
+      showToast(
+        "Gagal menyimpan: " +
+        error.message,
+        "error"
+      );
+
+    }
+
+  }
+
+
+  function editKasMasuk(id) {
+
+    const item =
+      window.appState.kasMasuk[id];
+
+
+    if (!item) return;
+
+
+    const form =
+      document.getElementById(
+        "formKasMasuk"
+      );
+
+
+    form.dataset.editId =
+      id;
+
+
+    document.getElementById(
+      "kasMasukTanggal"
+    ).value =
+      item.tanggal || "";
+
+
+    populateSiswaSelect(
+      item.siswaId || ""
+    );
+
+
+    document.getElementById(
+      "kasMasukKeterangan"
+    ).value =
+      item.keterangan || "";
+
+
+    document.getElementById(
+      "kasMasukNominal"
+    ).value =
+      item.nominal || "";
+
+
+    document.getElementById(
+      "modalKasMasukTitle"
+    ).textContent =
+      "Edit Kas Masuk";
+
+
+    openModal(
+      "modalKasMasuk"
+    );
+
+  }
+
+
+  async function deleteKasMasuk(id) {
+
+    if (!confirm(
+      "Hapus transaksi ini?"
+    )) return;
+
+
+    try {
+
+      await window.firebaseRemove(
+
+        window.firebaseRef(
+          window.firebaseDB,
+          "kelasVIIIB/kasMasuk/" + id
+        )
+
+      );
+
+
+      showToast(
+        "Kas masuk berhasil dihapus."
+      );
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      showToast(
+        "Gagal menghapus data.",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     KAS KELUAR
+  ========================================================= */
+
+  function renderKasKeluar() {
+
+    const data =
+      Object.entries(
+        window.appState.kasKeluar
+      ).sort(
+        (a, b) =>
+          Number(b[1].createdAt || 0) -
+          Number(a[1].createdAt || 0)
+      );
+
+
+    document
+      .getElementById("pageContent")
+      .innerHTML = `
+
+      <div class="flex flex-col sm:flex-row justify-between gap-3 mb-5">
+
+        <div>
+
+          <h2 class="text-xl font-bold">
+            Kas Keluar
+          </h2>
+
+          <p class="text-xs text-gray-400">
+            Data pengeluaran kas kelas
+          </p>
+
+        </div>
+
+
+        <button
+          onclick="prepareKasKeluar()"
+          class="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold"
+        >
+          <i class="fa-solid fa-plus mr-1"></i>
+          Tambah Kas Keluar
+        </button>
+
+      </div>
+
+
+      <div class="bg-white border rounded-xl overflow-hidden">
+
+        <div class="overflow-x-auto">
+
+          <table class="w-full">
+
+            <thead class="bg-gray-50">
+
+              <tr>
+
+                <th class="text-left px-4 py-3">
+                  No
+                </th>
+
+                <th class="text-left px-4 py-3">
+                  Tanggal
+                </th>
+
+                <th class="text-left px-4 py-3">
+                  Keterangan
+                </th>
+
+                <th class="text-right px-4 py-3">
+                  Nominal
+                </th>
+
+                <th class="text-center px-4 py-3">
+                  Aksi
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              ${
+                data.length === 0
+
+                ? `
+                  <tr>
+
+                    <td
+                      colspan="5"
+                      class="text-center py-10 text-gray-400"
+                    >
+                      Belum ada transaksi.
+                    </td>
+
+                  </tr>
+                `
+
+                :
+
+                data.map(
+                  ([id, item], index) => `
+
+                    <tr class="border-t">
+
+                      <td class="px-4 py-3">
+                        ${index + 1}
+                      </td>
+
+                      <td class="px-4 py-3">
+                        ${formatTanggal(item.tanggal)}
+                      </td>
+
+                      <td class="px-4 py-3">
+                        ${escapeHtml(item.keterangan)}
+                      </td>
+
+                      <td class="px-4 py-3 text-right text-red-600 font-semibold">
+                        ${rupiah(item.nominal)}
+                      </td>
+
+                      <td class="px-4 py-3">
+
+                        <div class="flex justify-center gap-1">
+
+                          <button
+                            onclick="editKasKeluar('${id}')"
+                            class="w-8 h-8 rounded bg-blue-50 text-blue-600"
+                          >
+                            <i class="fa-solid fa-pen"></i>
+                          </button>
+
+                          <button
+                            onclick="deleteKasKeluar('${id}')"
+                            class="w-8 h-8 rounded bg-red-50 text-red-600"
+                          >
+                            <i class="fa-solid fa-trash"></i>
+                          </button>
+
+                        </div>
+
+                      </td>
+
+                    </tr>
+
+                  `
+                ).join("")
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  function prepareKasKeluar() {
+
+    const form =
+      document.getElementById(
+        "formKasKeluar"
+      );
+
+
+    form.reset();
+
+    delete form.dataset.editId;
+
+
+    document.getElementById(
+      "kasKeluarTanggal"
+    ).value =
+      today();
+
+
+    document.getElementById(
+      "modalKasKeluarTitle"
+    ).textContent =
+      "Tambah Kas Keluar";
+
+
+    openModal(
+      "modalKasKeluar"
+    );
+
+  }
+
+
+  /* =========================================================
+     SIMPAN KAS KELUAR
+  ========================================================= */
+
+  async function saveKasKeluar(event) {
+
+    event.preventDefault();
+
+
+    const form =
+      event.target;
+
+
+    const id =
+      form.dataset.editId || "";
+
+
+    const tanggal =
+      document.getElementById(
+        "kasKeluarTanggal"
+      ).value;
+
+
+    const keterangan =
+      document.getElementById(
+        "kasKeluarKeterangan"
+      ).value
+      .trim();
+
+
+    const nominal =
+      Number(
+        document.getElementById(
+          "kasKeluarNominal"
+        ).value
+      );
+
+
+    if (
+      !tanggal ||
+      !keterangan ||
+      !nominal
+    ) {
+
+      showToast(
+        "Lengkapi data terlebih dahulu.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!window.firebaseDB) {
+
+      showToast(
+        "Firebase belum siap.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const data = {
+
+      tanggal,
+
+      keterangan,
+
+      nominal,
+
+      updatedAt:
+        Date.now(),
+
+      createdBy:
+        window.appState.currentUser ||
+        "bendahara"
+
+    };
+
+
+    try {
+
+      if (id) {
+
+        await window.firebaseUpdate(
+
+          window.firebaseRef(
+            window.firebaseDB,
+            "kelasVIIIB/kasKeluar/" + id
+          ),
+
+          data
+
+        );
+
+
+        showToast(
+          "Kas keluar berhasil diperbarui."
+        );
+
+
+      } else {
+
+        data.createdAt =
+          Date.now();
+
+
+        const targetRef =
+          window.firebasePush(
+
+            window.firebaseRef(
+              window.firebaseDB,
+              "kelasVIIIB/kasKeluar"
+            )
+
+          );
+
+
+        await window.firebaseSet(
+          targetRef,
+          data
+        );
+
+
+        showToast(
+          "Kas keluar berhasil disimpan."
+        );
+
+      }
+
+
+      form.reset();
+
+      delete form.dataset.editId;
+
+      closeModal(
+        "modalKasKeluar"
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "SAVE KAS KELUAR:",
+        error
+      );
+
+
+      showToast(
+        "Gagal menyimpan: " +
+        error.message,
+        "error"
+      );
+
+    }
+
+  }
+
+
+  function editKasKeluar(id) {
+
+    const item =
+      window.appState.kasKeluar[id];
+
+
+    if (!item) return;
+
+
+    const form =
+      document.getElementById(
+        "formKasKeluar"
+      );
+
+
+    form.dataset.editId =
+      id;
+
+
+    document.getElementById(
+      "kasKeluarTanggal"
+    ).value =
+      item.tanggal || "";
+
+
+    document.getElementById(
+      "kasKeluarKeterangan"
+    ).value =
+      item.keterangan || "";
+
+
+    document.getElementById(
+      "kasKeluarNominal"
+    ).value =
+      item.nominal || "";
+
+
+    document.getElementById(
+      "modalKasKeluarTitle"
+    ).textContent =
+      "Edit Kas Keluar";
+
+
+    openModal(
+      "modalKasKeluar"
+    );
+
+  }
+
+
+  async function deleteKasKeluar(id) {
+
+    if (!confirm(
+      "Hapus transaksi ini?"
+    )) return;
+
+
+    try {
+
+      await window.firebaseRemove(
+
+        window.firebaseRef(
+          window.firebaseDB,
+          "kelasVIIIB/kasKeluar/" + id
+        )
+
+      );
+
+
+      showToast(
+        "Kas keluar berhasil dihapus."
+      );
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      showToast(
+        "Gagal menghapus data.",
+        "error"
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     REFRESH
   ========================================================= */
 
   function refreshAllViews() {
 
     if (
-      !document.getElementById("app") ||
       document
         .getElementById("app")
         .classList.contains("hidden")
     ) {
+
       return;
+
     }
 
 
@@ -2924,19 +3013,29 @@
       window.appState.activeTab
     ) {
 
-      case "kasMasuk":
-        renderKasMasuk();
+      case "siswa":
+
+        renderSiswa();
+
         break;
+
+
+      case "kasMasuk":
+
+        renderKasMasuk();
+
+        break;
+
 
       case "kasKeluar":
+
         renderKasKeluar();
+
         break;
 
-      case "siswa":
-        renderSiswa();
-        break;
 
       default:
+
         renderDashboard();
 
     }
@@ -2945,32 +3044,16 @@
 
 
   /* =========================================================
-     ESCAPE HTML
+     FORM LISTENER
   ========================================================= */
 
-  function escapeHtml(value) {
+  document
+    .getElementById("formSiswa")
+    .addEventListener(
+      "submit",
+      saveSiswa
+    );
 
-    return String(value ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-
-  }
-
-
-  function escapeAttribute(value) {
-
-    return String(value ?? "")
-      .replace(/"/g, "&quot;");
-
-  }
-
-
-  /* =========================================================
-     FORM EVENTS
-  ========================================================= */
 
   document
     .getElementById("formKasMasuk")
@@ -2988,14 +3071,6 @@
     );
 
 
-  document
-    .getElementById("formSiswa")
-    .addEventListener(
-      "submit",
-      saveSiswa
-    );
-
-
   /* =========================================================
      START
   ========================================================= */
@@ -3006,8 +3081,9 @@
 
 
 <!-- =========================================================
-     FIREBASE REALTIME DATABASE
+     FIREBASE
 ========================================================= -->
+
 <script type="module">
 
   import {
@@ -3019,97 +3095,109 @@
   import {
     getDatabase,
     ref,
-    onValue,
-    set,
     push,
+    set,
     update,
-    remove
+    remove,
+    onValue
   } from
   "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
 
+  /* =========================================================
+     FIREBASE CONFIG BARU
+  ========================================================= */
+
   const firebaseConfig = {
 
     apiKey:
-      "AIzaSyBk8rEYzpHRlSdtza2B_iek_1yQ-danrqE",
+      "AIzaSyAmy4PcVbc3bUnIEti0rhkhyPvGiLwFRYc",
 
     authDomain:
-      "absen-iiz.firebaseapp.com",
+      "absenguru-615da.firebaseapp.com",
 
     databaseURL:
-      "https://absen-iiz-default-rtdb.firebaseio.com",
+      "https://absenguru-615da-default-rtdb.firebaseio.com",
 
     projectId:
-      "absen-iiz",
+      "absenguru-615da",
 
     storageBucket:
-      "absen-iiz.firebasestorage.app",
+      "absenguru-615da.firebasestorage.app",
 
     messagingSenderId:
-      "14091466845",
+      "1014411980118",
 
     appId:
-      "1:14091466845:web:2c7e8320acf0f5759575b4"
+      "1:1014411980118:web:6f3f702d8aad89af57faf7"
 
   };
 
 
   try {
 
+    /*
+     * INITIALIZE FIREBASE
+     */
+
     const app =
-      initializeApp(firebaseConfig);
+      initializeApp(
+        firebaseConfig
+      );
 
 
-    const db =
+    /*
+     * DATABASE
+     */
+
+    const database =
       getDatabase(app);
 
 
     /*
-     * API FIREBASE GLOBAL
+     * SIMPAN API FIREBASE
+     * KE WINDOW AGAR BISA DIPAKAI
+     * OLEH SCRIPT UTAMA
      */
 
-    window.dbRef = {
+    window.firebaseDB =
+      database;
 
-      db,
 
-      ref,
+    window.firebaseRef =
+      ref;
 
-      onValue,
 
-      set,
+    window.firebasePush =
+      push;
 
-      push,
 
-      update,
+    window.firebaseSet =
+      set;
 
-      remove
 
-    };
+    window.firebaseUpdate =
+      update;
+
+
+    window.firebaseRemove =
+      remove;
 
 
     /*
-     * CEK KONEKSI REALTIME DATABASE
+     * STATUS KONEKSI
      */
 
     const connectedRef =
       ref(
-        db,
+        database,
         ".info/connected"
       );
 
 
     onValue(
       connectedRef,
-      (snapshot) => {
-
-        const connected =
-          snapshot.val() === true;
-
-
-        window.appState
-          .isFirebaseConnected =
-          connected;
-
+      snapshot => {
 
         const status =
           document.getElementById(
@@ -3117,33 +3205,45 @@
           );
 
 
-        if (status) {
+        const connected =
+          snapshot.val() === true;
 
-          if (connected) {
 
-            status.innerHTML = `
-              <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-              <span class="desktop-only">
-                Terhubung
-              </span>
-            `;
+        if (!status) return;
 
-            status.className =
-              "flex items-center gap-1 text-green-600 text-xs";
 
-          } else {
+        if (connected) {
 
-            status.innerHTML = `
-              <span class="w-2 h-2 bg-red-500 rounded-full"></span>
-              <span class="desktop-only">
-                Terputus
-              </span>
-            `;
+          status.innerHTML = `
+            <span
+              class="w-2 h-2 bg-green-500 rounded-full"
+            ></span>
 
-            status.className =
-              "flex items-center gap-1 text-red-500 text-xs";
+            <span class="hidden sm:block">
+              Terhubung
+            </span>
+          `;
 
-          }
+
+          status.className =
+            "flex items-center gap-1 text-green-600 text-xs";
+
+
+        } else {
+
+          status.innerHTML = `
+            <span
+              class="w-2 h-2 bg-red-500 rounded-full"
+            ></span>
+
+            <span class="hidden sm:block">
+              Tidak terhubung
+            </span>
+          `;
+
+
+          status.className =
+            "flex items-center gap-1 text-red-500 text-xs";
 
         }
 
@@ -3152,21 +3252,19 @@
 
 
     /*
-     * DATA SISWA
+     * ======================================================
+     * REALTIME SISWA
+     * ======================================================
      */
-
-    const siswaRef =
-      ref(
-        db,
-        "kelasVIIIB/siswa"
-      );
-
 
     onValue(
 
-      siswaRef,
+      ref(
+        database,
+        "kelasVIIIB/siswa"
+      ),
 
-      (snapshot) => {
+      snapshot => {
 
         window.appState.siswa =
           snapshot.val() || {};
@@ -3176,16 +3274,11 @@
 
       },
 
-      (error) => {
+      error => {
 
         console.error(
-          "Firebase siswa:",
+          "READ SISWA:",
           error
-        );
-
-        showToast(
-          "Gagal membaca data siswa.",
-          "error"
         );
 
       }
@@ -3194,21 +3287,19 @@
 
 
     /*
-     * DATA KAS MASUK
+     * ======================================================
+     * REALTIME KAS MASUK
+     * ======================================================
      */
-
-    const kasMasukRef =
-      ref(
-        db,
-        "kelasVIIIB/kasMasuk"
-      );
-
 
     onValue(
 
-      kasMasukRef,
+      ref(
+        database,
+        "kelasVIIIB/kasMasuk"
+      ),
 
-      (snapshot) => {
+      snapshot => {
 
         window.appState.kasMasuk =
           snapshot.val() || {};
@@ -3218,10 +3309,10 @@
 
       },
 
-      (error) => {
+      error => {
 
         console.error(
-          "Firebase kas masuk:",
+          "READ KAS MASUK:",
           error
         );
 
@@ -3231,21 +3322,19 @@
 
 
     /*
-     * DATA KAS KELUAR
+     * ======================================================
+     * REALTIME KAS KELUAR
+     * ======================================================
      */
-
-    const kasKeluarRef =
-      ref(
-        db,
-        "kelasVIIIB/kasKeluar"
-      );
-
 
     onValue(
 
-      kasKeluarRef,
+      ref(
+        database,
+        "kelasVIIIB/kasKeluar"
+      ),
 
-      (snapshot) => {
+      snapshot => {
 
         window.appState.kasKeluar =
           snapshot.val() || {};
@@ -3255,10 +3344,10 @@
 
       },
 
-      (error) => {
+      error => {
 
         console.error(
-          "Firebase kas keluar:",
+          "READ KAS KELUAR:",
           error
         );
 
@@ -3268,20 +3357,33 @@
 
 
     console.log(
-      "🔥 Firebase Realtime Database aktif"
+      "================================="
+    );
+
+    console.log(
+      "FIREBASE REALTIME DATABASE AKTIF"
+    );
+
+    console.log(
+      "Database:",
+      firebaseConfig.databaseURL
+    );
+
+    console.log(
+      "================================="
     );
 
 
   } catch (error) {
 
     console.error(
-      "Firebase initialization error:",
+      "FIREBASE INITIALIZATION ERROR:",
       error
     );
 
 
     showToast(
-      "Firebase gagal diinisialisasi.",
+      "Firebase gagal dimuat.",
       "error"
     );
 
