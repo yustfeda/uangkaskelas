@@ -2220,36 +2220,28 @@ function getRawCashOutTotal(){
 
 function getDisplayedCashIn(){
 
-    const offset=
-        Number(
-            appState.settings
-            .resetState?.cashInOffset
-        ) || 0;
-
-    return Math.max(
-        0,
-        getPersistentCashInTotal()-offset
-    );
+    /*
+       TOTAL KAS MASUK DI BERANDA = TOTAL KAS MASUK DI MENU KAS MASUK.
+       Jangan kurangi dengan offset tampilan. Sumber angka hanya
+       transaksi yang benar-benar tersimpan di Firebase pada node
+       ${DB}/kasMasuk.
+    */
+    return getPersistentCashInTotal();
 }
 
 function getDisplayedCashOut(){
 
-    const offset=
-        Number(
-            appState.settings
-            .resetState?.cashOutOffset
-        ) || 0;
-
-    return Math.max(
-        0,
-        getRawCashOutTotal()-offset
-    );
+    /*
+       Sama seperti kas masuk, total kas keluar di beranda harus
+       sama persis dengan transaksi pada menu Kas Keluar.
+    */
+    return getRawCashOutTotal();
 }
 
 function getDisplayedBalance(){
 
-    const cashIn=getDisplayedCashIn();
-    const cashOut=getDisplayedCashOut();
+    const cashIn=getPersistentCashInTotal();
+    const cashOut=getRawCashOutTotal();
 
     return cashIn-cashOut;
 }
@@ -2636,6 +2628,32 @@ function renderDashboard(){
             <p>
                 Kelola dan pantau kas kelas VII B dengan mudah.
             </p>
+
+            <div
+                style="
+                    display:inline-flex;
+                    align-items:center;
+                    gap:7px;
+                    margin-top:10px;
+                    padding:7px 11px;
+                    border-radius:999px;
+                    background:rgba(34,197,94,.10);
+                    color:#16a34a;
+                    font-size:11px;
+                    font-weight:700;">
+
+                <span
+                    style="
+                        width:7px;
+                        height:7px;
+                        border-radius:50%;
+                        background:#22c55e;
+                        box-shadow:0 0 0 4px rgba(34,197,94,.12);">
+                </span>
+
+                Data kas realtime dari Firebase
+
+            </div>
 
         </div>
 
@@ -4129,19 +4147,23 @@ async function(){
         await update(ref(database),updates);
 
         /*
-           KONFIRMASI DARI FIREBASE
-           ========================
-           Jangan memakai data input/form untuk mengubah dashboard.
-           Setelah multi-location update berhasil, baca kembali root
-           Firebase yang baru tersimpan. Dengan begitu angka Total Kas
-           Masuk dan Saldo dihitung ulang dari data yang benar-benar ada
-           di Realtime Database. Listener onValue tetap aktif sehingga
-           perangkat Bendahara dan Anggota lain juga ikut tersinkron.
+           KONFIRMASI LANGSUNG DARI REALTIME DATABASE
+           ===========================================
+           Setelah Firebase menerima transaksi, baca kembali root DB.
+           Beranda dan menu Kas Masuk kemudian dirender dari snapshot
+           tersebut, bukan dari nominal form. Ini memastikan angka yang
+           tampil adalah angka yang benar-benar tersimpan.
         */
         const confirmedSnapshot=
             await get(ref(database,DB));
 
         applyDatabaseSnapshot(confirmedSnapshot);
+
+        /*
+           Listener onValue tetap aktif. Perangkat Bendahara maupun
+           Anggota yang sedang membuka aplikasi akan menerima perubahan
+           Firebase dan refresh otomatis.
+        */
 
         showToast(
             `${selectedPeriods.length} periode berhasil dicatat. Total kas masuk ${formatRupiah(totalAmount)}.`,
