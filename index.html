@@ -2149,80 +2149,25 @@ function getStudentUnpaidPeriods(
 
 function getPersistentCashInTotal(){
 
+    /*
+       SUMBER UTAMA KAS MASUK
+       -----------------------
+       Dashboard Bendahara dan Anggota wajib membaca
+       transaksi yang benar-benar tersimpan di kasMasuk.
+       pembayaranStatus hanya merupakan status pembayaran,
+       bukan sumber saldo kedua, agar tidak terjadi double count.
+    */
     let total=0;
 
-    const deleted=
-        appState.settings
-        .deletedStudents || {};
+    Object.values(
+        appState.kasMasuk || {}
+    ).forEach(tx=>{
 
-    const status=
-        appState.pembayaranStatus || {};
+        if(!tx) return;
 
-    const covered=new Set();
+        total += Number(tx.jumlah) || 0;
 
-    for(
-        const [
-            studentId,
-            periods
-        ]
-        of Object.entries(status)
-    ){
-
-        if(deleted[studentId]) continue;
-
-        for(
-            const [
-                periodKey,
-                p
-            ]
-            of Object.entries(
-                periods || {}
-            )
-        ){
-
-            if(p?.paid){
-
-                total+=
-                    Number(p.jumlah)||0;
-
-                covered.add(
-                    `${studentId}|${periodKey}`
-                );
-            }
-        }
-    }
-
-    for(
-        const tx
-        of Object.values(
-            appState.kasMasuk || {}
-        )
-    ){
-
-        if(
-            tx?.siswaId &&
-            tx?.periodeKey
-        ){
-
-            if(
-                deleted[tx.siswaId]
-            ) continue;
-
-            const key=
-                `${tx.siswaId}|${tx.periodeKey}`;
-
-            if(!covered.has(key)){
-
-                total+=
-                    Number(tx.jumlah)||0;
-            }
-
-        }else{
-
-            total+=
-                Number(tx?.jumlah)||0;
-        }
-    }
+    });
 
     return total;
 }
@@ -2273,8 +2218,10 @@ function getDisplayedCashOut(){
 
 function getDisplayedBalance(){
 
-    return getDisplayedCashIn()
-        -getDisplayedCashOut();
+    const cashIn=getDisplayedCashIn();
+    const cashOut=getDisplayedCashOut();
+
+    return cashIn-cashOut;
 }
 
 
