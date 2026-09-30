@@ -2150,81 +2150,36 @@ function getStudentUnpaidPeriods(
 function getPersistentCashInTotal(){
 
     /*
-       SUMBER UTAMA KAS MASUK
-       -----------------------
-       Semua transaksi yang benar-benar tersimpan di kasMasuk
-       langsung dihitung sebagai kas masuk.
+       SUMBER RESMI TOTAL KAS MASUK
+       =============================
+       HANYA transaksi yang benar-benar tersimpan di kasMasuk
+       yang dihitung sebagai uang masuk.
 
-       pembayaranStatus hanya menjadi cadangan untuk data lama
-       yang belum mempunyai transaksi kasMasuk, sehingga nominal
-       pembayaran tetap muncul di dashboard tanpa terjadi hitung ganda.
+       pembayaranStatus TIDAK ikut dijumlahkan karena hanya berfungsi
+       sebagai status pembayaran anggota. Setiap pembayaran yang sah
+       selalu membuat SATU transaksi kasMasuk dengan nominal yang sama.
+
+       Dengan aturan ini:
+       - Siswa bayar Rp2.000 -> kas masuk Rp2.000
+       - Kas masuk manual Rp5.000 -> kas masuk Rp5.000
+       - Kas keluar Rp1.000 -> saldo berkurang Rp1.000
+       - Tidak ada nominal yang dikalikan 2 karena status pembayaran
+         tidak pernah dijadikan sumber uang kedua.
     */
     let total=0;
 
-    const transactionIds=new Set();
-
-    Object.entries(
+    Object.values(
         appState.kasMasuk || {}
-    ).forEach(([id,tx])=>{
+    ).forEach(tx=>{
 
         if(!tx) return;
 
         const amount=Number(tx.jumlah)||0;
 
-        total+=amount;
-
-        transactionIds.add(String(id));
-
-        if(tx.id){
-            transactionIds.add(String(tx.id));
+        if(amount>0){
+            total+=amount;
         }
 
-        if(tx.transaksiId){
-            transactionIds.add(String(tx.transaksiId));
-        }
-    });
-
-    /*
-       DATA LAMA / STATUS PEMBAYARAN
-       Jika status pembayaran sudah lunas tetapi transaksi kas masuk
-       belum tersedia, nominalnya tetap dianggap sebagai kas masuk.
-       Jika transaksi sudah ada, status tidak dihitung lagi.
-    */
-    Object.entries(
-        appState.pembayaranStatus || {}
-    ).forEach(([studentId,periods])=>{
-
-        if(!periods) return;
-
-        Object.values(periods).forEach(status=>{
-
-            if(!status?.paid) return;
-
-            const linkedId=String(
-                status.transaksiId ||
-                status.kasMasukId ||
-                ""
-            );
-
-            if(linkedId && transactionIds.has(linkedId)){
-                return;
-            }
-
-            /*
-               Jika status mempunyai ID transaksi tetapi transaksi
-               tersebut masih ada di database, sudah dihitung di atas.
-               Jika tidak ada, gunakan nominal status sebagai fallback.
-            */
-            const amount=Number(
-                status.jumlah ??
-                status.amount ??
-                appState.settings.weeklyFee
-            )||0;
-
-            if(amount>0){
-                total+=amount;
-            }
-        });
     });
 
     return total;
@@ -4113,6 +4068,19 @@ function(){
 window.savePayment=
 async function(){
 
+    /*
+       Cegah tombol Simpan ditekan berkali-kali sebelum proses pertama
+       selesai. Satu klik pembayaran hanya boleh menghasilkan satu
+       transaksi kasMasuk.
+    */
+    if(window.__savingPayment){
+
+        window.__savingPayment=false;
+        return;
+    }
+
+    window.__savingPayment=true;
+
     const studentId=
         document
         .getElementById(
@@ -4147,6 +4115,7 @@ async function(){
             "error"
         );
 
+        window.__savingPayment=false;
         return;
     }
 
@@ -4157,6 +4126,7 @@ async function(){
             "error"
         );
 
+        window.__savingPayment=false;
         return;
     }
 
@@ -4172,6 +4142,7 @@ async function(){
             "error"
         );
 
+        window.__savingPayment=false;
         return;
     }
 
@@ -4182,6 +4153,7 @@ async function(){
             "error"
         );
 
+        window.__savingPayment=false;
         return;
     }
 
@@ -4197,6 +4169,7 @@ async function(){
             "error"
         );
 
+        window.__savingPayment=false;
         return;
     }
 
@@ -4285,6 +4258,8 @@ async function(){
 
         closeModal();
 
+        window.__savingPayment=false;
+
     }catch(error){
 
         console.error(error);
@@ -4293,6 +4268,8 @@ async function(){
             "Gagal menyimpan pembayaran.",
             "error"
         );
+
+        window.__savingPayment=false;
     }
 };
 
@@ -4326,10 +4303,13 @@ function(studentId){
         return;
     }
 
+    const weeklyFee=Number(getWeeklyFee())||0;
+    const totalPayment=unpaid.length*weeklyFee;
+
     openConfirmModal(
         "Lunasi Kas",
 
-        `Lunasi ${unpaid.length} minggu kas untuk ${student.nama} sebesar ${formatRupiah(unpaid.length*getWeeklyFee())}?`,
+        `Lunasi ${unpaid.length} minggu kas untuk ${student.nama} sebesar ${formatRupiah(totalPayment)}?`,
 
         async()=>{
 
@@ -4353,7 +4333,7 @@ function(studentId){
                         txRef.key;
 
                     const amount=
-                        getWeeklyFee();
+                        weeklyFee;
 
                     updates[
                         `${DB}/kasMasuk/${txId}`
