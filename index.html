@@ -2570,6 +2570,26 @@ function renderDashboard(){
                 .length>0
         );
 
+    const currentStudentUnpaid=
+        appState.role==="anggota"
+        ?getStudentUnpaidPeriods(appState.userId)
+        :[];
+
+    const currentStudentArrearAmount=
+        currentStudentUnpaid.length *
+        getWeeklyFee();
+
+    const totalArrearAmount=
+        arrears.reduce(
+            (sum,[id])=>
+                sum +
+                (
+                    getStudentUnpaidPeriods(id).length *
+                    getWeeklyFee()
+                ),
+            0
+        );
+
     const history=
         getHistoryForCurrentUser();
 
@@ -2701,6 +2721,7 @@ function renderDashboard(){
                                 </strong>
 
                                 <p>
+                                    Perkiraan total tunggakan: <strong>${formatRupiah(totalArrearAmount)}</strong>.
                                     Periksa daftar siswa yang belum membayar kas.
                                 </p>
 
@@ -2713,6 +2734,40 @@ function renderDashboard(){
                                 Lihat Semua
 
                             </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `
+            :
+            appState.role==="anggota" &&
+            currentStudentUnpaid.length
+            ?`
+
+                <div class="card alert-card">
+
+                    <div class="card-body">
+
+                        <div class="alert-content">
+
+                            <div>
+
+                                <strong>
+
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                                    Anda memiliki ${currentStudentUnpaid.length} minggu tunggakan
+
+                                </strong>
+
+                                <p>
+                                    Jumlah yang perlu dibayar sesuai tarif saat ini: <strong>${formatRupiah(currentStudentArrearAmount)}</strong>.
+                                </p>
+
+                            </div>
 
                         </div>
 
@@ -4075,7 +4130,11 @@ async function(){
     */
     if(window.__savingPayment){
 
-        window.__savingPayment=false;
+        showToast(
+            "Pembayaran sedang diproses. Tunggu sampai selesai.",
+            "info"
+        );
+
         return;
     }
 
