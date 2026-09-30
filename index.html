@@ -2152,21 +2152,79 @@ function getPersistentCashInTotal(){
     /*
        SUMBER UTAMA KAS MASUK
        -----------------------
-       Dashboard Bendahara dan Anggota wajib membaca
-       transaksi yang benar-benar tersimpan di kasMasuk.
-       pembayaranStatus hanya merupakan status pembayaran,
-       bukan sumber saldo kedua, agar tidak terjadi double count.
+       Semua transaksi yang benar-benar tersimpan di kasMasuk
+       langsung dihitung sebagai kas masuk.
+
+       pembayaranStatus hanya menjadi cadangan untuk data lama
+       yang belum mempunyai transaksi kasMasuk, sehingga nominal
+       pembayaran tetap muncul di dashboard tanpa terjadi hitung ganda.
     */
     let total=0;
 
-    Object.values(
+    const transactionIds=new Set();
+
+    Object.entries(
         appState.kasMasuk || {}
-    ).forEach(tx=>{
+    ).forEach(([id,tx])=>{
 
         if(!tx) return;
 
-        total += Number(tx.jumlah) || 0;
+        const amount=Number(tx.jumlah)||0;
 
+        total+=amount;
+
+        transactionIds.add(String(id));
+
+        if(tx.id){
+            transactionIds.add(String(tx.id));
+        }
+
+        if(tx.transaksiId){
+            transactionIds.add(String(tx.transaksiId));
+        }
+    });
+
+    /*
+       DATA LAMA / STATUS PEMBAYARAN
+       Jika status pembayaran sudah lunas tetapi transaksi kas masuk
+       belum tersedia, nominalnya tetap dianggap sebagai kas masuk.
+       Jika transaksi sudah ada, status tidak dihitung lagi.
+    */
+    Object.entries(
+        appState.pembayaranStatus || {}
+    ).forEach(([studentId,periods])=>{
+
+        if(!periods) return;
+
+        Object.values(periods).forEach(status=>{
+
+            if(!status?.paid) return;
+
+            const linkedId=String(
+                status.transaksiId ||
+                status.kasMasukId ||
+                ""
+            );
+
+            if(linkedId && transactionIds.has(linkedId)){
+                return;
+            }
+
+            /*
+               Jika status mempunyai ID transaksi tetapi transaksi
+               tersebut masih ada di database, sudah dihitung di atas.
+               Jika tidak ada, gunakan nominal status sebagai fallback.
+            */
+            const amount=Number(
+                status.jumlah ??
+                status.amount ??
+                appState.settings.weeklyFee
+            )||0;
+
+            if(amount>0){
+                total+=amount;
+            }
+        });
     });
 
     return total;
