@@ -3891,7 +3891,8 @@ function(studentId=""){
 
                         <select
                             id="paymentPeriod"
-                            class="form-control">
+                            class="form-control"
+                            onchange="updateSelectedPaymentPeriod()">
 
                             <option value="">
                                 Pilih periode
@@ -3991,6 +3992,34 @@ function(studentId=""){
         updatePaymentPeriods();
     }
 };
+
+window.updateSelectedPaymentPeriod=
+function(){
+
+    const select=
+        document.getElementById(
+            "paymentPeriod"
+        );
+
+    const amountInput=
+        document.getElementById(
+            "paymentAmount"
+        );
+
+    if(!select || !amountInput) return;
+
+    /*
+       Setiap periode mempunyai tarif mingguan yang ditentukan bendahara.
+       Ketika periode dipilih, nominal awal otomatis mengikuti tarif tersebut.
+       Bendahara tetap boleh mengubah nominal jika jumlah yang benar-benar
+       dibayarkan berbeda. Dashboard akan mencatat nominal final yang disimpan.
+    */
+    if(select.value){
+        amountInput.value=
+            Number(getWeeklyFee()) || 0;
+    }
+};
+
 
 window.updatePaymentPeriods=
 function(){
@@ -4311,8 +4340,43 @@ async function(){
             updates
         );
 
+        /*
+           SINKRONISASI LOKAL SEGERA
+           --------------------------
+           Setelah Firebase mengonfirmasi penyimpanan, transaksi baru
+           langsung dimasukkan ke state lokal. Dengan begitu dashboard
+           Bendahara/Anggota langsung menampilkan nominal yang baru dibayar
+           tanpa menunggu listener berikutnya.
+
+           PENTING: pembayaranStatus TIDAK dimasukkan ke perhitungan kas.
+           Hanya satu objek kasMasuk yang menjadi sumber uang.
+        */
+        if(!appState.kasMasuk){
+            appState.kasMasuk={};
+        }
+
+        appState.kasMasuk[txId]=paymentData;
+
+        if(!appState.pembayaranStatus){
+            appState.pembayaranStatus={};
+        }
+
+        if(!appState.pembayaranStatus[studentId]){
+            appState.pembayaranStatus[studentId]={};
+        }
+
+        appState.pembayaranStatus[studentId][periodKey]=statusData;
+
+        /*
+           Render ulang sekarang juga:
+           Total Kas Masuk += amount satu kali
+           Total Kas Keluar tetap
+           Saldo = Kas Masuk - Kas Keluar
+        */
+        refreshAllViews();
+
         showToast(
-            "Pembayaran berhasil disimpan dan disinkronkan ke anggota."
+            `Pembayaran ${formatRupiah(amount)} berhasil disimpan. Total kas dan saldo telah diperbarui.`
         );
 
         closeModal();
@@ -5438,36 +5502,47 @@ async function(id){
 
     try{
 
+        const cashOutData={
+
+            keterangan:
+                description,
+
+            jumlah:
+                amount,
+
+            timestamp:
+                id
+                ?Number(
+                    appState
+                    .kasKeluar[id]
+                    ?.timestamp
+                ) ||
+                Date.now()
+                :Date.now()
+
+        };
+
         await set(
             ref(
                 database,
                 `${DB}/kasKeluar/${txId}`
             ),
-            {
-
-                keterangan:
-                    description,
-
-                jumlah:
-                    amount,
-
-                timestamp:
-                    id
-                    ?Number(
-                        appState
-                        .kasKeluar[id]
-                        ?.timestamp
-                    ) ||
-                    Date.now()
-                    :Date.now()
-
-            }
+            cashOutData
         );
+
+        /* Langsung sinkronkan state lokal agar saldo berubah segera. */
+        if(!appState.kasKeluar){
+            appState.kasKeluar={};
+        }
+
+        appState.kasKeluar[txId]=cashOutData;
+
+        refreshAllViews();
 
         showToast(
             id
-            ?"Kas keluar berhasil diperbarui."
-            :"Kas keluar berhasil disimpan."
+            ?`Kas keluar ${formatRupiah(amount)} berhasil diperbarui.`
+            :`Kas keluar ${formatRupiah(amount)} berhasil disimpan. Saldo telah diperbarui.`
         );
 
         closeModal();
