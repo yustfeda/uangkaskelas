@@ -1397,6 +1397,7 @@ import {
     getDatabase,
     ref,
     onValue,
+    get,
     set,
     push,
     update,
@@ -2258,57 +2259,66 @@ function getDisplayedBalance(){
    REALTIME DATABASE
 ========================================================= */
 
+function applyDatabaseSnapshot(snap){
+
+    const data=snap?.val() || {};
+
+    /*
+       SATU-SATUNYA STATE SUMBER APLIKASI
+       =================================
+       Semua angka dashboard, halaman Kas Masuk, Kas Keluar,
+       status pembayaran, dan daftar siswa dibentuk dari snapshot
+       Firebase yang sama. Tidak ada angka kas yang ditambah secara
+       manual setelah tombol Simpan ditekan.
+    */
+    appState.siswa=
+        data.siswa || {};
+
+    appState.kasMasuk=
+        data.kasMasuk || {};
+
+    appState.kasKeluar=
+        data.kasKeluar || {};
+
+    appState.pembayaranStatus=
+        data.pembayaranStatus || {};
+
+    appState.settings={
+        ...defaultSettings,
+        ...(data.settings || {}),
+        resetState:{
+            ...defaultSettings.resetState,
+            ...((data.settings || {}).resetState || {})
+        },
+        deletedStudents:
+            ((data.settings || {}).deletedStudents || {})
+    };
+
+    updateStudentSelect();
+    refreshAllViews();
+}
+
 function startListeners(){
 
     /*
-       SATU SUMBER DATA REALTIME
+       REALTIME LISTENER TUNGGAL
        =========================
-       Seluruh dashboard dan halaman aplikasi membaca snapshot
-       langsung dari root DB/kelas. Dengan demikian kas masuk,
-       kas keluar, status pembayaran, siswa, dan pengaturan selalu
-       diperbarui dari Firebase secara bersamaan.
-
-       Tidak ada lagi perhitungan dashboard yang bergantung pada
-       state lokal hasil input sebelumnya.
+       Seluruh halaman mendengarkan root kelas. Jadi ketika Bendahara
+       menyimpan pembayaran, perubahan kasMasuk + pembayaranStatus
+       diterima sebagai SATU snapshot Firebase dan dashboard Bendahara
+       maupun Anggota ikut diperbarui otomatis.
     */
     onValue(
         ref(database,DB),
         snap=>{
 
-            const data=snap.val() || {};
-
-            appState.siswa=
-                data.siswa || {};
-
-            appState.kasMasuk=
-                data.kasMasuk || {};
-
-            appState.kasKeluar=
-                data.kasKeluar || {};
-
-            appState.pembayaranStatus=
-                data.pembayaranStatus || {};
-
-            appState.settings={
-                ...defaultSettings,
-                ...(data.settings || {}),
-                resetState:{
-                    ...defaultSettings.resetState,
-                    ...((data.settings || {}).resetState || {})
-                },
-                deletedStudents:
-                    ((data.settings || {}).deletedStudents || {})
-            };
-
-            updateStudentSelect();
+            applyDatabaseSnapshot(snap);
 
             /*
-               Dashboard selalu dirender setelah snapshot Firebase
-               diterima. Jadi angka yang tampil berasal dari data
-               yang benar-benar tersimpan di Realtime Database.
+               Hanya untuk melengkapi status pembayaran lama yang
+               belum memiliki node pembayaranStatus. Fungsi ini tidak
+               pernah menambah uang ke kas.
             */
-            refreshAllViews();
-
             reconcilePaymentStatus();
         }
     );
@@ -4119,11 +4129,19 @@ async function(){
         await update(ref(database),updates);
 
         /*
-           JANGAN mengubah appState secara manual di sini.
-           Setelah update() berhasil, listener Firebase di atas
-           menerima snapshot terbaru dan menjadi satu-satunya sumber
-           untuk memperbarui dashboard.
+           KONFIRMASI DARI FIREBASE
+           ========================
+           Jangan memakai data input/form untuk mengubah dashboard.
+           Setelah multi-location update berhasil, baca kembali root
+           Firebase yang baru tersimpan. Dengan begitu angka Total Kas
+           Masuk dan Saldo dihitung ulang dari data yang benar-benar ada
+           di Realtime Database. Listener onValue tetap aktif sehingga
+           perangkat Bendahara dan Anggota lain juga ikut tersinkron.
         */
+        const confirmedSnapshot=
+            await get(ref(database,DB));
+
+        applyDatabaseSnapshot(confirmedSnapshot);
 
         showToast(
             `${selectedPeriods.length} periode berhasil dicatat. Total kas masuk ${formatRupiah(totalAmount)}.`,
