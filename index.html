@@ -706,6 +706,22 @@ td{
     min-width:620px;
 }
 
+
+.payment-period-option:hover{
+    background:#f8fafc;
+}
+
+.payment-period-option:has(input:checked){
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+}
+
+.payment-period-checkbox{
+    width:16px;
+    height:16px;
+    accent-color:var(--navy);
+}
+
 /* ALERT */
 .alert-card{
     border-left:4px solid var(--red);
@@ -3787,361 +3803,237 @@ function renderKasKeluarPage(){
 window.openPaymentModal=
 function(studentId=""){
 
-    if(
-        appState.role!=="bendahara"
-    ) return;
+    if(appState.role!=="bendahara") return;
 
     const students=
-        Object.entries(
-            appState.siswa
+        Object.entries(appState.siswa)
+        .filter(([id,s])=>
+            s &&
+            s.aktif!==false &&
+            !(appState.settings.deletedStudents || {})[id]
         )
-        .filter(
-            ([id,s])=>
-                s &&
-                s.aktif!==false &&
-                !(
-                    appState
-                    .settings
-                    .deletedStudents || {}
-                )[id]
-        )
-        .sort(
-            (a,b)=>
-                String(a[1].nama||"")
-                .localeCompare(
-                    String(b[1].nama||"")
-                )
+        .sort((a,b)=>
+            String(a[1].nama||"").localeCompare(String(b[1].nama||""))
         );
 
-    const periods=
-        getPaymentPeriods();
+    const periods=getPaymentPeriods();
+    const weeklyFee=Number(getWeeklyFee())||0;
 
     const html=`
-
-        <div
-            class="modal-backdrop"
-            id="activeModal">
-
+        <div class="modal-backdrop" id="activeModal">
             <div class="modal">
-
                 <div class="modal-header">
-
-                    <h3>
-                        Catat Pembayaran Kas
-                    </h3>
-
-                    <button
-                        class="modal-close"
-                        onclick="closeModal()">
-
+                    <h3>Catat Pembayaran Kas</h3>
+                    <button class="modal-close" onclick="closeModal()">
                         <i class="fa-solid fa-xmark"></i>
-
                     </button>
-
                 </div>
 
                 <div class="modal-body">
-
                     <div class="form-group">
-
-                        <label>
-                            Nama Siswa
-                        </label>
-
+                        <label>Nama Siswa</label>
                         <select
                             id="paymentStudent"
                             class="form-control"
                             onchange="updatePaymentPeriods()">
-
-                            <option value="">
-                                Pilih siswa
-                            </option>
-
-                            ${students
-                                .map(
-                                    ([id,s])=>`
-
-                                        <option
-                                            value="${escapeHtml(id)}"
-                                            ${
-                                                id===studentId
-                                                ?"selected"
-                                                :""
-                                            }>
-
-                                            ${escapeHtml(
-                                                s.nama
-                                            )}
-
-                                        </option>
-
-                                    `
-                                )
-                                .join("")}
-
+                            <option value="">Pilih siswa</option>
+                            ${students.map(([id,s])=>`
+                                <option value="${escapeHtml(id)}" ${id===studentId?"selected":""}>
+                                    ${escapeHtml(s.nama)}
+                                </option>
+                            `).join("")}
                         </select>
-
                     </div>
 
                     <div class="form-group">
-
-                        <label>
-                            Periode Pembayaran
-                        </label>
-
-                        <select
-                            id="paymentPeriod"
-                            class="form-control"
-                            onchange="updateSelectedPaymentPeriod()">
-
-                            <option value="">
-                                Pilih periode
-                            </option>
-
-                            ${periods
-                                .map(
-                                    period=>`
-
-                                        <option
-                                            value="${period.key}">
-
-                                            ${escapeHtml(
-                                                period.label
-                                            )}
-
-                                            -
-                                            ${formatRupiah(
-                                                getWeeklyFee()
-                                            )}
-
-                                        </option>
-
-                                    `
-                                )
-                                .join("")}
-
-                        </select>
-
+                        <label>Periode Pembayaran</label>
+                        <div
+                            id="paymentPeriodList"
+                            style="
+                                border:1px solid var(--border);
+                                border-radius:10px;
+                                max-height:240px;
+                                overflow-y:auto;
+                                background:#fff;
+                                padding:6px;">
+                            ${periods.map(period=>`
+                                <label
+                                    class="payment-period-option"
+                                    data-period-key="${escapeHtml(period.key)}"
+                                    style="
+                                        display:flex;
+                                        align-items:flex-start;
+                                        gap:10px;
+                                        padding:10px;
+                                        border-radius:8px;
+                                        cursor:pointer;
+                                        margin:2px 0;">
+                                    <input
+                                        type="checkbox"
+                                        class="payment-period-checkbox"
+                                        value="${escapeHtml(period.key)}"
+                                        onchange="updateSelectedPaymentPeriod()"
+                                        style="margin-top:3px;">
+                                    <span style="font-size:12px;line-height:1.45">
+                                        <strong>${escapeHtml(period.label)}</strong>
+                                        <br>
+                                        <span class="period-payment-label" style="color:var(--muted)">
+                                            ${formatRupiah(weeklyFee)}
+                                        </span>
+                                    </span>
+                                </label>
+                            `).join("")}
+                        </div>
+                        <div style="font-size:11px;color:var(--muted);margin-top:7px">
+                            Pilih satu atau beberapa minggu yang benar-benar dibayarkan.
+                        </div>
                     </div>
 
                     <div id="paymentInfo"></div>
 
                     <div class="form-group">
-
-                        <label>
-                            Jumlah Pembayaran
-                        </label>
-
+                        <label>Total Pembayaran</label>
                         <input
                             id="paymentAmount"
                             class="form-control"
                             type="number"
-                            value="${getWeeklyFee()}"
-                            min="0">
-
+                            value="0"
+                            readonly
+                            aria-readonly="true"
+                            style="background:#f8fafc;font-weight:800;">
+                        <div style="font-size:11px;color:var(--muted);margin-top:6px">
+                            Nominal otomatis: tarif mingguan × jumlah periode yang dipilih.
+                        </div>
                     </div>
 
                     <div class="form-group">
-
-                        <label>
-                            Keterangan
-                        </label>
-
+                        <label>Keterangan</label>
                         <input
                             id="paymentDescription"
                             class="form-control"
                             value="Pembayaran kas mingguan"
                             placeholder="Keterangan">
-
                     </div>
-
                 </div>
 
                 <div class="modal-footer">
-
-                    <button
-                        class="btn btn-secondary"
-                        onclick="closeModal()">
-
-                        Batal
-
-                    </button>
-
-                    <button
-                        class="btn btn-success"
-                        onclick="savePayment()">
-
+                    <button class="btn btn-secondary" onclick="closeModal()">Batal</button>
+                    <button class="btn btn-success" id="savePaymentButton" onclick="savePayment()">
                         <i class="fa-solid fa-check"></i>
-
-                        Simpan
-
+                        Simpan Pembayaran
                     </button>
-
                 </div>
-
             </div>
-
         </div>
     `;
 
-    document
-        .getElementById("modalContainer")
-        .innerHTML=html;
+    document.getElementById("modalContainer").innerHTML=html;
 
-    if(studentId){
-        updatePaymentPeriods();
-    }
+    if(studentId) updatePaymentPeriods();
+    updateSelectedPaymentPeriod();
 };
 
 window.updateSelectedPaymentPeriod=
 function(){
 
-    const select=
-        document.getElementById(
-            "paymentPeriod"
-        );
+    const checkboxes=[
+        ...document.querySelectorAll(
+            ".payment-period-checkbox"
+        )
+    ];
 
-    const amountInput=
-        document.getElementById(
-            "paymentAmount"
-        );
+    const amountInput=document.getElementById("paymentAmount");
+    const info=document.getElementById("paymentInfo");
 
-    if(!select || !amountInput) return;
+    if(!amountInput) return;
 
-    /*
-       Setiap periode mempunyai tarif mingguan yang ditentukan bendahara.
-       Ketika periode dipilih, nominal awal otomatis mengikuti tarif tersebut.
-       Bendahara tetap boleh mengubah nominal jika jumlah yang benar-benar
-       dibayarkan berbeda. Dashboard akan mencatat nominal final yang disimpan.
-    */
-    if(select.value){
-        amountInput.value=
-            Number(getWeeklyFee()) || 0;
+    const selected=checkboxes.filter(cb=>cb.checked);
+    const weeklyFee=Number(getWeeklyFee())||0;
+    const total=selected.length*weeklyFee;
+
+    amountInput.value=total;
+
+    if(info){
+        if(selected.length){
+            info.innerHTML=`
+                <div class="info-box" style="border-color:#bfdbfe;background:#eff6ff;color:#1e3a8a">
+                    <strong style="color:#1e40af">
+                        ${selected.length} periode dipilih
+                    </strong>
+                    <div style="margin-top:4px">
+                        ${formatRupiah(weeklyFee)} × ${selected.length} minggu =
+                        <strong>${formatRupiah(total)}</strong>
+                    </div>
+                </div>
+                <br>
+            `;
+        }else{
+            info.innerHTML=`
+                <div class="info-box">
+                    Pilih periode yang benar-benar dibayarkan. Nominal akan dihitung otomatis.
+                </div>
+                <br>
+            `;
+        }
     }
 };
-
 
 window.updatePaymentPeriods=
 function(){
 
-    const studentId=
-        document
-        .getElementById(
-            "paymentStudent"
-        )?.value;
+    const studentId=document.getElementById("paymentStudent")?.value;
+    const container=document.getElementById("paymentPeriodList");
+    const info=document.getElementById("paymentInfo");
 
-    const select=
-        document.getElementById(
-            "paymentPeriod"
+    if(!container) return;
+
+    const periods=getPaymentPeriods();
+
+    periods.forEach(period=>{
+        const row=container.querySelector(
+            `.payment-period-option[data-period-key="${CSS.escape(period.key)}"]`
+        );
+        const checkbox=row?.querySelector(".payment-period-checkbox");
+        const label=row?.querySelector(".period-payment-label");
+
+        if(!row || !checkbox) return;
+
+        const paid=!!(
+            studentId &&
+            getStudentPaymentStatus(studentId,period.key)
         );
 
-    const info=
-        document.getElementById(
-            "paymentInfo"
-        );
+        checkbox.checked=false;
+        checkbox.disabled=paid;
+        row.style.opacity=paid?".55":"1";
+        row.style.cursor=paid?"not-allowed":"pointer";
+        row.style.background=paid?"#f8fafc":"transparent";
 
-    if(!select) return;
-
-    const periods=
-        getPaymentPeriods();
-
-    select.innerHTML=
-        `<option value="">Pilih periode</option>`+
-        periods.map(
-            period=>{
-
-                const paid=
-                    studentId &&
-                    getStudentPaymentStatus(
-                        studentId,
-                        period.key
-                    );
-
-                return `
-
-                    <option
-                        value="${period.key}"
-                        ${paid?"disabled":""}>
-
-                        ${escapeHtml(
-                            period.label
-                        )}
-
-                        ${
-                            paid
-                            ?" - SUDAH DIBAYAR"
-                            :" - "+
-                              formatRupiah(
-                                  getWeeklyFee()
-                              )
-                        }
-
-                    </option>
-
-                `;
-
-            }
-        ).join("");
-
-    if(studentId){
-
-        const unpaid=
-            getStudentUnpaidPeriods(
-                studentId
-            );
-
-        if(!unpaid.length){
-
-            info.innerHTML=`
-
-                <div
-                    class="info-box"
-                    style="
-                        border-color:#bbf7d0;
-                        background:#f0fdf4;
-                        color:#166534">
-
-                    <strong
-                        style="color:#166534">
-
-                        Siswa sudah melunasi
-                        seluruh periode kas.
-
-                    </strong>
-
-                </div>
-
-                <br>
-
-            `;
-
-        }else{
-
-            info.innerHTML=`
-
-                <div class="info-box">
-
-                    Belum dibayar:
-
-                    <strong>
-
-                        ${unpaid.length}
-                        minggu
-                        -
-                        ${formatRupiah(
-                            unpaid.length*
-                            getWeeklyFee()
-                        )}
-
-                    </strong>
-
-                </div>
-
-                <br>
-
-            `;
+        if(label){
+            label.textContent=paid
+                ?"SUDAH DIBAYAR"
+                :formatRupiah(Number(getWeeklyFee())||0);
+            label.style.color=paid?"#16a34a":"var(--muted)";
+            label.style.fontWeight=paid?"800":"400";
         }
+    });
+
+    const unpaid=studentId
+        ?getStudentUnpaidPeriods(studentId)
+        :[];
+
+    if(info && studentId){
+        info.innerHTML=unpaid.length
+            ?`<div class="info-box">
+                Belum dibayar:
+                <strong>${unpaid.length} minggu — ${formatRupiah(unpaid.length*(Number(getWeeklyFee())||0))}</strong>
+              </div><br>`
+            :`<div class="info-box" style="border-color:#bbf7d0;background:#f0fdf4;color:#166534">
+                <strong style="color:#166534">Siswa sudah melunasi seluruh periode kas.</strong>
+              </div><br>`;
     }
+
+    updateSelectedPaymentPeriod();
 };
 
 
@@ -4152,390 +4044,127 @@ function(){
 window.savePayment=
 async function(){
 
-    /*
-       Cegah tombol Simpan ditekan berkali-kali sebelum proses pertama
-       selesai. Satu klik pembayaran hanya boleh menghasilkan satu
-       transaksi kasMasuk.
-    */
     if(window.__savingPayment){
+        showToast("Pembayaran sedang diproses. Tunggu sampai selesai.","info");
+        return;
+    }
 
-        showToast(
-            "Pembayaran sedang diproses. Tunggu sampai selesai.",
-            "info"
-        );
+    const studentId=document.getElementById("paymentStudent")?.value;
+    const selectedPeriods=[
+        ...document.querySelectorAll(".payment-period-checkbox:checked")
+    ].map(cb=>cb.value);
+    const description=document.getElementById("paymentDescription")?.value.trim();
+    const weeklyFee=Number(getWeeklyFee())||0;
+    const totalAmount=selectedPeriods.length*weeklyFee;
 
+    if(!studentId){
+        showToast("Pilih siswa terlebih dahulu.","error");
+        return;
+    }
+
+    if(!selectedPeriods.length){
+        showToast("Pilih minimal satu periode pembayaran.","error");
+        return;
+    }
+
+    if(weeklyFee<=0){
+        showToast("Tarif kas mingguan belum ditentukan atau tidak valid.","error");
+        return;
+    }
+
+    const student=appState.siswa[studentId];
+    if(!student){
+        showToast("Data siswa tidak ditemukan.","error");
+        return;
+    }
+
+    const duplicate=selectedPeriods.filter(periodKey=>
+        getStudentPaymentStatus(studentId,periodKey)
+    );
+
+    if(duplicate.length){
+        showToast("Ada periode yang sudah dibayar. Segarkan pilihan periode.","error");
+        updatePaymentPeriods();
         return;
     }
 
     window.__savingPayment=true;
 
-    const studentId=
-        document
-        .getElementById(
-            "paymentStudent"
-        ).value;
-
-    const periodKey=
-        document
-        .getElementById(
-            "paymentPeriod"
-        ).value;
-
-    const amount=
-        Number(
-            document
-            .getElementById(
-                "paymentAmount"
-            ).value
-        );
-
-    const description=
-        document
-        .getElementById(
-            "paymentDescription"
-        ).value
-        .trim();
-
-    if(!studentId){
-
-        showToast(
-            "Pilih siswa terlebih dahulu.",
-            "error"
-        );
-
-        window.__savingPayment=false;
-        return;
+    const saveButton=document.getElementById("savePaymentButton");
+    if(saveButton){
+        saveButton.disabled=true;
+        saveButton.style.opacity=".65";
+        saveButton.style.pointerEvents="none";
     }
-
-    if(!periodKey){
-
-        showToast(
-            "Pilih periode pembayaran.",
-            "error"
-        );
-
-        window.__savingPayment=false;
-        return;
-    }
-
-    if(
-        getStudentPaymentStatus(
-            studentId,
-            periodKey
-        )
-    ){
-
-        showToast(
-            "Periode ini sudah dibayar.",
-            "error"
-        );
-
-        window.__savingPayment=false;
-        return;
-    }
-
-    if(amount<=0){
-
-        showToast(
-            "Jumlah pembayaran tidak valid.",
-            "error"
-        );
-
-        window.__savingPayment=false;
-        return;
-    }
-
-    const student=
-        appState.siswa[
-            studentId
-        ];
-
-    if(!student){
-
-        showToast(
-            "Data siswa tidak ditemukan.",
-            "error"
-        );
-
-        window.__savingPayment=false;
-        return;
-    }
-
-    const transactionRef=
-        push(
-            ref(
-                database,
-                `${DB}/kasMasuk`
-            )
-        );
-
-    const txId=
-        transactionRef.key;
-
-    const timestamp=
-        Date.now();
-
-    /*
-       DATA TRANSAKSI KAS MASUK
-    */
-    const paymentData={
-
-        siswaId:studentId,
-
-        namaSiswa:student.nama,
-
-        periodeKey:periodKey,
-
-        jumlah:amount,
-
-        keterangan:
-            description ||
-            "Pembayaran kas mingguan",
-
-        timestamp:timestamp,
-
-        dibuatOleh:"Bendahara"
-    };
-
-    /*
-       DATA STATUS SISWA
-       Inilah yang dibaca oleh akun anggota.
-    */
-    const statusData={
-
-        paid:true,
-
-        jumlah:amount,
-
-        timestamp:timestamp,
-
-        namaSiswa:student.nama,
-
-        periodeKey:periodKey,
-
-        transaksiId:txId,
-
-        updatedBy:"Bendahara"
-    };
-
-    const updates={};
-
-    updates[
-        `${DB}/kasMasuk/${txId}`
-    ]=paymentData;
-
-    updates[
-        `${DB}/pembayaranStatus/${studentId}/${periodKey}`
-    ]=statusData;
 
     try{
+        const updates={};
+        const localTransactions=[];
+        const localStatuses=[];
+        const timestamp=Date.now();
 
-        /*
-           SATU UPDATE:
-           Kas Masuk + status anggota
-           tersimpan bersamaan.
-        */
-        await update(
-            ref(database),
-            updates
-        );
+        selectedPeriods.forEach((periodKey,index)=>{
+            const txRef=push(ref(database,`${DB}/kasMasuk`));
+            const txId=txRef.key;
+            const txTimestamp=timestamp+index;
 
-        /*
-           SINKRONISASI LOKAL SEGERA
-           --------------------------
-           Setelah Firebase mengonfirmasi penyimpanan, transaksi baru
-           langsung dimasukkan ke state lokal. Dengan begitu dashboard
-           Bendahara/Anggota langsung menampilkan nominal yang baru dibayar
-           tanpa menunggu listener berikutnya.
+            const paymentData={
+                siswaId:studentId,
+                namaSiswa:student.nama,
+                periodeKey:periodKey,
+                jumlah:weeklyFee,
+                keterangan:description || "Pembayaran kas mingguan",
+                timestamp:txTimestamp,
+                dibuatOleh:"Bendahara"
+            };
 
-           PENTING: pembayaranStatus TIDAK dimasukkan ke perhitungan kas.
-           Hanya satu objek kasMasuk yang menjadi sumber uang.
-        */
-        if(!appState.kasMasuk){
-            appState.kasMasuk={};
-        }
+            const statusData={
+                paid:true,
+                jumlah:weeklyFee,
+                timestamp:txTimestamp,
+                namaSiswa:student.nama,
+                periodeKey:periodKey,
+                transaksiId:txId,
+                updatedBy:"Bendahara"
+            };
 
-        appState.kasMasuk[txId]=paymentData;
+            updates[`${DB}/kasMasuk/${txId}`]=paymentData;
+            updates[`${DB}/pembayaranStatus/${studentId}/${periodKey}`]=statusData;
 
-        if(!appState.pembayaranStatus){
-            appState.pembayaranStatus={};
-        }
+            localTransactions.push([txId,paymentData]);
+            localStatuses.push([periodKey,statusData]);
+        });
 
+        await update(ref(database),updates);
+
+        if(!appState.kasMasuk) appState.kasMasuk={};
+        localTransactions.forEach(([id,tx])=>{
+            appState.kasMasuk[id]=tx;
+        });
+
+        if(!appState.pembayaranStatus) appState.pembayaranStatus={};
         if(!appState.pembayaranStatus[studentId]){
             appState.pembayaranStatus[studentId]={};
         }
+        localStatuses.forEach(([periodKey,status])=>{
+            appState.pembayaranStatus[studentId][periodKey]=status;
+        });
 
-        appState.pembayaranStatus[studentId][periodKey]=statusData;
-
-        /*
-           Render ulang sekarang juga:
-           Total Kas Masuk += amount satu kali
-           Total Kas Keluar tetap
-           Saldo = Kas Masuk - Kas Keluar
-        */
         refreshAllViews();
 
         showToast(
-            `Pembayaran ${formatRupiah(amount)} berhasil disimpan. Total kas dan saldo telah diperbarui.`
+            `${selectedPeriods.length} periode berhasil dicatat. Total kas masuk ${formatRupiah(totalAmount)}.`,
+            "success"
         );
 
         closeModal();
 
-        window.__savingPayment=false;
-
     }catch(error){
-
         console.error(error);
-
-        showToast(
-            "Gagal menyimpan pembayaran.",
-            "error"
-        );
-
+        showToast("Gagal menyimpan pembayaran.","error");
+    }finally{
         window.__savingPayment=false;
     }
-};
-
-
-/* =========================================================
-   LUNASKAN SISWA
-========================================================= */
-
-window.lunaskanSiswa=
-function(studentId){
-
-    const student=
-        appState.siswa[
-            studentId
-        ];
-
-    if(!student) return;
-
-    const unpaid=
-        getStudentUnpaidPeriods(
-            studentId
-        );
-
-    if(!unpaid.length){
-
-        showToast(
-            "Siswa sudah lunas.",
-            "info"
-        );
-
-        return;
-    }
-
-    const weeklyFee=Number(getWeeklyFee())||0;
-    const totalPayment=unpaid.length*weeklyFee;
-
-    openConfirmModal(
-        "Lunasi Kas",
-
-        `Lunasi ${unpaid.length} minggu kas untuk ${student.nama} sebesar ${formatRupiah(totalPayment)}?`,
-
-        async()=>{
-
-            const updates={};
-
-            const timestamp=
-                Date.now();
-
-            unpaid.forEach(
-                (period,i)=>{
-
-                    const txRef=
-                        push(
-                            ref(
-                                database,
-                                `${DB}/kasMasuk`
-                            )
-                        );
-
-                    const txId=
-                        txRef.key;
-
-                    const amount=
-                        weeklyFee;
-
-                    updates[
-                        `${DB}/kasMasuk/${txId}`
-                    ]={
-
-                        siswaId:
-                            studentId,
-
-                        namaSiswa:
-                            student.nama,
-
-                        periodeKey:
-                            period.key,
-
-                        jumlah:
-                            amount,
-
-                        keterangan:
-                            "Pelunasan kas",
-
-                        timestamp:
-                            timestamp+i,
-
-                        dibuatOleh:
-                            "Bendahara"
-
-                    };
-
-                    updates[
-                        `${DB}/pembayaranStatus/${studentId}/${period.key}`
-                    ]={
-
-                        paid:true,
-
-                        jumlah:
-                            amount,
-
-                        timestamp:
-                            timestamp+i,
-
-                        namaSiswa:
-                            student.nama,
-
-                        periodeKey:
-                            period.key,
-
-                        transaksiId:
-                            txId,
-
-                        updatedBy:
-                            "Bendahara"
-
-                    };
-
-                }
-            );
-
-            try{
-
-                await update(
-                    ref(database),
-                    updates
-                );
-
-                showToast(
-                    "Kas siswa berhasil dilunasi dan disinkronkan ke anggota."
-                );
-
-            }catch(error){
-
-                console.error(error);
-
-                showToast(
-                    "Gagal melunasi kas.",
-                    "error"
-                );
-            }
-        }
-    );
 };
 
 
@@ -4714,35 +4343,7 @@ function renderSiswaPage(){
                                                             <div
                                                                 class="
                                                                     action-group
-                                                                ">
-
-                                                                ${
-                                                                    unpaid
-                                                                    ?`
-
-                                                                        <button
-                                                                            class="
-                                                                                btn
-                                                                                btn-success
-                                                                            "
-                                                                            style="
-                                                                                padding:7px 9px;
-                                                                                font-size:10px"
-                                                                            onclick="
-                                                                                lunaskanSiswa(
-                                                                                    '${id}'
-                                                                                )
-                                                                            ">
-
-                                                                            Lunaskan
-
-                                                                        </button>
-
-                                                                    `
-                                                                    :""
-                                                                }
-
-                                                                <button
+                                                                "><button
                                                                     class="
                                                                         action-btn
                                                                         action-edit
@@ -5259,31 +4860,6 @@ function renderNunggakPage(){
                                                         </td>
 
                                                         <td>
-
-                                                            <button
-                                                                class="
-                                                                    btn
-                                                                    btn-success
-                                                                "
-                                                                style="
-                                                                    padding:8px 10px;
-                                                                    font-size:11px"
-                                                                onclick="
-                                                                    lunaskanSiswa(
-                                                                        '${id}'
-                                                                    )
-                                                                ">
-
-                                                                <i
-                                                                    class="
-                                                                        fa-solid
-                                                                        fa-check-double
-                                                                    ">
-                                                                </i>
-
-                                                                Lunaskan
-
-                                                            </button>
 
                                                         </td>
 
