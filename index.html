@@ -497,52 +497,61 @@ button{
 }
 
 .stat-card{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:15px;
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(145deg,#071b3a 0%,#0b2d5c 55%,#123d73 100%);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:18px;
     padding:18px;
-    box-shadow:var(--shadow);
+    box-shadow:0 12px 28px rgba(7,27,58,.18);
+    color:#fff;
+    min-height:142px;
+}
+
+.stat-card::after{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    right:-35px;
+    bottom:-48px;
+    border-radius:50%;
+    background:rgba(255,255,255,.07);
 }
 
 .stat-icon{
-    width:40px;
-    height:40px;
-    border-radius:10px;
+    width:42px;
+    height:42px;
+    border-radius:12px;
     display:flex;
     align-items:center;
     justify-content:center;
     margin-bottom:12px;
+    background:rgba(255,255,255,.13);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.12);
 }
 
-.icon-green{
-    background:#dcfce7;
-    color:var(--green);
-}
-
-.icon-red{
-    background:#fee2e2;
-    color:var(--red);
-}
-
-.icon-blue{
-    background:#dbeafe;
-    color:var(--blue);
-}
-
-.icon-yellow{
-    background:#fef3c7;
-    color:#d97706;
+.icon-green,.icon-red,.icon-blue,.icon-yellow{
+    background:rgba(255,255,255,.13);
+    color:#fff;
 }
 
 .stat-title{
     font-size:11px;
-    color:var(--muted);
+    color:rgba(255,255,255,.76);
+    text-transform:uppercase;
+    letter-spacing:.8px;
+    font-weight:800;
 }
 
 .stat-value{
-    font-size:21px;
-    font-weight:800;
-    margin-top:4px;
+    font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;
+    font-size:23px;
+    font-weight:900;
+    letter-spacing:.2px;
+    margin-top:5px;
+    color:#fff;
 }
 
 /* CARDS */
@@ -1255,6 +1264,7 @@ td{
 
             <button
                 class="nav-item"
+                id="navRiwayat"
                 data-page="riwayat"
                 onclick="navigateTo('riwayat')">
 
@@ -2288,7 +2298,18 @@ function applyDatabaseSnapshot(snap){
 
     updateStudentSelect();
     refreshAllViews();
+    updateConditionalNavigation();
 }
+
+function updateConditionalNavigation(){
+
+    const navRiwayat=document.getElementById("navRiwayat");
+    if(navRiwayat){
+        const hasHistory=getHistoryForCurrentUser().length>0;
+        navRiwayat.style.display=hasHistory ? "flex" : "none";
+    }
+}
+
 
 function startListeners(){
 
@@ -2662,7 +2683,7 @@ function renderDashboard(){
             <div class="stat-card">
 
                 <div class="stat-icon icon-green">
-                    <i class="fa-solid fa-arrow-down"></i>
+                    <i class="fa-solid fa-coins"></i>
                 </div>
 
                 <div class="stat-title">
@@ -2671,22 +2692,6 @@ function renderDashboard(){
 
                 <div class="stat-value">
                     ${formatRupiah(cashIn)}
-                </div>
-
-            </div>
-
-            <div class="stat-card">
-
-                <div class="stat-icon icon-red">
-                    <i class="fa-solid fa-arrow-up"></i>
-                </div>
-
-                <div class="stat-title">
-                    Total Kas Keluar
-                </div>
-
-                <div class="stat-value">
-                    ${formatRupiah(cashOut)}
                 </div>
 
             </div>
@@ -2703,6 +2708,22 @@ function renderDashboard(){
 
                 <div class="stat-value">
                     ${formatRupiah(balance)}
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon icon-red">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </div>
+
+                <div class="stat-title">
+                    Kas Keluar
+                </div>
+
+                <div class="stat-value">
+                    ${formatRupiah(cashOut)}
                 </div>
 
             </div>
@@ -3127,6 +3148,16 @@ function renderRiwayatPage(){
 
     const history=
         getHistoryForCurrentUser();
+
+    if(!history.length){
+        return `
+            <div class="card">
+                <div class="card-body" style="padding:40px;text-align:center;color:var(--muted)">
+                    Belum ada transaksi tersimpan.
+                </div>
+            </div>
+        `;
+    }
 
     return `
 
