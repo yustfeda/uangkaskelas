@@ -2260,83 +2260,56 @@ function getDisplayedBalance(){
 
 function startListeners(){
 
+    /*
+       SATU SUMBER DATA REALTIME
+       =========================
+       Seluruh dashboard dan halaman aplikasi membaca snapshot
+       langsung dari root DB/kelas. Dengan demikian kas masuk,
+       kas keluar, status pembayaran, siswa, dan pengaturan selalu
+       diperbarui dari Firebase secara bersamaan.
+
+       Tidak ada lagi perhitungan dashboard yang bergantung pada
+       state lokal hasil input sebelumnya.
+    */
     onValue(
-        ref(database,`${DB}/siswa`),
+        ref(database,DB),
         snap=>{
 
+            const data=snap.val() || {};
+
             appState.siswa=
-                snap.val() || {};
+                data.siswa || {};
+
+            appState.kasMasuk=
+                data.kasMasuk || {};
+
+            appState.kasKeluar=
+                data.kasKeluar || {};
+
+            appState.pembayaranStatus=
+                data.pembayaranStatus || {};
+
+            appState.settings={
+                ...defaultSettings,
+                ...(data.settings || {}),
+                resetState:{
+                    ...defaultSettings.resetState,
+                    ...((data.settings || {}).resetState || {})
+                },
+                deletedStudents:
+                    ((data.settings || {}).deletedStudents || {})
+            };
 
             updateStudentSelect();
 
-            refreshAllViews();
-
-        }
-    );
-
-    onValue(
-        ref(database,`${DB}/kasMasuk`),
-        snap=>{
-
-            appState.kasMasuk=
-                snap.val() || {};
-
+            /*
+               Dashboard selalu dirender setelah snapshot Firebase
+               diterima. Jadi angka yang tampil berasal dari data
+               yang benar-benar tersimpan di Realtime Database.
+            */
             refreshAllViews();
 
             reconcilePaymentStatus();
-
-        }
-    );
-
-    onValue(
-        ref(database,`${DB}/kasKeluar`),
-        snap=>{
-
-            appState.kasKeluar=
-                snap.val() || {};
-
-            refreshAllViews();
-
-        }
-    );
-
-    onValue(
-        ref(
-            database,
-            `${DB}/pembayaranStatus`
-        ),
-        snap=>{
-
-            appState.pembayaranStatus=
-                snap.val() || {};
-
-            refreshAllViews();
-
-        }
-    );
-
-    onValue(
-        ref(database,`${DB}/settings`),
-        snap=>{
-
-            const data=
-                snap.val() || {};
-
-            appState.settings={
-
-                ...defaultSettings,
-
-                ...data,
-
-                resetState:{
-                    ...defaultSettings.resetState,
-                    ...(data.resetState || {})
-                }
-
-            };
-
-            refreshAllViews();
-
         }
     );
 }
@@ -2606,11 +2579,37 @@ function renderDashboard(){
             0
         );
 
+    /*
+       "Pembayaran Terbaru" KHUSUS mengambil transaksi kasMasuk
+       yang benar-benar tersimpan di Firebase. Kas keluar tidak
+       boleh muncul di kartu pembayaran terbaru.
+    */
+    const recent=[
+        ...Object.entries(appState.kasMasuk || {})
+    ]
+    .map(([id,tx])=>({
+        id,
+        type:"masuk",
+        timestamp:Number(tx?.timestamp)||0,
+        nama:
+            tx?.namaSiswa ||
+            (tx?.siswaId && appState.siswa[tx.siswaId]?.nama) ||
+            "-",
+        keterangan:
+            tx?.keterangan ||
+            (tx?.periodeKey ? "Pembayaran kas" : "Kas masuk"),
+        jumlah:Number(tx?.jumlah)||0
+    }))
+    .filter(item=>{
+        if(appState.role!=="anggota") return true;
+        const tx=appState.kasMasuk[item.id];
+        return tx?.siswaId===appState.userId;
+    })
+    .sort((a,b)=>b.timestamp-a.timestamp)
+    .slice(0,6);
+
     const history=
         getHistoryForCurrentUser();
-
-    const recent=
-        history.slice(0,6);
 
     return `
 
@@ -2797,6 +2796,9 @@ function renderDashboard(){
 
         <div class="grid-2">
 
+            ${
+                recent.length
+                ?`
             <div class="card">
 
                 <div class="card-header">
@@ -2809,54 +2811,34 @@ function renderDashboard(){
 
                 <div class="card-body">
 
-                    ${
-                        recent.length
-                        ?`
+                    <div class="recent-scroll">
 
-                            <div class="recent-scroll">
+                        <table>
 
-                                <table>
+                            <thead>
 
-                                    <thead>
+                                <tr>
 
-                                        <tr>
+                                    <th>Tanggal</th>
+                                    <th>Nama</th>
+                                    <th>Keterangan</th>
+                                    <th>Jumlah</th>
 
-                                            <th>Tanggal</th>
-                                            <th>Nama</th>
-                                            <th>Keterangan</th>
-                                            <th>Jumlah</th>
+                                </tr>
 
-                                        </tr>
+                            </thead>
 
-                                    </thead>
+                            <tbody>
 
-                                    <tbody>
+                                ${recent
+                                    .map(renderHistoryRow)
+                                    .join("")}
 
-                                        ${recent
-                                            .map(renderHistoryRow)
-                                            .join("")}
+                            </tbody>
 
-                                    </tbody>
+                        </table>
 
-                                </table>
-
-                            </div>
-
-                        `
-                        :`
-
-                            <div class="empty">
-
-                                <i class="fa-solid fa-receipt"></i>
-
-                                <div>
-                                    Belum ada riwayat pembayaran.
-                                </div>
-
-                            </div>
-
-                        `
-                    }
+                    </div>
 
                     ${
                         history.length>6
@@ -2884,6 +2866,9 @@ function renderDashboard(){
                 </div>
 
             </div>
+            `
+                :""
+            }
 
             <div class="card">
 
@@ -4099,8 +4084,6 @@ async function(){
 
     try{
         const updates={};
-        const localTransactions=[];
-        const localStatuses=[];
         const timestamp=Date.now();
 
         selectedPeriods.forEach((periodKey,index)=>{
@@ -4131,26 +4114,16 @@ async function(){
             updates[`${DB}/kasMasuk/${txId}`]=paymentData;
             updates[`${DB}/pembayaranStatus/${studentId}/${periodKey}`]=statusData;
 
-            localTransactions.push([txId,paymentData]);
-            localStatuses.push([periodKey,statusData]);
         });
 
         await update(ref(database),updates);
 
-        if(!appState.kasMasuk) appState.kasMasuk={};
-        localTransactions.forEach(([id,tx])=>{
-            appState.kasMasuk[id]=tx;
-        });
-
-        if(!appState.pembayaranStatus) appState.pembayaranStatus={};
-        if(!appState.pembayaranStatus[studentId]){
-            appState.pembayaranStatus[studentId]={};
-        }
-        localStatuses.forEach(([periodKey,status])=>{
-            appState.pembayaranStatus[studentId][periodKey]=status;
-        });
-
-        refreshAllViews();
+        /*
+           JANGAN mengubah appState secara manual di sini.
+           Setelah update() berhasil, listener Firebase di atas
+           menerima snapshot terbaru dan menjadi satu-satunya sumber
+           untuk memperbarui dashboard.
+        */
 
         showToast(
             `${selectedPeriods.length} periode berhasil dicatat. Total kas masuk ${formatRupiah(totalAmount)}.`,
@@ -5106,14 +5079,11 @@ async function(id){
             cashOutData
         );
 
-        /* Langsung sinkronkan state lokal agar saldo berubah segera. */
-        if(!appState.kasKeluar){
-            appState.kasKeluar={};
-        }
-
-        appState.kasKeluar[txId]=cashOutData;
-
-        refreshAllViews();
+        /*
+           State lokal tidak diubah manual.
+           Listener Firebase akan menerima data terbaru dan
+           memperbarui dashboard dari Realtime Database.
+        */
 
         showToast(
             id
